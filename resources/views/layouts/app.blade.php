@@ -10,8 +10,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?v={{ Str::random(40) }}" defer></script>
+    @yield('vue_script')
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,7 +23,7 @@
 
 <body>
     <div>
-        <div id="app"></div>
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -81,7 +81,12 @@
         </nav>
 
         <main class="py-4">
+
             @yield('content')
+
+
+
+
         </main>
     </div>
 </body>
