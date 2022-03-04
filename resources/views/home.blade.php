@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container" id="app">
+<div class="container-fluid" id="app">
 
 
 </div>
