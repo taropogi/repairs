@@ -1,5 +1,5 @@
 <template>
-    <h1>Test here haha</h1>
+    <h1>This is a sample component</h1>
 </template>
 
 <script>
