@@ -1,5 +1,6 @@
 <template>
-    <TheHeader user-name="Richard Bernisca" />
+    <the-header></the-header>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -11,6 +12,7 @@ export default {
     data() {
         return {};
     },
+    mounted() {},
 };
 </script>
 

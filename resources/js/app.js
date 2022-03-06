@@ -1,9 +1,28 @@
 require("./bootstrap");
 
 import { createApp } from "vue";
+import { createRouter, createWebHistory } from "vue-router";
 
 import App from "./components/App.vue";
+import welcomePage from "./components/pages/welcomePage.vue";
+import loginPage from "./components/pages/loginPage.vue";
+
+const router = createRouter({
+    history: createWebHistory(), // manage the history, using crateWebHistory means using the default browser history management
+    routes: [
+        {
+            path: "/",
+            component: welcomePage,
+        },
+        {
+            path: "/login",
+            component: loginPage,
+        },
+    ],
+});
 
 const app = createApp(App);
+
+app.use(router);
 
 app.mount("#app");

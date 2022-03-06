@@ -40,7 +40,7 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            {{ userName }}
+                            Richard
                         </a>
 
                         <div
@@ -71,9 +71,7 @@
 </template>
 
 <script>
-export default {
-    props: ["userName"],
-};
+export default {};
 </script>
 
 <style></style>
