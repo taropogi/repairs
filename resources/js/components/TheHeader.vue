@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"> Repairs Systemx </a>
+            <a class="navbar-brand" href="#"> Repairs System </a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -23,11 +23,18 @@
                     <!-- Authentication Links -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <router-link to="/login" class="nav-link"
+                            >Login</router-link
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/">Home</router-link>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <router-link class="nav-link" to="/register"
+                            >Register</router-link
+                        >
                     </li>
 
                     <li class="nav-item dropdown">
