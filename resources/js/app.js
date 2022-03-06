@@ -19,14 +19,17 @@ const router = createRouter({
         {
             path: "/home",
             component: homePage,
+            name: "home-page",
         },
         {
             path: "/login",
             component: loginPage,
+            name: "login-page",
         },
         {
             path: "/register",
             component: registerPage,
+            name: "register-page",
         },
     ],
 });

@@ -23,7 +23,7 @@
                     <!-- Authentication Links -->
 
                     <li class="nav-item">
-                        <router-link to="/login" class="nav-link"
+                        <router-link :to="loginPageLink" class="nav-link"
                             >Login</router-link
                         >
                     </li>
@@ -33,13 +33,13 @@
                         >
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/home"
+                        <router-link class="nav-link" :to="homePageLink"
                             >Home</router-link
                         >
                     </li>
 
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/register"
+                        <router-link class="nav-link" :to="registerPageLink"
                             >Register</router-link
                         >
                     </li>
@@ -85,7 +85,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+    computed: {
+        loginPageLink() {
+            return {
+                name: "login-page",
+            };
+        },
+        registerPageLink() {
+            return {
+                name: "register-page",
+            };
+        },
+        homePageLink() {
+            return {
+                name: "home-page",
+            };
+        },
+    },
+};
 </script>
 
 <style></style>
