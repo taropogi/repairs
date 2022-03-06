@@ -1,4 +1,5 @@
 <template>
+    <strong>Access only when not logged in</strong>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -18,7 +19,7 @@
                                     <input
                                         id="email"
                                         type="email"
-                                        class="form-control @error('email') is-invalid @enderror"
+                                        class="form-control"
                                         name="email"
                                         value=""
                                         required

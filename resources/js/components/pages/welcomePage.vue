@@ -1,5 +1,5 @@
 <template>
-    <h1>Home page</h1>
+    <strong>Welcome page. Access only when not logged in</strong>
 </template>
 
 <script>
