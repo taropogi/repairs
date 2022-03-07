@@ -24,3 +24,6 @@ Route::post('login', function () {
 });
 
 Route::post('register', [RegisterController::class, 'create']);
+Route::get('register', function () {
+    return "taro";
+});
