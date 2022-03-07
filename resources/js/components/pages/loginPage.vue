@@ -25,7 +25,7 @@
                                         type="email"
                                         class="form-control"
                                         name="email"
-                                        value=""
+                                        v-model="loginFormData.email"
                                         required
                                         autocomplete="email"
                                         autofocus
@@ -50,6 +50,7 @@
                                         type="password"
                                         class="form-control"
                                         name="password"
+                                        v-model="loginFormData.password"
                                         required
                                         autocomplete="current-password"
                                     />
@@ -104,9 +105,26 @@
 
 <script>
 export default {
+    data() {
+        return {
+            loginFormData: {
+                email: "",
+                password: "",
+            },
+        };
+    },
     methods: {
         submitLoginForm() {
-            alert("submitted!");
+            axios
+                .post("/repairs/api/login", this.loginFormData)
+                .then((response) => {
+                    this.$router.push({
+                        name: "home-page",
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 };
