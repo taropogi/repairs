@@ -138,9 +138,10 @@ export default {
         submitRegisterForm() {
             axios
                 .post("/repairs/api/register", this.formData)
-                .then(function (response) {
-                    console.log(response);
-                    alert("registered!");
+                .then((response) => {
+                    this.$router.push({
+                        name: "home-page",
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
