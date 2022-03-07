@@ -137,7 +137,7 @@ export default {
     methods: {
         submitRegisterForm() {
             axios
-                .post("repairs/api/register", this.formData)
+                .post("/repairs/api/register", this.formData)
                 .then(function (response) {
                     console.log(response);
                     alert("registered!");
