@@ -7,7 +7,11 @@
                     <div class="card-header">Login</div>
 
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form
+                            method="POST"
+                            action="#"
+                            @submit.prevent="submitLoginForm"
+                        >
                             <div class="row mb-3">
                                 <label
                                     for="email"
@@ -99,7 +103,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    methods: {
+        submitLoginForm() {
+            alert("submitted!");
+        },
+    },
+};
 </script>
 
 <style></style>

@@ -6,7 +6,11 @@
                     <div class="card-header">Register</div>
 
                     <div class="card-body">
-                        <form method="POST" action="#">
+                        <form
+                            method="POST"
+                            action="#"
+                            @submit.prevent="submitRegisterForm"
+                        >
                             <div class="row mb-3">
                                 <label
                                     for="name"
@@ -20,7 +24,7 @@
                                         type="text"
                                         class="form-control"
                                         name="name"
-                                        value=""
+                                        v-model="formData.name"
                                         required
                                         autocomplete="name"
                                         autofocus
@@ -45,7 +49,7 @@
                                         type="email"
                                         class="form-control"
                                         name="email"
-                                        value=""
+                                        v-model="formData.email"
                                         required
                                         autocomplete="email"
                                     />
@@ -67,6 +71,7 @@
                                     <input
                                         id="password"
                                         type="password"
+                                        v-model="formData.password"
                                         class="form-control"
                                         name="password"
                                         required
@@ -89,6 +94,7 @@
                                 <div class="col-md-6">
                                     <input
                                         id="password-confirm"
+                                        v-model="formData.password_confirm"
                                         type="password"
                                         class="form-control"
                                         name="password_confirmation"
@@ -117,7 +123,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            formData: {
+                name: "",
+                email: "",
+                password: "",
+                password_confirm: "",
+            },
+        };
+    },
+    methods: {
+        submitRegisterForm() {
+            alert("submitted form!");
+        },
+    },
+};
 </script>
 
 <style></style>
