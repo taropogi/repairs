@@ -14,20 +14,25 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            component: welcomePage,
+            redirect: { name: "welcome-page" },
         },
         {
-            path: "/home",
+            path: "/repairs",
+            component: welcomePage,
+            name: "welcome-page",
+        },
+        {
+            path: "/repairs/home",
             component: homePage,
             name: "home-page",
         },
         {
-            path: "/login",
+            path: "/repairs/login",
             component: loginPage,
             name: "login-page",
         },
         {
-            path: "/register",
+            path: "/repairs/register",
             component: registerPage,
             name: "register-page",
         },
