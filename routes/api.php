@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,4 @@ Route::post('login', function () {
     return "aaaasdf";
 });
 
-Route::post('register', function () {
-    return "register here";
-});
+Route::post('register', [RegisterController::class, 'create']);

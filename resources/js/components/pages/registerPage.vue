@@ -86,14 +86,14 @@
 
                             <div class="row mb-3">
                                 <label
-                                    for="password-confirm"
+                                    for="confirm_password"
                                     class="col-md-4 col-form-label text-md-end"
                                     >Confirm Password</label
                                 >
 
                                 <div class="col-md-6">
                                     <input
-                                        id="password-confirm"
+                                        id="confirm_password"
                                         v-model="formData.password_confirm"
                                         type="password"
                                         class="form-control"
@@ -136,7 +136,15 @@ export default {
     },
     methods: {
         submitRegisterForm() {
-            alert("submitted form!");
+            axios
+                .post("/api/register", this.formData)
+                .then(function (response) {
+                    console.log(response);
+                    alert("registered!");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 };
