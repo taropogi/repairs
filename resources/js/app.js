@@ -34,7 +34,7 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            redirect: { name: "welcome-page" },
+            redirect: { name: "cpo-page" },
         },
         {
             path: "/repairs",
