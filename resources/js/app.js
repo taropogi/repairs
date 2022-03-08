@@ -9,6 +9,7 @@ import welcomePage from "./components/pages/welcomePage.vue";
 import homePage from "./components/pages/homePage.vue";
 import loginPage from "./components/pages/loginPage.vue";
 import registerPage from "./components/pages/registerPage.vue";
+import cpoPage from "./components/pages/cpoPage.vue";
 
 const store = createStore({
     state() {
@@ -39,6 +40,11 @@ const router = createRouter({
             path: "/repairs",
             component: welcomePage,
             name: "welcome-page",
+        },
+        {
+            path: "/repairs/cpo",
+            component: cpoPage,
+            name: "cpo-page",
         },
         {
             path: "/repairs/home",

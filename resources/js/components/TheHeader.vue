@@ -30,14 +30,14 @@
                             >Login</router-link
                         >
                     </li>
-                    <li class="nav-item" v-if="isLoggedIn">
-                        <a href="#" class="nav-link" @click.prevent="logout"
-                            >Logout</a
-                        >
-                    </li>
                     <li class="nav-item" v-if="!isLoggedIn">
                         <router-link class="nav-link" to="/"
                             >Welcome</router-link
+                        >
+                    </li>
+                    <li class="nav-item" v-if="isLoggedIn">
+                        <router-link class="nav-link" :to="cpoPageLink"
+                            >CPO</router-link
                         >
                     </li>
                     <li class="nav-item" v-if="isLoggedIn">
@@ -69,21 +69,9 @@
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdown"
                         >
-                            <a
-                                class="dropdown-item"
-                                href="/logout"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
+                            <a href="#" class="nav-link" @click.prevent="logout"
+                                >Logout</a
                             >
-                                Logout
-                            </a>
-
-                            <form
-                                id="logout-form"
-                                action="/logout"
-                                method="POST"
-                                class="d-none"
-                            ></form>
                         </div>
                     </li>
                 </ul>
@@ -108,6 +96,11 @@ export default {
         registerPageLink() {
             return {
                 name: "register-page",
+            };
+        },
+        cpoPageLink() {
+            return {
+                name: "cpo-page",
             };
         },
         homePageLink() {

@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <strong>Access only when not logged in</strong>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -123,7 +122,7 @@ export default {
                         this.$store.commit("setUser", response.data);
 
                         this.$router.push({
-                            name: "home-page",
+                            name: "cpo-page",
                         });
                     })
                     .catch((error) => {
