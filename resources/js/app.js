@@ -38,8 +38,7 @@ const router = createRouter({
         },
         {
             path: "/repairs",
-            component: welcomePage,
-            name: "welcome-page",
+            redirect: { name: "cpo-page" },
         },
         {
             path: "/repairs/cpo",
