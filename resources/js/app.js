@@ -14,15 +14,11 @@ const store = createStore({
     state() {
         return {
             user: null,
-            counter: 0,
         };
     },
     mutations: {
         setUser(state, user) {
             state.user = user;
-        },
-        addOne(state, payload = 5) {
-            state.counter = state.counter + payload;
         },
     },
     getters: {

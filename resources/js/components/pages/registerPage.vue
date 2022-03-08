@@ -140,7 +140,7 @@ export default {
                 .post("/repairs/api/register", this.formData)
                 .then((response) => {
                     this.$router.push({
-                        name: "home-page",
+                        name: "login-page",
                     });
                 })
                 .catch((error) => {

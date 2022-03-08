@@ -62,7 +62,7 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            Richard
+                            {{ loggedUser.name }}
                         </a>
 
                         <div
@@ -89,9 +89,6 @@
                 </ul>
             </div>
         </div>
-        <h1>
-            {{ $store.state.counter }}
-        </h1>
     </nav>
 </template>
 
@@ -123,6 +120,9 @@ export default {
                 return true;
             }
             return false;
+        },
+        loggedUser() {
+            return this.$store.getters.loggedUser;
         },
     },
     methods: {
