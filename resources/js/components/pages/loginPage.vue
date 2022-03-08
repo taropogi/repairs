@@ -119,7 +119,10 @@ export default {
                 axios
                     .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
-                        //  console.log(response);
+                        // console.log(response);
+                        this.$store.commit("setUser", response.data);
+
+                        this.$store.commit("addOne");
                         this.$router.push({
                             name: "home-page",
                         });

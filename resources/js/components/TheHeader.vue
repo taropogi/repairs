@@ -1,5 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav
+        class="navbar navbar-expand-md navbar-light bg-white shadow-sm"
+        v-if="!isLoading"
+    >
         <div class="container">
             <a class="navbar-brand" href="#"> Repairs System </a>
             <button
@@ -22,34 +25,34 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!isLoggedIn">
                         <router-link :to="loginPageLink" class="nav-link"
                             >Login</router-link
                         >
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="isLoggedIn">
                         <a href="#" class="nav-link" @click.prevent="logout"
                             >Logout</a
                         >
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!isLoggedIn">
                         <router-link class="nav-link" to="/"
                             >Welcome</router-link
                         >
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="isLoggedIn">
                         <router-link class="nav-link" :to="homePageLink"
                             >Home</router-link
                         >
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!isLoggedIn">
                         <router-link class="nav-link" :to="registerPageLink"
                             >Register</router-link
                         >
                     </li>
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" v-if="isLoggedIn">
                         <a
                             id="navbarDropdown"
                             class="nav-link dropdown-toggle"
@@ -86,11 +89,19 @@
                 </ul>
             </div>
         </div>
+        <h1>
+            {{ $store.state.counter }}
+        </h1>
     </nav>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            isLoading: true,
+        };
+    },
     computed: {
         loginPageLink() {
             return {
@@ -107,16 +118,26 @@ export default {
                 name: "home-page",
             };
         },
+        isLoggedIn() {
+            if (this.$store.getters.loggedUser) {
+                return true;
+            }
+            return false;
+        },
     },
     methods: {
         logout() {
             axios.post("/repairs/api/logout").then((response) => {
                 //console.log(response);
+                this.$store.commit("setUser", null);
                 this.$router.push({
                     name: "login-page",
                 });
             });
         },
+    },
+    mounted() {
+        this.isLoading = false;
     },
 };
 </script>

@@ -10,9 +10,20 @@ export default {
         TheHeader,
     },
     data() {
-        return {};
+        return {
+            isAuthenticated: false,
+        };
     },
-    mounted() {},
+    mounted() {
+        axios
+            .get("/repairs/api/user")
+            .then((response) => {
+                this.$store.commit("setUser", response.data);
+            })
+            .catch((error) => {
+                console.log("Ito ang error: " + error);
+            });
+    },
 };
 </script>
 
