@@ -118,8 +118,9 @@ export default {
                 axios
                     .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
-                        // console.log(response);
-                        this.$store.commit("setUser", response.data);
+                        //  console.log(response);
+                        this.$store.commit("auth/setIsLoggedIn", true);
+                        this.$store.commit("auth/setUser", response.data);
 
                         this.$router.push({
                             name: "cpo-page",
@@ -130,6 +131,15 @@ export default {
                     });
             });
         },
+    },
+    created() {
+        /*
+        if (this.$store.getters["auth/isLoggedIn"]) {
+            this.$router.replace({
+                name: "cpo-page",
+            });
+        }
+        */
     },
 };
 </script>

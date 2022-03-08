@@ -1,8 +1,8 @@
 <template>
-    <nav
-        class="navbar navbar-expand-md navbar-light bg-white shadow-sm"
-        v-if="!isLoading"
-    >
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <h1>
+            {{ isLoggedIn }}
+        </h1>
         <div class="container">
             <a class="navbar-brand" href="#"> Repairs System </a>
             <button
@@ -30,19 +30,10 @@
                             >Login</router-link
                         >
                     </li>
-                    <li class="nav-item" v-if="!isLoggedIn">
-                        <router-link class="nav-link" to="/"
-                            >Welcome</router-link
-                        >
-                    </li>
+
                     <li class="nav-item" v-if="isLoggedIn">
                         <router-link class="nav-link" :to="cpoPageLink"
                             >CPO</router-link
-                        >
-                    </li>
-                    <li class="nav-item" v-if="isLoggedIn">
-                        <router-link class="nav-link" :to="homePageLink"
-                            >Home</router-link
                         >
                     </li>
 
@@ -62,7 +53,7 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            {{ loggedUser.name }}
+                            <span v-if="loggedUser">{{ loggedUser.name }}</span>
                         </a>
 
                         <div
@@ -82,11 +73,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-            isLoading: true,
-        };
-    },
     computed: {
         loginPageLink() {
             return {
@@ -103,26 +89,22 @@ export default {
                 name: "cpo-page",
             };
         },
-        homePageLink() {
-            return {
-                name: "home-page",
-            };
-        },
+
         isLoggedIn() {
-            if (this.$store.getters.loggedUser) {
-                return true;
-            }
-            return false;
+            // return false;
+            return this.$store.getters["auth/isLoggedIn"];
         },
         loggedUser() {
-            return this.$store.getters.loggedUser;
+            return this.$store.getters["auth/loggedUser"];
         },
     },
     methods: {
         logout() {
             axios.post("/repairs/api/logout").then((response) => {
                 //console.log(response);
-                this.$store.commit("setUser", null);
+                this.$store.commit("auth/setIsLoggedIn", false);
+                this.$store.commit("auth/setUser", null);
+
                 this.$router.push({
                     name: "login-page",
                 });
@@ -130,7 +112,10 @@ export default {
         },
     },
     mounted() {
-        this.isLoading = false;
+        console.log(
+            typeof this.$store.getters["auth/isLoggedIn"],
+            this.$store.getters["auth/isLoggedIn"]
+        );
     },
 };
 </script>

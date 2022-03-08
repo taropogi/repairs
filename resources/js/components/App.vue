@@ -9,16 +9,13 @@ export default {
     components: {
         TheHeader,
     },
-    data() {
-        return {
-            isAuthenticated: false,
-        };
-    },
-    mounted() {
+    created() {
         axios
             .get("/repairs/api/user")
             .then((response) => {
-                this.$store.commit("setUser", response.data);
+                this.$store.commit("auth/setIsLoggedIn", true);
+                this.$store.commit("auth/setUser", response.data);
+                //   console.log(response.data);
             })
             .catch((error) => {
                 console.log("Ito ang error: " + error);
