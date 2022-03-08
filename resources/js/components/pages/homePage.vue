@@ -18,7 +18,7 @@ export default {
     mounted() {
         axios.get("/repairs/api/user").then((response) => {
             this.user = response.data;
-            console.log(this.user);
+            //  console.log(this.user);
             this.isLoading = false;
         });
     },

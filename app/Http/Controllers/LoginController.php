@@ -36,6 +36,11 @@ class LoginController extends Controller
         ]);
     }
 
+    public function logout()
+    {
+        Auth::logout();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

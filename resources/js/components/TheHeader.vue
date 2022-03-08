@@ -110,8 +110,11 @@ export default {
     },
     methods: {
         logout() {
-            this.$router.push({
-                name: "login-page",
+            axios.post("/repairs/api/logout").then((response) => {
+                //console.log(response);
+                this.$router.push({
+                    name: "login-page",
+                });
             });
         },
     },

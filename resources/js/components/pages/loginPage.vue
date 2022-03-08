@@ -115,16 +115,19 @@ export default {
     },
     methods: {
         submitLoginForm() {
-            axios
-                .post("/repairs/api/login", this.loginFormData)
-                .then((response) => {
-                    this.$router.push({
-                        name: "home-page",
+            axios.get("/repairs/sanctum/csrf-cookie").then((response) => {
+                axios
+                    .post("/repairs/api/login", this.loginFormData)
+                    .then((response) => {
+                        //  console.log(response);
+                        this.$router.push({
+                            name: "home-page",
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
                     });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            });
         },
     },
 };
