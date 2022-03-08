@@ -28,6 +28,11 @@
                         >
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link" @click.prevent="logout"
+                            >Logout</a
+                        >
+                    </li>
+                    <li class="nav-item">
                         <router-link class="nav-link" to="/"
                             >Welcome</router-link
                         >
@@ -101,6 +106,13 @@ export default {
             return {
                 name: "home-page",
             };
+        },
+    },
+    methods: {
+        logout() {
+            this.$router.push({
+                name: "login-page",
+            });
         },
     },
 };
