@@ -1,8 +1,5 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <h1>
-            {{ isLoggedIn }}
-        </h1>
         <div class="container">
             <a class="navbar-brand" href="#"> Repairs System </a>
             <button
@@ -31,7 +28,7 @@
                         >
                     </li>
 
-                    <li class="nav-item" v-if="isLoggedIn">
+                    <li class="nav-item" v-if="loggedUser">
                         <router-link class="nav-link" :to="cpoPageLink"
                             >CPO</router-link
                         >
@@ -43,7 +40,7 @@
                         >
                     </li>
 
-                    <li class="nav-item dropdown" v-if="isLoggedIn">
+                    <li class="nav-item dropdown" v-if="loggedUser">
                         <a
                             id="navbarDropdown"
                             class="nav-link dropdown-toggle"
@@ -53,7 +50,7 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            <span v-if="loggedUser">{{ loggedUser.name }}</span>
+                            {{ loggedUser.name }}
                         </a>
 
                         <div
@@ -110,12 +107,6 @@ export default {
                 });
             });
         },
-    },
-    mounted() {
-        console.log(
-            typeof this.$store.getters["auth/isLoggedIn"],
-            this.$store.getters["auth/isLoggedIn"]
-        );
     },
 };
 </script>

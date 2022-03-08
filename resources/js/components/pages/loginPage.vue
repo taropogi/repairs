@@ -88,10 +88,6 @@
                                     >
                                         Login
                                     </button>
-
-                                    <a class="btn btn-link" href="#">
-                                        Forgot your password?
-                                    </a>
                                 </div>
                             </div>
                         </form>
