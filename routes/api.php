@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
 
 //cpo
 Route::post('cpo', [CpoController::class, 'create']);
+Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 
 //auth
 Route::post('register', [RegisterController::class, 'create']);

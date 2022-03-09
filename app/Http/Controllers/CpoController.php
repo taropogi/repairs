@@ -45,6 +45,11 @@ class CpoController extends Controller
         return response()->json($request);
     }
 
+    public function getCpoHeaders()
+    {
+        return Cpo::orderBy('id', 'desc')->get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
