@@ -50,13 +50,13 @@ router.beforeEach(function (to, from, next) {
         next({
             name: "login-page",
         });
-    }
-    if (to.meta.requiresUnAuth && store.getters["auth/isLoggedIn"]) {
+    } else if (to.meta.requiresUnAuth && store.getters["auth/isLoggedIn"]) {
         next({
             name: "cpo-page",
         });
+    } else {
+        next();
     }
-    next();
 });
 
 export default router;
