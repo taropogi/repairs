@@ -1,9 +1,14 @@
 <template>
-    <h1>CPO here</h1>
+    <encode-cpo-form></encode-cpo-form>
 </template>
 
 <script>
-export default {};
+import encodeCpoForm from "../CPO/encodeCpoForm.vue";
+export default {
+    components: {
+        encodeCpoForm,
+    },
+};
 </script>
 
 <style></style>
