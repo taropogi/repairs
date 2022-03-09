@@ -2,21 +2,19 @@
     <form @submit.prevent="submitCpoForm">
         <div class="row my-2">
             <div class="col">
+                <label>Customer Name</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Customer name"
-                    aria-label="Customer name"
                     required
                     v-model="formData.customerName"
                 />
             </div>
             <div class="col">
+                <label>Customer Address</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Customer address"
-                    aria-label="Customer address"
                     required
                     v-model="formData.customerAddress"
                 />
@@ -24,21 +22,19 @@
         </div>
         <div class="row my-2">
             <div class="col">
+                <label>Contact Number</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Contact number"
-                    aria-label="Contact number"
                     required
                     v-model="formData.contactNumber"
                 />
             </div>
             <div class="col">
+                <label>RPO Number</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="RPO number"
-                    aria-label="RPO number"
                     required
                     v-model="formData.rpoNumber"
                 />
@@ -47,21 +43,19 @@
 
         <div class="row my-2">
             <div class="col">
+                <label>Prepared By</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Prepared by"
-                    aria-label="Prepared by"
                     required
                     v-model="formData.preparedBy"
                 />
             </div>
             <div class="col">
+                <label>Authorized By</label>
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Authorized by"
-                    aria-label="Authorized by"
                     required
                     v-model="formData.authorizedBy"
                 />
