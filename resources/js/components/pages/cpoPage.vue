@@ -8,7 +8,7 @@ export default {
     components: {
         encodeCpoForm,
     },
-    mounted() {
+    beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "CPO - Pullout Form");
     },
 };

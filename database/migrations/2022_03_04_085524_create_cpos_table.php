@@ -15,7 +15,12 @@ class CreateCposTable extends Migration
     {
         Schema::create('cpos', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
+            $table->string('customer_name')->nullable();
+            $table->string('customer_address')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('rpo_number')->nullable();
+            $table->string('prepared_by')->nullable();
+            $table->string('authorized_by')->nullable();
             $table->timestamps();
         });
     }

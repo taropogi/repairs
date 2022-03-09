@@ -22,9 +22,23 @@ class CpoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'customerName' => ['required'],
+            'customerAddress' => ['required'],
+            'contactNumber' => ['required'],
+            'rpoNumber' => ['required'],
+        ]);
+
+        Cpo::create([
+            'customer_name' => $request->customerName,
+            'customer_address' => $request->customerAddress,
+            'contact_number' => $request->contactNumber,
+            'rpo_number' => $request->rpoNumber,
+        ]);
+
+        return response()->json($request);
     }
 
     /**
