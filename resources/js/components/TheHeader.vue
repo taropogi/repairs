@@ -1,7 +1,12 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"> Repairs System </a>
+            <a class="navbar-brand" href="#">
+                Repairs System
+                <span v-if="mainPageHeader"
+                    >/ <strong>{{ mainPageHeader }}</strong></span
+                >
+            </a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -71,6 +76,9 @@
 <script>
 export default {
     computed: {
+        mainPageHeader() {
+            return this.$store.getters.mainPageTitleHeader;
+        },
         loginPageLink() {
             return {
                 name: "login-page",

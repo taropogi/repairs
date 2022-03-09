@@ -8,6 +8,9 @@ export default {
     components: {
         encodeCpoForm,
     },
+    mounted() {
+        this.$store.commit("setMainPageTitleHeader", "CPO - Pullout Form");
+    },
 };
 </script>
 

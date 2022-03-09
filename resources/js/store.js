@@ -35,6 +35,21 @@ const store = createStore({
     modules: {
         auth: authModule,
     },
+    state() {
+        return {
+            mainPageTitleHeader: "",
+        };
+    },
+    mutations: {
+        setMainPageTitleHeader(state, payload) {
+            state.mainPageTitleHeader = payload;
+        },
+    },
+    getters: {
+        mainPageTitleHeader(state) {
+            return state.mainPageTitleHeader;
+        },
+    },
 });
 
 export default store;

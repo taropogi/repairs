@@ -137,6 +137,9 @@ export default {
         }
         */
     },
+    mounted() {
+        this.$store.commit("setMainPageTitleHeader", "Login");
+    },
 };
 </script>
 
