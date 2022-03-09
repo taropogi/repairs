@@ -7,6 +7,7 @@
                     >/ <strong>{{ mainPageHeader }}</strong></span
                 >
             </a>
+
             <button
                 class="navbar-toggler"
                 type="button"

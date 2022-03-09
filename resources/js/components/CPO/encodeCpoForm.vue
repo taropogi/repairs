@@ -1,5 +1,8 @@
 <template>
     <form @submit.prevent="submitCpoForm">
+        <div v-if="isSubmitSuccess" class="alert alert-success" role="alert">
+            Successful insert!
+        </div>
         <div class="row my-2">
             <div class="col">
                 <label>Customer Name</label>
@@ -78,18 +81,29 @@ export default {
                 preparedBy: "",
                 authorizedBy: "",
             },
+            isSubmitSuccess: false,
         };
     },
     methods: {
         submitCpoForm() {
+            this.isSubmitSuccess = false;
             axios
                 .post("/repairs/api/cpo", this.formData)
-                .then(function (response) {
-                    console.log(response);
+                .then((response) => {
+                    this.isSubmitSuccess = true;
+                    this.resetForm();
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        resetForm() {
+            this.formData.customerName = "";
+            this.formData.customerAddress = "";
+            this.formData.contactNumber = "";
+            this.formData.rpoNumber = "";
+            this.formData.preparedBy = "";
+            this.formData.authorizedBy = "";
         },
     },
 };
