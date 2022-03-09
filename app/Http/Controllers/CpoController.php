@@ -29,6 +29,8 @@ class CpoController extends Controller
             'customerAddress' => ['required'],
             'contactNumber' => ['required'],
             'rpoNumber' => ['required'],
+            'preparedBy' => ['required'],
+            'authorizedBy' => ['required'],
         ]);
 
         Cpo::create([
@@ -36,6 +38,8 @@ class CpoController extends Controller
             'customer_address' => $request->customerAddress,
             'contact_number' => $request->contactNumber,
             'rpo_number' => $request->rpoNumber,
+            'prepared_by' => $request->preparedBy,
+            'authorized_by' => $request->authorizedBy,
         ]);
 
         return response()->json($request);

@@ -45,6 +45,29 @@
             </div>
         </div>
 
+        <div class="row my-2">
+            <div class="col">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Prepared by"
+                    aria-label="Prepared by"
+                    required
+                    v-model="formData.preparedBy"
+                />
+            </div>
+            <div class="col">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Authorized by"
+                    aria-label="Authorized by"
+                    required
+                    v-model="formData.authorizedBy"
+                />
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
 </template>
@@ -58,6 +81,8 @@ export default {
                 customerAddress: "",
                 contactNumber: "",
                 rpoNumber: "",
+                preparedBy: "",
+                authorizedBy: "",
             },
         };
     },
