@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div class="container p-2 bg-white">
+    <div class="container p-2 bg-white vh-100">
         <main class="py-2" id="app">
         </main>
     </div>
