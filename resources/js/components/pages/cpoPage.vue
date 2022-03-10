@@ -3,6 +3,7 @@
         <confirm-modal></confirm-modal>
         <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
         <hr />
+        <search-cpo-header></search-cpo-header>
         <cpo-header-list :cpoHeaderList="cpoHeaderList"></cpo-header-list>
     </div>
 </template>
@@ -11,11 +12,14 @@
 import encodeCpoForm from "../CPO/encodeCpoForm.vue";
 import cpoHeaderList from "../CPO/cpoHeaderList.vue";
 import confirmModal from "../UI/confirmModal.vue";
+import searchCpoHeader from "../CPO/searchCpoHeader.vue";
+
 export default {
     components: {
         encodeCpoForm,
         cpoHeaderList,
         confirmModal,
+        searchCpoHeader,
     },
     data() {
         return {

@@ -1,5 +1,8 @@
 <template>
     <form @submit.prevent="submitCpoForm">
+        <h4 class="text-center bg-primary p-2 text-white">
+            Encode CPO Headers
+        </h4>
         <div v-if="isSubmitSuccess" class="alert alert-success" role="alert">
             Successful insert!
         </div>
@@ -10,7 +13,7 @@
                     type="text"
                     class="form-control"
                     required
-                    v-model="formData.customerName"
+                    v-model.trim="formData.customerName"
                 />
             </div>
             <div class="col">
@@ -19,7 +22,7 @@
                     type="text"
                     class="form-control"
                     required
-                    v-model="formData.customerAddress"
+                    v-model.trim="formData.customerAddress"
                 />
             </div>
         </div>
