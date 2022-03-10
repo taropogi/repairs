@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table table-sm">
+        <table class="table table-sm table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">CPO#</th>

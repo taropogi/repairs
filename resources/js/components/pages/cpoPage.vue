@@ -1,5 +1,6 @@
 <template>
     <div>
+        <confirm-modal></confirm-modal>
         <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
         <hr />
         <cpo-header-list :cpoHeaderList="cpoHeaderList"></cpo-header-list>
@@ -9,10 +10,12 @@
 <script>
 import encodeCpoForm from "../CPO/encodeCpoForm.vue";
 import cpoHeaderList from "../CPO/cpoHeaderList.vue";
+import confirmModal from "../UI/confirmModal.vue";
 export default {
     components: {
         encodeCpoForm,
         cpoHeaderList,
+        confirmModal,
     },
     data() {
         return {
