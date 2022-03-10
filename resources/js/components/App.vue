@@ -9,7 +9,7 @@ export default {
     components: {
         TheHeader,
     },
-    created() {
+    beforeCreate() {
         //  console.log("try login");
         axios
             .get("/repairs/api/user")

@@ -1,6 +1,6 @@
 <template>
     <table class="table table-sm table-striped table-bordered">
-        <thead>
+        <thead class="table-success">
             <tr>
                 <th scope="col">CPO#</th>
                 <th scope="col">RPO #</th>
@@ -28,13 +28,16 @@
                         aria-label="Basic mixed styles example"
                     >
                         <button type="button" class="btn btn-danger">
-                            Delete
+                            Delete <i class="bi bi-trash-fill"></i>
                         </button>
                         <button type="button" class="btn btn-warning">
-                            Add lines
+                            Add lines <i class="bi bi-file-plus-fill"></i>
                         </button>
                         <button type="button" class="btn btn-success">
-                            Edit
+                            Edit <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button type="button" class="btn btn-info">
+                            Print <i class="bi bi-printer-fill"></i>
                         </button>
                     </div>
                 </td>
