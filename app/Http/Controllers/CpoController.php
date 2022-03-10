@@ -58,6 +58,16 @@ class CpoController extends Controller
         if ($request->searchContact) {
             $cpos = $cpos->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
         }
+        if ($request->searchRpo) {
+            $cpos = $cpos->where('rpo_number', 'LIKE', '%' . $request->searchRpo . '%');
+        }
+        if ($request->searchPrepared) {
+            $cpos = $cpos->where('prepared_by', 'LIKE', '%' . $request->searchPrepared . '%');
+        }
+        if ($request->searchAuthorized) {
+            $cpos = $cpos->where('authorized_by', 'LIKE', '%' . $request->searchAuthorized . '%');
+        }
+
 
         $cpos = $cpos->get();
         return $cpos;

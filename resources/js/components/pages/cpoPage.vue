@@ -43,6 +43,10 @@ export default {
                         searchName: searchCriteria.searchName || "",
                         searchAddress: searchCriteria.searchAddress || "",
                         searchContact: searchCriteria.searchContactNumber || "",
+                        searchRpo: searchCriteria.searchRpoNumber || "",
+                        searchPrepared: searchCriteria.searchPreparedBy || "",
+                        searchAuthorized:
+                            searchCriteria.searchAuthorizedBy || "",
                     },
                 })
                 .then((response) => {

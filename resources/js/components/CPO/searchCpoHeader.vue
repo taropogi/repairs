@@ -35,15 +35,30 @@
         <div class="row my-2">
             <div class="col">
                 <label>RPO #</label>
-                <input type="text" class="form-control" @input="search" />
+                <input
+                    type="text"
+                    class="form-control"
+                    @input="search"
+                    v-model="searchCriteria.searchRpoNumber"
+                />
             </div>
             <div class="col">
                 <label>Prepared By</label>
-                <input type="text" class="form-control" @input="search" />
+                <input
+                    type="text"
+                    class="form-control"
+                    @input="search"
+                    v-model="searchCriteria.searchPreparedBy"
+                />
             </div>
             <div class="col">
                 <label>Authorized By</label>
-                <input type="text" class="form-control" @input="search" />
+                <input
+                    type="text"
+                    class="form-control"
+                    @input="search"
+                    v-model="searchCriteria.searchAuthorizedBy"
+                />
             </div>
         </div>
     </form>
@@ -59,6 +74,9 @@ export default {
                 searchName: "",
                 searchAddress: "",
                 searchContactNumber: "",
+                searchRpoNumber: "",
+                searchPreparedBy: "",
+                searchAuthorizedBy: "",
             },
         };
     },
