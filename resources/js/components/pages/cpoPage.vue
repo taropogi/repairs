@@ -42,6 +42,7 @@ export default {
                     params: {
                         searchName: searchCriteria.searchName || "",
                         searchAddress: searchCriteria.searchAddress || "",
+                        searchContact: searchCriteria.searchContactNumber || "",
                     },
                 })
                 .then((response) => {

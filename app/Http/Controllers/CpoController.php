@@ -55,6 +55,9 @@ class CpoController extends Controller
         if ($request->searchAddress) {
             $cpos = $cpos->where('customer_address', 'LIKE', '%' . $request->searchAddress . '%');
         }
+        if ($request->searchContact) {
+            $cpos = $cpos->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
+        }
 
         $cpos = $cpos->get();
         return $cpos;

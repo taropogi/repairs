@@ -24,7 +24,12 @@
             </div>
             <div class="col">
                 <label>Contact #</label>
-                <input type="text" class="form-control" @input="search" />
+                <input
+                    type="text"
+                    class="form-control"
+                    @input="search"
+                    v-model="searchCriteria.searchContactNumber"
+                />
             </div>
         </div>
         <div class="row my-2">
@@ -53,6 +58,7 @@ export default {
             searchCriteria: {
                 searchName: "",
                 searchAddress: "",
+                searchContactNumber: "",
             },
         };
     },
