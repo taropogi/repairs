@@ -92,6 +92,7 @@ export default {
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
+                    this.$emit("inserted-cpo-header");
                 })
                 .catch((error) => {
                     console.log(error);

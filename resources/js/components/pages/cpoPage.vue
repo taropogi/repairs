@@ -1,6 +1,6 @@
 <template>
     <div>
-        <encode-cpo-form></encode-cpo-form>
+        <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
         <hr />
         <cpo-header-list :cpoHeaderList="cpoHeaderList"></cpo-header-list>
     </div>
