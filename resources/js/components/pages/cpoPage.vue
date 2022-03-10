@@ -3,7 +3,10 @@
         <confirm-modal></confirm-modal>
         <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
         <hr />
-        <search-cpo-header></search-cpo-header>
+        <search-cpo-header
+            @search-cpo-header="getCpoHeaders"
+        ></search-cpo-header>
+
         <cpo-header-list :cpoHeaderList="cpoHeaderList"></cpo-header-list>
     </div>
 </template>
@@ -27,11 +30,24 @@ export default {
         };
     },
     methods: {
-        getCpoHeaders() {
+        getCpoHeaders(searchCriteria) {
+            if (searchCriteria === undefined) {
+                searchCriteria = {};
+            }
+
+            // console.log(searchCriteria);
+
             axios
-                .get("/repairs/api/cpo")
+                .get("/repairs/api/cpo", {
+                    params: {
+                        searchName: searchCriteria.searchName || "",
+                        searchAddress: searchCriteria.searchAddress || "",
+                    },
+                })
                 .then((response) => {
                     this.cpoHeaderList = response.data;
+                    //  console.log(searchCriteria);
+                    // console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);

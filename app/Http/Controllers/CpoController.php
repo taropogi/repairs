@@ -45,9 +45,19 @@ class CpoController extends Controller
         return response()->json($request);
     }
 
-    public function getCpoHeaders()
+    public function getCpoHeaders(Request $request)
     {
-        return Cpo::orderBy('id', 'desc')->get();
+
+        $cpos = Cpo::orderBy('id', 'desc');
+        if ($request->searchName) {
+            $cpos = $cpos->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
+        }
+        if ($request->searchAddress) {
+            $cpos = $cpos->where('customer_address', 'LIKE', '%' . $request->searchAddress . '%');
+        }
+
+        $cpos = $cpos->get();
+        return $cpos;
     }
 
     /**
