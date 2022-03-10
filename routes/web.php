@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GeneratePdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/generatePdf', [GeneratePdfController::class, 'generatePdf']);
+
 Route::get('/{path}', function () {
     return view('layouts.app');
 })->where('path', '^(?!path).*$');
+
+
 
 //Auth::routes();
 

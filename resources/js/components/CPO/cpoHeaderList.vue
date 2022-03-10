@@ -36,7 +36,11 @@
                         <button type="button" class="btn btn-success">
                             Edit <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-info">
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            @click="printCPOPdf"
+                        >
                             Print <i class="bi bi-printer-fill"></i>
                         </button>
                     </div>
@@ -48,6 +52,11 @@
 
 <script>
 export default {
+    methods: {
+        printCPOPdf() {
+            window.location.href = "/repairs/generatePdf";
+        },
+    },
     props: ["cpoHeaderList"],
 };
 </script>
