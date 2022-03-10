@@ -2,7 +2,7 @@
     <div>
         <confirm-modal></confirm-modal>
         <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
-        <hr />
+
         <search-cpo-header
             @search-cpo-header="getCpoHeaders"
         ></search-cpo-header>

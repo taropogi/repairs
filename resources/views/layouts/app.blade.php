@@ -23,7 +23,7 @@
 
 <body>
     <div class="container p-2 bg-white vh-100">
-        <main class="py-2" id="app">
+        <main class="border p-2" id="app">
         </main>
     </div>
 

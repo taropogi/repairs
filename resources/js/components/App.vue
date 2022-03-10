@@ -20,7 +20,7 @@ export default {
                 //  console.log(response.data);
             })
             .catch((error) => {
-                //  console.log("Ito ang error: " + error);
+                console.log("Ito ang error: " + error);
                 axios.post("/repairs/api/logout").then((response) => {
                     //console.log(response);
                     this.$store.commit("auth/setIsLoggedIn", false);
