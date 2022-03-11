@@ -23,9 +23,8 @@
 </head>
 
 <body>
-    <div class="container p-2 bg-white vh-100">
-
-        <main class="py-2" id="app">
+    <div class="container-fluid p-2 bg-white vh-100">
+        <main id="app">
         </main>
     </div>
 

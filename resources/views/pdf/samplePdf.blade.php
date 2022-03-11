@@ -61,7 +61,7 @@
         <tr>
             <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
             <td align="right">
-                <h3>PULL OUT FORM</h3>
+                <h3>________________ PULL OUT FORM</h3>
             </td>
         </tr>
 
@@ -72,16 +72,15 @@
         <tr>
             <td><small><strong>NAME:</strong> {{ $customer_name }}</small></td>
             <td><small><strong>RPO#:</strong> {{ $rpo_number }}</small></td>
-        </tr>
-        <tr>
-            <td><small><strong>ADDRESS:</strong> {{ $customer_address }}</small></td>
             <td><small><strong>DATE:</strong> {{ $date }}</small></td>
         </tr>
         <tr>
+            <td colspan="2"><small><strong>ADDRESS:</strong> {{ $customer_address }}</small></td>
             <td><small><strong>CONTACT:</strong> {{ $contact_number }}</small></td>
-            <td><small><strong>PREPARED BY:</strong> GEOMEL </small></td>
         </tr>
         <tr>
+
+            <td><small><strong>PREPARED BY:</strong> GEOMEL </small></td>
             <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
             <td><small><strong>AUTHORIZED BY:</strong> GEOMEL </small></td>
         </tr>

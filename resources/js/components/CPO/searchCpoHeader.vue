@@ -1,9 +1,9 @@
 <template>
-    <form class="my-2">
+    <form class="p-2">
         <h4 class="text-center bg-success p-2 text-white">
             Search CPO Headers
         </h4>
-        <div class="row my-2">
+        <div class="row">
             <div class="col">
                 <label>Customer Name</label>
                 <input
@@ -32,7 +32,7 @@
                 />
             </div>
         </div>
-        <div class="row my-2">
+        <div class="row">
             <div class="col">
                 <label>RPO #</label>
                 <input

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-2">
         <form @submit.prevent="submitCpoForm">
             <h4 class="text-center bg-primary p-2 text-white">
                 Encode CPO Headers
