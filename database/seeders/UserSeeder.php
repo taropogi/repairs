@@ -17,6 +17,8 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+        User::factory()->times(100)->create();
+
         $users = [
             [
                 'name' => "Richard",
@@ -24,9 +26,9 @@ class UserSeeder extends Seeder
                 'password' => Hash::make("tarotaro"),
             ],
             [
-                'name' => "Mike",
-                'email' => "mike@repairs.com",
-                'password' => Hash::make("mike"),
+                'name' => "Test User",
+                'email' => "test@test.com",
+                'password' => Hash::make("password"),
             ]
         ];
 

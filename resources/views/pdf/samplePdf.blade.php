@@ -80,9 +80,9 @@
         </tr>
         <tr>
 
-            <td><small><strong>PREPARED BY:</strong> GEOMEL </small></td>
+            <td><small><strong>PREPARED BY:</strong> {{ $prepared_by }} </small></td>
             <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
-            <td><small><strong>AUTHORIZED BY:</strong> GEOMEL </small></td>
+            <td><small><strong>AUTHORIZED BY:</strong> {{ $authorized_by }} </small></td>
         </tr>
 
 

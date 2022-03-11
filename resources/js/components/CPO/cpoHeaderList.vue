@@ -46,7 +46,7 @@
                                 class="btn btn-info"
                                 @click="printCPOPdf(item.id)"
                             >
-                                Download Pdf <i class="bi bi-download"></i>
+                                PDF <i class="bi bi-download"></i>
                             </button>
                         </div>
                     </td>
