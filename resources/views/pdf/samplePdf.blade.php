@@ -203,6 +203,9 @@
 
 
     </table>
+    <p style="font-size: x-small;">
+        NOTE: PLEASE REFER TO RMA FOR COMPLETE DETAILS RE: RESOLUTION OF THIS TRANSACTION
+    </p>
 
 </body>
 
