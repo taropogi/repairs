@@ -19,8 +19,37 @@
         font-size: x-small;
     }
 
+    thead th {
+        font-size: 10px;
+    }
+
+
     .gray {
         background-color: lightgray
+    }
+
+    td.text-center {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+
+
+    .to-border,
+    .to-border td,
+    .to-border th {
+        border: 1px solid;
+    }
+
+    .to-border {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-inside,
+    .table-inside td {
+        font-size: 10px;
+        border: none;
     }
     </style>
 
@@ -32,80 +61,147 @@
         <tr>
             <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
             <td align="right">
-                <h3>Times Trading Company Inc.</h3>
-                <pre>
-                Company representative name
-                Company address
-                Tax ID
-                phone
-                fax
-            </pre>
+                <h3>PULL OUT FORM</h3>
             </td>
         </tr>
+
+    </table>
+    <br>
+
+    <table width="100%">
+        <tr>
+            <td><small><strong>NAME:</strong> {{ $customer_name }}</small></td>
+            <td><small><strong>RPO#:</strong> {{ $rpo_number }}</small></td>
+        </tr>
+        <tr>
+            <td><small><strong>ADDRESS:</strong> {{ $customer_address }}</small></td>
+            <td><small><strong>DATE:</strong> {{ $date }}</small></td>
+        </tr>
+        <tr>
+            <td><small><strong>CONTACT:</strong> {{ $contact_number }}</small></td>
+            <td><small><strong>PREPARED BY:</strong> GEOMEL </small></td>
+        </tr>
+        <tr>
+            <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
+            <td><small><strong>AUTHORIZED BY:</strong> GEOMEL </small></td>
+        </tr>
+
+
+    </table>
+
+
+    <p style="font-size: x-small;">
+        THIS DOCUMENT IS TO ACKNOWLEDGE PULL OUT OF THE ITEMS: (TO BE FILLED IN BY TIMES STAFF)
+    </p>
+
+    <table width="100%" style="border: 1px solid;" class="to-border">
+        <thead style="background-color: lightgray;">
+            <tr>
+                <td>#</td>
+                <th>DESCRIPTION</th>
+                <th>QTY<br>RETURNED</th>
+                <th>UNIT</th>
+                <th>QTY<br>INSPECT</th>
+                <th>GOOD<br>CONDITION</th>
+                <th>MINOR<br>REPAIR/<br>CLEAN</th>
+                <th>REPAIR/<br>PARTS<br>NEEDED</th>
+                <th>DAMAGED</th>
+                <th>COMMENTS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for ($i = 1; $i < 10; $i++) <tr>
+                <th scope="row" rowspan="2">{{ $i }}</th>
+                <td class="text-center"><small>21-DERWE-KINGFISHERBLUE-XX-XX-009085</small></td>
+                <td class="text-center" align="right"><small>60</small></td>
+                <td class="text-center" align="right"><small>PC</small></td>
+                <td class="text-center" align="right"><small>60</small></td>
+                <td class="text-center" align="right"><small>60</small></td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td rowspan="2">
+                    <small>Good Condition</small>
+                </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <table width="100%" class="table-inside" style="border:none;">
+                            <tr>
+                                <td><strong>DATE:</strong> {{ $date }}</td>
+                                <td><strong>DOC#:</strong> 1245784</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PRICE:</strong> 45.33</td>
+                                <td><strong>HC:</strong> WL 904523</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td colspan="2">
+                        <table width="100%" class="table-inside" style="border:none;">
+                            <tr>
+                                <td><strong>REP</strong></td>
+                                <td><strong>EXC</strong></td>
+                                <td><strong>RET/</strong></td>
+                            </tr>
+                            <tr>
+                                <td>____</td>
+                                <td>____</td>
+                                <td>____</td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td>
+                        <small sy>BY:</small>
+                    </td>
+                    <td>
+                        <small>BY:</small>
+                    </td>
+                    <td>
+                        <small>BY:</small>
+                    </td>
+                    <td>
+                        <small>BY:</small>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                @endfor
+
+        </tbody>
+
 
     </table>
 
     <table width="100%">
         <tr>
-            <td><strong>From:</strong> Linblum - Barrio teatral</td>
-            <td><strong>To:</strong> Linblum - Barrio Comercial</td>
+            <td class="text-center"><small><strong>RETURNED BY</strong></small></td>
+            <td class="text-center"><small><strong>RECEIVED BY WHSE</strong></small></td>
+            <td class="text-center"><small><strong>INSPECTED BY</strong></small></td>
+            <td class="text-center"><small><strong>RM#</strong></small></td>
+            <td class="text-center"><small><strong>RECOVERED BY</strong></small></td>
+            <td class="text-center"><small><strong>DATE</strong></small></td>
+        </tr>
+        <tr>
+            <td class="text-center">__________</td>
+            <td class="text-center">__________</td>
+            <td class="text-center">__________</td>
+            <td class="text-center">__________</td>
+            <td class="text-center">__________</td>
+            <td class="text-center">__________</td>
         </tr>
 
-    </table>
 
-    <br />
-
-    <table width="100%">
-        <thead style="background-color: lightgray;">
-            <tr>
-                <th>#</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Unit Price $</th>
-                <th>Total $</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Playstation IV - Black</td>
-                <td align="right">1</td>
-                <td align="right">1400.00</td>
-                <td align="right">1400.00</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Metal Gear Solid - Phantom</td>
-                <td align="right">1</td>
-                <td align="right">105.00</td>
-                <td align="right">105.00</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Final Fantasy XV - Game</td>
-                <td align="right">1</td>
-                <td align="right">130.00</td>
-                <td align="right">130.00</td>
-            </tr>
-        </tbody>
-
-        <tfoot>
-            <tr>
-                <td colspan="3"></td>
-                <td align="right">Subtotal $</td>
-                <td align="right">1635.00</td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td align="right">Tax $</td>
-                <td align="right">294.3</td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td align="right">Total $</td>
-                <td align="right" class="gray">$ 1929.3</td>
-            </tr>
-        </tfoot>
     </table>
 
 </body>

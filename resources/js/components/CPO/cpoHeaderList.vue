@@ -39,9 +39,9 @@
                         <button
                             type="button"
                             class="btn btn-info"
-                            @click="printCPOPdf"
+                            @click="printCPOPdf(item.id)"
                         >
-                            Print <i class="bi bi-printer-fill"></i>
+                            Download Pdf <i class="bi bi-download"></i>
                         </button>
                     </div>
                 </td>
@@ -53,8 +53,8 @@
 <script>
 export default {
     methods: {
-        printCPOPdf() {
-            window.location.href = "/repairs/generatePdf";
+        printCPOPdf(cpoId) {
+            window.location.href = "/repairs/generatePdf/?id=" + cpoId;
         },
     },
     props: ["cpoHeaderList"],
