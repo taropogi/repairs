@@ -1,39 +1,11 @@
 import { createStore } from "vuex";
-
-const authModule = {
-    namespaced: true,
-    state() {
-        return {
-            isLoggedIn: localStorage.getItem("isLoggedIn")
-                ? localStorage.getItem("isLoggedIn") === "true"
-                    ? true
-                    : false
-                : false,
-            user: null,
-        };
-    },
-    mutations: {
-        setIsLoggedIn(state, payload) {
-            state.isLoggedIn = payload;
-            localStorage.setItem("isLoggedIn", payload);
-        },
-        setUser(state, user) {
-            state.user = user;
-        },
-    },
-    getters: {
-        loggedUser(state) {
-            return state.user;
-        },
-        isLoggedIn(state) {
-            return state.isLoggedIn;
-        },
-    },
-};
+import authModule from "./store/modules/auth/index.js";
+import cpoModule from "./store/modules/cpo/index.js";
 
 const store = createStore({
     modules: {
         auth: authModule,
+        cpo: cpoModule,
     },
     state() {
         return {

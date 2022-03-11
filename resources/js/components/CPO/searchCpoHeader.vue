@@ -1,5 +1,5 @@
 <template>
-    <form class="p-2">
+    <form class="my-2">
         <h4 class="text-center bg-success p-2 text-white">
             Search CPO Headers
         </h4>

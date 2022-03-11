@@ -34,16 +34,42 @@
                         >
                     </li>
 
-                    <li class="nav-item" v-if="loggedUser">
-                        <router-link class="nav-link" :to="cpoPageLink"
-                            >CPO</router-link
-                        >
-                    </li>
-
                     <li class="nav-item" v-if="!isLoggedIn">
                         <router-link class="nav-link" :to="registerPageLink"
                             >Register</router-link
                         >
+                    </li>
+
+                    <li class="nav-item dropdown" v-if="loggedUser">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            CPO
+                        </a>
+                        <ul
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdown"
+                        >
+                            <li>
+                                <router-link
+                                    class="dropdown-item"
+                                    :to="encodeCpoPageLink"
+                                    >Encode</router-link
+                                >
+                            </li>
+                            <li>
+                                <router-link
+                                    class="dropdown-item"
+                                    :to="searchCpoPageLink"
+                                    >Search CPO Header</router-link
+                                >
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="nav-item dropdown" v-if="loggedUser">
@@ -93,6 +119,16 @@ export default {
         cpoPageLink() {
             return {
                 name: "cpo-page",
+            };
+        },
+        encodeCpoPageLink() {
+            return {
+                name: "encode-cpo",
+            };
+        },
+        searchCpoPageLink() {
+            return {
+                name: "search-cpo",
             };
         },
 

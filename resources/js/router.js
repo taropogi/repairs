@@ -4,6 +4,8 @@ import loginPage from "./components/pages/loginPage.vue";
 import registerPage from "./components/pages/registerPage.vue";
 import cpoPage from "./components/pages/cpoPage.vue";
 import notFoundPage from "./components/pages/notFoundPage.vue";
+import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
+import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -20,6 +22,19 @@ const router = createRouter({
             meta: {
                 requiresAuth: true,
             },
+            redirect: { name: "search-cpo" },
+            children: [
+                {
+                    path: "encode",
+                    component: encodeCpoForm,
+                    name: "encode-cpo",
+                },
+                {
+                    path: "search",
+                    component: searchCpoHeader,
+                    name: "search-cpo",
+                },
+            ],
         },
 
         {

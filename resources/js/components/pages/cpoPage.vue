@@ -1,13 +1,14 @@
 <template>
     <div>
-        <confirm-modal></confirm-modal>
-        <encode-cpo-form @inserted-cpo-header="getCpoHeaders"></encode-cpo-form>
-
-        <search-cpo-header
+        <router-view
+            @inserted-cpo-header="getCpoHeaders"
             @search-cpo-header="getCpoHeaders"
-        ></search-cpo-header>
+        ></router-view>
 
-        <cpo-header-list :cpoHeaderList="cpoHeaderList"></cpo-header-list>
+        <cpo-header-list
+            :cpoHeaderList="cpoHeaderList"
+            @editCpo="editCpo"
+        ></cpo-header-list>
     </div>
 </template>
 
@@ -16,6 +17,7 @@ import encodeCpoForm from "../CPO/encodeCpoForm.vue";
 import cpoHeaderList from "../CPO/cpoHeaderList.vue";
 import confirmModal from "../UI/confirmModal.vue";
 import searchCpoHeader from "../CPO/searchCpoHeader.vue";
+import editCpoHeader from "../CPO/editCpoHeader.vue";
 
 export default {
     components: {
@@ -23,13 +25,20 @@ export default {
         cpoHeaderList,
         confirmModal,
         searchCpoHeader,
+        editCpoHeader,
     },
     data() {
         return {
             cpoHeaderList: null,
+            isEdit: false,
+            toEditCpoItemHeader: null,
         };
     },
     methods: {
+        editCpo(cpoItemHeader) {
+            this.isEdit = true;
+            this.toEditCpoItemHeader = cpoItemHeader;
+        },
         getCpoHeaders(searchCriteria) {
             if (searchCriteria === undefined) {
                 searchCriteria = {};
