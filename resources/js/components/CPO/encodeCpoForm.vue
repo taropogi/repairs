@@ -5,9 +5,10 @@
                 Encode CPO Headers
             </h4>
 
-            <transition>
+            <transition name="encode-cpo-success">
                 <div v-if="isSubmitSuccess" class="fixed-top">
                     <div class="alert alert-success text-center" role="alert">
+                        <i class="bi bi-check2-all"></i>
                         <strong
                             >A new CPO header has been successfully
                             inserted.</strong
@@ -130,28 +131,28 @@ export default {
 </script>
 
 <style>
-.v-enter-from {
+.encode-cpo-success-enter-from {
     opacity: 0;
     transform: translateY(-30px);
 }
 
-.v-enter-active {
+.encode-cpo-success-enter-active {
     transition: all 0.5s ease-out;
 }
-.v-enter-to {
+.encode-cpo-success-enter-to {
     opacity: 1;
     transform: translateY(0);
 }
 
-.v-leave-from {
+.encode-cpo-success-leave-from {
     opacity: 1;
     transform: translateY(0);
 }
 
-.v-leave-active {
+.encode-cpo-success-leave-active {
     transition: all 0.5s ease-in;
 }
-.v-leave-to {
+.encode-cpo-success-leave-to {
     opacity: 0;
     transform: translateY(-30px);
 }

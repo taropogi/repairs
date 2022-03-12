@@ -1,7 +1,7 @@
 <template>
     <form class="p-2 border border-success">
         <h4 class="text-center bg-success p-1 mt-0 text-white">
-            Search CPO Headersx
+            Search CPO Headers
         </h4>
         <div class="row">
             <div class="col">
