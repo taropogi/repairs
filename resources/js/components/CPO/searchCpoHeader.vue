@@ -1,7 +1,7 @@
 <template>
-    <form class="p-2">
-        <h4 class="text-center bg-success p-2 text-white">
-            Search CPO Headers
+    <form class="p-2 border border-success">
+        <h4 class="text-center bg-success p-1 mt-0 text-white">
+            Search CPO Headersx
         </h4>
         <div class="row">
             <div class="col">
@@ -99,6 +99,9 @@ export default {
         actualSearch() {
             this.$emit("search-cpo-header", this.searchCriteria);
         },
+    },
+    beforeCreate() {
+        this.$store.commit("setMainPageTitleHeader", "CPO - Search");
     },
     mounted() {
         setInterval(() => {

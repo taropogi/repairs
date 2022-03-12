@@ -1,17 +1,21 @@
 <template>
-    <div class="p-2">
+    <div class="border border-primary p-2">
         <form @submit.prevent="submitCpoForm">
-            <h4 class="text-center bg-primary p-2 text-white">
+            <h4 class="text-center bg-primary p-1 text-white">
                 Encode CPO Headers
             </h4>
 
-            <div
-                v-if="isSubmitSuccess"
-                class="alert alert-success"
-                role="alert"
-            >
-                Successful insert!
-            </div>
+            <transition>
+                <div v-if="isSubmitSuccess" class="fixed-top">
+                    <div class="alert alert-success text-center" role="alert">
+                        <strong
+                            >A new CPO header has been successfully
+                            inserted.</strong
+                        >
+                    </div>
+                </div>
+            </transition>
+
             <div class="row my-2">
                 <div class="col">
                     <label>Customer Name</label>
@@ -95,13 +99,16 @@ export default {
     },
     methods: {
         submitCpoForm() {
-            this.isSubmitSuccess = false;
+            // this.isSubmitSuccess = false;
             axios
                 .post("/repairs/api/cpo", this.formData)
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
                     this.$emit("inserted-cpo-header");
+                    setTimeout(() => {
+                        this.isSubmitSuccess = false;
+                    }, 3000);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -116,7 +123,36 @@ export default {
             this.formData.authorizedBy = "";
         },
     },
+    beforeCreate() {
+        this.$store.commit("setMainPageTitleHeader", "CPO - Encode");
+    },
 };
 </script>
 
-<style></style>
+<style>
+.v-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.v-enter-active {
+    transition: all 0.5s ease-out;
+}
+.v-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.v-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.v-leave-active {
+    transition: all 0.5s ease-in;
+}
+.v-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+</style>

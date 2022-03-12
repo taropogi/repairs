@@ -69,6 +69,7 @@ class CpoController extends Controller
         }
 
 
+
         $cpos = $cpos->get();
         return $cpos;
     }

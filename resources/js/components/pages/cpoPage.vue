@@ -13,18 +13,12 @@
 </template>
 
 <script>
-import encodeCpoForm from "../CPO/encodeCpoForm.vue";
 import cpoHeaderList from "../CPO/cpoHeaderList.vue";
-import confirmModal from "../UI/confirmModal.vue";
-import searchCpoHeader from "../CPO/searchCpoHeader.vue";
 import editCpoHeader from "../CPO/editCpoHeader.vue";
 
 export default {
     components: {
-        encodeCpoForm,
         cpoHeaderList,
-        confirmModal,
-        searchCpoHeader,
         editCpoHeader,
     },
     data() {
@@ -38,6 +32,7 @@ export default {
         editCpo(cpoItemHeader) {
             this.isEdit = true;
             this.toEditCpoItemHeader = cpoItemHeader;
+            alert("edit");
         },
         getCpoHeaders(searchCriteria) {
             if (searchCriteria === undefined) {
@@ -68,9 +63,7 @@ export default {
                 });
         },
     },
-    beforeCreate() {
-        this.$store.commit("setMainPageTitleHeader", "CPO - Pullout Form");
-    },
+
     mounted() {
         this.getCpoHeaders();
     },
