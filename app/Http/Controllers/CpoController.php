@@ -44,7 +44,10 @@ class CpoController extends Controller
 
         return response()->json($request);
     }
-
+    public function getCpoHeader(Cpo $cpo)
+    {
+        return  $cpo;
+    }
     public function getCpoHeaders(Request $request)
     {
 

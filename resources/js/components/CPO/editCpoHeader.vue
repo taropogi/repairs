@@ -1,79 +1,95 @@
 <template>
-    <form @submit.prevent="submitCpoForm">
-        <h4 class="text-center bg-warning p-2 text-white">Update CPO Header</h4>
+    <div>
+        <h4 class="text-center bg-warning text-white p-2">UPDATE</h4>
+        <form @submit.prevent="submitCpoForm" class="border border-warning p-2">
+            <div
+                v-if="isSubmitSuccess"
+                class="alert alert-success"
+                role="alert"
+            >
+                Successful update!
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Customer Name</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model.trim="formData.customerName"
+                    />
+                </div>
+                <div class="col">
+                    <label>Customer Address</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model.trim="formData.customerAddress"
+                    />
+                </div>
+                <div class="col">
+                    <label>Contact Number</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model="formData.contactNumber"
+                    />
+                </div>
+            </div>
 
-        <div v-if="isSubmitSuccess" class="alert alert-success" role="alert">
-            Successful update!
-        </div>
-        <div class="row my-2">
-            <div class="col">
-                <label>Customer Name</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model.trim="formData.customerName"
-                />
+            <div class="row">
+                <div class="col">
+                    <label>RPO Number</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model="formData.rpoNumber"
+                    />
+                </div>
+                <div class="col">
+                    <label>Prepared By</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model="formData.preparedBy"
+                    />
+                </div>
+                <div class="col">
+                    <label>Authorized By</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        required
+                        v-model="formData.authorizedBy"
+                    />
+                </div>
             </div>
-            <div class="col">
-                <label>Customer Address</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model.trim="formData.customerAddress"
-                />
-            </div>
-        </div>
-        <div class="row my-2">
-            <div class="col">
-                <label>Contact Number</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model="formData.contactNumber"
-                />
-            </div>
-            <div class="col">
-                <label>RPO Number</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model="formData.rpoNumber"
-                />
-            </div>
-        </div>
 
-        <div class="row my-2">
-            <div class="col">
-                <label>Prepared By</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model="formData.preparedBy"
-                />
-            </div>
-            <div class="col">
-                <label>Authorized By</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    required
-                    v-model="formData.authorizedBy"
-                />
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-warning mt-2">Update</button>
-    </form>
+            <button type="submit" class="btn btn-warning btn-sm mt-2">
+                Update
+            </button>
+            |
+            <router-link
+                :to="{ name: 'search-cpo' }"
+                class="btn btn-danger mt-2 btn-sm"
+                >Cancel</router-link
+            >
+        </form>
+    </div>
 </template>
 
 <script>
 export default {
-    props: ["cpoItemHeader"],
+    props: ["id"],
+    watch: {
+        id(id) {
+            this.getCpoHeaderRow();
+        },
+    },
     data() {
         return {
             formData: {
@@ -88,6 +104,22 @@ export default {
         };
     },
     methods: {
+        getCpoHeaderRow() {
+            axios
+                .get("/repairs/api/cpo/" + this.id)
+                .then((response) => {
+                    this.formData.customerName = response.data.customer_name;
+                    this.formData.customerAddress =
+                        response.data.customer_address;
+                    this.formData.contactNumber = response.data.contact_number;
+                    this.formData.rpoNumber = response.data.rpo_number;
+                    this.formData.preparedBy = response.data.prepared_by;
+                    this.formData.authorizedBy = response.data.authorized_by;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         submitCpoForm() {
             this.isSubmitSuccess = false;
             axios
@@ -109,6 +141,12 @@ export default {
             this.formData.preparedBy = "";
             this.formData.authorizedBy = "";
         },
+    },
+    beforeCreate() {
+        this.$store.commit("setMainPageTitleHeader", "CPO - Edit");
+    },
+    mounted() {
+        this.getCpoHeaderRow();
     },
 };
 </script>

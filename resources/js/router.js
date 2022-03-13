@@ -6,6 +6,7 @@ import cpoPage from "./components/pages/cpoPage.vue";
 import notFoundPage from "./components/pages/notFoundPage.vue";
 import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
+import editCpoHeader from "./components/CPO/editCpoHeader.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -34,6 +35,12 @@ const router = createRouter({
                     component: searchCpoHeader,
                     name: "search-cpo",
                 },
+                {
+                    path: "edit/:id",
+                    component: editCpoHeader,
+                    name: "edit-cpo",
+                    props: true,
+                },
             ],
         },
 
@@ -58,6 +65,16 @@ const router = createRouter({
             component: notFoundPage,
         },
     ],
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+
+        return {
+            top: 0,
+            left: 0,
+        };
+    },
 });
 
 router.beforeEach(function (to, from, next) {

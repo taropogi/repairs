@@ -1,67 +1,67 @@
 <template>
-    <form class="p-2 border border-success">
-        <h4 class="text-center bg-success p-1 mt-0 text-white">
-            Search CPO Headers
-        </h4>
-        <div class="row">
-            <div class="col">
-                <label>Customer Name</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchName"
-                />
+    <div>
+        <h4 class="text-center bg-success text-white p-2">SEARCH</h4>
+        <form class="p-2 border border-success">
+            <div class="row">
+                <div class="col">
+                    <label>Customer Name</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchName"
+                    />
+                </div>
+                <div class="col">
+                    <label>Customer Address</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchAddress"
+                    />
+                </div>
+                <div class="col">
+                    <label>Contact #</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchContactNumber"
+                    />
+                </div>
             </div>
-            <div class="col">
-                <label>Customer Address</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchAddress"
-                />
+            <div class="row">
+                <div class="col">
+                    <label>RPO #</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchRpoNumber"
+                    />
+                </div>
+                <div class="col">
+                    <label>Prepared By</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchPreparedBy"
+                    />
+                </div>
+                <div class="col">
+                    <label>Authorized By</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        @input="search"
+                        v-model="searchCriteria.searchAuthorizedBy"
+                    />
+                </div>
             </div>
-            <div class="col">
-                <label>Contact #</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchContactNumber"
-                />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>RPO #</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchRpoNumber"
-                />
-            </div>
-            <div class="col">
-                <label>Prepared By</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchPreparedBy"
-                />
-            </div>
-            <div class="col">
-                <label>Authorized By</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    @input="search"
-                    v-model="searchCriteria.searchAuthorizedBy"
-                />
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <script>

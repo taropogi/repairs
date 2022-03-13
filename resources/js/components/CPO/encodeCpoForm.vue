@@ -1,10 +1,7 @@
 <template>
-    <div class="border border-primary p-2">
-        <form @submit.prevent="submitCpoForm">
-            <h4 class="text-center bg-primary p-1 text-white">
-                Encode CPO Headers
-            </h4>
-
+    <div>
+        <h4 class="text-center bg-primary text-white p-2">ENCODE</h4>
+        <form @submit.prevent="submitCpoForm" class="border border-primary p-2">
             <transition name="encode-cpo-success">
                 <div v-if="isSubmitSuccess" class="fixed-top">
                     <div class="alert alert-success text-center" role="alert">
@@ -17,12 +14,12 @@
                 </div>
             </transition>
 
-            <div class="row my-2">
+            <div class="row">
                 <div class="col">
                     <label>Customer Name</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model.trim="formData.customerName"
                     />
@@ -31,7 +28,7 @@
                     <label>Customer Address</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model.trim="formData.customerAddress"
                     />
@@ -41,18 +38,18 @@
                     <label>Contact Number</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model="formData.contactNumber"
                     />
                 </div>
             </div>
-            <div class="row my-2">
+            <div class="row">
                 <div class="col">
                     <label>RPO Number</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model="formData.rpoNumber"
                     />
@@ -62,7 +59,7 @@
                     <label>Prepared By</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model="formData.preparedBy"
                     />
@@ -71,14 +68,16 @@
                     <label>Authorized By</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control form-control-sm"
                         required
                         v-model="formData.authorizedBy"
                     />
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <button type="submit" class="btn btn-sm btn-primary mt-2">
+                Submit
+            </button>
         </form>
     </div>
 </template>

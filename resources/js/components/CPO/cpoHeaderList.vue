@@ -60,7 +60,13 @@
 export default {
     methods: {
         editCpoHeader(cpoItemHeader) {
-            this.$emit("editCpo", cpoItemHeader);
+            this.$router.replace({
+                name: "edit-cpo",
+                params: {
+                    id: cpoItemHeader.id,
+                },
+            });
+            // this.$emit("editCpo", cpoItemHeader);
         },
         printCPOPdf(cpoId) {
             window.location.href = "/repairs/generatePdf/?id=" + cpoId;
