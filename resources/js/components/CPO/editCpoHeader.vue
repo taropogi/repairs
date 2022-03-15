@@ -81,153 +81,42 @@
         </form>
 
         <h5 class="text-center p-2 bg-warning text-white">LINE DETAILS</h5>
-
-        <div class="p-2" v-for="item in lineDetails" :key="item.id">
-            <div class="row">
-                <div class="col-sm-1">
-                    <h1>{{ item.id }}</h1>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <label>Description</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model.trim="item.description"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Price</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.price"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>HC</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.hcopy"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Qty Returned</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model.trim="item.qtyReturned"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Unit</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.unit"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Qty Inspect</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.qtyInspect"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Date</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.qtyInspect"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label>Good Condition</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.goodCondition"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Minor Repair / Clean</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.minorRepairClean"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Repair / Parts Needed</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.repairPartsNeeded"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Damaged</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.damaged"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Comments</label>
-                            <textarea
-                                class="form-control"
-                                v-model="item.comments"
-                                rows="2"
-                            ></textarea>
-                        </div>
-                        <div class="col">
-                            <label>Doc#</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.comments"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Doc#</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="item.comments"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">HCopy</th>
+                    <th scope="col">Qty Returned</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Qty Inspect</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Good Condition</th>
+                    <th scope="col">Minor Repair/Clean</th>
+                    <th scope="col">Repair/Parts Needed</th>
+                    <th scope="col">Damaged</th>
+                    <th scope="col">Comments</th>
+                    <th scope="col">Doc #</th>
+                </tr>
+            </thead>
+            <tbody>
+                <edit-header-line
+                    v-for="item in lineDetails"
+                    :key="item.id"
+                    :lineDetails="item"
+                ></edit-header-line>
+            </tbody>
+        </table>
     </div>
 </template>
 
 <script>
+import editHeaderLine from "./editHeaderLine.vue";
 export default {
+    components: {
+        editHeaderLine,
+    },
     props: ["id"],
     watch: {
         id(id) {
@@ -270,6 +159,7 @@ export default {
                         const line = responseLines[key];
                         this.lineDetails.push({
                             id: line.id,
+                            lineNumber: line.line_number,
                             description: line.description,
                             price: line.price,
                             hcopy: line.hcopy,
@@ -280,7 +170,7 @@ export default {
                             minorRepairClean: 5,
                             repairPartsNeeded: 5,
                             damaged: 0,
-                            comments: "",
+                            comments: line.comments,
                         });
                     }
 

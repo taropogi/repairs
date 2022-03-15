@@ -18,6 +18,7 @@ class CpoLinesFactory extends Factory
             'cpo_id' => Cpo::all()->random()->id,
             'line_number' => 1,
             'description' => $this->faker->text(50),
+            'comments' => $this->faker->text(50),
             'price' => 34.67,
             'hcopy' => 'WL 001298',
             'qty_returned' => 60,

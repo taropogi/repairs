@@ -21,6 +21,7 @@ class CreateCpoLinesTable extends Migration
                 ->onDelete('cascade');
             $table->integer('line_number')->nullable();
             $table->string('description')->nullable();
+            $table->string('comments')->nullable();
             $table->double('price', 4, 2)->nullable();
             $table->string('hcopy')->nullable();
             $table->integer('qty_returned')->nullable();
