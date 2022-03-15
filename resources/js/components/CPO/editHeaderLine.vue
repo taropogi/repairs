@@ -47,7 +47,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
-                v-model="lineDetailsLocal.qtyReturned"
+                v-model="lineDetailsLocal.goodCondition"
             />
         </td>
         <td>

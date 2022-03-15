@@ -5,7 +5,9 @@ import actions from "./actions.js";
 const cpoModule = {
     namespaced: true,
     state() {
-        return {};
+        return {
+            cpoHeaders: [],
+        };
     },
     mutations,
     getters,

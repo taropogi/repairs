@@ -24,6 +24,7 @@ class GeneratePdfController extends Controller
             'contact_number' => strtoupper($cpo->contact_number),
             'prepared_by' => strtoupper($cpo->prepared_by),
             'authorized_by' => strtoupper($cpo->authorized_by),
+            'lines' => $cpo->lines,
         ];
 
         $pdf = PDF::loadView('pdf.samplePdf', $data);

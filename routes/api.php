@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CpoController;
+use App\Http\Controllers\CpoLinesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,9 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
 Route::post('cpo', [CpoController::class, 'create']);
 Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
+
+//cpo line
+Route::post('cpoline', [CpoLinesController::class, 'store']);
 
 //auth
 Route::post('register', [RegisterController::class, 'create']);

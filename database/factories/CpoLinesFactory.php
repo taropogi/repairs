@@ -23,7 +23,11 @@ class CpoLinesFactory extends Factory
             'hcopy' => 'WL 001298',
             'qty_returned' => 60,
             'qty_inspect' => 60,
-            'unit' => 'PC'
+            'unit' => 'PC',
+            'good_condition' => 60,
+            'minor_repair_clean' => 60,
+            'repair_parts_needed' => 60,
+            'damaged' => 40,
         ];
     }
 }

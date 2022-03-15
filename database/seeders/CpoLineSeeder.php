@@ -14,6 +14,6 @@ class CpoLineSeeder extends Seeder
      */
     public function run()
     {
-        CpoLInes::factory()->times(1000)->create();
+        CpoLInes::factory()->times(500)->create();
     }
 }

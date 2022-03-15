@@ -109,73 +109,73 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 1; $i < 10; $i++) <tr>
-                <th scope="row" rowspan="2">{{ $i }}</th>
-                <td class="text-center"><small>21-DERWE-KINGFISHERBLUE-XX-XX-009085</small></td>
-                <td class="text-center" align="right"><small>60</small></td>
-                <td class="text-center" align="right"><small>PC</small></td>
-                <td class="text-center" align="right"><small>60</small></td>
-                <td class="text-center" align="right"><small>60</small></td>
-                <td>
-
+            @foreach($lines as $line) <tr>
+                <th scope="row" rowspan="2">{{ $line->line_number }}</th>
+                <td class="text-center"><small>{{ $line->description }}</small></td>
+                <td class="text-center" align="right"><small>{{ $line->qty_returned }}</small></td>
+                <td class="text-center" align="right"><small>{{ $line->unit }}</small></td>
+                <td class="text-center" align="right"><small>{{ $line->qty_inspect }}</small></td>
+                <td class="text-center" align="right"><small>{{ $line->good_condition }}</small></td>
+                <td class="text-center">
+                    <small>{{ $line->minor_repair_clean }}</small>
                 </td>
-                <td>
-
+                <td class="text-center">
+                    <small>{{ $line->repair_parts_needed }}</small>
                 </td>
-                <td>
-
+                <td class="text-center">
+                    <small>{{ $line->damaged }}</small>
                 </td>
                 <td rowspan="2">
-                    <small>Good Condition</small>
+                    <small>{{ $line->comments }}</small>
                 </td>
-                </tr>
-                <tr>
+            </tr>
+            <tr>
 
-                    <td>
-                        <table width="100%" class="table-inside" style="border:none;">
-                            <tr>
-                                <td><strong>DATE:</strong> {{ $date }}</td>
-                                <td><strong>DOC#:</strong> 1245784</td>
-                            </tr>
-                            <tr>
-                                <td><strong>PRICE:</strong> 45.33</td>
-                                <td><strong>HC:</strong> WL 904523</td>
-                            </tr>
+                <td>
+                    <table width="100%" class="table-inside" style="border:none;">
+                        <tr>
+                            <td><strong>DATE:</strong> {{ $date }}</td>
+                            <td><strong>DOC#:</strong> 1245784</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PRICE:</strong> 45.33</td>
+                            <td><strong>HC:</strong> WL 904523</td>
+                        </tr>
 
-                        </table>
-                    </td>
-                    <td colspan="2">
-                        <table width="100%" class="table-inside" style="border:none;">
-                            <tr>
-                                <td><strong>REP</strong></td>
-                                <td><strong>EXC</strong></td>
-                                <td><strong>RET/</strong></td>
-                            </tr>
-                            <tr>
-                                <td>____</td>
-                                <td>____</td>
-                                <td>____</td>
-                            </tr>
-                        </table>
-                    </td>
+                    </table>
+                </td>
+                <td colspan="2">
+                    <table width="100%" class="table-inside" style="border:none;">
+                        <tr>
+                            <td><strong>REP</strong></td>
+                            <td><strong>EXC</strong></td>
+                            <td><strong>RET/</strong></td>
+                        </tr>
+                        <tr>
+                            <td>____</td>
+                            <td>____</td>
+                            <td>____</td>
+                        </tr>
+                    </table>
+                </td>
 
-                    <td>
-                        <small sy>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
+                <td>
+                    <small sy>BY:</small>
+                </td>
+                <td>
+                    <small>BY:</small>
+                </td>
+                <td>
+                    <small>BY:</small>
+                </td>
+                <td>
+                    <small>BY:</small>
+                </td>
+                <td>
 
-                    </td>
-                </tr>
-                @endfor
+                </td>
+            </tr>
+            @endforeach
 
         </tbody>
 

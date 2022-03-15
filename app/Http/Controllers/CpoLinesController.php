@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cpo;
 use App\Models\CpoLines;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,13 @@ class CpoLinesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cpo = Cpo::where('id', $request->id)->first();
+        $cpo->lines()->create([
+            'line_number' => $cpo->lines()->count() + 1,
+            'good_condition' => 2,
+            'description' => 'test'
+        ]);
+        return $cpo;
     }
 
     /**

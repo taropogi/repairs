@@ -27,6 +27,10 @@ class CreateCpoLinesTable extends Migration
             $table->integer('qty_returned')->nullable();
             $table->string('unit')->nullable();
             $table->integer('qty_inspect')->nullable();
+            $table->integer('good_condition')->nullable();
+            $table->integer('minor_repair_clean')->nullable();
+            $table->integer('repair_parts_needed')->nullable();
+            $table->integer('damaged')->nullable();
             $table->timestamps();
         });
     }

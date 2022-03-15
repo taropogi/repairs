@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CpoLines extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function cpo()
     {
         return $this->belongsTo(Cpo::class);

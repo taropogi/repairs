@@ -108,6 +108,9 @@
                 ></edit-header-line>
             </tbody>
         </table>
+        <button class="btn btn-primary" @click="addNewLine">
+            Add new line
+        </button>
     </div>
 </template>
 
@@ -138,6 +141,17 @@ export default {
         };
     },
     methods: {
+        addNewLine() {
+            axios
+                .post("/repairs/api/cpoline/", { id: this.id })
+                .then((res) => {
+                    this.getCpoHeaderRow();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
         getCpoHeaderRow() {
             axios
                 .get("/repairs/api/cpo/" + this.id)
@@ -166,15 +180,15 @@ export default {
                             qtyReturned: line.qty_returned,
                             unit: line.unit,
                             qtyInspect: line.qty_inspect,
-                            goodCondition: 5,
-                            minorRepairClean: 5,
-                            repairPartsNeeded: 5,
+                            goodCondition: line.good_condition,
+                            minorRepairClean: line.minor_repair_clean,
+                            repairPartsNeeded: line.repari_parts_needed,
                             damaged: 0,
                             comments: line.comments,
                         });
                     }
 
-                    // console.log(lines.length);
+                    //  console.log(this.lineDetails);
                 })
                 .catch((error) => {
                     console.log(error);
