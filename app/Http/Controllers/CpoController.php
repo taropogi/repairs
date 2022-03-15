@@ -46,7 +46,11 @@ class CpoController extends Controller
     }
     public function getCpoHeader(Cpo $cpo)
     {
-        return  $cpo;
+
+        $response['cpo'] = $cpo;
+        $response['lines'] = $cpo->lines;
+
+        return  $response;
     }
     public function getCpoHeaders(Request $request)
     {

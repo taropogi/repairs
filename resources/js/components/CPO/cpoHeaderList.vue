@@ -31,9 +31,7 @@
                             <button type="button" class="btn btn-danger">
                                 Delete <i class="bi bi-trash-fill"></i>
                             </button>
-                            <button type="button" class="btn btn-warning">
-                                Add lines <i class="bi bi-file-plus-fill"></i>
-                            </button>
+
                             <button
                                 type="button"
                                 class="btn btn-success"

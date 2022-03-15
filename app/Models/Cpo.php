@@ -10,4 +10,9 @@ class Cpo extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function lines()
+    {
+        return $this->hasMany(CpoLines::class);
+    }
 }

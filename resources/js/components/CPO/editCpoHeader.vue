@@ -79,6 +79,150 @@
                 >Cancel</router-link
             >
         </form>
+
+        <h5 class="text-center p-2 bg-warning text-white">LINE DETAILS</h5>
+
+        <div class="p-2" v-for="item in lineDetails" :key="item.id">
+            <div class="row">
+                <div class="col-sm-1">
+                    <h1>{{ item.id }}</h1>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="item.description"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Price</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.price"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>HC</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.hcopy"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Qty Returned</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="item.qtyReturned"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Unit</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.unit"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Qty Inspect</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.qtyInspect"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Date</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.qtyInspect"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Good Condition</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.goodCondition"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Minor Repair / Clean</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.minorRepairClean"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Repair / Parts Needed</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.repairPartsNeeded"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Damaged</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.damaged"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Comments</label>
+                            <textarea
+                                class="form-control"
+                                v-model="item.comments"
+                                rows="2"
+                            ></textarea>
+                        </div>
+                        <div class="col">
+                            <label>Doc#</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.comments"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Doc#</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="item.comments"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+        </div>
     </div>
 </template>
 
@@ -100,6 +244,7 @@ export default {
                 preparedBy: "",
                 authorizedBy: "",
             },
+            lineDetails: [],
             isSubmitSuccess: false,
         };
     },
@@ -108,13 +253,38 @@ export default {
             axios
                 .get("/repairs/api/cpo/" + this.id)
                 .then((response) => {
-                    this.formData.customerName = response.data.customer_name;
+                    this.formData.customerName =
+                        response.data.cpo.customer_name;
                     this.formData.customerAddress =
-                        response.data.customer_address;
-                    this.formData.contactNumber = response.data.contact_number;
-                    this.formData.rpoNumber = response.data.rpo_number;
-                    this.formData.preparedBy = response.data.prepared_by;
-                    this.formData.authorizedBy = response.data.authorized_by;
+                        response.data.cpo.customer_address;
+                    this.formData.contactNumber =
+                        response.data.cpo.contact_number;
+                    this.formData.rpoNumber = response.data.cpo.rpo_number;
+                    this.formData.preparedBy = response.data.cpo.prepared_by;
+                    this.formData.authorizedBy =
+                        response.data.cpo.authorized_by;
+                    this.lineDetails = [];
+                    const responseLines = response.data.lines;
+
+                    for (const key in responseLines) {
+                        const line = responseLines[key];
+                        this.lineDetails.push({
+                            id: line.id,
+                            description: line.description,
+                            price: line.price,
+                            hcopy: line.hcopy,
+                            qtyReturned: line.qty_returned,
+                            unit: line.unit,
+                            qtyInspect: line.qty_inspect,
+                            goodCondition: 5,
+                            minorRepairClean: 5,
+                            repairPartsNeeded: 5,
+                            damaged: 0,
+                            comments: "",
+                        });
+                    }
+
+                    // console.log(lines.length);
                 })
                 .catch((error) => {
                     console.log(error);
