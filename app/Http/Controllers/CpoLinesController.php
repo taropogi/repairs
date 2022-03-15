@@ -83,8 +83,10 @@ class CpoLinesController extends Controller
      * @param  \App\Models\CpoLines  $cpoLines
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CpoLines $cpoLines)
+    public function destroy(Request $request)
     {
-        //
+        $cpoLine = CpoLines::where('id', $request->id)->first();
+        $cpoLine->delete();
+        return $cpoLine;
     }
 }

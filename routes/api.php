@@ -32,6 +32,7 @@ Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
+Route::post('cpoline/destroy', [CpoLinesController::class, 'destroy']);
 
 //auth
 Route::post('register', [RegisterController::class, 'create']);

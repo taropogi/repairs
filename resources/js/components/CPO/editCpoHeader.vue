@@ -98,6 +98,7 @@
                     <th scope="col">Damaged</th>
                     <th scope="col">Comments</th>
                     <th scope="col">Doc #</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,6 +106,7 @@
                     v-for="item in lineDetails"
                     :key="item.id"
                     :lineDetails="item"
+                    @delete-line="deleteLine"
                 ></edit-header-line>
             </tbody>
         </table>
@@ -145,6 +147,17 @@ export default {
         };
     },
     methods: {
+        deleteLine(lineId) {
+            axios
+                .post("/repairs/api/cpoline/destroy/", { id: lineId })
+                .then((res) => {
+                    //console.log(res);
+                    this.getCpoHeaderRow();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         addNewLine() {
             this.isInsertingNewLine = true;
             axios

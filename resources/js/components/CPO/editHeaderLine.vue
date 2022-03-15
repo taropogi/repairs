@@ -88,6 +88,21 @@
         <td>
             <input type="text" class="form-control form-control-sm" />
         </td>
+        <td>
+            <div
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="Basic example"
+            >
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="deleteLine()"
+                >
+                    Delete
+                </button>
+            </div>
+        </td>
     </tr>
 </template>
 
@@ -98,6 +113,11 @@ export default {
         return {
             lineDetailsLocal: this.lineDetails,
         };
+    },
+    methods: {
+        deleteLine() {
+            this.$emit("deleteLine", this.lineDetailsLocal.id);
+        },
     },
 };
 </script>
