@@ -39,8 +39,6 @@ class CpoLinesController extends Controller
         $cpo = Cpo::where('id', $request->id)->first();
         $cpo->lines()->create([
             'line_number' => $cpo->lines()->count() + 1,
-            'good_condition' => 2,
-            'description' => 'test'
         ]);
         return $cpo;
     }

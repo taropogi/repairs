@@ -108,7 +108,10 @@
                 ></edit-header-line>
             </tbody>
         </table>
-        <button class="btn btn-primary" @click="addNewLine">
+        <div class="spinner-border" role="status" v-if="isInsertingNewLine">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <button v-else class="btn btn-primary" @click="addNewLine">
             Add new line
         </button>
     </div>
@@ -138,14 +141,17 @@ export default {
             },
             lineDetails: [],
             isSubmitSuccess: false,
+            isInsertingNewLine: false,
         };
     },
     methods: {
         addNewLine() {
+            this.isInsertingNewLine = true;
             axios
                 .post("/repairs/api/cpoline/", { id: this.id })
                 .then((res) => {
                     this.getCpoHeaderRow();
+                    this.isInsertingNewLine = false;
                 })
                 .catch((err) => {
                     console.log(err);
