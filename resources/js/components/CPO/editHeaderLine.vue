@@ -6,6 +6,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.description"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -13,6 +14,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.price"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -20,6 +22,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.hcopy"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -27,6 +30,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.qtyReturned"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -34,6 +38,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.unit"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -41,6 +46,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.qtyInspect"
+                @input="changedLineValue"
             />
         </td>
         <td>
@@ -94,10 +100,13 @@
                 role="group"
                 aria-label="Basic example"
             >
+                <button type="button" class="btn btn-primary" @click="saveLine">
+                    Save
+                </button>
                 <button
                     type="button"
                     class="btn btn-danger"
-                    @click="deleteLine()"
+                    @click="deleteLine"
                 >
                     Delete
                 </button>
@@ -108,13 +117,30 @@
 
 <script>
 export default {
-    props: ["lineDetails"],
+    props: ["lineNumber", "lineDetails", "lineIndex"],
+
     data() {
         return {
             lineDetailsLocal: this.lineDetails,
         };
     },
+
+    watch: {
+        lineNumber(val) {
+            this.lineDetailsLocal = this.lineDetails;
+        },
+    },
+
     methods: {
+        changedLineValue() {
+            this.$emit("changedLineValue", {
+                itemRow: this.lineDetailsLocal,
+                lineIndex: this.lineIndex,
+            });
+        },
+        saveLine() {
+            this.$emit("saveLine", this.lineDetailsLocal);
+        },
         deleteLine() {
             this.$emit("deleteLine", this.lineDetailsLocal.id);
         },

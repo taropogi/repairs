@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cpo;
+use App\Models\CpoLine;
 use Illuminate\Http\Request;
 
 class CpoController extends Controller
@@ -46,11 +47,49 @@ class CpoController extends Controller
     }
     public function getCpoHeader(Cpo $cpo)
     {
+        $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
         $response['lines'] = $cpo->lines;
 
         return  $response;
+    }
+
+    private function sortLineNumbers(Cpo $cpo)
+    {
+        $lines = $cpo->lines;
+        $line_number = 1;
+        foreach ($lines as $key => $line) {
+            $line->line_number = $line_number;
+            $line_number++;
+        }
+    }
+
+    public function updateAllLines(Request $request)
+    {
+
+        foreach ($request->cpoLines as $key => $item) {
+
+            $itemObj = (object)$item;
+
+            $cpoLine = CpoLine::find($itemObj->id);
+            $cpoLine->line_number = $key + 1;
+            $cpoLine->description = $itemObj->description;
+            $cpoLine->price = $itemObj->price;
+            $cpoLine->hcopy = $itemObj->hcopy;
+            $cpoLine->qty_returned = $itemObj->qtyReturned;
+            $cpoLine->unit = $itemObj->unit;
+            $cpoLine->qty_inspect = $itemObj->qtyInspect;
+            $cpoLine->good_condition = $itemObj->goodCondition;
+            $cpoLine->minor_repair_clean = $itemObj->minorRepairClean;
+            $cpoLine->repair_parts_needed = $itemObj->repairPartsNeeded;
+            $cpoLine->damaged = $itemObj->damaged;
+            $cpoLine->comments = $itemObj->comments;
+
+            $cpoLine->update();
+        }
+
+        return $request;
     }
     public function getCpoHeaders(Request $request)
     {

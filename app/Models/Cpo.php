@@ -13,6 +13,6 @@ class Cpo extends Model
 
     public function lines()
     {
-        return $this->hasMany(CpoLines::class);
+        return $this->hasMany(CpoLine::class);
     }
 }

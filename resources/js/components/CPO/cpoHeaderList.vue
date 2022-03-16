@@ -58,6 +58,10 @@
 export default {
     methods: {
         editCpoHeader(cpoItemHeader) {
+            // this.$store.dispatch("cpo/setEditingHeaderRow", {
+            //     cpoId: cpoItemHeader.id,
+            // });
+
             this.$router.replace({
                 name: "edit-cpo",
                 params: {

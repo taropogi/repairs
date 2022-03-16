@@ -29,10 +29,13 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
 Route::post('cpo', [CpoController::class, 'create']);
 Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
+Route::post('cpo/lines/updateAllLines', [CpoController::class, 'updateAllLines']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
 Route::post('cpoline/destroy', [CpoLinesController::class, 'destroy']);
+Route::post('cpoline/update', [CpoLinesController::class, 'update']);
+
 
 //auth
 Route::post('register', [RegisterController::class, 'create']);

@@ -7,6 +7,8 @@ const cpoModule = {
     state() {
         return {
             cpoHeaders: [],
+            editingHeaderId: null, // what is currently editing cpo header
+            editingHeaderRow: [], // what is currently editing cpo header, actual row from database
         };
     },
     mutations,

@@ -9,6 +9,14 @@
             >
                 Successful update!
             </div>
+            <transition name="saved-all-lines">
+                <div class="fixed-top p2" v-if="isUpdatedAllLinesSuccess">
+                    <div class="alert alert-success text-center" role="alert">
+                        <i class="bi bi-check2-all"></i>
+                        <strong>Lines updated!</strong>
+                    </div>
+                </div>
+            </transition>
             <div class="row">
                 <div class="col">
                     <label>Customer Name</label>
@@ -81,8 +89,8 @@
         </form>
 
         <h5 class="text-center p-2 bg-warning text-white">LINE DETAILS</h5>
-        <table class="table">
-            <thead>
+        <table class="table table-sm">
+            <thead class="table-warning">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Description</th>
@@ -103,19 +111,36 @@
             </thead>
             <tbody>
                 <edit-header-line
-                    v-for="item in lineDetails"
+                    v-for="(item, index) in lineDetails"
                     :key="item.id"
                     :lineDetails="item"
                     @delete-line="deleteLine"
+                    @save-line="saveLine"
+                    @changed-line-value="changedLineValue"
+                    :line-index="index"
+                    :line-number="item.lineNumber"
                 ></edit-header-line>
             </tbody>
         </table>
         <div class="spinner-border" role="status" v-if="isInsertingNewLine">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <button v-else class="btn btn-primary" @click="addNewLine">
-            Add new line
-        </button>
+        <div
+            class="btn-group btn-group-sm"
+            role="group"
+            aria-label="Basic example"
+        >
+            <button
+                v-if="!isInsertingNewLine"
+                class="btn btn-primary"
+                @click="addNewLine"
+            >
+                Add new line
+            </button>
+            <button class="btn btn-success" @click="saveAllLines">
+                Save All
+            </button>
+        </div>
     </div>
 </template>
 
@@ -144,9 +169,43 @@ export default {
             lineDetails: [],
             isSubmitSuccess: false,
             isInsertingNewLine: false,
+            isUpdatedAllLinesSuccess: false,
         };
     },
     methods: {
+        saveAllLines() {
+            this.isUpdatedAllLinesSuccess = false;
+            axios
+                .post("/repairs/api/cpo/lines/updateAllLines/", {
+                    cpoLines: this.lineDetails,
+                })
+                .then((res) => {
+                    this.isUpdatedAllLinesSuccess = true;
+                    // console.log("save all", res);
+                    this.getCpoHeaderRow();
+                    setTimeout(() => {
+                        this.isUpdatedAllLinesSuccess = false;
+                    }, 3000);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        changedLineValue(args) {
+            // console.log(args);
+            this.lineDetails[args.lineIndex] = args.itemRow;
+        },
+        saveLine(lineRow) {
+            axios
+                .post("/repairs/api/cpoline/update/", lineRow)
+                .then((res) => {
+                    //   console.log(res);
+                    this.getCpoHeaderRow();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         deleteLine(lineId) {
             axios
                 .post("/repairs/api/cpoline/destroy/", { id: lineId })
@@ -165,16 +224,41 @@ export default {
                 .then((res) => {
                     this.getCpoHeaderRow();
                     this.isInsertingNewLine = false;
+                    console.log(this.lineDetails);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
 
+        refreshHeaderLines(responseLines) {
+            this.lineDetails = [];
+            for (const key in responseLines) {
+                const line = responseLines[key];
+
+                this.lineDetails.push({
+                    id: line.id,
+                    lineNumber: line.line_number,
+                    description: line.description,
+                    price: line.price,
+                    hcopy: line.hcopy,
+                    qtyReturned: line.qty_returned,
+                    unit: line.unit,
+                    qtyInspect: line.qty_inspect,
+                    goodCondition: line.good_condition,
+                    minorRepairClean: line.minor_repair_clean,
+                    repairPartsNeeded: line.repair_parts_needed,
+                    damaged: line.damaged,
+                    comments: line.comments,
+                });
+            }
+        },
+
         getCpoHeaderRow() {
             axios
                 .get("/repairs/api/cpo/" + this.id)
                 .then((response) => {
+                    // console.log(response);
                     this.formData.customerName =
                         response.data.cpo.customer_name;
                     this.formData.customerAddress =
@@ -185,29 +269,9 @@ export default {
                     this.formData.preparedBy = response.data.cpo.prepared_by;
                     this.formData.authorizedBy =
                         response.data.cpo.authorized_by;
-                    this.lineDetails = [];
+
                     const responseLines = response.data.lines;
-
-                    for (const key in responseLines) {
-                        const line = responseLines[key];
-                        this.lineDetails.push({
-                            id: line.id,
-                            lineNumber: line.line_number,
-                            description: line.description,
-                            price: line.price,
-                            hcopy: line.hcopy,
-                            qtyReturned: line.qty_returned,
-                            unit: line.unit,
-                            qtyInspect: line.qty_inspect,
-                            goodCondition: line.good_condition,
-                            minorRepairClean: line.minor_repair_clean,
-                            repairPartsNeeded: line.repari_parts_needed,
-                            damaged: 0,
-                            comments: line.comments,
-                        });
-                    }
-
-                    //  console.log(this.lineDetails);
+                    this.refreshHeaderLines(responseLines);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -244,4 +308,30 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.saved-all-lines-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.saved-all-lines-enter-active {
+    transition: all 0.5s ease-out;
+}
+.saved-all-lines-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.saved-all-lines-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.saved-all-lines-leave-active {
+    transition: all 0.5s ease-in;
+}
+.saved-all-lines-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+</style>

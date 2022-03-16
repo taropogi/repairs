@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Cpo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CpoLinesFactory extends Factory
+class CpoLineFactory extends Factory
 {
     /**
      * Define the model's default state.

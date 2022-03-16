@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cpo;
-use App\Models\CpoLines;
+use App\Models\CpoLine;
 use Illuminate\Http\Request;
 
 class CpoLinesController extends Controller
@@ -49,7 +49,7 @@ class CpoLinesController extends Controller
      * @param  \App\Models\CpoLines  $cpoLines
      * @return \Illuminate\Http\Response
      */
-    public function show(CpoLines $cpoLines)
+    public function show(CpoLine $cpoLine)
     {
         //
     }
@@ -60,7 +60,7 @@ class CpoLinesController extends Controller
      * @param  \App\Models\CpoLines  $cpoLines
      * @return \Illuminate\Http\Response
      */
-    public function edit(CpoLines $cpoLines)
+    public function edit(CpoLine $cpoLine)
     {
         //
     }
@@ -72,9 +72,18 @@ class CpoLinesController extends Controller
      * @param  \App\Models\CpoLines  $cpoLines
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CpoLines $cpoLines)
+    public function update(Request $request)
     {
-        //
+        $cpoLine = CpoLine::where('id', $request->id)->first();
+
+        $cpoLine->description = $request->description;
+        $cpoLine->price = $request->price;
+        $cpoLine->hcopy = $request->hcopy;
+        $cpoLine->qty_returned = $request->qty_returned;
+        $cpoLine->update();
+
+
+        return $cpoLine;
     }
 
     /**
@@ -85,7 +94,7 @@ class CpoLinesController extends Controller
      */
     public function destroy(Request $request)
     {
-        $cpoLine = CpoLines::where('id', $request->id)->first();
+        $cpoLine = CpoLine::where('id', $request->id)->first();
         $cpoLine->delete();
         return $cpoLine;
     }

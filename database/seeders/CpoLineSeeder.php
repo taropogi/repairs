@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\CpoLines;
+use App\Models\CpoLine;
 use Illuminate\Database\Seeder;
 
 class CpoLineSeeder extends Seeder
@@ -14,6 +14,6 @@ class CpoLineSeeder extends Seeder
      */
     public function run()
     {
-        CpoLInes::factory()->times(500)->create();
+        CpoLIne::factory()->times(500)->create();
     }
 }
