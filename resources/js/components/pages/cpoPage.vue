@@ -4,6 +4,8 @@
             v-slot="slotProps"
             @inserted-cpo-header="getCpoHeaders"
             @search-cpo-header="getCpoHeaders"
+            @updated-cpo-header="getCpoHeaders"
+            @updated-header-lines="getCpoHeaders"
         >
             <transition name="router" mode="out-in">
                 <component :is="slotProps.Component"></component>

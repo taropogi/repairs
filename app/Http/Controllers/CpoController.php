@@ -68,6 +68,8 @@ class CpoController extends Controller
     public function updateAllLines(Request $request)
     {
 
+        $cpo = Cpo::find($request->cpoId);
+
         foreach ($request->cpoLines as $key => $item) {
 
             $itemObj = (object)$item;
@@ -89,12 +91,14 @@ class CpoController extends Controller
             $cpoLine->update();
         }
 
+        $cpo->touch();
+
         return $request;
     }
     public function getCpoHeaders(Request $request)
     {
 
-        $cpos = Cpo::orderBy('id', 'desc');
+        $cpos = Cpo::orderBy('updated_at', 'desc');
         if ($request->searchName) {
             $cpos = $cpos->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
         }
@@ -160,9 +164,20 @@ class CpoController extends Controller
      * @param  \App\Models\Cpo  $cpo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cpo $cpo)
+    public function update(Request $request)
     {
-        //
+        $cpo = Cpo::find($request->id);
+
+        $cpo->customer_name = $request->customerName;
+        $cpo->customer_address = $request->customerAddress;
+        $cpo->contact_number = $request->contactNumber;
+        $cpo->rpo_number = $request->rpoNumber;
+        $cpo->prepared_by = $request->preparedBy;
+        $cpo->authorized_by = $request->authorizedBy;
+
+        $cpo->update();
+
+        return $cpo;
     }
 
     /**

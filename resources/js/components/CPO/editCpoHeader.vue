@@ -1,14 +1,16 @@
 <template>
     <div>
         <h4 class="text-center bg-warning text-white p-2">UPDATE</h4>
+
         <form @submit.prevent="submitCpoForm" class="border border-warning p-2">
-            <div
-                v-if="isSubmitSuccess"
-                class="alert alert-success"
-                role="alert"
-            >
-                Successful update!
-            </div>
+            <transition name="updated-header">
+                <div class="fixed-top p2" v-if="isSubmitSuccess">
+                    <div class="alert alert-success text-center" role="alert">
+                        <i class="bi bi-check2-all"></i>
+                        <strong>Successful header update!</strong>
+                    </div>
+                </div>
+            </transition>
             <transition name="saved-all-lines">
                 <div class="fixed-top p2" v-if="isUpdatedAllLinesSuccess">
                     <div class="alert alert-success text-center" role="alert">
@@ -159,6 +161,7 @@ export default {
     data() {
         return {
             formData: {
+                id: 0,
                 customerName: "",
                 customerAddress: "",
                 contactNumber: "",
@@ -177,12 +180,14 @@ export default {
             this.isUpdatedAllLinesSuccess = false;
             axios
                 .post("/repairs/api/cpo/lines/updateAllLines/", {
+                    cpoId: this.id,
                     cpoLines: this.lineDetails,
                 })
                 .then((res) => {
                     this.isUpdatedAllLinesSuccess = true;
                     // console.log("save all", res);
                     this.getCpoHeaderRow();
+                    this.$emit("updated-header-lines");
                     setTimeout(() => {
                         this.isUpdatedAllLinesSuccess = false;
                     }, 3000);
@@ -259,6 +264,7 @@ export default {
                 .get("/repairs/api/cpo/" + this.id)
                 .then((response) => {
                     // console.log(response);
+                    this.formData.id = response.data.cpo.id;
                     this.formData.customerName =
                         response.data.cpo.customer_name;
                     this.formData.customerAddress =
@@ -280,23 +286,20 @@ export default {
         submitCpoForm() {
             this.isSubmitSuccess = false;
             axios
-                .post("/repairs/api/cpo", this.formData)
+                .post("/repairs/api/cpo/update", this.formData)
                 .then((response) => {
+                    console.log(response);
                     this.isSubmitSuccess = true;
-                    this.resetForm();
-                    this.$emit("inserted-cpo-header");
+
+                    this.$emit("updated-cpo-header");
+
+                    setTimeout(() => {
+                        this.isSubmitSuccess = false;
+                    }, 3000);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-        },
-        resetForm() {
-            this.formData.customerName = "";
-            this.formData.customerAddress = "";
-            this.formData.contactNumber = "";
-            this.formData.rpoNumber = "";
-            this.formData.preparedBy = "";
-            this.formData.authorizedBy = "";
         },
     },
     beforeCreate() {
@@ -308,14 +311,40 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.updated-header-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.updated-header-enter-active {
+    transition: all 0.3s ease-out;
+}
+.updated-header-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.updated-header-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.updated-header-leave-active {
+    transition: all 0.3s ease-in;
+}
+.updated-header-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
 .saved-all-lines-enter-from {
     opacity: 0;
     transform: translateY(-30px);
 }
 
 .saved-all-lines-enter-active {
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
 }
 .saved-all-lines-enter-to {
     opacity: 1;
@@ -328,7 +357,7 @@ export default {
 }
 
 .saved-all-lines-leave-active {
-    transition: all 0.5s ease-in;
+    transition: all 0.3s ease-in;
 }
 .saved-all-lines-leave-to {
     opacity: 0;
