@@ -73,7 +73,7 @@ export default {
                 .then((response) => {
                     this.cpoHeaderList = response.data;
                     //  console.log(searchCriteria);
-                    // console.log(response);
+                    //console.log(response.data[0].updatedAtReadable);
                 })
                 .catch((error) => {
                     console.log(error);
