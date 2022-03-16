@@ -126,6 +126,9 @@ export default {
     beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "CPO - Encode");
     },
+    mounted() {
+        this.$emit("refresh-header-list");
+    },
 };
 </script>
 

@@ -6,6 +6,7 @@
             @search-cpo-header="getCpoHeaders"
             @updated-cpo-header="getCpoHeaders"
             @updated-header-lines="getCpoHeaders"
+            @refresh-header-list="getCpoHeaders"
         >
             <transition name="router" mode="out-in">
                 <component :is="slotProps.Component"></component>
@@ -14,7 +15,8 @@
 
         <cpo-header-list
             :cpoHeaderList="cpoHeaderList"
-            @editCpo="editCpo"
+            @edit-cpo="editCpo"
+            @delete-cpo="deleteCpo"
         ></cpo-header-list>
     </div>
 </template>
@@ -36,6 +38,14 @@ export default {
         };
     },
     methods: {
+        async deleteCpo(cpoItemHeader) {
+            const res = await axios.post("/repairs/api/cpo/destroy", {
+                cpoId: cpoItemHeader.id,
+            });
+            if (res.data) {
+                this.getCpoHeaders();
+            }
+        },
         editCpo(cpoItemHeader) {
             this.isEdit = true;
             this.toEditCpoItemHeader = cpoItemHeader;

@@ -186,8 +186,10 @@ class CpoController extends Controller
      * @param  \App\Models\Cpo  $cpo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cpo $cpo)
+    public function destroy(Request $request)
     {
-        //
+        $cpo = Cpo::find($request->cpoId);
+        $cpo->delete();
+        return $request;
     }
 }

@@ -28,7 +28,11 @@
                             role="group"
                             aria-label="Basic mixed styles example"
                         >
-                            <button type="button" class="btn btn-danger">
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                @click="deleteCpo(item)"
+                            >
                                 Delete <i class="bi bi-trash-fill"></i>
                             </button>
 
@@ -57,6 +61,9 @@
 <script>
 export default {
     methods: {
+        deleteCpo(cpoItemHeader) {
+            this.$emit("delete-cpo", cpoItemHeader);
+        },
         editCpoHeader(cpoItemHeader) {
             // this.$store.dispatch("cpo/setEditingHeaderRow", {
             //     cpoId: cpoItemHeader.id,
