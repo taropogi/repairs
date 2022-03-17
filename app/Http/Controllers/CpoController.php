@@ -174,6 +174,7 @@ class CpoController extends Controller
         $cpo->rpo_number = $request->rpoNumber;
         $cpo->prepared_by = $request->preparedBy;
         $cpo->authorized_by = $request->authorizedBy;
+        $cpo->locked = $request->locked;
 
         $cpo->update();
 

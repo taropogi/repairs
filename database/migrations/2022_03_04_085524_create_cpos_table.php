@@ -21,6 +21,7 @@ class CreateCposTable extends Migration
             $table->string('rpo_number')->nullable();
             $table->string('prepared_by')->nullable();
             $table->string('authorized_by')->nullable();
+            $table->boolean('locked')->default(true);
             $table->timestamps();
         });
     }

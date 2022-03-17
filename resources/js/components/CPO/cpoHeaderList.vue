@@ -31,6 +31,7 @@
                             aria-label="Basic mixed styles example"
                         >
                             <button
+                                :disabled="item.locked"
                                 type="button"
                                 class="btn btn-danger"
                                 @click="deleteCpo(item)"
@@ -46,6 +47,7 @@
                                 Edit <i class="bi bi-pencil-fill"></i>
                             </button>
                             <button
+                                :disabled="item.locked"
                                 type="button"
                                 class="btn btn-info"
                                 @click="printCPOPdf(item.id)"

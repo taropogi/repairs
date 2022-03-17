@@ -55,7 +55,7 @@ export default {
             if (searchCriteria === undefined) {
                 searchCriteria = {};
             }
-
+            console.log("search");
             // console.log(searchCriteria);
 
             axios

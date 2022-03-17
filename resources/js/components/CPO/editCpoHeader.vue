@@ -23,6 +23,7 @@
                 <div class="col">
                     <label>Customer Name</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
@@ -32,6 +33,7 @@
                 <div class="col">
                     <label>Customer Address</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
@@ -41,6 +43,7 @@
                 <div class="col">
                     <label>Contact Number</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
@@ -53,6 +56,7 @@
                 <div class="col">
                     <label>RPO Number</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
@@ -62,6 +66,7 @@
                 <div class="col">
                     <label>Prepared By</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
@@ -71,12 +76,26 @@
                 <div class="col">
                     <label>Authorized By</label>
                     <input
+                        :disabled="formData.locked"
                         type="text"
                         class="form-control form-control-sm"
                         required
                         v-model="formData.authorizedBy"
                     />
                 </div>
+            </div>
+
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    :checked="formData.locked"
+                    :id="'locked' + formData.id"
+                    v-model="formData.locked"
+                />
+                <label class="form-check-label" :for="'locked' + formData.id">
+                    Lock <i class="bi bi-file-lock2"></i>
+                </label>
             </div>
 
             <button type="submit" class="btn btn-warning btn-sm mt-2">
@@ -168,6 +187,7 @@ export default {
                 rpoNumber: "",
                 preparedBy: "",
                 authorizedBy: "",
+                locked: "",
             },
             lineDetails: [],
             isSubmitSuccess: false,
@@ -275,6 +295,7 @@ export default {
                     this.formData.preparedBy = response.data.cpo.prepared_by;
                     this.formData.authorizedBy =
                         response.data.cpo.authorized_by;
+                    this.formData.locked = response.data.cpo.locked;
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);
