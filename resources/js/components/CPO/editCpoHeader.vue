@@ -1,6 +1,14 @@
 <template>
     <div>
-        <h4 class="text-center bg-warning text-white p-2">UPDATE</h4>
+        <h4
+            class="text-center text-white p-2"
+            :class="{
+                'bg-warning': !formData.locked,
+                'bg-secondary': formData.locked,
+            }"
+        >
+            UPDATE
+        </h4>
 
         <form @submit.prevent="submitCpoForm" class="border border-warning p-2">
             <transition name="updated-header">
@@ -109,7 +117,15 @@
             >
         </form>
 
-        <h5 class="text-center p-2 bg-warning text-white">LINE DETAILS</h5>
+        <h5
+            class="text-center p-2 text-white"
+            :class="{
+                'bg-warning': !formData.locked,
+                'bg-secondary': formData.locked,
+            }"
+        >
+            LINE DETAILS
+        </h5>
         <table class="table table-sm">
             <thead class="table-warning">
                 <tr>
