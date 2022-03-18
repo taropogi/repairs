@@ -5,6 +5,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.description"
                 @input="changedLineValue"
             />
@@ -14,6 +15,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.price"
+                :disabled="headerIsLocked"
                 @input="changedLineValue"
             />
         </td>
@@ -22,6 +24,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.hcopy"
+                :disabled="headerIsLocked"
                 @input="changedLineValue"
             />
         </td>
@@ -30,6 +33,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.qtyReturned"
+                :disabled="headerIsLocked"
                 @input="changedLineValue"
             />
         </td>
@@ -38,6 +42,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.unit"
+                :disabled="headerIsLocked"
                 @input="changedLineValue"
             />
         </td>
@@ -46,6 +51,7 @@
                 type="text"
                 class="form-control form-control-sm"
                 v-model="lineDetailsLocal.qtyInspect"
+                :disabled="headerIsLocked"
                 @input="changedLineValue"
             />
         </td>
@@ -53,6 +59,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.goodCondition"
             />
         </td>
@@ -60,6 +67,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.goodCondition"
             />
         </td>
@@ -67,6 +75,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.minorRepairClean"
             />
         </td>
@@ -74,6 +83,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.repairPartsNeeded"
             />
         </td>
@@ -81,6 +91,7 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.damaged"
             />
         </td>
@@ -88,11 +99,16 @@
             <input
                 type="text"
                 class="form-control form-control-sm"
+                :disabled="headerIsLocked"
                 v-model="lineDetailsLocal.comments"
             />
         </td>
         <td>
-            <input type="text" class="form-control form-control-sm" />
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+            />
         </td>
         <td>
             <div
@@ -117,7 +133,7 @@
 
 <script>
 export default {
-    props: ["lineNumber", "lineDetails", "lineIndex"],
+    props: ["lineNumber", "lineDetails", "lineIndex", "headerIsLocked"],
 
     data() {
         return {
@@ -128,6 +144,14 @@ export default {
     watch: {
         lineNumber(val) {
             this.lineDetailsLocal = this.lineDetails;
+        },
+    },
+
+    computed: {
+        isLocked() {
+            return {
+                disabled: this.headerIsLocked,
+            };
         },
     },
 

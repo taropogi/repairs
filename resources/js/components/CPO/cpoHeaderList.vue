@@ -15,10 +15,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in cpoHeaderList" :key="item.id">
+                <tr
+                    :class="{ 'table-warning': item.locked }"
+                    v-for="item in cpoHeaderList"
+                    :key="item.id"
+                >
                     <th scope="row">{{ item.id }}</th>
-                    <td>{{ item.rpo_number }}</td>
-                    <td>{{ item.customer_name }}</td>
+                    <td>
+                        {{ item.rpo_number }}
+                    </td>
+                    <td>
+                        {{ item.customer_name }}
+                    </td>
                     <td>{{ item.customer_address }}</td>
                     <td>{{ item.contact_number }}</td>
                     <td>{{ item.prepared_by }}</td>
@@ -31,7 +39,7 @@
                             aria-label="Basic mixed styles example"
                         >
                             <button
-                                :disabled="item.locked"
+                                v-if="!item.locked"
                                 type="button"
                                 class="btn btn-danger"
                                 @click="deleteCpo(item)"
@@ -47,7 +55,7 @@
                                 Edit <i class="bi bi-pencil-fill"></i>
                             </button>
                             <button
-                                :disabled="item.locked"
+                                v-if="!item.locked"
                                 type="button"
                                 class="btn btn-info"
                                 @click="printCPOPdf(item.id)"

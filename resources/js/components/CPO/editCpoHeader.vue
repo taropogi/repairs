@@ -133,6 +133,7 @@
             <tbody>
                 <edit-header-line
                     v-for="(item, index) in lineDetails"
+                    :headerIsLocked="formData.locked"
                     :key="item.id"
                     :lineDetails="item"
                     @delete-line="deleteLine"
