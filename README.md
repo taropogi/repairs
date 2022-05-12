@@ -8,6 +8,7 @@ This is a website created by Richard Bernisca.
 -   Run "composer install"
 -   Run "npm install"
 -   Create an .env file from .env.example
+    If you are on linux, run `cp .env.example .env` command to create .env file.
 -   Run "php artisan key:generate" to create an app key appended to .env file.
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
