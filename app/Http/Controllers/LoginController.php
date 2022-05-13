@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Dotenv\Exception\ValidationException;
+use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Dotenv\Exception\ValidationException;
 
 class LoginController extends Controller
 {
@@ -28,7 +29,9 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-
+        Test::create([
+            'str' => 'test'
+        ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
