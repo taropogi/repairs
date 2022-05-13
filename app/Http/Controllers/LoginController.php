@@ -29,9 +29,7 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        Test::create([
-            'str' => 'test'
-        ]);
+
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();

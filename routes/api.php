@@ -43,3 +43,5 @@ Route::post('cpoline/update', [CpoLinesController::class, 'update']);
 Route::post('register', [RegisterController::class, 'create']);
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
+
+Route::get('login', [LoginController::class, 'login']);
