@@ -15,4 +15,9 @@ class Cpo extends Model
     {
         return $this->hasMany(CpoLine::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(HeaderStatus::class);
+    }
 }

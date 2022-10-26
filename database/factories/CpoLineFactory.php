@@ -28,6 +28,7 @@ class CpoLineFactory extends Factory
             'minor_repair_clean' => 60,
             'repair_parts_needed' => 60,
             'damaged' => 40,
+
         ];
     }
 }

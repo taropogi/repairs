@@ -22,6 +22,10 @@ class CreateCposTable extends Migration
             $table->string('prepared_by')->nullable();
             $table->string('authorized_by')->nullable();
             $table->boolean('locked')->default(false);
+            /*
+            add fk migration
+            $table->foreignId('status')->references('id')->on('header_statuses')->constrained()->onUpdate('cascade')->onDelete('cascade');
+*/
             $table->timestamps();
         });
     }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class HeaderStatus extends Model
 {
     use HasFactory;
+
+    public function cpos()
+    {
+        return $this->hasMany(Cpo::class);
+    }
 }

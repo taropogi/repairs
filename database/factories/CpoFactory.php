@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\HeaderStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CpoFactory extends Factory
@@ -20,7 +21,7 @@ class CpoFactory extends Factory
             'contact_number' => $this->faker->numerify('0920-###-####'),
             'prepared_by' => $this->faker->name,
             'authorized_by' => $this->faker->name,
-
+            'status_id' => HeaderStatus::all()->random()->id
 
         ];
     }
