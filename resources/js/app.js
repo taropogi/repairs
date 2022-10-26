@@ -2,7 +2,8 @@ require("./bootstrap");
 
 import { createApp } from "vue";
 
-import App from "./components/App.vue";
+// For CPO program
+import App from "./apps/cpo/components/App.vue";
 import router from "./router.js";
 import store from "./store.js";
 
