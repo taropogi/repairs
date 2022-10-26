@@ -14,8 +14,6 @@ This is a website created by Richard Bernisca.
 
 -   If you are using linux you have to set `AllowOverride All` in httpd.conf to honor the .htaccess config in your project's root directory. Httpd.conf is usually located at /etc/httpd/conf/httpd.conf.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
 ## Stack
 
 -   Laravel
