@@ -23,6 +23,9 @@
                     <th scope="row">{{ item.id }}</th>
                     <td>
                         {{ item.rpo_number }}
+                        <span class="badge bg-secondary" v-if="item.locked"
+                            >Locked</span
+                        >
                     </td>
                     <td>
                         {{ item.customer_name }}
