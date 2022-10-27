@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cpo;
 use App\Models\CpoLine;
+use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 
 class CpoController extends Controller
@@ -50,6 +51,7 @@ class CpoController extends Controller
         $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
+        $response['header_statuses'] = HeaderStatus::all();
 
         $response['lines'] = $cpo->lines;
 

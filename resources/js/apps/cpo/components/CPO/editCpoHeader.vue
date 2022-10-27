@@ -58,9 +58,7 @@
                         v-model="formData.contactNumber"
                     />
                 </div>
-            </div>
 
-            <div class="row">
                 <div class="col">
                     <label>RPO Number</label>
                     <input
@@ -71,6 +69,9 @@
                         v-model="formData.rpoNumber"
                     />
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col">
                     <label>Prepared By</label>
                     <input
@@ -91,6 +92,22 @@
                         v-model="formData.authorizedBy"
                     />
                 </div>
+                <div class="col">
+                    <label>Status</label>
+                    <select
+                        class="form-select form-select-sm"
+                        aria-label="Default select example"
+                    >
+                        <option
+                            v-for="status in formData.header_statuses"
+                            :key="status.id"
+                            :value="status.id"
+                        >
+                            {{ status.status }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col"></div>
             </div>
 
             <div class="form-check">
@@ -313,6 +330,8 @@ export default {
                     this.formData.authorizedBy =
                         response.data.cpo.authorized_by;
                     this.formData.locked = response.data.cpo.locked;
+                    this.formData.header_statuses =
+                        response.data.header_statuses;
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);
