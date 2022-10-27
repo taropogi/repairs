@@ -102,6 +102,7 @@
                             v-for="status in formData.header_statuses"
                             :key="status.id"
                             :value="status.id"
+                            :selected="status.id === headerStatus.id"
                         >
                             {{ status.status }}
                         </option>
@@ -213,6 +214,8 @@ export default {
     },
     data() {
         return {
+            headerDetails: null,
+            headerStatus: null,
             formData: {
                 id: 0,
                 customerName: "",
@@ -332,6 +335,8 @@ export default {
                     this.formData.locked = response.data.cpo.locked;
                     this.formData.header_statuses =
                         response.data.header_statuses;
+
+                    this.headerStatus = response.data.cpo.status;
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);

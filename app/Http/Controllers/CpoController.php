@@ -51,6 +51,7 @@ class CpoController extends Controller
         $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
+        $response['cpo']['status'] = $cpo->status;
         $response['header_statuses'] = HeaderStatus::all();
 
         $response['lines'] = $cpo->lines;
