@@ -96,10 +96,10 @@
                     <label>Status</label>
                     <select
                         class="form-select form-select-sm"
-                        aria-label="Default select example"
+                        v-model="formData.status_id"
                     >
                         <option
-                            v-for="status in formData.header_statuses"
+                            v-for="status in headerStatuses"
                             :key="status.id"
                             :value="status.id"
                             :selected="status.id === headerStatus.id"
@@ -216,6 +216,7 @@ export default {
         return {
             headerDetails: null,
             headerStatus: null,
+            headerStatuses: null,
             formData: {
                 id: 0,
                 customerName: "",
@@ -333,10 +334,12 @@ export default {
                     this.formData.authorizedBy =
                         response.data.cpo.authorized_by;
                     this.formData.locked = response.data.cpo.locked;
-                    this.formData.header_statuses =
-                        response.data.header_statuses;
+                    this.formData.status_id = response.data.cpo.status_id;
 
+                    this.headerStatuses = response.data.header_statuses;
                     this.headerStatus = response.data.cpo.status;
+
+                    // console.log(this.formData);
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);
@@ -347,10 +350,11 @@ export default {
         },
         submitCpoForm() {
             this.isSubmitSuccess = false;
+
             axios
                 .post("/repairs/api/cpo/update", this.formData)
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     this.isSubmitSuccess = true;
 
                     this.$emit("updated-cpo-header");
