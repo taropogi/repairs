@@ -3,7 +3,7 @@ require("./bootstrap");
 import { createApp } from "vue";
 
 // For CPO program
-import App from "./apps/cpo/components/App.vue";
+import App from "./apps/cpo/App.vue";
 import router from "./apps/cpo/router.js";
 import store from "./apps/cpo/store.js";
 

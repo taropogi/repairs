@@ -50,6 +50,7 @@ class CpoController extends Controller
         $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
+
         $response['lines'] = $cpo->lines;
 
         return  $response;
@@ -120,7 +121,7 @@ class CpoController extends Controller
 
 
 
-        $cpos = $cpos->get();
+        $cpos = $cpos->with('status')->get();
         return $cpos;
     }
 

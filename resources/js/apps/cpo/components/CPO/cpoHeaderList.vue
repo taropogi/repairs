@@ -10,7 +10,7 @@
                     <th scope="col">Contact#</th>
                     <th scope="col">Prepared By</th>
                     <th scope="col">Authorized By</th>
-
+                    <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -31,7 +31,7 @@
                     <td>{{ item.contact_number }}</td>
                     <td>{{ item.prepared_by }}</td>
                     <td>{{ item.authorized_by }}</td>
-
+                    <td>{{ item.status.status }}</td>
                     <td>
                         <div
                             class="btn-group btn-group-sm"
@@ -94,6 +94,9 @@ export default {
         },
     },
     props: ["cpoHeaderList"],
+    updated() {
+        //console.log(this.cpoHeaderList);
+    },
 };
 </script>
 
