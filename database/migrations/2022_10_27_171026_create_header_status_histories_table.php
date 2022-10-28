@@ -23,7 +23,7 @@ class CreateHeaderStatusHistoriesTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->foreignId('changed_by')
                 ->references('id')
                 ->on('users')

@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Activity::class);
     }
+
+    public function changed_header_status_history()
+    {
+        return $this->hasMany(HeaderStatusHistory::class);
+    }
 }

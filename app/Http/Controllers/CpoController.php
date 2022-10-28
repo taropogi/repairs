@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cpo;
 use App\Models\CpoLine;
 use App\Models\HeaderStatus;
+use App\Models\HeaderStatusHistory;
 use Illuminate\Http\Request;
 
 class CpoController extends Controller
@@ -179,9 +180,28 @@ class CpoController extends Controller
         $cpo->prepared_by = $request->preparedBy;
         $cpo->authorized_by = $request->authorizedBy;
         $cpo->locked = $request->locked;
-        $cpo->status_id = $request->status_id;
+
+
+        if ($cpo->status_id !== $request->status_id) {
+            $cpo->status_history()->create([
+                'header_status_id' => $request->status_id,
+                'changed_by' => auth()->user()->id
+            ]);
+
+            $cpo->status_id = $request->status_id;
+        }
+
+
+
 
         $cpo->update();
+
+
+
+
+
+
+
 
         return $cpo;
     }
