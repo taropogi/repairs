@@ -43,6 +43,7 @@ class CpoController extends Controller
             'rpo_number' => $request->rpoNumber,
             'prepared_by' => $request->preparedBy,
             'authorized_by' => $request->authorizedBy,
+            'status_id' => 1,
         ]);
 
         return response()->json($request);

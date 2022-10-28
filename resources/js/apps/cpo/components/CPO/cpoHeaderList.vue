@@ -3,6 +3,15 @@
         <table class="table table-sm table-striped table-bordered">
             <thead class="table-success">
                 <tr>
+                    <th class="col">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                            />
+                        </div>
+                    </th>
                     <th scope="col">CPO#</th>
                     <th scope="col">RPO #</th>
                     <th scope="col">Name</th>
@@ -20,6 +29,15 @@
                     v-for="item in cpoHeaderList"
                     :key="item.id"
                 >
+                    <th>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                            />
+                        </div>
+                    </th>
                     <th scope="row">{{ item.id }}</th>
                     <td>
                         {{ item.rpo_number }}
