@@ -14,6 +14,7 @@
         </router-view>
 
         <cpo-header-list
+            v-if="$route.name === 'search-cpo'"
             :cpoHeaderList="cpoHeaderList"
             @edit-cpo="editCpo"
             @delete-cpo="deleteCpo"
