@@ -15,6 +15,21 @@ class CreateHeaderStatusHistoriesTable extends Migration
     {
         Schema::create('header_status_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cpo_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignId('header_status_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->string('note');
+            $table->foreignId('changed_by')
+                ->references('id')
+                ->on('users')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
