@@ -34,7 +34,7 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                value=""
+                                v-model="selectedHeaders"
                             />
                         </div>
                     </th>
@@ -88,11 +88,34 @@
                 </tr>
             </tbody>
         </table>
+
+        <div
+            class="btn-toolbar"
+            role="toolbar"
+            aria-label="Toolbar with button groups"
+        >
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-primary">1</button>
+                <button type="button" class="btn btn-primary">2</button>
+                <button type="button" class="btn btn-primary">3</button>
+                <button type="button" class="btn btn-primary">4</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-info">
+                    Multi-select change Status
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            selectedHeaders: [],
+        };
+    },
     methods: {
         deleteCpo(cpoItemHeader) {
             this.$emit("delete-cpo", cpoItemHeader);

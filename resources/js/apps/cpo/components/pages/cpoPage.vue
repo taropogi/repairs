@@ -71,8 +71,8 @@ export default {
                     },
                 })
                 .then((response) => {
-                    this.cpoHeaderList = response.data;
-                    //  console.log(searchCriteria);
+                    this.cpoHeaderList = response.data.cpos;
+                    console.log(response.data.limit_per_page);
                     //console.log(response.data[0].updatedAtReadable);
                 })
                 .catch((error) => {

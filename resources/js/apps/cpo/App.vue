@@ -1,10 +1,12 @@
 <template>
-    <the-header></the-header>
-    <router-view v-slot="slotProps">
-        <transition name="app-router" mode="out-in">
-            <component :is="slotProps.Component"></component>
-        </transition>
-    </router-view>
+    <div class="pb-2">
+        <the-header></the-header>
+        <router-view v-slot="slotProps">
+            <transition name="app-router" mode="out-in">
+                <component :is="slotProps.Component"></component>
+            </transition>
+        </router-view>
+    </div>
 </template>
 
 <script>

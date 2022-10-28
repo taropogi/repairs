@@ -104,6 +104,8 @@ class CpoController extends Controller
     public function getCpoHeaders(Request $request)
     {
 
+
+
         $cpos = Cpo::orderBy('updated_at', 'desc');
         if ($request->searchName) {
             $cpos = $cpos->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
@@ -126,8 +128,14 @@ class CpoController extends Controller
 
 
 
-        $cpos = $cpos->with('status')->get();
-        return $cpos;
+        $cpos = $cpos->take(20)->with('status')->get();
+
+
+
+        $response['cpos'] = $cpos;
+        $response['limit_per_page'] = 0;
+
+        return $response;
     }
 
     /**
