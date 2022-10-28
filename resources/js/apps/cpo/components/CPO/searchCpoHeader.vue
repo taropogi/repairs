@@ -61,13 +61,26 @@
                 </div>
             </div>
         </form>
+
+        <cpo-header-list
+            :cpoHeaderList="cpoHeaderList"
+            @edit-cpo="editCpo"
+            @delete-cpo="deleteCpo"
+        ></cpo-header-list>
     </div>
 </template>
 
 <script>
+import cpoHeaderList from "./cpoHeaderList.vue";
+
 export default {
+    components: {
+        cpoHeaderList,
+    },
+
     data() {
         return {
+            cpoHeaderList: null,
             onInputDelayedSeconds: 0,
             startSearch: false,
             searchCriteria: {
@@ -90,6 +103,19 @@ export default {
         },
     },
     methods: {
+        async deleteCpo(cpoItemHeader) {
+            const res = await axios.post("/repairs/api/cpo/destroy", {
+                cpoId: cpoItemHeader.id,
+            });
+            if (res.data) {
+                this.getCpoHeaders();
+            }
+        },
+        editCpo(cpoItemHeader) {
+            this.isEdit = true;
+            this.toEditCpoItemHeader = cpoItemHeader;
+            alert("edit");
+        },
         search() {
             if (!this.startSearch) {
                 this.startSearch = true;
@@ -98,6 +124,35 @@ export default {
         },
         actualSearch() {
             this.$emit("search-cpo-header", this.searchCriteria);
+            this.getCpoHeaders(this.searchCriteria);
+        },
+        getCpoHeaders(searchCriteria) {
+            if (searchCriteria === undefined) {
+                searchCriteria = {};
+            }
+            console.log("search");
+            // console.log(searchCriteria);
+
+            axios
+                .get("/repairs/api/cpo", {
+                    params: {
+                        searchName: searchCriteria.searchName || "",
+                        searchAddress: searchCriteria.searchAddress || "",
+                        searchContact: searchCriteria.searchContactNumber || "",
+                        searchRpo: searchCriteria.searchRpoNumber || "",
+                        searchPrepared: searchCriteria.searchPreparedBy || "",
+                        searchAuthorized:
+                            searchCriteria.searchAuthorizedBy || "",
+                    },
+                })
+                .then((response) => {
+                    this.cpoHeaderList = response.data.cpos;
+                    console.log(response.data.limit_per_page);
+                    //console.log(response.data[0].updatedAtReadable);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     beforeCreate() {
@@ -108,6 +163,8 @@ export default {
             this.onInputDelayedSeconds++;
             // console.log(this.onInputDelayedSeconds);
         }, 1000);
+
+        this.getCpoHeaders();
     },
 };
 </script>

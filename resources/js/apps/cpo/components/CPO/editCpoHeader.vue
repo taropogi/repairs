@@ -124,15 +124,19 @@
                 </label>
             </div>
 
-            <button type="submit" class="btn btn-warning btn-sm mt-2">
-                Update
-            </button>
-            |
-            <router-link
-                :to="{ name: 'search-cpo' }"
-                class="btn btn-danger mt-2 btn-sm"
-                >Cancel</router-link
+            <div
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="Basic mixed styles example"
             >
+                <button type="submit" class="btn btn-success">
+                    Update & redirect to search
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+                <router-link :to="{ name: 'search-cpo' }" class="btn btn-danger"
+                    >Cancel</router-link
+                >
+            </div>
         </form>
 
         <h5

@@ -2,56 +2,32 @@
     <div>
         <router-view
             v-slot="slotProps"
-            @inserted-cpo-header="getCpoHeaders"
-            @search-cpo-header="getCpoHeaders"
-            @updated-cpo-header="getCpoHeaders"
-            @updated-header-lines="getCpoHeaders"
+            @inserted-cpo-header="gotoSearchPage"
+            @updated-cpo-header="gotoSearchPage"
             @refresh-header-list="getCpoHeaders"
         >
             <transition name="router" mode="out-in">
                 <component :is="slotProps.Component"></component>
             </transition>
         </router-view>
-
-        <cpo-header-list
-            v-if="$route.name === 'search-cpo'"
-            :cpoHeaderList="cpoHeaderList"
-            @edit-cpo="editCpo"
-            @delete-cpo="deleteCpo"
-        ></cpo-header-list>
     </div>
 </template>
 
 <script>
-import cpoHeaderList from "../CPO/cpoHeaderList.vue";
-import editCpoHeader from "../CPO/editCpoHeader.vue";
-
 export default {
-    components: {
-        cpoHeaderList,
-        editCpoHeader,
-    },
     data() {
         return {
-            cpoHeaderList: null,
             isEdit: false,
             toEditCpoItemHeader: null,
         };
     },
     methods: {
-        async deleteCpo(cpoItemHeader) {
-            const res = await axios.post("/repairs/api/cpo/destroy", {
-                cpoId: cpoItemHeader.id,
+        gotoSearchPage() {
+            this.$router.push({
+                name: "search-cpo",
             });
-            if (res.data) {
-                this.getCpoHeaders();
-            }
         },
-        editCpo(cpoItemHeader) {
-            this.isEdit = true;
-            this.toEditCpoItemHeader = cpoItemHeader;
-            alert("edit");
-        },
+
         getCpoHeaders(searchCriteria) {
             if (searchCriteria === undefined) {
                 searchCriteria = {};
