@@ -37,7 +37,7 @@ class CpoController extends Controller
             'authorizedBy' => ['required'],
         ]);
 
-        Cpo::create([
+        $new_cpo = Cpo::create([
             'customer_name' => $request->customerName,
             'customer_address' => $request->customerAddress,
             'contact_number' => $request->contactNumber,
@@ -45,6 +45,11 @@ class CpoController extends Controller
             'prepared_by' => $request->preparedBy,
             'authorized_by' => $request->authorizedBy,
             'status_id' => 1,
+        ]);
+
+        $new_cpo->status_history()->create([
+            'header_status_id' => 1,
+            'changed_by' => auth()->user()->id
         ]);
 
         return response()->json($request);
@@ -58,7 +63,7 @@ class CpoController extends Controller
         $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
-        //  $response['cpo']['status_history'] = $cpo->status_history;
+        $response['cpo']['status_history'] = HeaderStatusHistory::where('cpo_id', $cpo->id)->get();
         $response['header_statuses'] = HeaderStatus::all();
         $response['users'] = User::all();
         $response['lines'] = $cpo->lines;

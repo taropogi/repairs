@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HeaderStatusSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CpoSeeder::class);
+        $this->call(HeaderStatusHistorySeeder::class);
         $this->call(CpoLineSeeder::class);
     }
 }

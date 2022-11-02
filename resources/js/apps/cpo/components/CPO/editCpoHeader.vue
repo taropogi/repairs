@@ -395,7 +395,7 @@ export default {
                     this.allUsers = response.data.users;
 
                     //  this.headerDetails = response.data.cpo;
-                    // console.log(this.formData);
+                    console.log(this.headerStatusHistory);
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);
