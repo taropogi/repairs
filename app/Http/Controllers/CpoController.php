@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cpo;
+use App\Models\User;
 use App\Models\CpoLine;
 use App\Models\HeaderStatus;
-use App\Models\HeaderStatusHistory;
 use Illuminate\Http\Request;
+use App\Models\HeaderStatusHistory;
 
 class CpoController extends Controller
 {
@@ -50,13 +51,19 @@ class CpoController extends Controller
     }
     public function getCpoHeader(Cpo $cpo)
     {
+
+
+
+
         $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
-        $response['cpo']['status'] = $cpo->status;
+        //  $response['cpo']['status_history'] = $cpo->status_history;
         $response['header_statuses'] = HeaderStatus::all();
-
+        $response['users'] = User::all();
         $response['lines'] = $cpo->lines;
+
+
 
         return  $response;
     }

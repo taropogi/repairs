@@ -28,87 +28,133 @@
                 </div>
             </transition>
             <div class="row">
-                <div class="col">
-                    <label>Customer Name</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model.trim="formData.customerName"
-                    />
-                </div>
-                <div class="col">
-                    <label>Customer Address</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model.trim="formData.customerAddress"
-                    />
-                </div>
-                <div class="col">
-                    <label>Contact Number</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.contactNumber"
-                    />
-                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col">
+                            <label>Customer Name</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="formData.customerName"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Customer Address</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="formData.customerAddress"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Contact Number</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="formData.contactNumber"
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>RPO Number</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="formData.rpoNumber"
+                            />
+                        </div>
 
-                <div class="col">
-                    <label>RPO Number</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.rpoNumber"
-                    />
-                </div>
-            </div>
+                        <div class="col">
+                            <label>Prepared By</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="formData.preparedBy"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Authorized By</label>
+                            <input
+                                :disabled="formData.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="formData.authorizedBy"
+                            />
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="col">
-                    <label>Prepared By</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.preparedBy"
-                    />
+                    <div class="row">
+                        <div class="col">
+                            <label>Status</label>
+                            <select
+                                class="form-select form-select-sm"
+                                v-model="formData.status_id"
+                            >
+                                <option
+                                    v-for="status in headerStatuses"
+                                    :key="status.id"
+                                    :value="status.id"
+                                    :selected="status.id === headerStatus.id"
+                                >
+                                    {{ status.status }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                    </div>
                 </div>
-                <div class="col">
-                    <label>Authorized By</label>
-                    <input
-                        :disabled="formData.locked"
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.authorizedBy"
-                    />
+                <div class="col-sm-3">
+                    <label>Status History</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="status in headerStatusHistory"
+                                :key="status.id"
+                            >
+                                <th scope="row">
+                                    {{ status.created_at }}
+                                </th>
+                                <td>
+                                    {{
+                                        headerStatuses.find(
+                                            (stat) =>
+                                                stat.id ==
+                                                status.header_status_id
+                                        ).status
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                        allUsers.find(
+                                            (user) =>
+                                                user.id == status.changed_by
+                                        ).name
+                                    }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col">
-                    <label>Status</label>
-                    <select
-                        class="form-select form-select-sm"
-                        v-model="formData.status_id"
-                    >
-                        <option
-                            v-for="status in headerStatuses"
-                            :key="status.id"
-                            :value="status.id"
-                            :selected="status.id === headerStatus.id"
-                        >
-                            {{ status.status }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col"></div>
             </div>
 
             <div class="form-check">
@@ -132,7 +178,7 @@
                 <button type="submit" class="btn btn-success">
                     Update & redirect to search
                 </button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
                 <router-link :to="{ name: 'search-cpo' }" class="btn btn-danger"
                     >Cancel</router-link
                 >
@@ -218,9 +264,11 @@ export default {
     },
     data() {
         return {
-            headerDetails: null,
+            //   headerDetails: null,
             headerStatus: null,
+            headerStatusHistory: null,
             headerStatuses: null,
+            allUsers: null,
             formData: {
                 id: 0,
                 customerName: "",
@@ -342,7 +390,11 @@ export default {
 
                     this.headerStatuses = response.data.header_statuses;
                     this.headerStatus = response.data.cpo.status;
+                    this.headerStatusHistory = response.data.cpo.status_history;
 
+                    this.allUsers = response.data.users;
+
+                    //  this.headerDetails = response.data.cpo;
                     // console.log(this.formData);
 
                     const responseLines = response.data.lines;

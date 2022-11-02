@@ -9,6 +9,7 @@ class HeaderStatusHistory extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    // protected $with = ['changed_by'];
 
     public function cpos()
     {
@@ -17,6 +18,6 @@ class HeaderStatusHistory extends Model
 
     public function changed_by()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

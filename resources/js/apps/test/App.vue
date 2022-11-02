@@ -1,9 +1,15 @@
 <template>
-    <div>Test</div>
+    <div>
+        {{ sampleText }}
+    </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            sampleText: "Richard Hahahah",
+        };
+    },
+};
 </script>
-
-<style></style>

@@ -10,6 +10,7 @@ class Cpo extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $with = ['status', 'status_history'];
 
     public function lines()
     {
