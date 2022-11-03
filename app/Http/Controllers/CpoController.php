@@ -64,7 +64,7 @@ class CpoController extends Controller
 
         $response['cpo'] = $cpo;
         $response['header_statuses'] = HeaderStatus::all();
-        $response['users'] = User::all();
+        $response['users'] = User::select('id', 'name')->get();
         $response['lines'] = $cpo->lines;
 
 

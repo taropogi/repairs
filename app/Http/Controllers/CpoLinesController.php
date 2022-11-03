@@ -13,9 +13,9 @@ class CpoLinesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CpoLine $cpoLine)
     {
-        //
+        return ['cpoLine' => $cpoLine];
     }
 
     /**
@@ -79,9 +79,11 @@ class CpoLinesController extends Controller
         $cpoLine->description = $request->description;
         $cpoLine->price = $request->price;
         $cpoLine->hcopy = $request->hcopy;
-        $cpoLine->qty_returned = $request->qty_returned;
+        $cpoLine->qty_returned = $request->qtyReturned;
         $cpoLine->update();
 
+        $cpo = Cpo::find($cpoLine->cpo_id);
+        $cpo->touch();
 
         return $cpoLine;
     }

@@ -37,6 +37,7 @@ Route::post('cpo/destroy', [CpoController::class, 'destroy']);
 Route::post('cpoline', [CpoLinesController::class, 'store']);
 Route::post('cpoline/destroy', [CpoLinesController::class, 'destroy']);
 Route::post('cpoline/update', [CpoLinesController::class, 'update']);
+Route::get('cpoline', [CpoLinesController::class, 'index']);
 
 
 //auth
