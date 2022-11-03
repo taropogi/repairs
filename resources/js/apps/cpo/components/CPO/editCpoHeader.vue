@@ -118,42 +118,11 @@
                 </div>
                 <div class="col-sm-3">
                     <label>Status History</label>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">By</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="status in headerStatusHistory"
-                                :key="status.id"
-                            >
-                                <th scope="row">
-                                    {{ status.created_at }}
-                                </th>
-                                <td>
-                                    {{
-                                        headerStatuses.find(
-                                            (stat) =>
-                                                stat.id ==
-                                                status.header_status_id
-                                        ).status
-                                    }}
-                                </td>
-                                <td>
-                                    {{
-                                        allUsers.find(
-                                            (user) =>
-                                                user.id == status.changed_by
-                                        ).name
-                                    }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <history-list
+                        :header-status-history="headerStatusHistory"
+                        :header-statuses="headerStatuses"
+                        :all-users="allUsers"
+                    ></history-list>
                 </div>
             </div>
 
@@ -252,9 +221,12 @@
 
 <script>
 import editHeaderLine from "./editHeaderLine.vue";
+import historyList from "../StatusHistory/historyList.vue";
+
 export default {
     components: {
         editHeaderLine,
+        historyList,
     },
     props: ["id"],
     watch: {
@@ -395,7 +367,7 @@ export default {
                     this.allUsers = response.data.users;
 
                     //  this.headerDetails = response.data.cpo;
-                    console.log(this.headerStatusHistory);
+                    // console.log(this.headerStatus);
 
                     const responseLines = response.data.lines;
                     this.refreshHeaderLines(responseLines);
