@@ -19,7 +19,7 @@ class Cpo extends Model
 
     public function status_history()
     {
-        return $this->hasMany(HeaderStatusHistory::class);
+        return $this->hasMany(HeaderStatusHistory::class)->orderBy('created_at', 'desc');
     }
 
     public function status()

@@ -117,7 +117,6 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <label>Status History</label>
                     <history-list
                         :header-status-history="headerStatusHistory"
                         :header-statuses="headerStatuses"
@@ -144,10 +143,8 @@
                 role="group"
                 aria-label="Basic mixed styles example"
             >
-                <button type="submit" class="btn btn-success">
-                    Update & redirect to search
-                </button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-success">Update</button>
+
                 <router-link :to="{ name: 'search-cpo' }" class="btn btn-danger"
                     >Cancel</router-link
                 >

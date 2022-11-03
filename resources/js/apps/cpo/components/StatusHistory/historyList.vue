@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col">Date</th>
-                <th scope="col">Status</th>
+                <th scope="col">Status History</th>
                 <th scope="col">By</th>
             </tr>
         </thead>
