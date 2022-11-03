@@ -1,6 +1,6 @@
 <template>
     <transition name="saved-line">
-        <tr v-if="!lineUpdating">
+        <tr v-if="showTr">
             <th scope="row">{{ lineDetailsLocal.lineNumber }}</th>
             <td>
                 <input
@@ -106,11 +106,7 @@
                 />
             </td>
             <td>
-                <div
-                    class="btn-group btn-group-sm"
-                    role="group"
-                    aria-label="Basic example"
-                >
+                <div class="btn-group btn-group-sm" role="group">
                     <button
                         type="button"
                         class="btn btn-primary"
@@ -138,6 +134,7 @@ export default {
         return {
             lineDetailsLocal: this.lineDetails,
             lineUpdating: false,
+            isDeleted: false,
         };
     },
 
@@ -147,15 +144,12 @@ export default {
                 disabled: this.headerIsLocked,
             };
         },
+        showTr() {
+            return !this.lineUpdating;
+        },
     },
 
     methods: {
-        changedLineValue() {
-            this.$emit("changedLineValue", {
-                itemRow: this.lineDetailsLocal,
-                lineIndex: this.lineIndex,
-            });
-        },
         saveLine() {
             //locally save
             this.lineUpdating = true;
@@ -178,7 +172,8 @@ export default {
                     id: this.lineDetailsLocal.id,
                 })
                 .then((res) => {
-                    this.$emit("deleteLine", this.lineDetailsLocal.id);
+                    //    this.isDeleted = true;
+                    // this.$emit("deleteLine", this.lineDetailsLocal.id);
                     //console.log(res);
                     //  this.getCpoHeaderRow();
                 })

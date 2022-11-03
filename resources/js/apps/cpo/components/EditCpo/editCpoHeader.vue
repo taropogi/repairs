@@ -151,7 +151,10 @@
             </div>
         </form>
 
-        <header-lines :lines-details="lineDetails"></header-lines>
+        <header-lines
+            :lines-details="lineDetails"
+            :header-is-locked="formData.locked"
+        ></header-lines>
 
         <div class="spinner-border" role="status" v-if="isInsertingNewLine">
             <span class="visually-hidden">Loading...</span>
@@ -233,10 +236,6 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
-        },
-        changedLineValue(args) {
-            // console.log(args);
-            this.lineDetails[args.lineIndex] = args.itemRow;
         },
 
         addNewLine() {
