@@ -7,7 +7,7 @@
                 'bg-secondary': formData.locked,
             }"
         >
-            UPDATE
+            UPDATE HEADER
         </h4>
 
         <form @submit.prevent="submitCpoForm" class="border border-warning p-2">

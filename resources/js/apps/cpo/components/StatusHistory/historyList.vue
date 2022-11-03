@@ -8,30 +8,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="status in headerStatusHistory" :key="status.id">
-                <th scope="row">
-                    {{ status.created_at }}
-                </th>
-                <td>
-                    {{
-                        headerStatuses.find(
-                            (stat) => stat.id == status.header_status_id
-                        ).status
-                    }}
-                </td>
-                <td>
-                    {{
-                        allUsers.find((user) => user.id == status.changed_by)
-                            .name
-                    }}
-                </td>
-            </tr>
+            <history-item
+                v-for="status in headerStatusHistory"
+                :key="status.id"
+                :status="status"
+                :header-statuses="headerStatuses"
+                :all-users="allUsers"
+            >
+            </history-item>
         </tbody>
     </table>
 </template>
 
 <script>
+import historyItem from "./historyItem.vue";
 export default {
+    components: {
+        historyItem,
+    },
     props: ["headerStatusHistory", "headerStatuses", "allUsers"],
 };
 </script>
