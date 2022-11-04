@@ -26,9 +26,10 @@
                     <!-- Authentication Links -->
 
                     <auth-links
-                        v-if="!loggedUser"
+                        v-if="!isLoggedIn"
                         :login-page-link="loginPageLink"
                         :register-page-link="registerPageLink"
+                        @log-out="logOut"
                     ></auth-links>
                     <admin-nav-links
                         v-if="userIsAdmin"
@@ -63,10 +64,14 @@ export default {
     },
     computed: {
         userIsAdmin() {
-            return this.loggedUser && this.loggedUser.is_admin;
+            return (
+                this.isLoggedIn && this.loggedUser && this.loggedUser.is_admin
+            );
         },
         userIsUser() {
-            return this.loggedUser && !this.loggedUser.is_admin;
+            return (
+                this.isLoggedIn && this.loggedUser && !this.loggedUser.is_admin
+            );
         },
         mainPageHeader() {
             return this.$store.getters.mainPageTitleHeader;
@@ -117,6 +122,23 @@ export default {
                 });
             });
         },
+    },
+    mounted() {
+        // console.log("isUser: " + this.userIsUser);
+        // console.log("isAdmin: " + this.userIsAdmin);
+        // console.log("isLoggedIn: " + this.isLoggedIn);
+        // if (this.isLoggedIn) {
+        //     console.log("header: logged in");
+        //     console.log(this.loggedUser);
+        // } else {
+        //     console.log(this.userIsUser);
+        // }
+    },
+    updated() {
+        // console.log(this.loggedUser);
+        // if (this.isLoggedIn) {
+        //     console.log("typeof: ", typeof this.loggedUser.is_admin);
+        // }
     },
 };
 </script>

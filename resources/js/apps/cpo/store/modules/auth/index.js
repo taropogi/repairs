@@ -11,7 +11,9 @@ const authModule = {
                     ? true
                     : false
                 : false,
-            user: null,
+            user: localStorage.getItem("loggedUser")
+                ? JSON.parse(localStorage.getItem("loggedUser"))
+                : null,
         };
     },
     mutations,

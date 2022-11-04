@@ -117,6 +117,8 @@ export default {
                         this.$store.commit("auth/setIsLoggedIn", true);
                         this.$store.commit("auth/setUser", response.data);
                         //  console.log(response.data);
+                        // console.log("just logged in");
+                        // console.log(this.$store.getters["auth/loggedUser"]);
                         this.$router.push({
                             name: "cpo-page",
                         });
