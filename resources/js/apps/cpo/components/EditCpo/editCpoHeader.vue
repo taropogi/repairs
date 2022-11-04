@@ -228,10 +228,13 @@ export default {
                     this.isUpdatedAllLinesSuccess = true;
                     // console.log("save all", res);
                     this.getCpoHeaderRow();
+
                     this.$emit("updated-header-lines");
                     setTimeout(() => {
                         this.isUpdatedAllLinesSuccess = false;
                     }, 3000);
+
+                    console.log(res.data);
                 })
                 .catch((err) => {
                     console.log(err);

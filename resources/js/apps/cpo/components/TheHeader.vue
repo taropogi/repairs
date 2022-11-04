@@ -40,7 +40,18 @@
                         >
                     </li>
 
-                    <li class="nav-item dropdown" v-if="loggedUser">
+                    <li class="nav-item" v-if="isLoggedIn">
+                        <router-link class="nav-link" :to="searchCpoPageLink"
+                            >Search</router-link
+                        >
+                    </li>
+                    <li class="nav-item" v-if="isLoggedIn">
+                        <router-link class="nav-link" :to="encodeCpoPageLink"
+                            >Encode</router-link
+                        >
+                    </li>
+
+                    <li class="nav-item dropdown" v-if="loggedUser && false">
                         <a
                             class="nav-link dropdown-toggle"
                             href="#"
