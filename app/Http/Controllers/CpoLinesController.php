@@ -79,7 +79,7 @@ class CpoLinesController extends Controller
         $cpoLine->description = $request->description;
         $cpoLine->price = $request->price;
         $cpoLine->hcopy = $request->hcopy;
-        $cpoLine->qty_returned = $request->qtyReturned;
+        $cpoLine->qty_returned = $request->qty_returned;
         $cpoLine->update();
 
         $cpo = Cpo::find($cpoLine->cpo_id);

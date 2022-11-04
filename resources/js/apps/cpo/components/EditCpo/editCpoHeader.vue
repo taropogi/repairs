@@ -152,8 +152,9 @@
         </form>
 
         <header-lines
-            :lines-details="lineDetails"
+            :header-id="id"
             :header-is-locked="formData.locked"
+            :test-value="'the value'"
         ></header-lines>
 
         <div class="spinner-border" role="status" v-if="isInsertingNewLine">
@@ -337,7 +338,11 @@ export default {
         this.$store.commit("setMainPageTitleHeader", "CPO - Edit");
     },
     mounted() {
+        // console.log("old value: " + this.lineDetails.length);
         this.getCpoHeaderRow();
+    },
+    updated() {
+        //   console.log("new value: " + this.lineDetails.length);
     },
 };
 </script>

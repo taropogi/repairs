@@ -112,6 +112,16 @@ class CpoController extends Controller
 
         return $request;
     }
+
+    public function getCpoLines(Cpo $cpo)
+    {
+        $this->sortLineNumbers($cpo);
+        $response['lines'] = $cpo->lines;
+
+        return $response;
+    }
+
+
     public function getCpoHeaders(Request $request)
     {
 

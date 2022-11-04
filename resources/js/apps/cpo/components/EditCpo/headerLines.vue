@@ -22,10 +22,12 @@
             </thead>
             <tbody>
                 <header-line
-                    v-for="line in linesDetails"
+                    v-for="(line, index) in lines"
                     :key="line.id"
+                    :line-number="index + 1"
                     :line-details="line"
                     :header-is-locked="headerIsLocked"
+                    @delete-line="getCpoLines"
                 ></header-line>
             </tbody>
         </table>
@@ -38,7 +40,29 @@ export default {
     components: {
         headerLine,
     },
-    props: ["linesDetails", "headerIsLocked"],
+    props: ["headerId", "headerIsLocked"],
+    data() {
+        return {
+            lines: [],
+        };
+    },
+
+    methods: {
+        getCpoLines() {
+            axios
+                .get("/repairs/api/cpo/lines/" + this.headerId)
+                .then((response) => {
+                    this.lines = response.data.lines;
+                    //console.log(this.lines);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
+    mounted() {
+        this.getCpoLines();
+    },
 };
 </script>
 

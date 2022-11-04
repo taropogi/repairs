@@ -30,6 +30,7 @@ Route::post('cpo', [CpoController::class, 'create']);
 Route::post('cpo/update', [CpoController::class, 'update']);
 Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
+Route::get('cpo/lines/{cpo}', [CpoController::class, 'getCpoLines']);
 Route::post('cpo/lines/updateAllLines', [CpoController::class, 'updateAllLines']);
 Route::post('cpo/destroy', [CpoController::class, 'destroy']);
 
