@@ -109,7 +109,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($lines as $line) <tr>
+            @foreach($lines as $line)
+            <tr>
                 <th scope="row" rowspan="2">{{ $line->line_number }}</th>
                 <td class="text-center"><small>{{ $line->description }}</small></td>
                 <td class="text-center" align="right"><small>{{ $line->qty_returned }}</small></td>
@@ -139,7 +140,7 @@
                         </tr>
                         <tr>
                             <td><strong>PRICE:</strong> 45.33</td>
-                            <td><strong>HC:</strong> WL 904523</td>
+                            <td><strong>HC:</strong> {{ $line->hcopy }}</td>
                         </tr>
 
                     </table>

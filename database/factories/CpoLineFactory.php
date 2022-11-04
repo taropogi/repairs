@@ -20,7 +20,7 @@ class CpoLineFactory extends Factory
             'description' => $this->faker->text(50),
             'comments' => $this->faker->text(50),
             'price' => 34.67,
-            'hcopy' => 'WL 001298',
+            'hcopy' => 'WL ' . $this->faker->randomNumber(6, true),
             'qty_returned' => 60,
             'qty_inspect' => 60,
             'unit' => 'PC',

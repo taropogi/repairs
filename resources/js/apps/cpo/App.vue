@@ -38,9 +38,9 @@ export default {
 </script>
 
 <style>
-/* * {
-    font-size: 10px;
-} */
+* {
+    font-size: 12px;
+}
 .app-router-enter-from {
     opacity: 0;
     transform: translateY(-30px);
