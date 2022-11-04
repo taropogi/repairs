@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h4 class="text-center bg-success text-white p-2">SEARCH</h4>
-        <form class="p-2 border border-success">
+        <!-- <h4 class="text-center bg-success text-white p-2">SEARCH</h4> -->
+        <form>
             <div class="row">
                 <div class="col">
                     <label>Customer Name</label>

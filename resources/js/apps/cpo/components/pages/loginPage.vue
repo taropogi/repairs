@@ -114,10 +114,9 @@ export default {
                 axios
                     .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
-                        //  console.log(response);
                         this.$store.commit("auth/setIsLoggedIn", true);
                         this.$store.commit("auth/setUser", response.data);
-
+                        //  console.log(response.data);
                         this.$router.push({
                             name: "cpo-page",
                         });

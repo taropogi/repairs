@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div class="container-fluid p-2 bg-white vh-100">
+    <div class="container-fluid bg-white vh-100">
         <main id="app">
         </main>
     </div>

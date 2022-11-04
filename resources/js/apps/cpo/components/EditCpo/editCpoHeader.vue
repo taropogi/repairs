@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4
+        <!-- <h4
             class="text-center text-white p-2"
             :class="{
                 'bg-warning': !formData.locked,
@@ -8,9 +8,9 @@
             }"
         >
             UPDATE HEADER
-        </h4>
+        </h4> -->
 
-        <form @submit.prevent="submitCpoForm" class="border border-warning p-2">
+        <form @submit.prevent="submitCpoForm">
             <transition name="updated-header">
                 <div class="fixed-top p2" v-if="isSubmitSuccess">
                     <div class="alert alert-success text-center" role="alert">

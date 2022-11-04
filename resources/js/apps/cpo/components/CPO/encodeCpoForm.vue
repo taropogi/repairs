@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h4 class="text-center bg-primary text-white p-2">ENCODE</h4>
-        <form @submit.prevent="submitCpoForm" class="border border-primary p-2">
+        <!-- <h4 class="text-center bg-primary text-white p-2">ENCODE</h4> -->
+        <form @submit.prevent="submitCpoForm">
             <transition name="encode-cpo-success">
                 <div v-if="isSubmitSuccess" class="fixed-top">
                     <div class="alert alert-success text-center" role="alert">

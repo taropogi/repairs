@@ -24,11 +24,13 @@ class UserSeeder extends Seeder
                 'name' => "Richard",
                 'email' => "taro@taro.com",
                 'password' => Hash::make("tarotaro"),
+                'is_admin' => true,
             ],
             [
                 'name' => "Test User",
                 'email' => "test@test.com",
                 'password' => Hash::make("password"),
+                'is_admin' => false,
             ]
         ];
 

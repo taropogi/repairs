@@ -1,6 +1,7 @@
 <template>
-    <div class="pb-2">
+    <div>
         <the-header></the-header>
+        <hr />
         <router-view v-slot="slotProps">
             <transition name="app-router" mode="out-in">
                 <component :is="slotProps.Component"></component>
@@ -10,7 +11,7 @@
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue";
+import TheHeader from "./components/header/TheHeader.vue";
 export default {
     components: {
         TheHeader,

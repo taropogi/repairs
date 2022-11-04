@@ -36,6 +36,8 @@ class LoginController extends Controller
             $user->activities()->create([
                 'action' => "Login"
             ]);
+
+
             return response()->json($user, 200);
         }
         throw ValidationException::withMessages([
