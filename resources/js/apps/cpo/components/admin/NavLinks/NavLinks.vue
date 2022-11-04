@@ -36,6 +36,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
             {{ user.name }}
+            <span class="badge rounded-pill bg-primary">ADMIN</span>
         </a>
         <ul class="dropdown-menu">
             <li>
@@ -52,8 +53,20 @@
 
 <script>
 export default {
-    props: ["user", "searchCpoPageLink", "encodeCpoPageLink"],
+    props: ["user"],
     emits: ["log-out"],
+    computed: {
+        searchCpoPageLink() {
+            return {
+                name: "admin-search-cpo",
+            };
+        },
+        encodeCpoPageLink() {
+            return {
+                name: "admin-encode-cpo",
+            };
+        },
+    },
 };
 </script>
 

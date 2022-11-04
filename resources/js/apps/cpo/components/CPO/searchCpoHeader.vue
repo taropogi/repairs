@@ -115,7 +115,7 @@ export default {
         editCpo(cpoItemHeader) {
             this.isEdit = true;
             this.toEditCpoItemHeader = cpoItemHeader;
-            alert("edit");
+            //  alert("edit");
         },
         search() {
             if (!this.startSearch) {
@@ -131,7 +131,7 @@ export default {
             if (searchCriteria === undefined) {
                 searchCriteria = {};
             }
-            console.log("search");
+            console.log("search CpoHeader");
             // console.log(searchCriteria);
 
             axios
@@ -148,7 +148,7 @@ export default {
                 })
                 .then((response) => {
                     this.cpoHeaderList = response.data.cpos;
-                    console.log(response.data.limit_per_page);
+                    // console.log(response.data.limit_per_page);
                     //console.log(response.data[0].updatedAtReadable);
                 })
                 .catch((error) => {
@@ -166,6 +166,7 @@ export default {
         }, 1000);
 
         this.getCpoHeaders();
+        // console.log("search page");
     },
 };
 </script>

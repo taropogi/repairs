@@ -40,6 +40,9 @@ class CpoLinesController extends Controller
         $cpo->lines()->create([
             'line_number' => $cpo->lines()->count() + 1,
         ]);
+
+        $cpo->touch();
+
         return $cpo;
     }
 

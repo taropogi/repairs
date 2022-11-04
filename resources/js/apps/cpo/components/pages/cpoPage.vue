@@ -1,11 +1,7 @@
 <template>
     <div>
-        <router-view
-            v-slot="slotProps"
-            @inserted-cpo-header="gotoSearchPage"
-            @updated-cpo-header="gotoSearchPage"
-            @refresh-header-list="getCpoHeaders"
-        >
+        <router-view v-slot="slotProps">
+            <h1>CPO PAGE</h1>
             <transition name="router" mode="out-in">
                 <component :is="slotProps.Component"></component>
             </transition>
@@ -20,46 +16,6 @@ export default {
             isEdit: false,
             toEditCpoItemHeader: null,
         };
-    },
-    methods: {
-        gotoSearchPage() {
-            this.$router.push({
-                name: "search-cpo",
-            });
-        },
-
-        getCpoHeaders(searchCriteria) {
-            if (searchCriteria === undefined) {
-                searchCriteria = {};
-            }
-            console.log("search");
-            // console.log(searchCriteria);
-
-            axios
-                .get("/repairs/api/cpo", {
-                    params: {
-                        searchName: searchCriteria.searchName || "",
-                        searchAddress: searchCriteria.searchAddress || "",
-                        searchContact: searchCriteria.searchContactNumber || "",
-                        searchRpo: searchCriteria.searchRpoNumber || "",
-                        searchPrepared: searchCriteria.searchPreparedBy || "",
-                        searchAuthorized:
-                            searchCriteria.searchAuthorizedBy || "",
-                    },
-                })
-                .then((response) => {
-                    this.cpoHeaderList = response.data.cpos;
-                    console.log(response.data.limit_per_page);
-                    //console.log(response.data[0].updatedAtReadable);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-    },
-
-    mounted() {
-        this.getCpoHeaders();
     },
 };
 </script>

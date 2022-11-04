@@ -105,7 +105,7 @@ export default {
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
-                    this.$emit("inserted-cpo-header");
+                    this.gotoSearchPage();
                     setTimeout(() => {
                         this.isSubmitSuccess = false;
                     }, 3000);
@@ -121,6 +121,11 @@ export default {
             this.formData.rpoNumber = "";
             this.formData.preparedBy = "";
             this.formData.authorizedBy = "";
+        },
+        gotoSearchPage() {
+            this.$router.push({
+                name: "search-cpo",
+            });
         },
     },
     beforeCreate() {

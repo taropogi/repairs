@@ -116,12 +116,18 @@ export default {
                     .then((response) => {
                         this.$store.commit("auth/setIsLoggedIn", true);
                         this.$store.commit("auth/setUser", response.data);
-                        //  console.log(response.data);
+                        //console.log(response.data);
                         // console.log("just logged in");
                         // console.log(this.$store.getters["auth/loggedUser"]);
-                        this.$router.push({
-                            name: "cpo-page",
-                        });
+                        if (response.data.is_admin) {
+                            this.$router.push({
+                                name: "admin-search-cpo",
+                            });
+                        } else {
+                            this.$router.push({
+                                name: "cpo-page",
+                            });
+                        }
                     })
                     .catch((error) => {
                         console.log(error);

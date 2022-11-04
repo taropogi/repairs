@@ -6,7 +6,7 @@ import cpoPage from "./components/pages/cpoPage.vue";
 import notFoundPage from "./components/pages/notFoundPage.vue";
 import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
-import editCpoHeader from "./components/EditCpo/editCpoHeader.vue";
+import editCpo from "./components/EditCpo/editCpo.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -21,6 +21,42 @@ const router = createRouter({
         //     redirect: { name: "login-page" },
         // },
         {
+            path: "/repairs/user/cpo/search",
+            component: searchCpoHeader,
+            name: "search-cpo",
+            meta: {
+                requiresAuth: true,
+            },
+        },
+
+        {
+            path: "/repairs/admin/cpo/search",
+            component: searchCpoHeader,
+            name: "admin-search-cpo",
+            meta: {
+                requiresAuth: true,
+            },
+        },
+
+        {
+            path: "/repairs/user/cpo/encode",
+            component: encodeCpoForm,
+            name: "encode-cpo",
+            meta: {
+                requiresAuth: true,
+            },
+        },
+
+        {
+            path: "/repairs/admin/cpo/encode",
+            component: encodeCpoForm,
+            name: "admin-encode-cpo",
+            meta: {
+                requiresAuth: true,
+            },
+        },
+
+        {
             path: "/repairs/cpo",
             component: cpoPage,
             name: "cpo-page",
@@ -30,18 +66,8 @@ const router = createRouter({
             redirect: { name: "search-cpo" },
             children: [
                 {
-                    path: "encode",
-                    component: encodeCpoForm,
-                    name: "encode-cpo",
-                },
-                {
-                    path: "search",
-                    component: searchCpoHeader,
-                    name: "search-cpo",
-                },
-                {
                     path: "edit/:id",
-                    component: editCpoHeader,
+                    component: editCpo,
                     name: "edit-cpo",
                     props: true,
                 },

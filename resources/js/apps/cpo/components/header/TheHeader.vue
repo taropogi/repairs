@@ -29,13 +29,10 @@
                         v-if="!isLoggedIn"
                         :login-page-link="loginPageLink"
                         :register-page-link="registerPageLink"
-                        @log-out="logOut"
                     ></auth-links>
                     <admin-nav-links
                         v-if="userIsAdmin"
                         :user="loggedUser"
-                        :search-cpo-page-link="searchCpoPageLink"
-                        :encode-cpo-page-link="encodeCpoPageLink"
                         @log-out="logOut"
                     ></admin-nav-links>
                     <user-nav-links

@@ -8,10 +8,6 @@
             >Register</router-link
         >
     </li>
-
-    <a href="#" class="dropdown-item" @click.prevent="$emit('log-out')"
-        >Logout</a
-    >
 </template>
 
 <script>

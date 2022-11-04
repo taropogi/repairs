@@ -223,12 +223,15 @@ export default {
 
                     //  this.headerDetails = response.data.cpo;
                     // console.log(this.headerStatus);
-
-                    const responseLines = response.data.lines;
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        gotoSearchPage() {
+            this.$router.push({
+                name: "search-cpo",
+            });
         },
         submitCpoForm() {
             this.isSubmitSuccess = false;
@@ -239,7 +242,7 @@ export default {
                     // console.log(response);
                     this.isSubmitSuccess = true;
 
-                    this.$emit("updated-cpo-header");
+                    this.gotoSearchPage();
 
                     setTimeout(() => {
                         this.isSubmitSuccess = false;
