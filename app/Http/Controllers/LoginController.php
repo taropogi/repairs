@@ -25,13 +25,13 @@ class LoginController extends Controller
     {
 
         $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required']
         ]);
 
 
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('username', 'password'))) {
             $user = Auth::user();
             $user->activities()->create([
                 'action' => "Login"

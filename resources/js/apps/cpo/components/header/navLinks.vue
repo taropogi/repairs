@@ -1,12 +1,12 @@
 <template>
     <li class="nav-item">
         <router-link class="nav-link" :to="searchCpoPageLink"
-            >Search</router-link
+            >Search CPO</router-link
         >
     </li>
     <li class="nav-item">
         <router-link class="nav-link" :to="encodeCpoPageLink"
-            >Encode</router-link
+            >Encode CPO</router-link
         >
     </li>
     <li class="nav-item dropdown">

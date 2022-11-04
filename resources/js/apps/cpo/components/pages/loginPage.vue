@@ -13,20 +13,20 @@
                         >
                             <div class="row mb-3">
                                 <label
-                                    for="email"
+                                    for="username"
                                     class="col-md-4 col-form-label text-md-end"
-                                    >Email Address</label
+                                    >Username</label
                                 >
 
                                 <div class="col-md-6">
                                     <input
-                                        id="email"
-                                        type="email"
+                                        id="username"
+                                        type="text"
                                         class="form-control"
-                                        name="email"
-                                        v-model="loginFormData.email"
+                                        name="username"
+                                        v-model="loginFormData.username"
                                         required
-                                        autocomplete="email"
+                                        autocomplete="username"
                                         autofocus
                                     />
 
@@ -103,7 +103,7 @@ export default {
     data() {
         return {
             loginFormData: {
-                email: "",
+                username: "",
                 password: "",
             },
         };

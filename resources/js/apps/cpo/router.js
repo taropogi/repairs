@@ -16,6 +16,10 @@ const router = createRouter({
             path: "/repairs",
             redirect: { name: "login-page" },
         },
+        // {
+        //     path: "/repairs/admin",
+        //     redirect: { name: "login-page" },
+        // },
         {
             path: "/repairs/cpo",
             component: cpoPage,

@@ -25,12 +25,14 @@ class UserSeeder extends Seeder
                 'email' => "taro@taro.com",
                 'password' => Hash::make("tarotaro"),
                 'is_admin' => true,
+                'username' => "taro",
             ],
             [
                 'name' => "Test User",
                 'email' => "test@test.com",
                 'password' => Hash::make("password"),
                 'is_admin' => false,
+                'username' => "test",
             ]
         ];
 
