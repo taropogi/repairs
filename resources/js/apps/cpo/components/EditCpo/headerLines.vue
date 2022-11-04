@@ -31,6 +31,43 @@
                 ></header-line>
             </tbody>
         </table>
+
+        <div
+            class="btn-group btn-group-sm"
+            role="group"
+            aria-label="Basic example"
+        >
+            <button
+                v-if="!isInsertingNewLine"
+                class="btn btn-primary"
+                @click="addNewLine"
+            >
+                Add new line
+            </button>
+            <button class="btn btn-primary" type="button" disabled v-else>
+                Add new line
+                <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                ></span>
+            </button>
+            <button
+                class="btn btn-success"
+                @click="saveAllLines"
+                v-if="!isSavingAllLines"
+            >
+                Save All lines
+            </button>
+            <button class="btn btn-success" type="button" disabled v-else>
+                Save All lines
+                <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                ></span>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -44,10 +81,50 @@ export default {
     data() {
         return {
             lines: [],
+            isInsertingNewLine: false,
+            isSavingAllLines: false,
         };
     },
 
     methods: {
+        addNewLine() {
+            this.isInsertingNewLine = true;
+            axios
+                .post("/repairs/api/cpoline/", { id: this.headerId })
+                .then((res) => {
+                    this.getCpoLines();
+                    this.isInsertingNewLine = false;
+                    // console.log(this.lineDetails);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        saveAllLines() {
+            this.isSavingAllLines = true;
+
+            axios
+                .post("/repairs/api/cpo/lines/updateAllLines/", {
+                    cpoId: this.headerId,
+                    cpoLines: this.lines,
+                })
+                .then((res) => {
+                    this.isSavingAllLines = false;
+                    //this.getCpoLines();
+                    // this.isUpdatedAllLinesSuccess = true;
+                    // console.log("save all", res);
+                    // this.getCpoHeaderRow();
+                    // this.$emit("updated-header-lines");
+                    // setTimeout(() => {
+                    //     this.isUpdatedAllLinesSuccess = false;
+                    // }, 3000);
+                    // console.log(res.data);
+                    // console.log("saved all");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         getCpoLines() {
             axios
                 .get("/repairs/api/cpo/lines/" + this.headerId)
@@ -62,6 +139,7 @@ export default {
     },
     mounted() {
         this.getCpoLines();
+        console.log("headerId: " + this.headerId);
     },
 };
 </script>

@@ -96,12 +96,12 @@ class CpoController extends Controller
             $cpoLine->description = $itemObj->description;
             $cpoLine->price = $itemObj->price;
             $cpoLine->hcopy = $itemObj->hcopy;
-            $cpoLine->qty_returned = $itemObj->qtyReturned;
+            $cpoLine->qty_returned = $itemObj->qty_returned;
             $cpoLine->unit = $itemObj->unit;
-            $cpoLine->qty_inspect = $itemObj->qtyInspect;
-            $cpoLine->good_condition = $itemObj->goodCondition;
-            $cpoLine->minor_repair_clean = $itemObj->minorRepairClean;
-            $cpoLine->repair_parts_needed = $itemObj->repairPartsNeeded;
+            $cpoLine->qty_inspect = $itemObj->qty_inspect;
+            $cpoLine->good_condition = $itemObj->good_condition;
+            $cpoLine->minor_repair_clean = $itemObj->minor_repair_clean;
+            $cpoLine->repair_parts_needed = $itemObj->repair_parts_needed;
             $cpoLine->damaged = $itemObj->damaged;
             $cpoLine->comments = $itemObj->comments;
 

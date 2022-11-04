@@ -1,6 +1,6 @@
 <template>
     <transition name="saved-line">
-        <tr v-if="showTr">
+        <tr>
             <th scope="row">{{ lineDetails.line_number }}</th>
             <td>
                 <input
@@ -111,15 +111,33 @@
                         type="button"
                         class="btn btn-primary"
                         @click="saveLine"
+                        v-if="!lineUpdating"
                     >
                         Save
+                    </button>
+                    <button
+                        class="btn btn-primary"
+                        type="button"
+                        disabled
+                        v-else
+                    >
+                        <span class="spinner-border spinner-border-sm"></span>
                     </button>
                     <button
                         type="button"
                         class="btn btn-danger"
                         @click="deleteLine"
+                        v-if="!isDeleting"
                     >
                         Delete
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        type="button"
+                        disabled
+                        v-else
+                    >
+                        <span class="spinner-border spinner-border-sm"></span>
                     </button>
                 </div>
             </td>
@@ -134,6 +152,7 @@ export default {
         return {
             lineUpdating: false,
             isDeleted: false,
+            isDeleting: false,
         };
     },
 
@@ -166,6 +185,7 @@ export default {
             // this.$emit("saveLine", this.lineDetailsLocal);
         },
         deleteLine() {
+            this.isDeleting = true;
             axios
                 .post("/repairs/api/cpoline/destroy/", {
                     id: this.lineDetails.id,

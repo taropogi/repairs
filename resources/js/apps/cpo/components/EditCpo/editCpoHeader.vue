@@ -138,11 +138,7 @@
                 </label>
             </div>
 
-            <div
-                class="btn-group btn-group-sm"
-                role="group"
-                aria-label="Basic mixed styles example"
-            >
+            <div class="btn-group btn-group-sm">
                 <button type="submit" class="btn btn-success">Update</button>
 
                 <router-link :to="{ name: 'search-cpo' }" class="btn btn-danger"
@@ -157,25 +153,7 @@
             :test-value="'the value'"
         ></header-lines>
 
-        <div class="spinner-border" role="status" v-if="isInsertingNewLine">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div
-            class="btn-group btn-group-sm"
-            role="group"
-            aria-label="Basic example"
-        >
-            <button
-                v-if="!isInsertingNewLine"
-                class="btn btn-primary"
-                @click="addNewLine"
-            >
-                Add new line
-            </button>
-            <button class="btn btn-success" @click="saveAllLines">
-                Save All
-            </button>
-        </div>
+        <div class="btn-group btn-group-sm"></div>
     </div>
 </template>
 
@@ -211,74 +189,13 @@ export default {
                 authorizedBy: "",
                 locked: "",
             },
-            lineDetails: [],
+
             isSubmitSuccess: false,
-            isInsertingNewLine: false,
+
             isUpdatedAllLinesSuccess: false,
         };
     },
     methods: {
-        saveAllLines() {
-            this.isUpdatedAllLinesSuccess = false;
-            axios
-                .post("/repairs/api/cpo/lines/updateAllLines/", {
-                    cpoId: this.id,
-                    cpoLines: this.lineDetails,
-                })
-                .then((res) => {
-                    this.isUpdatedAllLinesSuccess = true;
-                    // console.log("save all", res);
-                    this.getCpoHeaderRow();
-
-                    this.$emit("updated-header-lines");
-                    setTimeout(() => {
-                        this.isUpdatedAllLinesSuccess = false;
-                    }, 3000);
-
-                    console.log(res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
-
-        addNewLine() {
-            this.isInsertingNewLine = true;
-            axios
-                .post("/repairs/api/cpoline/", { id: this.id })
-                .then((res) => {
-                    this.getCpoHeaderRow();
-                    this.isInsertingNewLine = false;
-                    console.log(this.lineDetails);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
-
-        refreshHeaderLines(responseLines) {
-            this.lineDetails = [];
-            for (const key in responseLines) {
-                const line = responseLines[key];
-
-                this.lineDetails.push({
-                    id: line.id,
-                    lineNumber: line.line_number,
-                    description: line.description,
-                    price: line.price,
-                    hcopy: line.hcopy,
-                    qtyReturned: line.qty_returned,
-                    unit: line.unit,
-                    qtyInspect: line.qty_inspect,
-                    goodCondition: line.good_condition,
-                    minorRepairClean: line.minor_repair_clean,
-                    repairPartsNeeded: line.repair_parts_needed,
-                    damaged: line.damaged,
-                    comments: line.comments,
-                });
-            }
-        },
-
         getCpoHeaderRow() {
             axios
                 .get("/repairs/api/cpo/" + this.id)
@@ -308,7 +225,6 @@ export default {
                     // console.log(this.headerStatus);
 
                     const responseLines = response.data.lines;
-                    this.refreshHeaderLines(responseLines);
                 })
                 .catch((error) => {
                     console.log(error);
