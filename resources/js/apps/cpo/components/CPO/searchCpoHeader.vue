@@ -148,6 +148,7 @@ export default {
                 })
                 .then((response) => {
                     this.cpoHeaderList = response.data.cpos;
+                    //  console.log(this.cpoHeaderList);
                     // console.log(response.data.limit_per_page);
                     //console.log(response.data[0].updatedAtReadable);
                 })

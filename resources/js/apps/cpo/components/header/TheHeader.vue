@@ -25,11 +25,11 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
 
-                    <auth-links
+                    <!-- <auth-links
                         v-if="!isLoggedIn"
                         :login-page-link="loginPageLink"
                         :register-page-link="registerPageLink"
-                    ></auth-links>
+                    ></auth-links> -->
                     <admin-nav-links
                         v-if="userIsAdmin"
                         :user="loggedUser"

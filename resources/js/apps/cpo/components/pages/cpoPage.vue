@@ -1,7 +1,6 @@
 <template>
     <div>
         <router-view v-slot="slotProps">
-            <h1>CPO PAGE</h1>
             <transition name="router" mode="out-in">
                 <component :is="slotProps.Component"></component>
             </transition>

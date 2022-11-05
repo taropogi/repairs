@@ -3,11 +3,18 @@
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
             Users
         </a>
-        <div class="dropdown-menu dropdown-menu-end">
-            <router-link class="nav-link" :to="searchCpoPageLink"
-                >Users</router-link
-            >
-        </div>
+        <ul class="dropdown-menu">
+            <li>
+                <router-link class="dropdown-item" :to="searchCpoPageLink"
+                    >Users</router-link
+                >
+            </li>
+            <li>
+                <router-link class="dropdown-item" :to="encodeCpoPageLink"
+                    >Create new user</router-link
+                >
+            </li>
+        </ul>
     </li>
 
     <li class="nav-item dropdown">

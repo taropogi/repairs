@@ -206,12 +206,12 @@ class CpoController extends Controller
     {
         $cpo = Cpo::find($request->id);
 
-        $cpo->customer_name = $request->customerName;
-        $cpo->customer_address = $request->customerAddress;
-        $cpo->contact_number = $request->contactNumber;
-        $cpo->rpo_number = $request->rpoNumber;
-        $cpo->prepared_by = $request->preparedBy;
-        $cpo->authorized_by = $request->authorizedBy;
+        $cpo->customer_name = $request->customer_name;
+        $cpo->customer_address = $request->customer_address;
+        $cpo->contact_number = $request->contact_number;
+        $cpo->rpo_number = $request->rpo_number;
+        $cpo->prepared_by = $request->prepared_by;
+        $cpo->authorized_by = $request->authorized_by;
         $cpo->locked = $request->locked;
 
 

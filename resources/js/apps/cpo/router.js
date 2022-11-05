@@ -91,14 +91,14 @@ const router = createRouter({
                 requiresUnAuth: true,
             },
         },
-        {
-            path: "/repairs/register",
-            component: registerPage,
-            name: "register-page",
-            meta: {
-                requiresUnAuth: true,
-            },
-        },
+        // {
+        //     path: "/repairs/register",
+        //     component: registerPage,
+        //     name: "register-page",
+        //     meta: {
+        //         requiresUnAuth: true,
+        //     },
+        // },
         {
             path: "/:notFound(.*)",
             component: notFoundPage,

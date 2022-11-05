@@ -1,8 +1,7 @@
 <template>
-    <div>
+    <div class="px-2">
         <the-header></the-header>
-        <hr />
-        <router-view v-slot="slotProps">
+        <router-view v-slot="slotProps" class="mt-3">
             <transition name="app-router" mode="out-in">
                 <component :is="slotProps.Component"></component>
             </transition>

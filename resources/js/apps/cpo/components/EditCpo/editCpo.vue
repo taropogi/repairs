@@ -10,7 +10,7 @@
             UPDATE HEADER
         </h4> -->
 
-        <form @submit.prevent="submitCpoForm">
+        <form @submit.prevent="submitCpoForm" v-if="headerRow">
             <transition name="updated-header">
                 <div class="fixed-top p2" v-if="isSubmitSuccess">
                     <div class="alert alert-success text-center" role="alert">
@@ -19,45 +19,38 @@
                     </div>
                 </div>
             </transition>
-            <transition name="saved-all-lines">
-                <div class="fixed-top p2" v-if="isUpdatedAllLinesSuccess">
-                    <div class="alert alert-success text-center" role="alert">
-                        <i class="bi bi-check2-all"></i>
-                        <strong>Lines updated!</strong>
-                    </div>
-                </div>
-            </transition>
+
             <div class="row">
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col">
                             <label>Customer Name</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model.trim="formData.customerName"
+                                v-model.trim="headerRow.customer_name"
                             />
                         </div>
                         <div class="col">
                             <label>Customer Address</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model.trim="formData.customerAddress"
+                                v-model.trim="headerRow.customer_address"
                             />
                         </div>
                         <div class="col">
                             <label>Contact Number</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model="formData.contactNumber"
+                                v-model="headerRow.contact_number"
                             />
                         </div>
                     </div>
@@ -65,32 +58,32 @@
                         <div class="col">
                             <label>RPO Number</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model="formData.rpoNumber"
+                                v-model="headerRow.rpo_number"
                             />
                         </div>
 
                         <div class="col">
                             <label>Prepared By</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model="formData.preparedBy"
+                                v-model="headerRow.prepared_by"
                             />
                         </div>
                         <div class="col">
                             <label>Authorized By</label>
                             <input
-                                :disabled="formData.locked"
+                                :disabled="headerRow.locked"
                                 type="text"
                                 class="form-control form-control-sm"
                                 required
-                                v-model="formData.authorizedBy"
+                                v-model="headerRow.authorized_by"
                             />
                         </div>
                     </div>
@@ -100,7 +93,7 @@
                             <label>Status</label>
                             <select
                                 class="form-select form-select-sm"
-                                v-model="formData.status_id"
+                                v-model="headerRow.status_id"
                             >
                                 <option
                                     v-for="status in headerStatuses"
@@ -129,11 +122,11 @@
                 <input
                     class="form-check-input"
                     type="checkbox"
-                    :checked="formData.locked"
-                    :id="'locked' + formData.id"
-                    v-model="formData.locked"
+                    :checked="headerRow.locked"
+                    :id="'locked' + headerRow.id"
+                    v-model="headerRow.locked"
                 />
-                <label class="form-check-label" :for="'locked' + formData.id">
+                <label class="form-check-label" :for="'locked' + headerRow.id">
                     Lock <i class="bi bi-file-lock2"></i>
                 </label>
             </div>
@@ -150,8 +143,9 @@
         </form>
 
         <header-lines
+            v-if="headerRow"
             :header-id="id"
-            :header-is-locked="formData.locked"
+            :header-is-locked="headerRow.locked"
             :test-value="'the value'"
         ></header-lines>
 
@@ -169,11 +163,11 @@ export default {
         historyList,
     },
     props: ["id"],
-    watch: {
-        id(id) {
-            this.getCpoHeaderRow();
-        },
-    },
+    // watch: {
+    //     id(id) {
+    //         this.getCpoHeaderRow();
+    //     },
+    // },
     computed: {
         searchCpoLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
@@ -189,16 +183,7 @@ export default {
             headerStatusHistory: null,
             headerStatuses: null,
             allUsers: null,
-            formData: {
-                id: 0,
-                customerName: "",
-                customerAddress: "",
-                contactNumber: "",
-                rpoNumber: "",
-                preparedBy: "",
-                authorizedBy: "",
-                locked: "",
-            },
+            headerRow: null,
 
             isSubmitSuccess: false,
 
@@ -207,32 +192,17 @@ export default {
     },
     methods: {
         getCpoHeaderRow() {
+            console.log("get row");
             axios
                 .get("/repairs/api/cpo/" + this.id)
                 .then((response) => {
-                    // console.log(response);
-                    this.formData.id = response.data.cpo.id;
-                    this.formData.customerName =
-                        response.data.cpo.customer_name;
-                    this.formData.customerAddress =
-                        response.data.cpo.customer_address;
-                    this.formData.contactNumber =
-                        response.data.cpo.contact_number;
-                    this.formData.rpoNumber = response.data.cpo.rpo_number;
-                    this.formData.preparedBy = response.data.cpo.prepared_by;
-                    this.formData.authorizedBy =
-                        response.data.cpo.authorized_by;
-                    this.formData.locked = response.data.cpo.locked;
-                    this.formData.status_id = response.data.cpo.status_id;
-
                     this.headerStatuses = response.data.header_statuses;
                     this.headerStatus = response.data.cpo.status;
                     this.headerStatusHistory = response.data.cpo.status_history;
-
+                    this.headerRow = response.data.cpo;
                     this.allUsers = response.data.users;
 
-                    //  this.headerDetails = response.data.cpo;
-                    // console.log(this.headerStatus);
+                    //  console.log(this.headerRow);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -240,14 +210,15 @@ export default {
         },
         gotoSearchPage() {
             this.$router.push({
-                name: "search-cpo",
+                name: this.searchCpoLink,
             });
         },
         submitCpoForm() {
             this.isSubmitSuccess = false;
-
+            console.log("submit edit");
+            console.log(this.headerRow);
             axios
-                .post("/repairs/api/cpo/update", this.formData)
+                .post("/repairs/api/cpo/update", this.headerRow)
                 .then((response) => {
                     // console.log(response);
                     this.isSubmitSuccess = true;
@@ -267,7 +238,7 @@ export default {
         this.$store.commit("setMainPageTitleHeader", "CPO - Edit");
     },
     mounted() {
-        // console.log("old value: " + this.lineDetails.length);
+        console.log("mounted");
         this.getCpoHeaderRow();
     },
     updated() {
@@ -299,32 +270,6 @@ export default {
     transition: all 0.3s ease-in;
 }
 .updated-header-leave-to {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.saved-all-lines-enter-from {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.saved-all-lines-enter-active {
-    transition: all 0.3s ease-out;
-}
-.saved-all-lines-enter-to {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.saved-all-lines-leave-from {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.saved-all-lines-leave-active {
-    transition: all 0.3s ease-in;
-}
-.saved-all-lines-leave-to {
     opacity: 0;
     transform: translateY(-30px);
 }
