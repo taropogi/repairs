@@ -141,7 +141,9 @@
             <div class="btn-group btn-group-sm">
                 <button type="submit" class="btn btn-success">Update</button>
 
-                <router-link :to="{ name: 'search-cpo' }" class="btn btn-danger"
+                <router-link
+                    :to="{ name: searchCpoLink }"
+                    class="btn btn-danger"
                     >Cancel</router-link
                 >
             </div>
@@ -170,6 +172,14 @@ export default {
     watch: {
         id(id) {
             this.getCpoHeaderRow();
+        },
+    },
+    computed: {
+        searchCpoLink() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return "admin-search-cpo";
+            }
+            return "search-cpo";
         },
     },
     data() {

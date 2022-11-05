@@ -16,8 +16,29 @@ export default {
     components: {
         TheHeader,
     },
+    created() {
+        if (
+            this.$store.getters["auth/isLoggedIn"] &&
+            this.$store.getters["auth/loggedUser"].is_admin
+        ) {
+            this.$store.commit("cpo/setGenLinks", [
+                {
+                    "search-cpo": "admin-search-cpo",
+                },
+            ]);
+        } else {
+            this.$store.commit("cpo/setGenLinks", [
+                {
+                    "search-cpo": "search-cpo",
+                },
+            ]);
+        }
+
+        //console.log(this.$store.getters["cpo/getGenLinks"]);
+    },
     mounted() {
         // console.log(this.$store.getters["auth/isLoggedIn"]);
+        // console.log(this.$store.getters["auth/loggedUser"]);
     },
 };
 </script>

@@ -10,14 +10,7 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            isEdit: false,
-            toEditCpoItemHeader: null,
-        };
-    },
-};
+export default {};
 </script>
 
 <style>

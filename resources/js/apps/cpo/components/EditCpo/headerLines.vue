@@ -122,7 +122,7 @@ export default {
                     // console.log("saved all");
                 })
                 .catch((err) => {
-                    console.log(err);
+                    // console.log(err);
                 });
         },
         getCpoLines() {

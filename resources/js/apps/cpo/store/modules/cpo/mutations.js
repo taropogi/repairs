@@ -16,4 +16,7 @@ export default {
                 };
             });
     },
+    setGenLinks(state, payload) {
+        state.genLinks = payload;
+    },
 };

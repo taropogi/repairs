@@ -10,6 +10,7 @@ const store = createStore({
     state() {
         return {
             mainPageTitleHeader: "",
+            genLinks: [],
         };
     },
     mutations: {

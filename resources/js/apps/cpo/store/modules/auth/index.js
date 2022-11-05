@@ -6,11 +6,13 @@ const authModule = {
     namespaced: true,
     state() {
         return {
-            isLoggedIn: localStorage.getItem("isLoggedIn")
-                ? localStorage.getItem("isLoggedIn") === "true"
-                    ? true
-                    : false
-                : false,
+            isLoggedIn:
+                localStorage.getItem("isLoggedIn") &&
+                localStorage.getItem("loggedUser") !== '""'
+                    ? localStorage.getItem("isLoggedIn") === "true"
+                        ? true
+                        : false
+                    : false,
             user: localStorage.getItem("loggedUser")
                 ? JSON.parse(localStorage.getItem("loggedUser"))
                 : null,

@@ -40,9 +40,12 @@ class LoginController extends Controller
 
             return response()->json($user, 200);
         }
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect']
-        ]);
+        // throw ValidationException::withMessages([
+        //     'email' => ['The provided credentials are incorrect']
+        // ]);
+        return response()->json([
+            'message' => 'Record not found.'
+        ], 404);
     }
 
     public function logout()

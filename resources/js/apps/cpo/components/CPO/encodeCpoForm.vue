@@ -124,8 +124,16 @@ export default {
         },
         gotoSearchPage() {
             this.$router.push({
-                name: "search-cpo",
+                name: this.searchCpoLink,
             });
+        },
+    },
+    computed: {
+        searchCpoLink() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return "admin-search-cpo";
+            }
+            return "search-cpo";
         },
     },
     beforeCreate() {

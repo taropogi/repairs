@@ -116,6 +116,15 @@ export default {
             selectedHeaders: [],
         };
     },
+    computed: {
+        editHeaderLink() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return "admin-edit-cpo";
+            }
+
+            return "edit-cpo";
+        },
+    },
     methods: {
         deleteCpo(cpoItemHeader) {
             this.$emit("delete-cpo", cpoItemHeader);
@@ -126,7 +135,7 @@ export default {
             // });
 
             this.$router.replace({
-                name: "edit-cpo",
+                name: this.editHeaderLink,
                 params: {
                     id: cpoItemHeader.id,
                 },

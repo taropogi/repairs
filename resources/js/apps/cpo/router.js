@@ -7,6 +7,7 @@ import notFoundPage from "./components/pages/notFoundPage.vue";
 import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
 import editCpo from "./components/EditCpo/editCpo.vue";
+import AdminPage from "./components/admin/AdminPage/AdminPage.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -17,47 +18,45 @@ const router = createRouter({
             redirect: { name: "login-page" },
         },
         // {
+        //     path: "/",
+        //     redirect: { name: "login-page" },
+        // },
+        // {
         //     path: "/repairs/admin",
         //     redirect: { name: "login-page" },
         // },
+
         {
-            path: "/repairs/user/cpo/search",
-            component: searchCpoHeader,
-            name: "search-cpo",
+            path: "/repairs/admin",
+            component: AdminPage,
+            name: "admin-page",
+            redirect: { name: "admin-search-cpo" },
             meta: {
                 requiresAuth: true,
+                forAdmin: true,
             },
+            children: [
+                {
+                    path: "cpo/encode",
+                    component: encodeCpoForm,
+                    name: "admin-encode-cpo",
+                },
+                {
+                    path: "cpo/search",
+                    component: searchCpoHeader,
+                    name: "admin-search-cpo",
+                },
+                {
+                    path: "cpo/edit/:id",
+                    component: editCpo,
+                    name: "admin-edit-cpo",
+                    props: true,
+                },
+            ],
         },
 
         {
-            path: "/repairs/admin/cpo/search",
-            component: searchCpoHeader,
-            name: "admin-search-cpo",
-            meta: {
-                requiresAuth: true,
-            },
-        },
-
-        {
-            path: "/repairs/user/cpo/encode",
-            component: encodeCpoForm,
-            name: "encode-cpo",
-            meta: {
-                requiresAuth: true,
-            },
-        },
-
-        {
-            path: "/repairs/admin/cpo/encode",
-            component: encodeCpoForm,
-            name: "admin-encode-cpo",
-            meta: {
-                requiresAuth: true,
-            },
-        },
-
-        {
-            path: "/repairs/cpo",
+            path: "/repairs/user/cpo",
             component: cpoPage,
             name: "cpo-page",
             meta: {
@@ -70,6 +69,16 @@ const router = createRouter({
                     component: editCpo,
                     name: "edit-cpo",
                     props: true,
+                },
+                {
+                    path: "encode",
+                    component: encodeCpoForm,
+                    name: "encode-cpo",
+                },
+                {
+                    path: "search",
+                    component: searchCpoHeader,
+                    name: "search-cpo",
                 },
             ],
         },
@@ -108,14 +117,36 @@ const router = createRouter({
 });
 
 router.beforeEach(function (to, from, next) {
+    // console.log(from, to);
     if (to.meta.requiresAuth && !store.getters["auth/isLoggedIn"]) {
+        //1
         next({
             name: "login-page",
         });
     } else if (to.meta.requiresUnAuth && store.getters["auth/isLoggedIn"]) {
+        if (store.getters["auth/loggedUser"].is_admin) {
+            next({
+                name: "admin-page",
+            });
+        }
+
         next({
             name: "cpo-page",
         });
+    } else if (to.meta.requiresAuth && store.getters["auth/isLoggedIn"]) {
+        if (!to.meta.forAdmin && store.getters["auth/loggedUser"].is_admin) {
+            next({
+                name: "admin-page",
+            });
+        } else if (
+            to.meta.forAdmin &&
+            !store.getters["auth/loggedUser"].is_admin
+        ) {
+            next({
+                name: "cpo-page",
+            });
+        }
+        next();
     } else {
         //else
         next();
