@@ -192,7 +192,7 @@ export default {
     },
     methods: {
         getCpoHeaderRow() {
-            console.log("get row");
+            // console.log("get row");
             axios
                 .get("/repairs/api/cpo/" + this.id)
                 .then((response) => {
@@ -215,8 +215,8 @@ export default {
         },
         submitCpoForm() {
             this.isSubmitSuccess = false;
-            console.log("submit edit");
-            console.log(this.headerRow);
+            //   console.log("submit edit");
+            // console.log(this.headerRow);
             axios
                 .post("/repairs/api/cpo/update", this.headerRow)
                 .then((response) => {
@@ -238,7 +238,7 @@ export default {
         this.$store.commit("setMainPageTitleHeader", "CPO - Edit");
     },
     mounted() {
-        console.log("mounted");
+        //  console.log("mounted");
         this.getCpoHeaderRow();
     },
     updated() {

@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import loginPage from "./components/pages/loginPage.vue";
-import registerPage from "./components/pages/registerPage.vue";
+// import registerPage from "./components/pages/registerPage.vue";
+import SearchCpo from "./components/SearchCpo/SearchCpo.vue";
 import cpoPage from "./components/pages/cpoPage.vue";
 import notFoundPage from "./components/pages/notFoundPage.vue";
 import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
@@ -43,7 +44,8 @@ const router = createRouter({
                 },
                 {
                     path: "cpo/search",
-                    component: searchCpoHeader,
+                    //component: searchCpoHeader,
+                    component: SearchCpo,
                     name: "admin-search-cpo",
                 },
                 {
@@ -77,7 +79,8 @@ const router = createRouter({
                 },
                 {
                     path: "search",
-                    component: searchCpoHeader,
+                    //component: searchCpoHeader,
+                    component: SearchCpo,
                     name: "search-cpo",
                 },
             ],
@@ -145,8 +148,9 @@ router.beforeEach(function (to, from, next) {
             next({
                 name: "cpo-page",
             });
+        } else {
+            next();
         }
-        next();
     } else {
         //else
         next();

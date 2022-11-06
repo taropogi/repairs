@@ -167,7 +167,7 @@ export default {
                         this.isValidating = false;
                         this.isError = true;
                         // console.log("error here");
-                        console.log(error.response.message);
+                        console.log(error.response.data.message);
                     });
             });
         },

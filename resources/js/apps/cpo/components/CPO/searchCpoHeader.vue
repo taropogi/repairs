@@ -131,7 +131,7 @@ export default {
             if (searchCriteria === undefined) {
                 searchCriteria = {};
             }
-            console.log("search CpoHeader");
+            // console.log("search CpoHeader");
             // console.log(searchCriteria);
 
             axios
