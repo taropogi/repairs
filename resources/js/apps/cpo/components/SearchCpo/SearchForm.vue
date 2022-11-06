@@ -7,7 +7,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchName"
+                    v-model.lazy="searchCriteria.searchName"
                 />
             </div>
             <div class="col">
@@ -16,7 +16,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchAddress"
+                    v-model.lazy="searchCriteria.searchAddress"
                 />
             </div>
             <div class="col">
@@ -25,7 +25,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchContactNumber"
+                    v-model.lazy="searchCriteria.searchContactNumber"
                 />
             </div>
         </div>
@@ -36,7 +36,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchRpoNumber"
+                    v-model.lazy="searchCriteria.searchRpoNumber"
                 />
             </div>
             <div class="col">
@@ -45,7 +45,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchPreparedBy"
+                    v-model.lazy="searchCriteria.searchPreparedBy"
                 />
             </div>
             <div class="col">
@@ -54,7 +54,7 @@
                     type="text"
                     class="form-control form-control-sm"
                     @input="search"
-                    v-model="searchCriteria.searchAuthorizedBy"
+                    v-model.lazy="searchCriteria.searchAuthorizedBy"
                 />
             </div>
         </div>
@@ -63,6 +63,7 @@
 
 <script>
 export default {
+    emits: ["search-cpo-header"],
     data() {
         return {
             onInputDelayedSeconds: 0,
@@ -77,36 +78,11 @@ export default {
             },
         };
     },
-    watch: {
-        onInputDelayedSeconds(value) {
-            if (value === 1) {
-                if (this.startSearch) {
-                    this.actualSearch();
-                }
-            }
-        },
-    },
+
     methods: {
         search() {
-            if (!this.startSearch) {
-                this.startSearch = true;
-            }
-            this.onInputDelayedSeconds = 0;
-        },
-        actualSearch() {
             this.$emit("search-cpo-header", this.searchCriteria);
-            //  this.getCpoHeaders(this.searchCriteria);
-            // console.log("search");
         },
-    },
-    mounted() {
-        setInterval(() => {
-            this.onInputDelayedSeconds++;
-            // console.log(this.onInputDelayedSeconds);
-        }, 2000);
-
-        //this.getCpoHeaders();
-        // console.log("search page");
     },
 };
 </script>

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import cpoHeaderList from "./cpoHeaderList.vue";
+import cpoHeaderList from "../SearchCpo/cpoHeaderList.vue";
 
 export default {
     components: {

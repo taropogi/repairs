@@ -113,9 +113,25 @@
 export default {
     data() {
         return {
+            cpoHeaderList: [],
             selectedHeaders: [],
+            isSearching: false,
         };
     },
+    props: ["searchCriteria"],
+    watch: {
+        searchCriteria: {
+            handler(newValue, oldValue) {
+                // console.log(newValue, oldValue);
+                this.getCpoHeaders();
+                // Note: `newValue` will be equal to `oldValue` here
+                // on nested mutations as long as the object itself
+                // hasn't been replaced.
+            },
+            deep: true,
+        },
+    },
+
     computed: {
         editHeaderLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
@@ -145,12 +161,41 @@ export default {
         printCPOPdf(cpoId) {
             window.location.href = "/repairs/generatePdf/?id=" + cpoId;
         },
+        getCpoHeaders() {
+            this.isSearching = true;
+            axios
+                .get("/repairs/api/cpo", {
+                    params: {
+                        searchName: this.searchCriteria.searchName || "",
+                        searchAddress: this.searchCriteria.searchAddress || "",
+                        searchContact:
+                            this.searchCriteria.searchContactNumber || "",
+                        searchRpo: this.searchCriteria.searchRpoNumber || "",
+                        searchPrepared:
+                            this.searchCriteria.searchPreparedBy || "",
+                        searchAuthorized:
+                            this.searchCriteria.searchAuthorizedBy || "",
+                    },
+                })
+                .then((response) => {
+                    this.cpoHeaderList = response.data.cpos;
+                    this.isSearching = false;
+                    // console.log(this.cpoHeaderList);
+                    // console.log(response.data.limit_per_page);
+                    //console.log(response.data[0].updatedAtReadable);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
-    props: ["cpoHeaderList"],
+    mounted() {
+        this.getCpoHeaders();
+    },
     updated() {
-        //console.log(this.cpoHeaderList);
+        // console.log(this.searchCriteria);
     },
 };
 </script>
 
-<style></style>
+<style scoped></style>

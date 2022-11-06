@@ -6,7 +6,7 @@ import SearchCpo from "./components/SearchCpo/SearchCpo.vue";
 import cpoPage from "./components/pages/cpoPage.vue";
 import notFoundPage from "./components/pages/notFoundPage.vue";
 import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
-import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
+// import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
 import editCpo from "./components/EditCpo/editCpo.vue";
 import AdminPage from "./components/admin/AdminPage/AdminPage.vue";
 import store from "./store";
