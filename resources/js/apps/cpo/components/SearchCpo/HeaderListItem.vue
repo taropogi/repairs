@@ -1,5 +1,5 @@
 <template>
-    <tr :class="{ 'table-warning': headerItem.locked }">
+    <tr :class="{ 'table-warning': headerItem.locked }" v-if="!isDeleted">
         <th>
             <div class="form-check">
                 <input
@@ -60,10 +60,11 @@
 <script>
 export default {
     props: ["headerItem"],
-    emits: ["delete-cpo"],
+    // emits: ["delete-cpo"],
     data() {
         return {
             isSelected: false,
+            isDeleted: false,
         };
     },
 
@@ -91,9 +92,7 @@ export default {
                     row: this.headerItem,
                 });
             } else {
-                this.$store.commit("cpo/removeSelectedPo", {
-                    id: this.headerItem.id,
-                });
+                this.unselectPo();
             }
         },
         async deleteCpo() {
@@ -101,8 +100,15 @@ export default {
                 cpoId: this.headerItem.id,
             });
             if (res.data) {
-                this.$emit("delete-cpo");
+                this.unselectPo();
+                this.isDeleted = true;
+                // this.$emit("delete-cpo");
             }
+        },
+        unselectPo() {
+            this.$store.commit("cpo/removeSelectedPo", {
+                id: this.headerItem.id,
+            });
         },
 
         printCPOPdf() {

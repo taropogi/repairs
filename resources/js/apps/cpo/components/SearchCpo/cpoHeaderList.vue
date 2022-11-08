@@ -1,51 +1,63 @@
 <template>
-    <spinner-loading v-if="isSearching"> </spinner-loading>
-    <div class="my-2" v-else>
-        <table class="table table-sm table-striped table-bordered">
-            <thead class="table-success">
-                <tr>
-                    <th class="col tex-center">
-                        [{{ selectedPosCount }}]
-                        <!-- <div class="form-check">
+    <div>
+        <modal-change-status
+            v-if="changeStatusMulti"
+            @close-modal="closeModal"
+        ></modal-change-status>
+        <spinner-loading v-if="isSearching"> </spinner-loading>
+        <div class="my-2" v-else>
+            <table
+                class="table table-sm table-striped table-bordered table-hover"
+            >
+                <thead class="table-success">
+                    <tr>
+                        <th class="col tex-center">
+                            [{{ selectedPosCount }}]
+                            <!-- <div class="form-check">
                             <input
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
                             />
                         </div> -->
-                    </th>
-                    <th scope="col">CPO#</th>
-                    <th scope="col">RPO #</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Contact#</th>
-                    <th scope="col">Prepared By</th>
-                    <th scope="col">Authorized By</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <header-list-item
-                    v-for="item in cpoHeaderList"
-                    :key="item.id"
-                    :header-item="item"
-                    @delete-cpo="getCpoHeaders"
-                ></header-list-item>
-            </tbody>
-        </table>
+                        </th>
+                        <th scope="col">CPO#</th>
+                        <th scope="col">RPO #</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Contact#</th>
+                        <th scope="col">Prepared By</th>
+                        <th scope="col">Authorized By</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <header-list-item
+                        v-for="item in cpoHeaderList"
+                        :key="item.id"
+                        :header-item="item"
+                        @delete-cpo="getCpoHeaders"
+                    ></header-list-item>
+                </tbody>
+            </table>
 
-        <div class="btn-toolbar" role="toolbar">
-            <div class="btn-group me-2" role="group">
-                <button type="button" class="btn btn-primary">1</button>
-                <button type="button" class="btn btn-primary">2</button>
-                <button type="button" class="btn btn-primary">3</button>
-                <button type="button" class="btn btn-primary">4</button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-info">
-                    Multi-select change Status
-                </button>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group me-2" role="group">
+                    <button type="button" class="btn btn-primary">1</button>
+                    <button type="button" class="btn btn-primary">2</button>
+                    <button type="button" class="btn btn-primary">3</button>
+                    <button type="button" class="btn btn-primary">4</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button
+                        type="button"
+                        class="btn btn-info"
+                        @click="openModalChangeStatusMulti"
+                    >
+                        Multi-select change Status
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -54,16 +66,19 @@
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
+import ModalChangeStatus from "./ModalChangeStatus.vue";
 export default {
     components: {
         HeaderListItem,
         SpinnerLoading,
+        ModalChangeStatus,
     },
     data() {
         return {
             cpoHeaderList: [],
             selectedHeaders: [],
             isSearching: false,
+            changeStatusMulti: false,
         };
     },
     props: ["searchCriteria"],
@@ -88,6 +103,12 @@ export default {
     },
 
     methods: {
+        closeModal() {
+            this.changeStatusMulti = false;
+        },
+        openModalChangeStatusMulti() {
+            this.changeStatusMulti = true;
+        },
         getCpoHeaders() {
             this.isSearching = true;
             axios

@@ -9,6 +9,7 @@ import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 // import searchCpoHeader from "./components/CPO/searchCpoHeader.vue";
 import editCpo from "./components/EditCpo/editCpo.vue";
 import AdminPage from "./components/admin/AdminPage/AdminPage.vue";
+import MultiChangeStatus from "./components/MultiChangeStatus/MultiChangeStatus.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -82,6 +83,13 @@ const router = createRouter({
                     //component: searchCpoHeader,
                     component: SearchCpo,
                     name: "search-cpo",
+                },
+
+                {
+                    path: "cpos/changes-status",
+                    //component: searchCpoHeader,
+                    component: MultiChangeStatus,
+                    name: "cpo-multi-change-status",
                 },
             ],
         },
