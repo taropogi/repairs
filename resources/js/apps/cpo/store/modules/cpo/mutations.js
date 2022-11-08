@@ -19,4 +19,11 @@ export default {
     setGenLinks(state, payload) {
         state.genLinks = payload;
     },
+    addSelectedPo(state, payload) {
+        state.selectedPos.push(payload);
+    },
+    removeSelectedPo(state, payload) {
+        const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
+        state.selectedPos = myArray;
+    },
 };

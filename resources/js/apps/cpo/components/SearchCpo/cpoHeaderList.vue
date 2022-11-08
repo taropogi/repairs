@@ -4,14 +4,15 @@
         <table class="table table-sm table-striped table-bordered">
             <thead class="table-success">
                 <tr>
-                    <th class="col">
-                        <div class="form-check">
+                    <th class="col tex-center">
+                        [{{ selectedPosCount }}]
+                        <!-- <div class="form-check">
                             <input
                                 class="form-check-input"
                                 type="checkbox"
                                 value=""
                             />
-                        </div>
+                        </div> -->
                     </th>
                     <th scope="col">CPO#</th>
                     <th scope="col">RPO #</th>
@@ -66,7 +67,11 @@ export default {
         };
     },
     props: ["searchCriteria"],
-
+    computed: {
+        selectedPosCount() {
+            return this.$store.getters["cpo/getSelectedPos"].length;
+        },
+    },
     watch: {
         searchCriteria: {
             handler(newValue, oldValue) {

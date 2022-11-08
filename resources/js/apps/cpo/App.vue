@@ -1,5 +1,5 @@
 <template>
-    <div class="px-2">
+    <div class="px-2 pb-5">
         <the-header></the-header>
         <router-view v-slot="slotProps" class="mt-3">
             <transition name="app-router" mode="out-in">

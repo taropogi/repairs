@@ -2,7 +2,13 @@
     <tr :class="{ 'table-warning': headerItem.locked }">
         <th>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    :id="id"
+                    v-model="isSelected"
+                    @change="selectPo"
+                />
             </div>
         </th>
         <th scope="row">{{ headerItem.id }}</th>
@@ -55,7 +61,16 @@
 export default {
     props: ["headerItem"],
     emits: ["delete-cpo"],
+    data() {
+        return {
+            isSelected: false,
+        };
+    },
+
     computed: {
+        id() {
+            return "select-po-" + this.headerItem;
+        },
         editHeaderLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
                 return "admin-edit-cpo";
@@ -63,8 +78,24 @@ export default {
 
             return "edit-cpo";
         },
+        // isSelected() {
+        //     return $store.getters["cpo/getSelectedPos"];
+        // },
     },
+
     methods: {
+        selectPo() {
+            if (this.isSelected) {
+                this.$store.commit("cpo/addSelectedPo", {
+                    id: this.headerItem.id,
+                    row: this.headerItem,
+                });
+            } else {
+                this.$store.commit("cpo/removeSelectedPo", {
+                    id: this.headerItem.id,
+                });
+            }
+        },
         async deleteCpo() {
             const res = await axios.post("/repairs/api/cpo/destroy", {
                 cpoId: this.headerItem.id,
@@ -87,6 +118,19 @@ export default {
             });
             // this.$emit("editCpo", cpoItemHeader);
         },
+        isCurrentlySelected() {
+            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedItem = selectedPos.find(
+                (num) => num.id === this.headerItem.id
+            );
+            if (selectedItem) {
+                this.isSelected = true;
+            }
+        },
+    },
+    mounted() {
+        this.isCurrentlySelected();
+        // this.isSelected = true;
     },
 };
 </script>
