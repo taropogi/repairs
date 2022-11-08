@@ -159,6 +159,9 @@ class CpoController extends Controller
         $response['cpos'] = $cpos;
         $response['limit_per_page'] = 0;
 
+        //sleep for 3 seconds
+        sleep(1);
+
         return $response;
     }
 
