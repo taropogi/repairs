@@ -10,6 +10,7 @@ const cpoModule = {
             editingHeaderId: null, // what is currently editing cpo header
             editingHeaderRow: [], // what is currently editing cpo header, actual row from database
             genLinks: [],
+            selectedPos: [],
         };
     },
     mutations,

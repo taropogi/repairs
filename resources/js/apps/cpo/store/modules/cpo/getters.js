@@ -6,4 +6,7 @@ export default {
     getGenLinks(state) {
         return state.genLinks;
     },
+    getSelectedPos(state) {
+        return state.selectedPos;
+    },
 };

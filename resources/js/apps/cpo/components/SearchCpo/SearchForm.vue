@@ -84,6 +84,9 @@ export default {
             this.$emit("search-cpo-header", this.searchCriteria);
         },
     },
+    mounted() {
+        this.search();
+    },
 };
 </script>
 

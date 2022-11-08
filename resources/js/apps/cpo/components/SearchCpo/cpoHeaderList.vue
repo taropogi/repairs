@@ -1,5 +1,6 @@
 <template>
-    <div class="my-2">
+    <spinner-loading v-if="isSearching"> </spinner-loading>
+    <div class="my-2" v-else>
         <table class="table table-sm table-striped table-bordered">
             <thead class="table-success">
                 <tr>
@@ -51,9 +52,11 @@
 
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
+import SpinnerLoading from "../UI/SpinnerLoading.vue";
 export default {
     components: {
         HeaderListItem,
+        SpinnerLoading,
     },
     data() {
         return {
@@ -63,11 +66,14 @@ export default {
         };
     },
     props: ["searchCriteria"],
+
     watch: {
         searchCriteria: {
             handler(newValue, oldValue) {
                 // console.log(newValue, oldValue);
+
                 this.getCpoHeaders();
+
                 // Note: `newValue` will be equal to `oldValue` here
                 // on nested mutations as long as the object itself
                 // hasn't been replaced.
@@ -101,12 +107,12 @@ export default {
                     //console.log(response.data[0].updatedAtReadable);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                 });
         },
     },
     mounted() {
-        this.getCpoHeaders();
+        // this.getCpoHeaders();
     },
     updated() {
         // console.log(this.searchCriteria);
