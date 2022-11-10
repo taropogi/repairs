@@ -49,7 +49,7 @@
                     <button type="button" class="btn btn-primary">3</button>
                     <button type="button" class="btn btn-primary">4</button>
                 </div>
-                <div class="btn-group" role="group">
+                <div class="btn-group" role="group" v-if="selectedPosCount">
                     <button
                         type="button"
                         class="btn btn-info"

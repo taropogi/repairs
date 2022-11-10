@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade show" tabindex="-1" style="display: block">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg border border-primary">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
                     <h5 class="modal-title text-white">
@@ -13,27 +13,42 @@
                     ></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">CPO#</th>
-                                <th scope="col">RPO #</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div v-if="selectedCpos">
+                        Change status to:
+
+                        <select class="form-select" v-model="selectedStatus">
+                            <option
+                                v-for="status in headerStatuses"
+                                :key="status.id + status.status"
+                                :value="status.id"
+                            >
+                                {{ status.status }}
+                            </option>
+                        </select>
+                        <table
+                            class="table table-sm mt-2 table-striped"
+                            v-if="selectedCpos"
+                        >
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">CPO#</th>
+                                    <th scope="col">RPO #</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="cpo in selectedCpos" :key="cpo.id">
+                                    <th scope="row">{{ cpo.id }}</th>
+                                    <td>{{ cpo.rpo_number }}</td>
+                                    <td>
+                                        {{
+                                            headerStatuses[cpo.status_id].status
+                                        }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button
@@ -59,9 +74,18 @@
 <script>
 export default {
     emits: ["close-modal"],
+    data() {
+        return {
+            selectedCpos: null,
+            headerStatuses: null,
+            selectedStatus: 1,
+        };
+    },
     computed: {
-        selectedPos() {
-            return this.$store.getters["cpo/getSelectedPos"];
+        selectedPosId() {
+            return this.$store.getters["cpo/getSelectedPos"].map(
+                (cpo) => cpo.id
+            );
         },
     },
     methods: {
@@ -69,13 +93,36 @@ export default {
             console.log("close");
             this.$emit("close-modal");
         },
-        saveChanges() {
-            console.log("save");
+        async saveChanges() {
+            const res = await axios.post(
+                "/repairs/api/cpo/selected/update/status/",
+                {
+                    rpos: this.selectedPosId,
+                    selected_status: this.selectedStatus,
+                }
+            );
+            if (res.data) {
+                console.log(res.data);
+            }
             this.$emit("close-modal");
+        },
+
+        async getSelectedPos() {
+            const res = await axios.post("/repairs/api/cpo/selected", {
+                rpos: this.selectedPosId,
+            });
+            if (res.data) {
+                // console.log(res.data.cpos);
+                this.selectedCpos = res.data.cpos;
+
+                this.headerStatuses = res.data.header_statuses;
+                // console.log(this.selectedCpos);
+            }
         },
     },
     mounted() {
-        // console.log(this.selectedPos);
+        this.getSelectedPos();
+        // console.log(this.selectedCpos.length);
     },
 };
 </script>

@@ -205,6 +205,28 @@ class CpoController extends Controller
      * @param  \App\Models\Cpo  $cpo
      * @return \Illuminate\Http\Response
      */
+
+    public function selectedCpos(Request $request)
+    {
+        $selectedPos = Cpo::whereIn('id',  $request->rpos)->get();
+        $response['cpos'] = $selectedPos;
+        $response['header_statuses'] = HeaderStatus::all();
+        return $response;
+    }
+
+
+    public function changeStatusSelectedCpos(Request $request)
+    {
+
+        $cpos =  Cpo::whereIn('id',  $request->rpos)
+            ->update([
+                'status_id' =>  $request->selected_status
+            ]);
+
+        $response['cpos'] = $cpos;
+        return $response;
+    }
+
     public function update(Request $request)
     {
         $cpo = Cpo::find($request->id);
