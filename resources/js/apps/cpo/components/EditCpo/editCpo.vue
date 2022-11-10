@@ -21,7 +21,7 @@
             </transition>
 
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                     <div class="row">
                         <div class="col">
                             <label>Customer Name</label>
@@ -43,6 +43,8 @@
                                 v-model.trim="headerRow.customer_address"
                             />
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col">
                             <label>Contact Number</label>
                             <input
@@ -53,8 +55,6 @@
                                 v-model="headerRow.contact_number"
                             />
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <label>RPO Number</label>
                             <input
@@ -65,7 +65,9 @@
                                 v-model="headerRow.rpo_number"
                             />
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="col">
                             <label>Prepared By</label>
                             <input
@@ -87,7 +89,6 @@
                             />
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col">
                             <label>Status</label>
@@ -105,30 +106,31 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col"></div>
-                        <div class="col"></div>
+                        <div class="col p-2">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    :checked="headerRow.locked"
+                                    :id="'locked' + headerRow.id"
+                                    v-model="headerRow.locked"
+                                />
+                                <label
+                                    class="form-check-label"
+                                    :for="'locked' + headerRow.id"
+                                >
+                                    Lock <i class="bi bi-file-lock2"></i>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                     <history-list
-                        :header-status-history="headerStatusHistory"
-                        :header-statuses="headerStatuses"
-                        :all-users="allUsers"
+                        v-if="!isUpdating"
+                        :header-id="headerRow.id"
                     ></history-list>
                 </div>
-            </div>
-
-            <div class="form-check">
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    :checked="headerRow.locked"
-                    :id="'locked' + headerRow.id"
-                    v-model="headerRow.locked"
-                />
-                <label class="form-check-label" :for="'locked' + headerRow.id">
-                    Lock <i class="bi bi-file-lock2"></i>
-                </label>
             </div>
 
             <div class="btn-group btn-group-sm">
@@ -143,13 +145,11 @@
         </form>
 
         <header-lines
+            class="mt-2"
             v-if="headerRow"
             :header-id="id"
             :header-is-locked="headerRow.locked"
-            :test-value="'the value'"
         ></header-lines>
-
-        <div class="btn-group btn-group-sm"></div>
     </div>
 </template>
 
@@ -180,12 +180,13 @@ export default {
         return {
             //   headerDetails: null,
             headerStatus: null,
-            headerStatusHistory: null,
+
             headerStatuses: null,
-            allUsers: null,
+
             headerRow: null,
 
             isSubmitSuccess: false,
+            isUpdating: false,
 
             isUpdatedAllLinesSuccess: false,
         };
@@ -198,9 +199,8 @@ export default {
                 .then((response) => {
                     this.headerStatuses = response.data.header_statuses;
                     this.headerStatus = response.data.cpo.status;
-                    this.headerStatusHistory = response.data.cpo.status_history;
+
                     this.headerRow = response.data.cpo;
-                    this.allUsers = response.data.users;
 
                     //  console.log(this.headerRow);
                 })
@@ -213,18 +213,21 @@ export default {
                 name: this.searchCpoLink,
             });
         },
-        submitCpoForm() {
+        async submitCpoForm() {
             this.isSubmitSuccess = false;
+            this.isUpdating = true;
             //   console.log("submit edit");
             // console.log(this.headerRow);
-            axios
+            await axios
                 .post("/repairs/api/cpo/update", this.headerRow)
                 .then((response) => {
                     // console.log(response);
                     this.isSubmitSuccess = true;
+                    console.log("done update");
+                    // this.gotoSearchPage();
+                    this.getCpoHeaderRow();
 
-                    this.gotoSearchPage();
-
+                    this.isUpdating = false;
                     setTimeout(() => {
                         this.isSubmitSuccess = false;
                     }, 3000);

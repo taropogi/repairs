@@ -3,36 +3,40 @@
         <th>
             <div class="form-check">
                 <input
+                    v-if="!localHeaderItem.locked"
                     class="form-check-input"
                     type="checkbox"
                     :id="id"
                     v-model="isSelected"
                     @change="selectPo"
                 />
+                <label class="form-check-label" :for="id">
+                    {{ localHeaderItem.id }}
+                </label>
             </div>
         </th>
-        <th scope="row">{{ headerItem.id }}</th>
+
         <td>
             {{ headerItem.rpo_number }}
-            <span class="badge bg-secondary" v-if="headerItem.locked"
+            <span class="badge bg-secondary" v-if="localHeaderItem.locked"
                 >Locked</span
             >
         </td>
         <td>
-            {{ headerItem.customer_name }}
+            {{ localHeaderItem.customer_name }}
         </td>
-        <td>{{ headerItem.customer_address }}</td>
-        <td>{{ headerItem.contact_number }}</td>
-        <td>{{ headerItem.prepared_by }}</td>
-        <td>{{ headerItem.authorized_by }}</td>
-        <td>{{ headerItem.status.status }}</td>
+        <td>{{ localHeaderItem.customer_address }}</td>
+        <td>{{ localHeaderItem.contact_number }}</td>
+        <td>{{ localHeaderItem.prepared_by }}</td>
+        <td>{{ localHeaderItem.authorized_by }}</td>
+        <td>{{ localHeaderItem.status.status }}</td>
         <td>
             <div class="btn-group btn-group-sm" role="group">
                 <button
-                    v-if="!headerItem.locked"
+                    v-if="!localHeaderItem.locked"
                     type="button"
                     class="btn btn-danger"
-                    @click="deleteCpo(headerItem)"
+                    @click="deleteCpo(localHeaderItem)"
                 >
                     Delete <i class="bi bi-trash-fill"></i>
                 </button>
@@ -45,7 +49,7 @@
                     Edit <i class="bi bi-pencil-fill"></i>
                 </button>
                 <button
-                    v-if="!headerItem.locked"
+                    v-if="!localHeaderItem.locked"
                     type="button"
                     class="btn btn-info"
                     @click="printCPOPdf"
@@ -63,6 +67,7 @@ export default {
     // emits: ["delete-cpo"],
     data() {
         return {
+            localHeaderItem: this.headerItem,
             isSelected: false,
             isDeleted: false,
         };
@@ -75,15 +80,17 @@ export default {
                         id: this.headerItem.id,
                         isStatusUpdated: false,
                     });
-                }, 2000);
+                    this.getUpdatedHeader();
+                }, 1000);
             }
         },
     },
     computed: {
         trClasses() {
             return {
-                "table-warning": this.headerItem.locked,
+                "table-warning": this.localHeaderItem.locked,
                 blink: this.isStatusUpdated,
+                "table-success": this.isStatusUpdated,
             };
         },
         selectedPos() {
@@ -102,7 +109,7 @@ export default {
             return null;
         },
         id() {
-            return "select-po-" + this.headerItem;
+            return "select-po-" + this.localHeaderItem.id;
         },
         editHeaderLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
@@ -117,11 +124,20 @@ export default {
     },
 
     methods: {
+        async getUpdatedHeader() {
+            const res = await axios.get(
+                "/repairs/api/cpo/" + this.localHeaderItem.id
+            );
+            if (res.data) {
+                this.localHeaderItem = res.data.cpo;
+                // console.log(res.data.cpo);
+            }
+        },
         selectPo() {
             if (this.isSelected) {
                 this.$store.commit("cpo/addSelectedPo", {
-                    id: this.headerItem.id,
-                    row: this.headerItem,
+                    id: this.localHeaderItem.id,
+                    row: this.localHeaderItem,
                     isStatusUpdated: false,
                 });
             } else {
@@ -136,7 +152,7 @@ export default {
         },
         async deleteCpo() {
             const res = await axios.post("/repairs/api/cpo/destroy", {
-                cpoId: this.headerItem.id,
+                cpoId: this.localHeaderItem.id,
             });
             if (res.data) {
                 this.unselectPo();
@@ -146,19 +162,19 @@ export default {
         },
         unselectPo() {
             this.$store.commit("cpo/removeSelectedPo", {
-                id: this.headerItem.id,
+                id: this.localHeaderItem.id,
             });
         },
 
         printCPOPdf() {
             window.location.href =
-                "/repairs/generatePdf/?id=" + this.headerItem.id;
+                "/repairs/generatePdf/?id=" + this.localHeaderItem.id;
         },
         editCpoHeader() {
             this.$router.push({
                 name: this.editHeaderLink,
                 params: {
-                    id: this.headerItem.id,
+                    id: this.localHeaderItem.id,
                 },
             });
             // this.$emit("editCpo", cpoItemHeader);
@@ -166,7 +182,7 @@ export default {
         isCurrentlySelected() {
             const selectedPos = this.$store.getters["cpo/getSelectedPos"];
             const selectedItem = selectedPos.find(
-                (num) => num.id === this.headerItem.id
+                (num) => num.id === this.localHeaderItem.id
             );
             if (selectedItem) {
                 this.isSelected = true;
@@ -183,19 +199,20 @@ export default {
 
 <style scoped>
 .blink {
-    animation: blink 1s linear;
+    animation: blink 0.5s linear;
 }
 @keyframes blink {
     0% {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateX(-50px);
     }
     50% {
         opacity: 0.5;
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+
+        transform: translateX(0);
     }
 }
 </style>

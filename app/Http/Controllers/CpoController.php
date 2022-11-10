@@ -63,7 +63,7 @@ class CpoController extends Controller
 
 
 
-        $this->sortLineNumbers($cpo);
+        // $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
         $response['header_statuses'] = HeaderStatus::all();
@@ -218,15 +218,27 @@ class CpoController extends Controller
     public function changeStatusSelectedCpos(Request $request)
     {
 
-        $cpos = Cpo::whereIn('id',  $request->rpos)
-            ->update([
-                'status_id' =>  $request->selected_status
-            ]);
+        $not_updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
+        foreach ($not_updated_cpos as $cpo) {
+            Cpo::where('id',  $cpo->id)
+                ->update([
+                    'status_id' =>  $request->selected_status
+                ]);
+            if ($cpo->status->id <> $request->selected_status) {
+                $cpo->status_history()->create([
+                    'header_status_id' => $request->selected_status,
+                    'changed_by' => auth()->user()->id
+                ]);
+            }
+        }
 
-        $response['cpos'] = $cpos;
+
 
         $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
+
         $response['updated_cpos'] = $updated_cpos;
+
+        $response['not_updated_cpos'] = $not_updated_cpos;
 
 
         return $response;

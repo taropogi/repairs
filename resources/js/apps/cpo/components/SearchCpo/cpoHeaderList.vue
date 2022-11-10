@@ -6,13 +6,11 @@
         ></modal-change-status>
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
-            <table
-                class="table table-sm table-striped table-bordered table-hover"
-            >
+            <table class="table table-sm table-bordered">
                 <thead class="table-success">
                     <tr>
                         <th class="col tex-center">
-                            [{{ selectedPosCount }}]
+                            [{{ selectedPosCount }}] CPO#
                             <!-- <div class="form-check">
                             <input
                                 class="form-check-input"
@@ -21,7 +19,7 @@
                             />
                         </div> -->
                         </th>
-                        <th scope="col">CPO#</th>
+
                         <th scope="col">RPO #</th>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
@@ -109,6 +107,7 @@ export default {
         closeModal() {
             this.changeStatusMulti = false;
         },
+
         openModalChangeStatusMulti() {
             this.changeStatusMulti = true;
         },
