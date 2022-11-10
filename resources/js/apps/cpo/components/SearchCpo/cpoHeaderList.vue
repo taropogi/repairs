@@ -36,6 +36,7 @@
                         :key="item.id"
                         :header-item="item"
                         @delete-cpo="getCpoHeaders"
+                        @open-delete-cpo="openModalDeleteCpo"
                     ></header-list-item>
                 </tbody>
             </table>
@@ -65,6 +66,7 @@
 import HeaderListItem from "./HeaderListItem.vue";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
 import ModalChangeStatus from "./ModalChangeStatus.vue";
+
 export default {
     components: {
         HeaderListItem,
@@ -77,6 +79,8 @@ export default {
             selectedHeaders: [],
             isSearching: false,
             changeStatusMulti: false,
+            deleteCpo: false,
+            deleteCpoId: null,
         };
     },
     props: ["searchCriteria"],
@@ -104,6 +108,14 @@ export default {
     },
 
     methods: {
+        closeModalDeleteCpo() {
+            this.deleteCpo = false;
+            this.deleteCpoId = null;
+        },
+        openModalDeleteCpo(cpoId) {
+            this.deleteCpoId = cpoId;
+            this.deleteCpo = true;
+        },
         closeModal() {
             this.changeStatusMulti = false;
         },

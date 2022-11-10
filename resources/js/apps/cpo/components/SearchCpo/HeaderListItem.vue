@@ -1,6 +1,13 @@
 <template>
-    <tr :class="trClasses" v-if="!isDeleted">
+    <tr :class="trClasses" v-if="!isRemovedTr">
         <th>
+            <teleport to="body" v-if="isDeleteCpo">
+                <modal-delete-cpo
+                    :cpo-id="headerItem.id"
+                    @close-modal-delete-cpo="closeModalDeleteCpo"
+                    @deletedCpo="deleteRow"
+                ></modal-delete-cpo
+            ></teleport>
             <div class="form-check">
                 <input
                     v-if="!localHeaderItem.locked"
@@ -62,14 +69,20 @@
 </template>
 
 <script>
+import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 export default {
     props: ["headerItem"],
-    // emits: ["delete-cpo"],
+    emits: ["open-delete-cpo"],
+    components: {
+        ModalDeleteCpo,
+    },
     data() {
         return {
             localHeaderItem: this.headerItem,
             isSelected: false,
             isDeleted: false,
+            isDeleteCpo: false,
+            isRemovedTr: false,
         };
     },
     watch: {
@@ -89,8 +102,10 @@ export default {
         trClasses() {
             return {
                 "table-warning": this.localHeaderItem.locked,
-                blink: this.isStatusUpdated,
-                "table-success": this.isStatusUpdated,
+                blink: this.isStatusUpdated && !this.isDeleted,
+                "table-success": this.isStatusUpdated && !this.isDeleted,
+                "table-danger": this.isDeleted,
+                "tr-exit": this.isDeleted,
             };
         },
         selectedPos() {
@@ -124,6 +139,15 @@ export default {
     },
 
     methods: {
+        deleteRow() {
+            this.isDeleted = true;
+            setTimeout(() => {
+                this.isRemovedTr = true;
+            }, 1000);
+        },
+        closeModalDeleteCpo() {
+            this.isDeleteCpo = false;
+        },
         async getUpdatedHeader() {
             const res = await axios.get(
                 "/repairs/api/cpo/" + this.localHeaderItem.id
@@ -150,15 +174,18 @@ export default {
             //     isStatusUpdated: true,
             // });
         },
-        async deleteCpo() {
-            const res = await axios.post("/repairs/api/cpo/destroy", {
-                cpoId: this.localHeaderItem.id,
-            });
-            if (res.data) {
-                this.unselectPo();
-                this.isDeleted = true;
-                // this.$emit("delete-cpo");
-            }
+        deleteCpo() {
+            this.isDeleteCpo = true;
+            // this.$emit("open-delete-cpo", this.localHeaderItem.id);
+            // // open modal
+            // const res = await axios.post("/repairs/api/cpo/destroy", {
+            //     cpoId: this.localHeaderItem.id,
+            // });
+            // if (res.data) {
+            //     this.unselectPo();
+            //     this.isDeleted = true;
+            //     // this.$emit("delete-cpo");
+            // }
         },
         unselectPo() {
             this.$store.commit("cpo/removeSelectedPo", {
@@ -198,6 +225,24 @@ export default {
 </script>
 
 <style scoped>
+.tr-exit {
+    animation: trExit 0.5s forwards;
+}
+@keyframes trExit {
+    0% {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}
+
 .blink {
     animation: blink 0.5s linear;
 }
