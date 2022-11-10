@@ -26,4 +26,16 @@ export default {
         const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
         state.selectedPos = myArray;
     },
+    updateSelectedCpoStatus(state, payload) {
+        const selectedItem = state.selectedPos.find(
+            (el) => el.id === payload.id
+        );
+        const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
+        const isStatusUpdated = {
+            ...selectedItem,
+            isStatusUpdated: payload.isStatusUpdated,
+        };
+        myArray.push(isStatusUpdated);
+        state.selectedPos = myArray;
+    },
 };

@@ -218,12 +218,17 @@ class CpoController extends Controller
     public function changeStatusSelectedCpos(Request $request)
     {
 
-        $cpos =  Cpo::whereIn('id',  $request->rpos)
+        $cpos = Cpo::whereIn('id',  $request->rpos)
             ->update([
                 'status_id' =>  $request->selected_status
             ]);
 
         $response['cpos'] = $cpos;
+
+        $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
+        $response['updated_cpos'] = $updated_cpos;
+
+
         return $response;
     }
 

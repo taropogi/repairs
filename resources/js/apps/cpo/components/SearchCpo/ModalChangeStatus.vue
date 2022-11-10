@@ -42,7 +42,10 @@
                                     <td>{{ cpo.rpo_number }}</td>
                                     <td>
                                         {{
-                                            headerStatuses[cpo.status_id].status
+                                            headerStatuses.find(
+                                                (status) =>
+                                                    status.id === cpo.status_id
+                                            ).status
                                         }}
                                     </td>
                                 </tr>
@@ -102,7 +105,12 @@ export default {
                 }
             );
             if (res.data) {
-                console.log(res.data);
+                for (const cpo of res.data.updated_cpos) {
+                    this.$store.commit("cpo/updateSelectedCpoStatus", {
+                        id: cpo.id,
+                        isStatusUpdated: true,
+                    });
+                }
             }
             this.$emit("close-modal");
         },
@@ -112,11 +120,9 @@ export default {
                 rpos: this.selectedPosId,
             });
             if (res.data) {
-                // console.log(res.data.cpos);
+                // console.log(res.data);
                 this.selectedCpos = res.data.cpos;
-
                 this.headerStatuses = res.data.header_statuses;
-                // console.log(this.selectedCpos);
             }
         },
     },

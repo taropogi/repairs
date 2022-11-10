@@ -4,4 +4,8 @@ export default {
         context.commit("setEditingHeaderRow");
         console.log(context.state.editingHeaderRow);
     },
+
+    updateSelectedCpoStatus(context, payload) {
+        context.commit("updateSelectedCpoStatus", payload);
+    },
 };

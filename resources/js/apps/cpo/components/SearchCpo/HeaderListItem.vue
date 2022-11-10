@@ -1,5 +1,5 @@
 <template>
-    <tr :class="{ 'table-warning': headerItem.locked }" v-if="!isDeleted">
+    <tr :class="trClasses" v-if="!isDeleted">
         <th>
             <div class="form-check">
                 <input
@@ -67,8 +67,40 @@ export default {
             isDeleted: false,
         };
     },
-
+    watch: {
+        isStatusUpdated(value) {
+            if (value) {
+                setTimeout(() => {
+                    this.$store.dispatch("cpo/updateSelectedCpoStatus", {
+                        id: this.headerItem.id,
+                        isStatusUpdated: false,
+                    });
+                }, 2000);
+            }
+        },
+    },
     computed: {
+        trClasses() {
+            return {
+                "table-warning": this.headerItem.locked,
+                blink: this.isStatusUpdated,
+            };
+        },
+        selectedPos() {
+            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            return selectedPos;
+        },
+        isStatusUpdated() {
+            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedItem = selectedPos.find(
+                (item) => item.id === this.headerItem.id
+            );
+            if (selectedItem) {
+                return selectedItem.isStatusUpdated;
+            }
+
+            return null;
+        },
         id() {
             return "select-po-" + this.headerItem;
         },
@@ -90,10 +122,17 @@ export default {
                 this.$store.commit("cpo/addSelectedPo", {
                     id: this.headerItem.id,
                     row: this.headerItem,
+                    isStatusUpdated: false,
                 });
             } else {
                 this.unselectPo();
             }
+
+            // this.$store.commit("cpo/updateSelectedCpoStatus", {
+            //     id: this.headerItem.id,
+
+            //     isStatusUpdated: true,
+            // });
         },
         async deleteCpo() {
             const res = await axios.post("/repairs/api/cpo/destroy", {
@@ -135,10 +174,28 @@ export default {
         },
     },
     mounted() {
+        // console.log(this.isSelectedRow);
         this.isCurrentlySelected();
         // this.isSelected = true;
     },
 };
 </script>
 
-<style></style>
+<style scoped>
+.blink {
+    animation: blink 1s linear;
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>

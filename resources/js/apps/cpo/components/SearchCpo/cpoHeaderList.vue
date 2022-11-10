@@ -84,7 +84,10 @@ export default {
     props: ["searchCriteria"],
     computed: {
         selectedPosCount() {
-            return this.$store.getters["cpo/getSelectedPos"].length;
+            return this.selectedPos.length;
+        },
+        selectedPos() {
+            return this.$store.getters["cpo/getSelectedPos"];
         },
     },
     watch: {
