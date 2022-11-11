@@ -17,9 +17,10 @@ class CpoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    private $completed_status_id = 6;
     public function __construct()
     {
+
         $this->middleware('auth');
     }
 
@@ -58,6 +59,7 @@ class CpoController extends Controller
             'header_status_id' => 1,
             'changed_by' => auth()->user()->id
         ]);
+
 
         return response()->json($request);
     }
@@ -273,7 +275,11 @@ class CpoController extends Controller
 
 
 
-        $cpo->update();
+        if ($cpo->update() && $request->status_id == $this->completed_status_id) {
+            Cpo::where('id', $request->id)->update(['locked' => true]);
+        }
+
+
 
 
 

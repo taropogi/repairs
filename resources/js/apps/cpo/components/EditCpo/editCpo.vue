@@ -107,7 +107,10 @@
                             </select>
                         </div>
                         <div class="col p-2">
-                            <div class="form-check">
+                            <h1 v-if="headerRow.locked">
+                                <span class="badge bg-secondary">LOCKED </span>
+                            </h1>
+                            <!-- <div class="form-check">
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
@@ -121,7 +124,7 @@
                                 >
                                     Lock <i class="bi bi-file-lock2"></i>
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
