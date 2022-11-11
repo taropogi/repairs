@@ -14,6 +14,10 @@ This is a website created by Richard Bernisca.
 
 -   If you are using linux you have to set `AllowOverride All` in httpd.conf to honor the .htaccess config in your project's root directory. Httpd.conf is usually located at /etc/httpd/conf/httpd.conf.
 
+## laravel.log could not be opened?
+
+-   If you are receive this error, probably you are runnin in linux. Try to run `chmod -R 777 storage`;
+
 ## Stack
 
 -   Laravel
