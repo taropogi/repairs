@@ -173,7 +173,7 @@ export default {
             this.lineUpdating = true;
             //  console.log(this.lineDetailsLocal);
             axios
-                .post("/repairs/api/cpoline/update/", this.lineDetails)
+                .post("api/cpoline/update/", this.lineDetails)
                 .then((res) => {
                     //   console.log(res);
                     // this.getCpoHeaderRow();
@@ -187,7 +187,7 @@ export default {
         deleteLine() {
             this.isDeleting = true;
             axios
-                .post("/repairs/api/cpoline/destroy/", {
+                .post("api/cpoline/destroy/", {
                     id: this.lineDetails.id,
                 })
                 .then((res) => {
