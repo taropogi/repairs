@@ -110,7 +110,7 @@ export default {
     methods: {
         logOut() {
             axios.post("/repairs/api/logout").then((response) => {
-                //console.log(response);
+                console.log(response.data);
                 this.$store.commit("auth/setIsLoggedIn", false);
                 this.$store.commit("auth/setUser", null);
 

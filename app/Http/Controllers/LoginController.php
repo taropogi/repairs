@@ -51,6 +51,8 @@ class LoginController extends Controller
     public function logout()
     {
         $user = Auth::user();
+        $response['user_id'] = $user->id;
+
         if ($user) {
             $user->activities()->create([
                 'action' => "Logout"
@@ -58,6 +60,8 @@ class LoginController extends Controller
 
             Auth::logout();
         }
+
+        return $response;
     }
 
     /**
