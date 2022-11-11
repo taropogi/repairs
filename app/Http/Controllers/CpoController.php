@@ -218,27 +218,27 @@ class CpoController extends Controller
     public function changeStatusSelectedCpos(Request $request)
     {
 
-        $not_updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
-        foreach ($not_updated_cpos as $cpo) {
-            Cpo::where('id',  $cpo->id)
-                ->update([
-                    'status_id' =>  $request->selected_status
-                ]);
-            if ($cpo->status->id <> $request->selected_status) {
-                $cpo->status_history()->create([
-                    'header_status_id' => $request->selected_status,
-                    'changed_by' => auth()->user()->id
-                ]);
-            }
-        }
+        // $not_updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
+        // foreach ($not_updated_cpos as $cpo) {
+        //     Cpo::where('id',  $cpo->id)
+        //         ->update([
+        //             'status_id' =>  $request->selected_status
+        //         ]);
+        //     if ($cpo->status->id <> $request->selected_status) {
+        //         $cpo->status_history()->create([
+        //             'header_status_id' => $request->selected_status,
+        //             'changed_by' => auth()->user()->id
+        //         ]);
+        //     }
+        // }
 
+        $response['user_id'] = auth()->user()->id;
 
+        // $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
 
-        $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
+        // $response['updated_cpos'] = $updated_cpos;
 
-        $response['updated_cpos'] = $updated_cpos;
-
-        $response['not_updated_cpos'] = $not_updated_cpos;
+        // $response['not_updated_cpos'] = $not_updated_cpos;
 
 
         return $response;
