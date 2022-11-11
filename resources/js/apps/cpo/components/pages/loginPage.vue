@@ -151,11 +151,7 @@ export default {
             axios.get("/repairs/sanctum/csrf-cookie").then((response) => {
                 // console.log(response);
                 axios
-                    .post("/repairs/api/login", this.loginFormData, {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    })
+                    .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
                         console.log(response.data);
                         this.$store.commit("auth/setIsLoggedIn", true);
