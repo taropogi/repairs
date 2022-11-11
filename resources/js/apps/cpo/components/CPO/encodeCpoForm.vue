@@ -98,14 +98,15 @@ export default {
         };
     },
     methods: {
-        submitCpoForm() {
+        async submitCpoForm() {
             // this.isSubmitSuccess = false;
-            axios
+            await axios
                 .post("api/cpo", this.formData)
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
-                    this.gotoSearchPage();
+                    // this.gotoSearchPage();
+                    this.gotoEditCpoPage(response.data.cpo.id);
                     setTimeout(() => {
                         this.isSubmitSuccess = false;
                     }, 3000);
@@ -127,8 +128,23 @@ export default {
                 name: this.searchCpoLink,
             });
         },
+        gotoEditCpoPage(id) {
+            this.$router.push({
+                name: this.editHeaderLink,
+                params: {
+                    id: id,
+                },
+            });
+        },
     },
     computed: {
+        editHeaderLink() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return "admin-edit-cpo";
+            }
+
+            return "edit-cpo";
+        },
         searchCpoLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
                 return "admin-search-cpo";

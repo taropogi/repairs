@@ -60,8 +60,10 @@ class CpoController extends Controller
             'changed_by' => auth()->user()->id
         ]);
 
+        $response['cpo'] = $new_cpo;
 
-        return response()->json($request);
+
+        return $response;
     }
     public function getCpoHeader(Cpo $cpo)
     {
