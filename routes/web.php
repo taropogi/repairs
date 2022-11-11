@@ -15,6 +15,7 @@ use App\Http\Controllers\GeneratePdfController;
 */
 
 Route::get('/generatePdf', [GeneratePdfController::class, 'generatePdf']);
+Route::get('/testUser', [GeneratePdfController::class, 'testUser']);
 
 Route::get('/{path}', function () {
     return view('layouts.app');

@@ -31,4 +31,9 @@ class GeneratePdfController extends Controller
 
         return $pdf->download('cpo.pdf');
     }
+
+    public function testUser()
+    {
+        dd(auth()->user()->id);
+    }
 }
