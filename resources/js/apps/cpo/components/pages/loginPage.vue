@@ -153,7 +153,7 @@ export default {
                 axios
                     .post("/repairs/api/login", this.loginFormData, {
                         headers: {
-                            Accept: `application/json`,
+                            "Content-Type": "application/json",
                         },
                     })
                     .then((response) => {
