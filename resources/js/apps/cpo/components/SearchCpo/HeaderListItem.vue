@@ -168,9 +168,7 @@ export default {
             this.isDeleteCpo = false;
         },
         async getUpdatedHeader() {
-            const res = await axios.get(
-                "/repairs/api/cpo/" + this.localHeaderItem.id
-            );
+            const res = await axios.get("api/cpo/" + this.localHeaderItem.id);
             if (res.data) {
                 this.localHeaderItem = res.data.cpo;
                 // console.log(res.data.cpo);

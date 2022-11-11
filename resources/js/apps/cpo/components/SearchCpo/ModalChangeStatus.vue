@@ -158,13 +158,13 @@ export default {
                 selected_status: this.selectedStatus,
             });
             if (res.data) {
-                console.log(res.data);
-                // for (const cpo of res.data.updated_cpos) {
-                //     this.$store.commit("cpo/updateSelectedCpoStatus", {
-                //         id: cpo.id,
-                //         isStatusUpdated: true,
-                //     });
-                // }
+                // console.log(res.data);
+                for (const cpo of res.data.updated_cpos) {
+                    this.$store.commit("cpo/updateSelectedCpoStatus", {
+                        id: cpo.id,
+                        isStatusUpdated: true,
+                    });
+                }
             }
             this.$emit("close-modal");
         },
