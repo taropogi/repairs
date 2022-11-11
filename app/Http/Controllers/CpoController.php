@@ -236,7 +236,7 @@ class CpoController extends Controller
         //     }
         // }
 
-        $response['user_id'] = $request->user()->id;
+        $response['user_id'] = auth()->user()->id;
 
         // $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
 
