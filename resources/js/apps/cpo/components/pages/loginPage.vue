@@ -149,6 +149,7 @@ export default {
         submitLoginForm() {
             this.isValidating = true;
             axios.get("/repairs/sanctum/csrf-cookie").then((response) => {
+                // console.log(response);
                 axios
                     .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
