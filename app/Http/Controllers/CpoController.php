@@ -20,7 +20,7 @@ class CpoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -236,7 +236,7 @@ class CpoController extends Controller
         //     }
         // }
 
-        $response['user_id'] = Auth::user()->id;
+        $response['user_id'] = $request->user()->id;
 
         // $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
 
