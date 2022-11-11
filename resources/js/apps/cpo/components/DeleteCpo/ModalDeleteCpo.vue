@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         async confirmDelete() {
-            const res = await axios.post("/repairs/api/cpo/destroy", {
+            const res = await axios.post("api/cpo/destroy", {
                 cpoId: this.cpoId,
             });
             if (res.data) {
@@ -72,7 +72,7 @@ export default {
         },
         getCpoHeader() {
             axios
-                .get("/repairs/api/cpo/" + this.cpoId)
+                .get("api/cpo/" + this.cpoId)
                 .then((response) => {
                     this.headerRow = response.data.cpo;
                 })

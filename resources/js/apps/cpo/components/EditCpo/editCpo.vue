@@ -195,7 +195,7 @@ export default {
         getCpoHeaderRow() {
             // console.log("get row");
             axios
-                .get("/repairs/api/cpo/" + this.id)
+                .get("api/cpo/" + this.id)
                 .then((response) => {
                     this.headerStatuses = response.data.header_statuses;
                     this.headerStatus = response.data.cpo.status;
@@ -219,7 +219,7 @@ export default {
             //   console.log("submit edit");
             // console.log(this.headerRow);
             await axios
-                .post("/repairs/api/cpo/update", this.headerRow)
+                .post("api/cpo/update", this.headerRow)
                 .then((response) => {
                     // console.log(response);
                     this.isSubmitSuccess = true;

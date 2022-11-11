@@ -90,7 +90,7 @@ export default {
         addNewLine() {
             this.isInsertingNewLine = true;
             axios
-                .post("/repairs/api/cpoline/", { id: this.headerId })
+                .post("api/cpoline/", { id: this.headerId })
                 .then((res) => {
                     this.getCpoLines();
                     this.isInsertingNewLine = false;
@@ -104,7 +104,7 @@ export default {
             this.isSavingAllLines = true;
 
             axios
-                .post("/repairs/api/cpo/lines/updateAllLines/", {
+                .post("api/cpo/lines/updateAllLines/", {
                     cpoId: this.headerId,
                     cpoLines: this.lines,
                 })
@@ -127,7 +127,7 @@ export default {
         },
         getCpoLines() {
             axios
-                .get("/repairs/api/cpo/lines/" + this.headerId)
+                .get("api/cpo/lines/" + this.headerId)
                 .then((response) => {
                     this.lines = response.data.lines;
                     //console.log(this.lines);

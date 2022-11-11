@@ -47,7 +47,7 @@ export default {
         getCpoHeaderRow() {
             // console.log("get row");
             axios
-                .get("/repairs/api/cpo/" + this.headerId)
+                .get("api/cpo/" + this.headerId)
                 .then((response) => {
                     this.headerStatusHistory = response.data.cpo.status_history;
                     this.headerStatuses = response.data.header_statuses;
