@@ -8,6 +8,7 @@ use App\Models\CpoLine;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Models\HeaderStatusHistory;
+use Illuminate\Support\Facades\Auth;
 
 class CpoController extends Controller
 {
@@ -232,7 +233,7 @@ class CpoController extends Controller
         //     }
         // }
 
-        $response['user_id'] = auth()->user()->id;
+        $response['user_id'] = Auth::user()->id;
 
         // $updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
 
