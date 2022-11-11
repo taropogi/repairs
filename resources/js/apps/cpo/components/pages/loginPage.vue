@@ -148,10 +148,10 @@ export default {
     methods: {
         submitLoginForm() {
             this.isValidating = true;
-            axios.get("/repairs/sanctum/csrf-cookie").then((response) => {
+            axios.get("sanctum/csrf-cookie").then((response) => {
                 // console.log(response);
                 axios
-                    .post("/repairs/api/login", this.loginFormData)
+                    .post("api/login", this.loginFormData)
                     .then((response) => {
                         console.log(response.data);
                         this.$store.commit("auth/setIsLoggedIn", true);

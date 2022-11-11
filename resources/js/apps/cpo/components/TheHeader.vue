@@ -101,7 +101,7 @@
                             aria-labelledby="navbarDropdown"
                         >
                             <a href="#" class="nav-link" @click.prevent="logout"
-                                >Logout</a
+                                >Logouxt</a
                             >
                         </div>
                     </li>
@@ -153,7 +153,8 @@ export default {
     },
     methods: {
         logout() {
-            axios.post("/repairs/api/logout").then((response) => {
+            console.log("out");
+            axios.post("api/logout").then((response) => {
                 //console.log(response);
                 this.$store.commit("auth/setIsLoggedIn", false);
                 this.$store.commit("auth/setUser", null);
