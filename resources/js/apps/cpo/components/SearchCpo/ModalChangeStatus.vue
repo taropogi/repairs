@@ -126,7 +126,7 @@ export default {
             this.showConfirmDelete = false;
         },
         async confirmDeleteYes() {
-            const res = await axios.post("/repairs/api/cpo/destroy/multi", {
+            const res = await axios.post("api/cpo/destroy/multi", {
                 selectedCpos: this.selectedPosId,
             });
             if (res.data) {
@@ -153,13 +153,10 @@ export default {
             this.$emit("close-modal");
         },
         async saveChanges() {
-            const res = await axios.post(
-                "/repairs/api/cpo/selected/update/status/",
-                {
-                    rpos: this.selectedPosId,
-                    selected_status: this.selectedStatus,
-                }
-            );
+            const res = await axios.post("api/cpo/selected/update/status/", {
+                rpos: this.selectedPosId,
+                selected_status: this.selectedStatus,
+            });
             if (res.data) {
                 console.log(res.data);
                 // for (const cpo of res.data.updated_cpos) {
@@ -173,7 +170,7 @@ export default {
         },
 
         async getSelectedPos() {
-            const res = await axios.post("/repairs/api/cpo/selected", {
+            const res = await axios.post("api/cpo/selected", {
                 rpos: this.selectedPosId,
             });
             if (res.data) {
