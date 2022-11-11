@@ -101,7 +101,7 @@ export default {
         submitCpoForm() {
             // this.isSubmitSuccess = false;
             axios
-                .post("/repairs/api/cpo", this.formData)
+                .post("api/cpo", this.formData)
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
