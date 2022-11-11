@@ -5,7 +5,7 @@
                 <modal-delete-cpo
                     :cpo-id="headerItem.id"
                     @close-modal-delete-cpo="closeModalDeleteCpo"
-                    @deletedCpo="deleteRow"
+                    @deleted-cpo="deleteRow"
                 ></modal-delete-cpo
             ></teleport>
             <div class="form-check">
@@ -72,7 +72,7 @@
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 export default {
     props: ["headerItem"],
-    emits: ["open-delete-cpo"],
+
     components: {
         ModalDeleteCpo,
     },
@@ -86,6 +86,11 @@ export default {
         };
     },
     watch: {
+        isSelectedDeleted(value) {
+            if (value) {
+                this.deleteRow();
+            }
+        },
         isStatusUpdated(value) {
             if (value) {
                 setTimeout(() => {
@@ -123,6 +128,19 @@ export default {
 
             return null;
         },
+
+        isSelectedDeleted() {
+            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedItem = selectedPos.find(
+                (item) => item.id === this.headerItem.id
+            );
+            if (selectedItem) {
+                return selectedItem.isDeleted;
+            }
+
+            return null;
+        },
+
         id() {
             return "select-po-" + this.localHeaderItem.id;
         },
@@ -142,6 +160,7 @@ export default {
         deleteRow() {
             this.isDeleted = true;
             setTimeout(() => {
+                this.unselectPo();
                 this.isRemovedTr = true;
             }, 1000);
         },
@@ -163,6 +182,7 @@ export default {
                     id: this.localHeaderItem.id,
                     row: this.localHeaderItem,
                     isStatusUpdated: false,
+                    isDeleted: false,
                 });
             } else {
                 this.unselectPo();

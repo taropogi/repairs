@@ -38,4 +38,17 @@ export default {
         myArray.push(isStatusUpdated);
         state.selectedPos = myArray;
     },
+
+    updateSelectedCpoDeleted(state, payload) {
+        const selectedItem = state.selectedPos.find(
+            (el) => el.id === payload.id
+        );
+        const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
+        const isSelectedDeleted = {
+            ...selectedItem,
+            isDeleted: payload.isDeleted,
+        };
+        myArray.push(isSelectedDeleted);
+        state.selectedPos = myArray;
+    },
 };

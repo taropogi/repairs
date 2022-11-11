@@ -33,6 +33,7 @@ Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
 Route::get('cpo/lines/{cpo}', [CpoController::class, 'getCpoLines']);
 Route::post('cpo/lines/updateAllLines', [CpoController::class, 'updateAllLines']);
 Route::post('cpo/destroy', [CpoController::class, 'destroy']);
+Route::post('cpo/destroy/multi', [CpoController::class, 'destroyMulti']);
 Route::post('cpo/selected', [CpoController::class, 'selectedCpos']);
 Route::post('cpo/selected/update/status', [CpoController::class, 'changeStatusSelectedCpos']);
 

@@ -8,4 +8,8 @@ export default {
     updateSelectedCpoStatus(context, payload) {
         context.commit("updateSelectedCpoStatus", payload);
     },
+
+    updateSelectedCpoDeleted(context, payload) {
+        context.commit("updateSelectedCpoDeleted", payload);
+    },
 };

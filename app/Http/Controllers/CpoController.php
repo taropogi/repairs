@@ -293,4 +293,17 @@ class CpoController extends Controller
         $cpo->delete();
         return $request;
     }
+
+    public function destroyMulti(Request $request)
+    {
+        $cpos_to_delete = Cpo::whereIn('id', $request->selectedCpos)->get();
+
+
+        $cpos = Cpo::whereIn('id', $request->selectedCpos);
+        $cpos->delete();
+
+        $response['cpos_deleted'] = $cpos_to_delete;
+
+        return $response;
+    }
 }

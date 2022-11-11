@@ -35,8 +35,6 @@
                         v-for="item in cpoHeaderList"
                         :key="item.id"
                         :header-item="item"
-                        @delete-cpo="getCpoHeaders"
-                        @open-delete-cpo="openModalDeleteCpo"
                     ></header-list-item>
                 </tbody>
             </table>
@@ -48,13 +46,18 @@
                     <button type="button" class="btn btn-primary">3</button>
                     <button type="button" class="btn btn-primary">4</button>
                 </div>
-                <div class="btn-group" role="group" v-if="selectedPosCount">
+
+                <div
+                    class="btn-group me-2"
+                    role="group"
+                    v-if="selectedPosCount"
+                >
                     <button
                         type="button"
                         class="btn btn-info"
                         @click="openModalChangeStatusMulti"
                     >
-                        Multi-select change Status
+                        Multi-select options
                     </button>
                 </div>
             </div>
@@ -108,14 +111,6 @@ export default {
     },
 
     methods: {
-        closeModalDeleteCpo() {
-            this.deleteCpo = false;
-            this.deleteCpoId = null;
-        },
-        openModalDeleteCpo(cpoId) {
-            this.deleteCpoId = cpoId;
-            this.deleteCpo = true;
-        },
         closeModal() {
             this.changeStatusMulti = false;
         },

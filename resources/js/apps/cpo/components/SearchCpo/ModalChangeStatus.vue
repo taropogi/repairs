@@ -13,7 +13,10 @@
                     ></button>
                 </div>
                 <div class="modal-body">
-                    <div v-if="selectedCpos">
+                    <div v-if="showConfirmDelete" class="text-center p-5">
+                        <h1>Confirm delete</h1>
+                    </div>
+                    <div v-if="selectedCpos && !showConfirmDelete">
                         Change status to:
 
                         <select class="form-select" v-model="selectedStatus">
@@ -54,20 +57,45 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        @click="closeModal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        @click="saveChanges"
-                    >
-                        Save changes
-                    </button>
+                    <div v-if="showConfirmDelete">
+                        <button
+                            type="button"
+                            class="btn btn-danger m-2"
+                            @click="confirmDeleteYes"
+                        >
+                            Yes
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary m-2"
+                            @click="cancelDeleteConfirm"
+                        >
+                            No
+                        </button>
+                    </div>
+                    <div v-else>
+                        <button
+                            type="button"
+                            class="btn btn-secondary m-2"
+                            @click="closeModal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary m-2"
+                            @click="saveChanges"
+                        >
+                            Save changes
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger m-2"
+                            @click="confirmDelete"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,6 +110,8 @@ export default {
             selectedCpos: null,
             headerStatuses: null,
             selectedStatus: 1,
+            showConfirmDelete: false,
+            deletedCpos: null,
         };
     },
     computed: {
@@ -92,8 +122,34 @@ export default {
         },
     },
     methods: {
+        cancelDeleteConfirm() {
+            this.showConfirmDelete = false;
+        },
+        async confirmDeleteYes() {
+            const res = await axios.post("/repairs/api/cpo/destroy/multi", {
+                selectedCpos: this.selectedPosId,
+            });
+            if (res.data) {
+                this.deletedCpos = res.data.cpos_deleted;
+                for (const cpo of this.deletedCpos) {
+                    this.$store.dispatch("cpo/updateSelectedCpoDeleted", {
+                        id: cpo.id,
+                        isDeleted: true,
+                    });
+                }
+                // console.log(this.deletedCpos);
+                // this.unselectPo();
+                // this.isDeleted = true;
+                // this.$emit("deleted-cpo");
+            }
+
+            this.$emit("close-modal");
+        },
+        confirmDelete() {
+            this.showConfirmDelete = true;
+        },
         closeModal() {
-            console.log("close");
+            // console.log("close");
             this.$emit("close-modal");
         },
         async saveChanges() {
