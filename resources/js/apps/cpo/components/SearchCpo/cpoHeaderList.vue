@@ -121,7 +121,7 @@ export default {
         getCpoHeaders() {
             this.isSearching = true;
             axios
-                .get("/repairs/api/cpo", {
+                .get("api/cpo", {
                     params: {
                         searchName: this.searchCriteria.searchName || "",
                         searchAddress: this.searchCriteria.searchAddress || "",
