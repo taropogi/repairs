@@ -152,7 +152,7 @@ export default {
                 axios
                     .post("/repairs/api/login", this.loginFormData)
                     .then((response) => {
-                        //  console.log(response);
+                        console.log(response.data);
                         this.$store.commit("auth/setIsLoggedIn", true);
                         this.$store.commit("auth/setUser", response.data);
                         //  console.log(response.data);
