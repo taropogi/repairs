@@ -18,6 +18,10 @@ This is a website created by Richard Bernisca.
 
 -   If you are receive this error, probably you are running in linux. Try to run `chmod -R 777 storage`;
 
+## Notes
+
+-   Always set the APP_URL in .env file. For example `APP_URL=http://localhost/yourproject` or if you use IP address `APP_URL=http://192.168.1.2/yourproject`
+
 ## Stack
 
 -   Laravel
