@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GeneratePdfController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\GeneratePdfController;
 
 Route::get('/generatePdf', [GeneratePdfController::class, 'generatePdf']);
 Route::get('/testUser', [GeneratePdfController::class, 'testUser']);
+Route::get('/test', [TestController::class, 'test']);
 
 Route::get('/{path}', function () {
     return view('layouts.app');

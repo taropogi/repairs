@@ -10,6 +10,11 @@ import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 import editCpo from "./components/EditCpo/editCpo.vue";
 import AdminPage from "./components/admin/AdminPage/AdminPage.vue";
 import MultiChangeStatus from "./components/MultiChangeStatus/MultiChangeStatus.vue";
+
+//admin
+import UserSearch from "./components/admin/UserPage/UserSearch.vue";
+import CreateUser from "./components/admin/UserPage/CreateUser.vue";
+
 import store from "./store";
 
 const router = createRouter({
@@ -54,6 +59,17 @@ const router = createRouter({
                     component: editCpo,
                     name: "admin-edit-cpo",
                     props: true,
+                },
+                {
+                    path: "user/search",
+                    component: UserSearch,
+                    name: "admin-user-search",
+                },
+
+                {
+                    path: "user/create",
+                    component: CreateUser,
+                    name: "admin-user-create",
                 },
             ],
         },

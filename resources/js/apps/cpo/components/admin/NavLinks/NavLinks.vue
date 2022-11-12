@@ -5,12 +5,12 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <router-link class="dropdown-item" :to="searchCpoPageLink"
+                <router-link class="dropdown-item" :to="adminSearchUserLink"
                     >Users</router-link
                 >
             </li>
             <li>
-                <router-link class="dropdown-item" :to="encodeCpoPageLink"
+                <router-link class="dropdown-item" :to="adminCreateUserLink"
                     >Create new user</router-link
                 >
             </li>
@@ -63,6 +63,18 @@ export default {
     props: ["user"],
     emits: ["log-out"],
     computed: {
+        adminSearchUserLink() {
+            return {
+                name: "admin-user-search",
+            };
+        },
+
+        adminCreateUserLink() {
+            return {
+                name: "admin-user-create",
+            };
+        },
+
         searchCpoPageLink() {
             return {
                 name: "admin-search-cpo",
