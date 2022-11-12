@@ -32,11 +32,7 @@
             </tbody>
         </table>
 
-        <div
-            class="btn-group btn-group-sm"
-            role="group"
-            aria-label="Basic example"
-        >
+        <div class="btn-group btn-group-sm" role="group" v-if="!headerIsLocked">
             <button
                 v-if="!isInsertingNewLine"
                 class="btn btn-primary"

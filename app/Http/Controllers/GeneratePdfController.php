@@ -29,7 +29,7 @@ class GeneratePdfController extends Controller
 
         $pdf = PDF::loadView('pdf.samplePdf', $data);
 
-        return $pdf->download('cpo.pdf');
+        return $pdf->download('RPO#' . $cpo->rpo_number . '.pdf');
     }
 
     public function testUser()

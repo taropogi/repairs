@@ -238,6 +238,8 @@ class CpoController extends Controller
                     'changed_by' => auth()->user()->id
                 ]);
             }
+
+            $this->checkIfCompletedStatus($cpo->id, $request->selected_status);
         }
 
 
@@ -277,20 +279,21 @@ class CpoController extends Controller
 
 
 
-        if ($cpo->update() && $request->status_id == $this->completed_status_id) {
-            Cpo::where('id', $request->id)->update(['locked' => true]);
+        if ($cpo->update()) {
+            $this->checkIfCompletedStatus($request->id, $request->status_id);
         }
 
 
-
-
-
-
-
-
-
-
         return $cpo;
+    }
+
+    private function checkIfCompletedStatus($cpo_id, $change_to_status_id)
+    {
+        if ($change_to_status_id == $this->completed_status_id) {
+            Cpo::where('id', $cpo_id)->update(['locked' => true]);
+        } else {
+            Cpo::where('id', $cpo_id)->update(['locked' => false]);
+        }
     }
 
     /**

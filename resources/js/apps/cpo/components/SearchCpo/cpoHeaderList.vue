@@ -6,7 +6,9 @@
         ></modal-change-status>
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
-            <table class="table table-sm table-bordered">
+            <table
+                class="table table-sm table-bordered table-striped table-hover"
+            >
                 <thead class="table-success">
                     <tr>
                         <th class="col tex-center">

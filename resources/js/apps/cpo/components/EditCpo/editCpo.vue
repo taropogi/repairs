@@ -108,7 +108,7 @@
                         </div>
                         <div class="col p-2">
                             <h1 v-if="headerRow.locked">
-                                <span class="badge bg-secondary">LOCKED </span>
+                                <span class="badge bg-success">COMPLETED </span>
                             </h1>
                             <!-- <div class="form-check">
                                 <input

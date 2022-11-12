@@ -106,7 +106,10 @@
                 />
             </td>
             <td>
-                <div class="btn-group btn-group-sm" role="group">
+                <span class="badge bg-secondary" v-if="headerIsLocked"
+                    >LOCKED</span
+                >
+                <div class="btn-group btn-group-sm" role="group" v-else>
                     <button
                         type="button"
                         class="btn btn-primary"

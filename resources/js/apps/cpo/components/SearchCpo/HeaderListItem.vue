@@ -10,7 +10,6 @@
             ></teleport>
             <div class="form-check">
                 <input
-                    v-if="!localHeaderItem.locked"
                     class="form-check-input"
                     type="checkbox"
                     :id="id"
@@ -25,9 +24,6 @@
 
         <td>
             {{ headerItem.rpo_number }}
-            <span class="badge bg-secondary" v-if="localHeaderItem.locked"
-                >Locked</span
-            >
         </td>
         <td>
             {{ localHeaderItem.customer_name }}
@@ -62,6 +58,14 @@
                     @click="printCPOPdf"
                 >
                     PDF <i class="bi bi-download"></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-lg btn-primary"
+                    v-if="localHeaderItem.locked"
+                    disabled
+                >
+                    LOCKED
                 </button>
             </div>
         </td>
@@ -106,7 +110,7 @@ export default {
     computed: {
         trClasses() {
             return {
-                "table-warning": this.localHeaderItem.locked,
+                // "table-secondary": this.localHeaderItem.locked,
                 blink: this.isStatusUpdated && !this.isDeleted,
                 "table-success": this.isStatusUpdated && !this.isDeleted,
                 "table-danger": this.isDeleted,
