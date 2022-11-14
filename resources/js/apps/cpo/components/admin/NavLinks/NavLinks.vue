@@ -37,6 +37,11 @@
                     >Encode CPO</router-link
                 >
             </li>
+            <li>
+                <router-link class="dropdown-item" :to="linkExportCpo"
+                    >Export CPO list</router-link
+                >
+            </li>
         </ul>
     </li>
 
@@ -83,6 +88,12 @@ export default {
         encodeCpoPageLink() {
             return {
                 name: "admin-encode-cpo",
+            };
+        },
+
+        linkExportCpo() {
+            return {
+                name: "admin-export-cpo-list",
             };
         },
     },

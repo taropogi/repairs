@@ -10,6 +10,7 @@ import encodeCpoForm from "./components/CPO/encodeCpoForm.vue";
 import editCpo from "./components/EditCpo/editCpo.vue";
 import AdminPage from "./components/admin/AdminPage/AdminPage.vue";
 import MultiChangeStatus from "./components/MultiChangeStatus/MultiChangeStatus.vue";
+import ExportCpoList from "./components/ExportCpoList/ExportCpoList.vue";
 
 //admin
 import UserSearch from "./components/admin/UserPage/UserSearch.vue";
@@ -61,6 +62,11 @@ const router = createRouter({
                     props: true,
                 },
                 {
+                    path: "cpos/export",
+                    component: ExportCpoList,
+                    name: "admin-export-cpo-list",
+                },
+                {
                     path: "user/search",
                     component: UserSearch,
                     name: "admin-user-search",
@@ -106,6 +112,11 @@ const router = createRouter({
                     //component: searchCpoHeader,
                     component: MultiChangeStatus,
                     name: "cpo-multi-change-status",
+                },
+                {
+                    path: "cpos/export",
+                    component: ExportCpoList,
+                    name: "export-cpo-list",
                 },
             ],
         },

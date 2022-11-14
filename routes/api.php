@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CpoController;
 use App\Http\Controllers\CpoLinesController;
+use App\Http\Controllers\ExportListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -51,3 +52,8 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
 
 Route::get('login', [LoginController::class, 'login']);
+
+
+
+//export
+Route::get('export/criteria/data', [ExportListController::class, 'getCriteriaData']);
