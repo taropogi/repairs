@@ -122,7 +122,7 @@ const router = createRouter({
         },
 
         {
-            path: "/repairs/login",
+            path: window.laravelData.app_url_root_folder + "/login",
             component: loginPage,
             name: "login-page",
             meta: {
