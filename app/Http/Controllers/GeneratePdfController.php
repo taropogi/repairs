@@ -6,6 +6,8 @@ use PDF;
 use App\Models\Cpo;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
+use App\Exports\ExportCpoByStatus;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GeneratePdfController extends Controller
 {
@@ -33,7 +35,7 @@ class GeneratePdfController extends Controller
         return $pdf->download('RPO#' . $cpo->rpo_number . '.pdf');
     }
 
-    public function listByCpoStatus(Request $request)
+    public function listByCpoStatusPdf(Request $request)
     {
         if ($request->status_id) {
 
@@ -51,6 +53,11 @@ class GeneratePdfController extends Controller
 
             return $pdf->download('CPO List By Status.pdf');
         }
+    }
+
+    public function listByCpoStatusXls()
+    {
+        return Excel::download(new ExportCpoByStatus, 'CpoListByStatus.xlsx');
     }
 
     public function testUser()

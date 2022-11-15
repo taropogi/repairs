@@ -95,10 +95,15 @@
             </div>
         </div>
 
-        <button class="btn btn-primary">Search</button>
-        <button class="btn btn-primary" @click="exportPdf">
-            Export as PDF
-        </button>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-danger">Search</button>
+            <button type="button" class="btn btn-warning" @click="exportPdf">
+                Export/PDF
+            </button>
+            <button type="button" class="btn btn-success" @click="exportXls">
+                Export/Excel
+            </button>
+        </div>
     </div>
 </template>
 
@@ -127,8 +132,19 @@ export default {
                 (route) => route.routeName === "generate-pdf-by-status"
             ).uri;
         },
+        linkXlsListByStatus() {
+            return this.laravelData.route_list.find(
+                (route) => route.routeName === "generate-xls-by-status"
+            ).uri;
+        },
     },
     methods: {
+        exportXls() {
+            window.location.href =
+                this.linkXlsListByStatus +
+                "/?status_id=" +
+                this.selectedStatuses;
+        },
         exportPdf() {
             window.location.href =
                 this.linkPdfListByStatus +
