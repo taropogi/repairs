@@ -12,7 +12,8 @@
                         <input
                             class="form-check-input"
                             type="checkbox"
-                            checked
+                            :value="status.id"
+                            v-model="selectedStatuses"
                             :id="status.id + 'status'"
                         />
                         <label
@@ -106,6 +107,7 @@ export default {
     data() {
         return {
             cpoStatuses: null,
+            selectedStatuses: [],
             cpoModifiedDate: {
                 from: new Date().toISOString().slice(0, 10),
                 to: new Date().toISOString().slice(0, 10),
@@ -120,15 +122,18 @@ export default {
         laravelData() {
             return this.$store.getters.laravelData;
         },
-        linkGeneratePdf() {
+        linkPdfListByStatus() {
             return this.laravelData.route_list.find(
-                (route) => route.routeName === "generate-pdf"
+                (route) => route.routeName === "generate-pdf-by-status"
             ).uri;
         },
     },
     methods: {
         exportPdf() {
-            window.location.href = this.linkGeneratePdf + "/?id=" + 1;
+            window.location.href =
+                this.linkPdfListByStatus +
+                "/?status_id=" +
+                this.selectedStatuses;
         },
         async getDataCriteria() {
             await axios

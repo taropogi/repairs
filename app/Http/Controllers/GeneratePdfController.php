@@ -34,22 +34,19 @@ class GeneratePdfController extends Controller
 
     public function listByCpoStatus(Request $request)
     {
-        // $cpo = Cpo::where('id', $request->id)->first();
-        // $data = [
-        //     'title' => $cpo->customer_name,
-        //     'date' => date('m/d/Y'),
-        //     'customer_name' => strtoupper($cpo->customer_name),
-        //     'customer_address' => strtoupper($cpo->customer_address),
-        //     'rpo_number' => strtoupper($cpo->rpo_number),
-        //     'contact_number' => strtoupper($cpo->contact_number),
-        //     'prepared_by' => strtoupper($cpo->prepared_by),
-        //     'authorized_by' => strtoupper($cpo->authorized_by),
-        //     'lines' => $cpo->lines,
-        // ];
+        if ($request->status_id) {
 
-        // $pdf = PDF::loadView('pdf.samplePdf', $data);
 
-        // return $pdf->download('RPO#' . $cpo->rpo_number . '.pdf');
+            $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
+            $data = [
+                'title' => 'CPO list by status',
+                'cpos' => $cpos
+            ];
+
+            $pdf = PDF::loadView('pdf.cpoListByStatus', $data);
+
+            return $pdf->download('CPO List By Status.pdf');
+        }
     }
 
     public function testUser()
