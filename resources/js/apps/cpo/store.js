@@ -11,16 +11,23 @@ const store = createStore({
         return {
             mainPageTitleHeader: "",
             genLinks: [],
+            laravelData: null,
         };
     },
     mutations: {
         setMainPageTitleHeader(state, payload) {
             state.mainPageTitleHeader = payload;
         },
+        setLaravelData(state, payload) {
+            state.laravelData = payload;
+        },
     },
     getters: {
         mainPageTitleHeader(state) {
             return state.mainPageTitleHeader;
+        },
+        laravelData(state) {
+            return state.laravelData;
         },
     },
 });

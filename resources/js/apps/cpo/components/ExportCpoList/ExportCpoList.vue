@@ -116,11 +116,19 @@ export default {
             },
         };
     },
-    computed: {},
+    computed: {
+        laravelData() {
+            return this.$store.getters.laravelData;
+        },
+        linkGeneratePdf() {
+            return this.laravelData.route_list.find(
+                (route) => route.routeName === "generate-pdf"
+            ).uri;
+        },
+    },
     methods: {
         exportPdf() {
-            window.location.href =
-                "/repairs/generatePdf/?id=" + this.localHeaderItem.id;
+            window.location.href = this.linkGeneratePdf + "/?id=" + 1;
         },
         async getDataCriteria() {
             await axios
@@ -137,6 +145,9 @@ export default {
     mounted() {
         this.getDataCriteria();
         this.$store.commit("setMainPageTitleHeader", "CPO - Export");
+    },
+    updated() {
+        // console.log(this.laravelData);
     },
 };
 </script>

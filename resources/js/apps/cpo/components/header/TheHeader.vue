@@ -59,6 +59,7 @@ export default {
         userNavLinks,
         AuthLinks,
     },
+
     computed: {
         userIsAdmin() {
             return (

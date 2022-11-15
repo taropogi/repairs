@@ -8,4 +8,7 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 
+// app.config.unwrapInjectedRef = true;
+// console.log(app.config);
+
 app.mount("#app");

@@ -109,6 +109,14 @@ export default {
         },
     },
     computed: {
+        laravelData() {
+            return this.$store.getters.laravelData;
+        },
+        linkGeneratePdf() {
+            return this.laravelData.route_list.find(
+                (route) => route.routeName === "generate-pdf"
+            ).uri;
+        },
         trClasses() {
             return {
                 // "table-secondary": this.localHeaderItem.locked,
@@ -218,7 +226,7 @@ export default {
 
         printCPOPdf() {
             window.location.href =
-                "/repairs/generatePdf/?id=" + this.localHeaderItem.id;
+                this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
         },
         editCpoHeader() {
             this.$router.push({
