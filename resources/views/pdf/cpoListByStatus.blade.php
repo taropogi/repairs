@@ -60,6 +60,9 @@
     <table width="100%">
         <tr>
             <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td align="right">
+                {{ $date }}
+            </td>
 
         </tr>
 
@@ -74,67 +77,29 @@
 
 
     <p style="font-size: x-small;">
-        THIS DOCUMENT IS TO ACKNOWLEDGE PULL OUT OF THE ITEMS: (TO BE FILLED IN BY TIMES STAFF)
+        LIST OF CPOS BY STATUS
     </p>
 
     <table width="100%" style="border: 1px solid;" class="to-border">
         <thead style="background-color: lightgray;">
             <tr>
                 <td>#</td>
-                <th>DESCRIPTION</th>
-                <th>QTY<br>RETURNED</th>
-                <th>UNIT</th>
-                <th>QTY<br>INSPECT</th>
-                <th>GOOD<br>CONDITION</th>
-                <th>MINOR<br>REPAIR/<br>CLEAN</th>
-                <th>REPAIR/<br>PARTS<br>NEEDED</th>
-                <th>DAMAGED</th>
-                <th>COMMENTS</th>
+                <th>RPO#</th>
+                <th>CUSTOMER</th>
+                <th>ADDRESS</th>
+                <th>STATUS</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach($cpos as $cpo)
             <tr>
-                <th scope="row" rowspan="2">{{ $cpo->id }}</th>
+                <th scope="row">{{ $cpo->id }}</th>
+                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+                <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
+                <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
+                <td class="text-center"><small>{{ $header_statuses[$cpo->status_id]->status }}</small></td>
 
-            </tr>
-            <tr>
-
-                <td>
-                    <table width="100%" class="table-inside" style="border:none;">
-
-                    </table>
-                </td>
-                <td colspan="2">
-                    <table width="100%" class="table-inside" style="border:none;">
-                        <tr>
-                            <td><strong>REP</strong></td>
-                            <td><strong>EXC</strong></td>
-                            <td><strong>RET/</strong></td>
-                        </tr>
-                        <tr>
-                            <td>____</td>
-                            <td>____</td>
-                            <td>____</td>
-                        </tr>
-                    </table>
-                </td>
-
-                <td>
-                    <small sy>BY:</small>
-                </td>
-                <td>
-                    <small>BY:</small>
-                </td>
-                <td>
-                    <small>BY:</small>
-                </td>
-                <td>
-                    <small>BY:</small>
-                </td>
-                <td>
-
-                </td>
             </tr>
             @endforeach
 

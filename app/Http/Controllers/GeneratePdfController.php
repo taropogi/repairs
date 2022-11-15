@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cpo;
 use PDF;
+use App\Models\Cpo;
+use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 
 class GeneratePdfController extends Controller
@@ -38,9 +39,12 @@ class GeneratePdfController extends Controller
 
 
             $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
+            $header_statuses = HeaderStatus::all();
             $data = [
                 'title' => 'CPO list by status',
-                'cpos' => $cpos
+                'cpos' => $cpos,
+                'header_statuses' => $header_statuses,
+                'date' => date('m/d/Y'),
             ];
 
             $pdf = PDF::loadView('pdf.cpoListByStatus', $data);
