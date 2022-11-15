@@ -13,6 +13,16 @@
 <script>
 import TheHeader from "./components/header/TheHeader.vue";
 export default {
+    data() {
+        return {
+            laravelData: null,
+        };
+    },
+    provide() {
+        return {
+            laravelData: this.laravelData,
+        };
+    },
     components: {
         TheHeader,
     },
@@ -37,6 +47,7 @@ export default {
         //console.log(this.$store.getters["cpo/getGenLinks"]);
     },
     mounted() {
+        this.laravelData = window.laravelData;
         // console.log(this.$store.getters["auth/isLoggedIn"]);
         // console.log(this.$store.getters["auth/loggedUser"]);
     },

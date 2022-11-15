@@ -25,10 +25,14 @@
 <body>
     <div class="container-fluid bg-white vh-100">
         <main id="app">
+
         </main>
     </div>
 
     <!-- Styles -->
+    <script>
+    window.laravelData = @json($data);
+    </script>
     <script src="{{ asset('js/app.js') }}?v={{ Str::random(40) }}"></script>
 </body>
 

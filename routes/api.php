@@ -57,3 +57,7 @@ Route::get('login', [LoginController::class, 'login']);
 
 //export
 Route::get('export/criteria/data', [ExportListController::class, 'getCriteriaData']);
+
+
+//pdf generate
+Route::get('generatePdf', [GeneratePdfController::class, 'generatePdf']);

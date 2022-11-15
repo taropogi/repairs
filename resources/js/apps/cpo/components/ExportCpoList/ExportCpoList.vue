@@ -95,7 +95,9 @@
         </div>
 
         <button class="btn btn-primary">Search</button>
-        <button class="btn btn-primary">Export</button>
+        <button class="btn btn-primary" @click="exportPdf">
+            Export as PDF
+        </button>
     </div>
 </template>
 
@@ -116,6 +118,10 @@ export default {
     },
     computed: {},
     methods: {
+        exportPdf() {
+            window.location.href =
+                "/repairs/generatePdf/?id=" + this.localHeaderItem.id;
+        },
         async getDataCriteria() {
             await axios
                 .get("api/export/criteria/data")
