@@ -12,9 +12,19 @@
 
 <script>
 import TheHeader from "./components/header/TheHeader.vue";
+import { computed } from "vue";
+
 export default {
     components: {
         TheHeader,
+    },
+    data() {
+        return { laravelData: null };
+    },
+    provide() {
+        return {
+            laravelData: computed(() => this.laravelData),
+        };
     },
     created() {
         if (
@@ -36,10 +46,9 @@ export default {
     },
     mounted() {
         this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
-        // setTimeout(() => {
-        //     console.log("xxxx");
-        //     this.laravelData = "asdfasdfasdfasdf";
-        // }, 3000);
+
+        this.laravelData = window.laravelData;
+
         // this.laravelData = window.laravelData;
         // console.log(this.laravelData);
         // console.log(this.$store.getters["auth/isLoggedIn"]);

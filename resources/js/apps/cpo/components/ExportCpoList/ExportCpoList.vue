@@ -109,6 +109,7 @@
 
 <script>
 export default {
+    inject: ["laravelData"],
     data() {
         return {
             cpoStatuses: null,
@@ -124,9 +125,9 @@ export default {
         };
     },
     computed: {
-        laravelData() {
-            return this.$store.getters.laravelData;
-        },
+        // laravelData() {
+        //     return this.$store.getters.laravelData;
+        // },
         linkPdfListByStatus() {
             return this.laravelData.route_list.find(
                 (route) => route.routeName === "generate-pdf-by-status"
