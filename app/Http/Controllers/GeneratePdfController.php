@@ -41,15 +41,25 @@ class GeneratePdfController extends Controller
 
 
             $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
+
+
             $header_statuses = HeaderStatus::all();
+            $header_statuses_indexed = [];
+            foreach ($header_statuses as $status) {
+                $header_statuses_indexed[$status->id] = $status->status;
+            }
+
+
             $data = [
                 'title' => 'CPO list by status',
                 'cpos' => $cpos,
-                'header_statuses' => $header_statuses,
+                'header_statuses' => $header_statuses_indexed,
                 'date' => date('m/d/Y'),
             ];
 
             $pdf = PDF::loadView('pdf.cpoListByStatus', $data);
+
+
 
             return $pdf->download('CPO List By Status.pdf');
         }

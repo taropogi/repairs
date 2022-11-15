@@ -98,7 +98,7 @@
                 <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
                 <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
                 <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
-                <td class="text-center"><small>{{ $header_statuses[$cpo->status_id]->status }}</small></td>
+                <td class="text-center"><small>{{ $header_statuses[$cpo->status_id] }}</small></td>
 
             </tr>
             @endforeach
