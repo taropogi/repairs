@@ -23,7 +23,7 @@ use App\Http\Controllers\LoginController;
 
 
 
-Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('user', function (Request $request) { // this is for token authentication and SPA authentication
     return $request->user();
 });
 

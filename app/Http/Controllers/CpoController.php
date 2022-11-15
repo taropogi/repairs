@@ -163,7 +163,7 @@ class CpoController extends Controller
         $cpos = $cpos->take(20)->with('status')->get();
 
 
-
+        // $response['req'] = $request->header('X-XSRF-TOKEN');
         $response['cpos'] = $cpos;
         $response['limit_per_page'] = 0;
 

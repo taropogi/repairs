@@ -125,18 +125,20 @@ export default {
             axios
                 .get("api/cpo", {
                     params: {
-                        searchName: this.searchCriteria.searchName || "",
-                        searchAddress: this.searchCriteria.searchAddress || "",
-                        searchContact:
-                            this.searchCriteria.searchContactNumber || "",
-                        searchRpo: this.searchCriteria.searchRpoNumber || "",
-                        searchPrepared:
-                            this.searchCriteria.searchPreparedBy || "",
-                        searchAuthorized:
-                            this.searchCriteria.searchAuthorizedBy || "",
+                        ...this.searchCriteria,
+                        // searchName: this.searchCriteria.searchName || "",
+                        // searchAddress: this.searchCriteria.searchAddress || "",
+                        // searchContact:
+                        //     this.searchCriteria.searchContactNumber || "",
+                        // searchRpo: this.searchCriteria.searchRpoNumber || "",
+                        // searchPrepared:
+                        //     this.searchCriteria.searchPreparedBy || "",
+                        // searchAuthorized:
+                        //     this.searchCriteria.searchAuthorizedBy || "",
                     },
                 })
                 .then((response) => {
+                    // console.log(response.data);
                     this.cpoHeaderList = response.data.cpos;
                     this.isSearching = false;
                     // console.log(this.cpoHeaderList);

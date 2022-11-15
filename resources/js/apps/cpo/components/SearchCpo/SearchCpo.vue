@@ -3,7 +3,6 @@
         <!-- <h4 class="text-center bg-success text-white p-2">SEARCH</h4> -->
         <!-- <h1>Search</h1> -->
 
-        <hr />
         <search-form @search-cpo-header="mySearch"></search-form>
 
         <cpo-header-list

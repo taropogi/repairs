@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <div>
         <div class="row">
             <div class="col">
                 <div class="mb-3">
@@ -29,9 +29,10 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="date-modified-from" class="form-label"
-                                >CPOs Modified From</label
-                            >
+                                >CPOs Modified From
+                            </label>
                             <input
+                                v-model="cpoModifiedDate.from"
                                 type="date"
                                 class="form-control"
                                 id="date-modified-from"
@@ -43,6 +44,7 @@
                                 >CPOs Modified From</label
                             >
                             <input
+                                v-model="cpoModifiedDate.to"
                                 type="date"
                                 class="form-control"
                                 id="date-modified-to"
@@ -57,6 +59,7 @@
                                 >CPOs Change Status From</label
                             >
                             <input
+                                v-model="cpoChangedStatusDate.from"
                                 type="date"
                                 class="form-control"
                                 id="date-change-status-from"
@@ -67,9 +70,10 @@
                             <label
                                 for="date-change-status-to"
                                 class="form-label"
-                                >CPOs Change Status From</label
+                                >CPOs Change Status To</label
                             >
                             <input
+                                v-model="cpoChangedStatusDate.to"
                                 type="date"
                                 class="form-control"
                                 id="date-change-status-to"
@@ -90,8 +94,9 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <button class="btn btn-primary">Search</button>
+        <button class="btn btn-primary">Export</button>
+    </div>
 </template>
 
 <script>
@@ -99,8 +104,17 @@ export default {
     data() {
         return {
             cpoStatuses: null,
+            cpoModifiedDate: {
+                from: new Date().toISOString().slice(0, 10),
+                to: new Date().toISOString().slice(0, 10),
+            },
+            cpoChangedStatusDate: {
+                from: new Date().toISOString().slice(0, 10),
+                to: new Date().toISOString().slice(0, 10),
+            },
         };
     },
+    computed: {},
     methods: {
         async getDataCriteria() {
             await axios
