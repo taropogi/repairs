@@ -65,9 +65,10 @@ class GeneratePdfController extends Controller
         }
     }
 
-    public function listByCpoStatusXls()
+    public function listByCpoStatusXls(Request $request)
     {
-        return Excel::download(new ExportCpoByStatus, 'CpoListByStatus.xlsx');
+
+        return Excel::download(new ExportCpoByStatus($request), 'CpoListByStatus.xlsx');
     }
 
     public function testUser()
