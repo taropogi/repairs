@@ -29,6 +29,8 @@
             </li>
         </ul>
 
+        <MultiOptions v-if="selectedPosCount"> </MultiOptions>
+
         <hr />
 
         <user-options @logOut="logOut"></user-options>
@@ -37,11 +39,24 @@
 
 <script>
 import UserOptions from "./UserOptions.vue";
+
+import MultiOptions from "./MultiOptions.vue";
 export default {
     components: {
         UserOptions,
+
+        MultiOptions,
+    },
+    data() {
+        return {};
     },
     computed: {
+        selectedPos() {
+            return this.$store.getters["cpo/getSelectedPos"];
+        },
+        selectedPosCount() {
+            return this.selectedPos.length;
+        },
         activeNav() {
             return this.$store.getters.activeNav;
         },

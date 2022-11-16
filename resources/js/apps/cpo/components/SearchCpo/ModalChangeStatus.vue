@@ -2,7 +2,7 @@
     <div class="modal fade show" tabindex="-1" style="display: block">
         <div class="modal-dialog modal-lg border border-primary">
             <div class="modal-content">
-                <div class="modal-header bg-dark">
+                <div class="modal-header bg-danger">
                     <h5 class="modal-title text-white">
                         <strong>Multiple RPO Change Status</strong>
                     </h5>

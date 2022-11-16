@@ -1,9 +1,5 @@
 <template>
     <div>
-        <modal-change-status
-            v-if="changeStatusMulti"
-            @close-modal="closeModal"
-        ></modal-change-status>
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
             <table
@@ -40,29 +36,6 @@
                     ></header-list-item>
                 </tbody>
             </table>
-
-            <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group me-2" role="group">
-                    <button type="button" class="btn btn-primary">1</button>
-                    <button type="button" class="btn btn-primary">2</button>
-                    <button type="button" class="btn btn-primary">3</button>
-                    <button type="button" class="btn btn-primary">4</button>
-                </div>
-
-                <div
-                    class="btn-group me-2"
-                    role="group"
-                    v-if="selectedPosCount"
-                >
-                    <button
-                        type="button"
-                        class="btn btn-info"
-                        @click="openModalChangeStatusMulti"
-                    >
-                        Multi-select options
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -70,22 +43,17 @@
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
-import ModalChangeStatus from "./ModalChangeStatus.vue";
 
 export default {
     components: {
         HeaderListItem,
         SpinnerLoading,
-        ModalChangeStatus,
     },
     data() {
         return {
             cpoHeaderList: [],
             selectedHeaders: [],
             isSearching: false,
-            changeStatusMulti: false,
-            deleteCpo: false,
-            deleteCpoId: null,
         };
     },
     props: ["searchCriteria"],
@@ -113,13 +81,6 @@ export default {
     },
 
     methods: {
-        closeModal() {
-            this.changeStatusMulti = false;
-        },
-
-        openModalChangeStatusMulti() {
-            this.changeStatusMulti = true;
-        },
         getCpoHeaders() {
             this.isSearching = true;
             axios
