@@ -35,6 +35,47 @@ const router = createRouter({
         // },
 
         {
+            path: window.laravelData.app_url_root_folder + "/user/cpo",
+            component: cpoPage,
+            name: "cpo-page",
+            meta: {
+                requiresAuth: true,
+            },
+            redirect: { name: "search-cpo" },
+            children: [
+                {
+                    path: "edit/:id",
+                    component: editCpo,
+                    name: "edit-cpo",
+                    props: true,
+                },
+                {
+                    path: "encode",
+                    component: encodeCpoForm,
+                    name: "encode-cpo",
+                },
+                {
+                    path: "search",
+                    //component: searchCpoHeader,
+                    component: SearchCpo,
+                    name: "search-cpo",
+                },
+
+                {
+                    path: "cpos/changes-status",
+                    //component: searchCpoHeader,
+                    component: MultiChangeStatus,
+                    name: "cpo-multi-change-status",
+                },
+                {
+                    path: "cpos/export",
+                    component: ExportCpoList,
+                    name: "export-cpo-list",
+                },
+            ],
+        },
+
+        {
             path: window.laravelData.app_url_root_folder + "/admin",
             component: AdminPage,
             name: "admin-page",
@@ -76,47 +117,6 @@ const router = createRouter({
                     path: "user/create",
                     component: CreateUser,
                     name: "admin-user-create",
-                },
-            ],
-        },
-
-        {
-            path: window.laravelData.app_url_root_folder + "/user/cpo",
-            component: cpoPage,
-            name: "cpo-page",
-            meta: {
-                requiresAuth: true,
-            },
-            redirect: { name: "search-cpo" },
-            children: [
-                {
-                    path: "edit/:id",
-                    component: editCpo,
-                    name: "edit-cpo",
-                    props: true,
-                },
-                {
-                    path: "encode",
-                    component: encodeCpoForm,
-                    name: "encode-cpo",
-                },
-                {
-                    path: "search",
-                    //component: searchCpoHeader,
-                    component: SearchCpo,
-                    name: "search-cpo",
-                },
-
-                {
-                    path: "cpos/changes-status",
-                    //component: searchCpoHeader,
-                    component: MultiChangeStatus,
-                    name: "cpo-multi-change-status",
-                },
-                {
-                    path: "cpos/export",
-                    component: ExportCpoList,
-                    name: "export-cpo-list",
                 },
             ],
         },

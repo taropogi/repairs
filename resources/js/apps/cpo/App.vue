@@ -1,22 +1,26 @@
 <template>
-    <div class="px-2 pb-5">
-        <the-header></the-header>
-        <hr />
-        <router-view v-slot="slotProps" class="mt-3">
+    <main class="container-fluid">
+        <!-- <the-header></the-header>
+        <side-bar></side-bar>
+
+        <hr /> -->
+        <router-view v-slot="slotProps">
             <transition name="app-router" mode="out-in">
                 <component :is="slotProps.Component"></component>
             </transition>
         </router-view>
-    </div>
+    </main>
 </template>
 
 <script>
 import TheHeader from "./components/header/TheHeader.vue";
+import SideBar from "./components/SideBar/SideBar.vue";
 import { computed } from "vue";
 
 export default {
     components: {
         TheHeader,
+        SideBar,
     },
     data() {
         return { laravelData: null };

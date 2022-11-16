@@ -21,7 +21,10 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     }
     public function collection()
     {
-        $cpos = Cpo::select('id', 'rpo_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by')->whereIn('status_id', explode(',', $this->request->status_id))->get();
+        $cpos = Cpo::select('id', 'rpo_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by')
+            ->whereIn('status_id', explode(',', $this->request->status_id))
+            // ->with('status:id')
+            ->get();
         return $cpos;
     }
 
