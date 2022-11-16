@@ -47,7 +47,12 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()
-                    ->setARGB('DD4B39');
+                    ->setARGB('007A08');
+
+                $event->sheet->getDelegate()->getStyle('A1:G1')
+                    ->getFont()
+                    ->getColor()
+                    ->setARGB('white');
             },
         ];
     }
