@@ -29,7 +29,13 @@
             </li>
         </ul>
 
-        <MultiOptions v-if="selectedPosCount"> </MultiOptions>
+        <div class="d-grid gap-2" v-if="isNavExportActive">
+            <button class="btn btn-danger" type="button">Export PDF</button>
+            <button class="btn btn-success" type="button">Export Excel</button>
+        </div>
+
+        <MultiOptions v-if="selectedPosCount && isNavSearchActive">
+        </MultiOptions>
 
         <hr />
 

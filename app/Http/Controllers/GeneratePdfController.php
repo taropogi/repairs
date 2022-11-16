@@ -61,7 +61,7 @@ class GeneratePdfController extends Controller
 
 
 
-            return $pdf->download('CPO List By Status.pdf');
+            return  $pdf->download('CPO List By Status.pdf');
         }
     }
 

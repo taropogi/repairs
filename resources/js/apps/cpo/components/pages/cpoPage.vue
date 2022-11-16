@@ -20,6 +20,7 @@ export default {};
 <style>
 .router-enter-from {
     opacity: 0;
+
     transform: translateY(-30px);
 }
 .router-enter-active {
@@ -27,6 +28,7 @@ export default {};
 }
 .router-enter-to {
     opacity: 1;
+
     transform: translateY(0);
 }
 .router-leave-from {
@@ -38,6 +40,6 @@ export default {};
 }
 .router-leave-to {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(30px);
 }
 </style>

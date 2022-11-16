@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown">
+    <div class="dropdown my-2">
         <a
             href="#"
             class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
