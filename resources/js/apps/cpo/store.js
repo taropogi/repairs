@@ -12,6 +12,7 @@ const store = createStore({
             mainPageTitleHeader: "",
             genLinks: [],
             laravelData: null,
+            activeNav: null,
         };
     },
     mutations: {
@@ -21,6 +22,9 @@ const store = createStore({
         setLaravelData(state, payload) {
             state.laravelData = payload;
         },
+        setActiveNav(state, payload) {
+            state.activeNav = payload;
+        },
     },
     getters: {
         mainPageTitleHeader(state) {
@@ -28,6 +32,9 @@ const store = createStore({
         },
         laravelData(state) {
             return state.laravelData;
+        },
+        activeNav(state) {
+            return state.activeNav;
         },
     },
 });

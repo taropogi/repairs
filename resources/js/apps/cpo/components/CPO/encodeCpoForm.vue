@@ -154,6 +154,9 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "CPO - Encode");
+        this.$store.commit("setActiveNav", {
+            nav: "encode-cpo",
+        });
     },
     mounted() {
         this.$emit("refresh-header-list");

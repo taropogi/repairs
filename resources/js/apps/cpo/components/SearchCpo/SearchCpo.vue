@@ -50,6 +50,9 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "CPO - Search");
+        this.$store.commit("setActiveNav", {
+            nav: "search-cpo",
+        });
     },
 };
 </script>

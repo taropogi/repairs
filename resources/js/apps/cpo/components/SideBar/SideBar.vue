@@ -1,26 +1,31 @@
 <template>
-    <div class="min-vh-100 sticky-top d-flex flex-column">
-        <ul class="nav nav-pills flex-column mb-auto my-5">
+    <div class="min-vh-100 sticky-top d-flex flex-column" v-if="isLoggedIn">
+        <h2 class="text-white mt-5 mb-0">Menu</h2>
+        <hr class="text-white" />
+        <ul class="nav nav-pills flex-column mb-auto my-2">
             <li class="nav-item">
                 <router-link
                     :to="searchCpoLink"
-                    class="nav-link text-white active"
-                    >Search CPO</router-link
-                >
+                    class="nav-link text-white"
+                    :class="{ active: isNavSearchActive }"
+                    >Search CPO
+                </router-link>
             </li>
             <li>
-                <router-link :to="encodeCpoPageLink" class="nav-link text-white"
+                <router-link
+                    :to="encodeCpoPageLink"
+                    class="nav-link text-white"
+                    :class="{ active: isNavEncodeActive }"
                     >Encode CPO</router-link
                 >
             </li>
             <li>
-                <a href="#" class="nav-link text-white"> Orders </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white"> Products </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white"> Customers </a>
+                <router-link
+                    :to="linkExportCpo"
+                    class="nav-link text-white"
+                    :class="{ active: isNavExportActive }"
+                    >Export CPO list</router-link
+                >
             </li>
         </ul>
 
@@ -37,6 +42,27 @@ export default {
         UserOptions,
     },
     computed: {
+        activeNav() {
+            return this.$store.getters.activeNav;
+        },
+        isNavSearchActive() {
+            if (this.activeNav && this.activeNav.nav === "search-cpo") {
+                return true;
+            }
+            return false;
+        },
+        isNavExportActive() {
+            if (this.activeNav && this.activeNav.nav === "export-cpo") {
+                return true;
+            }
+            return false;
+        },
+        isNavEncodeActive() {
+            if (this.activeNav && this.activeNav.nav === "encode-cpo") {
+                return true;
+            }
+            return false;
+        },
         userIsAdmin() {
             return (
                 this.isLoggedIn && this.loggedUser && this.loggedUser.is_admin
@@ -63,6 +89,17 @@ export default {
         cpoPageLink() {
             return {
                 name: "cpo-page",
+            };
+        },
+        linkExportCpo() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return {
+                    name: "admin-export-cpo-list",
+                };
+            }
+
+            return {
+                name: "export-cpo-list",
             };
         },
         encodeCpoPageLink() {

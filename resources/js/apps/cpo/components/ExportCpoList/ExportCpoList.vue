@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-2">
         <div class="row">
             <div class="col">
                 <div class="mb-3">
@@ -163,6 +163,11 @@ export default {
                     console.log(err);
                 });
         },
+    },
+    beforeCreate() {
+        this.$store.commit("setActiveNav", {
+            nav: "export-cpo",
+        });
     },
     mounted() {
         this.getDataCriteria();

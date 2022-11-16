@@ -35,6 +35,9 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "CPO - Edit");
+        // this.$store.commit("setActiveNav", {
+        //     nav: "edit-cpo",
+        // });
     },
     mounted() {
         //  console.log("mounted");
