@@ -1,13 +1,17 @@
 <template>
-    <div class="min-vh-100 sticky-top my-5">
-        <ul class="nav nav-pills flex-column mb-auto">
+    <div class="min-vh-100 sticky-top d-flex flex-column">
+        <ul class="nav nav-pills flex-column mb-auto my-5">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
-                    Search CPO
-                </a>
+                <router-link
+                    :to="searchCpoLink"
+                    class="nav-link text-white active"
+                    >Search CPO</router-link
+                >
             </li>
             <li>
-                <a href="#" class="nav-link text-white"> Dashboard </a>
+                <router-link :to="encodeCpoPageLink" class="nav-link text-white"
+                    >Encode CPO</router-link
+                >
             </li>
             <li>
                 <a href="#" class="nav-link text-white"> Orders </a>
@@ -62,14 +66,16 @@ export default {
             };
         },
         encodeCpoPageLink() {
-            return {
-                name: "encode-cpo",
-            };
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return { name: "admin-encode-cpo" };
+            }
+            return { name: "encode-cpo" };
         },
-        searchCpoPageLink() {
-            return {
-                name: "search-cpo",
-            };
+        searchCpoLink() {
+            if (this.$store.getters["auth/loggedUser"].is_admin) {
+                return { name: "admin-search-cpo" };
+            }
+            return { name: "search-cpo" };
         },
 
         isLoggedIn() {

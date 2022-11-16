@@ -1,152 +1,6 @@
 <template>
-    <div>
-        <!-- <h4
-            class="text-center text-white p-2"
-            :class="{
-                'bg-warning': !formData.locked,
-                'bg-secondary': formData.locked,
-            }"
-        >
-            UPDATE HEADER
-        </h4> -->
-
-        <form @submit.prevent="submitCpoForm" v-if="headerRow">
-            <transition name="updated-header">
-                <div class="fixed-top p2" v-if="isSubmitSuccess">
-                    <div class="alert alert-success text-center" role="alert">
-                        <i class="bi bi-check2-all"></i>
-                        <strong>Successful header update!</strong>
-                    </div>
-                </div>
-            </transition>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col">
-                            <label>Customer Name</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model.trim="headerRow.customer_name"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Customer Address</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model.trim="headerRow.customer_address"
-                            />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Contact Number</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.contact_number"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>RPO Number</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.rpo_number"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label>Prepared By</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.prepared_by"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>Authorized By</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.authorized_by"
-                            />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Status</label>
-                            <select
-                                class="form-select form-select-sm"
-                                v-model="headerRow.status_id"
-                            >
-                                <option
-                                    v-for="status in headerStatuses"
-                                    :key="status.id"
-                                    :value="status.id"
-                                    :selected="status.id === headerStatus.id"
-                                >
-                                    {{ status.status }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col p-2">
-                            <h1 v-if="headerRow.locked">
-                                <span class="badge bg-success">COMPLETED </span>
-                            </h1>
-                            <!-- <div class="form-check">
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    :checked="headerRow.locked"
-                                    :id="'locked' + headerRow.id"
-                                    v-model="headerRow.locked"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    :for="'locked' + headerRow.id"
-                                >
-                                    Lock <i class="bi bi-file-lock2"></i>
-                                </label>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <history-list
-                        v-if="!isUpdating"
-                        :header-id="headerRow.id"
-                    ></history-list>
-                </div>
-            </div>
-
-            <div class="btn-group btn-group-sm">
-                <button type="submit" class="btn btn-success">Update</button>
-
-                <router-link
-                    :to="{ name: searchCpoLink }"
-                    class="btn btn-danger"
-                    >Cancel</router-link
-                >
-            </div>
-        </form>
-
+    <div class="p-2">
+        <form-header @searched-header-row="setHeaderRow" :id="id"></form-header>
         <header-lines
             class="mt-2"
             v-if="headerRow"
@@ -158,86 +12,25 @@
 
 <script>
 import headerLines from "./headerLines.vue";
-import historyList from "../StatusHistory/historyList.vue";
+import FormHeader from "./FormHeader.vue";
 
 export default {
     components: {
+        FormHeader,
         headerLines,
-        historyList,
     },
     props: ["id"],
-    // watch: {
-    //     id(id) {
-    //         this.getCpoHeaderRow();
-    //     },
-    // },
-    computed: {
-        searchCpoLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
-                return "admin-search-cpo";
-            }
-            return "search-cpo";
-        },
-    },
+
     data() {
         return {
-            //   headerDetails: null,
-            headerStatus: null,
-
-            headerStatuses: null,
-
             headerRow: null,
-
-            isSubmitSuccess: false,
-            isUpdating: false,
 
             isUpdatedAllLinesSuccess: false,
         };
     },
     methods: {
-        getCpoHeaderRow() {
-            // console.log("get row");
-            axios
-                .get("api/cpo/" + this.id)
-                .then((response) => {
-                    this.headerStatuses = response.data.header_statuses;
-                    this.headerStatus = response.data.cpo.status;
-
-                    this.headerRow = response.data.cpo;
-
-                    //  console.log(this.headerRow);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        gotoSearchPage() {
-            this.$router.push({
-                name: this.searchCpoLink,
-            });
-        },
-        async submitCpoForm() {
-            this.isSubmitSuccess = false;
-            this.isUpdating = true;
-            //   console.log("submit edit");
-            // console.log(this.headerRow);
-            await axios
-                .post("api/cpo/update", this.headerRow)
-                .then((response) => {
-                    // console.log(response);
-                    this.isSubmitSuccess = true;
-                    console.log("done update");
-                    // this.gotoSearchPage();
-                    this.getCpoHeaderRow();
-
-                    this.isUpdating = false;
-                    setTimeout(() => {
-                        this.isSubmitSuccess = false;
-                    }, 3000);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        setHeaderRow(headerRow) {
+            this.headerRow = headerRow;
         },
     },
     beforeCreate() {
@@ -245,7 +38,7 @@ export default {
     },
     mounted() {
         //  console.log("mounted");
-        this.getCpoHeaderRow();
+        // this.getCpoHeaderRow();
     },
     updated() {
         //   console.log("new value: " + this.lineDetails.length);
