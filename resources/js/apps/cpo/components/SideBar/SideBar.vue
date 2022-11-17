@@ -39,7 +39,7 @@
 
         <hr />
 
-        <user-options @logOut="logOut"></user-options>
+        <user-options :user="loggedUser" @logOut="logOut"></user-options>
     </div>
 </template>
 

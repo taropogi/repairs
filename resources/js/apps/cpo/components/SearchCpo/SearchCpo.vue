@@ -1,7 +1,6 @@
 <template>
     <div>
         <search-form @search-cpo-header="mySearch"></search-form>
-
         <cpo-header-list
             :search-criteria="searchCriteria"
             @edit-cpo="editCpo"
