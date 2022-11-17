@@ -56,7 +56,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["cpoId"],
     inject: ["setShowBackDrop"],
-    emits: ["deleted-cpo"],
+    emits: ["deleted-cpo", "close-modal-delete-cpo"],
     data() {
         return {
             headerRow: null,
@@ -83,7 +83,7 @@ export default {
                 });
                 // this.isDeleted = true;
 
-                this.$emit("deleted-cpo");
+                this.$emit("deleted-cpo", { id: this.cpoId });
             }
         },
         getCpoHeader() {

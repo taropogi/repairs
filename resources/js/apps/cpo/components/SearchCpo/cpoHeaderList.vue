@@ -2,12 +2,13 @@
     <div>
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
-            <modal-delete-cpo
-                v-if="deleteCpo"
-                :cpo-id="deleteCpo.id"
-                @close-modal-delete-cpo="closeModalDeleteCpo"
-                @deleted-cpo="closeModalDeleteCpo"
-            ></modal-delete-cpo>
+            <teleport to="body">
+                <modal-delete-cpo
+                    v-if="deleteCpo"
+                    :cpo-id="deleteCpo.id"
+                    @close-modal-delete-cpo="closeModalDeleteCpo"
+                ></modal-delete-cpo>
+            </teleport>
 
             <table
                 class="table table-sm table-bordered table-striped table-hover"
@@ -41,6 +42,7 @@
                         :key="item.id"
                         :header-item="item"
                         @delete-cpo="openDeleteCpo"
+                        @deleted-cpo="deleteCpoConfirm"
                     ></header-list-item>
                 </tbody>
             </table>
@@ -73,6 +75,9 @@ export default {
     props: ["searchCriteria"],
     computed: {
         ...mapGetters("cpo", ["deletedCpos"]),
+        cpoListCount() {
+            return this.cpoHeaderList.length;
+        },
         selectedPosCount() {
             return this.selectedPos.length;
         },
@@ -81,6 +86,12 @@ export default {
         },
     },
     watch: {
+        cpoListCount(value) {
+            if (value <= 40) {
+                // console.log("search");
+                // this.getCpoHeaders();
+            }
+        },
         searchCriteria: {
             handler(newValue, oldValue) {
                 // console.log(newValue, oldValue);
@@ -98,6 +109,13 @@ export default {
     methods: {
         openDeleteCpo(cpoId) {
             this.deleteCpo = cpoId;
+        },
+        deleteCpoConfirm(deletedCpoId) {
+            const filteredList = this.cpoHeaderList.filter(
+                (el) => el.id !== deletedCpoId.id
+            );
+            this.cpoHeaderList = filteredList;
+            this.closeModalDeleteCpo();
         },
         closeModalDeleteCpo() {
             this.deleteCpo = null;

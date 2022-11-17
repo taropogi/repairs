@@ -73,7 +73,7 @@ import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 import { mapGetters } from "vuex";
 export default {
     props: ["headerItem"],
-    emits: ["delete-cpo"],
+    emits: ["delete-cpo", "deleted-cpo"],
     components: {
         ModalDeleteCpo,
     },
@@ -91,6 +91,7 @@ export default {
             if (value) {
                 setTimeout(() => {
                     this.isRemovedTr = true;
+                    this.$emit("deleted-cpo", { id: this.headerItem.id });
                 }, 1000);
             }
         },
