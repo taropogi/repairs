@@ -1,5 +1,6 @@
 <template>
     <main class="container-fluid">
+        <div :class="{ backdrop: showBackDrop }"></div>
         <!-- <the-header></the-header>
         <side-bar></side-bar>
 
@@ -16,6 +17,7 @@
 import TheHeader from "./components/header/TheHeader.vue";
 import SideBar from "./components/SideBar/SideBar.vue";
 import { computed } from "vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     components: {
@@ -25,8 +27,15 @@ export default {
     data() {
         return { laravelData: null };
     },
+    methods: {
+        ...mapActions(["setShowBackDrop"]),
+    },
+    computed: {
+        ...mapGetters(["showBackDrop"]),
+    },
     provide() {
         return {
+            setShowBackDrop: this.setShowBackDrop,
             laravelData: computed(() => this.laravelData),
         };
     },
@@ -62,6 +71,16 @@ export default {
 </script>
 
 <style>
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    opacity: 0.8;
+}
 * {
     font-size: 12px;
 }

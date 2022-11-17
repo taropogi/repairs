@@ -15,6 +15,7 @@ const store = createStore({
             genLinks: [],
             laravelData: null,
             activeNav: null,
+            showBackDrop: false,
         };
     },
     mutations: {
@@ -27,8 +28,14 @@ const store = createStore({
         setActiveNav(state, payload) {
             state.activeNav = payload;
         },
+        setShowBackDrop(state, payload) {
+            state.showBackDrop = payload;
+        },
     },
     getters: {
+        showBackDrop(state) {
+            return state.showBackDrop;
+        },
         mainPageTitleHeader(state) {
             return state.mainPageTitleHeader;
         },
@@ -37,6 +44,11 @@ const store = createStore({
         },
         activeNav(state) {
             return state.activeNav;
+        },
+    },
+    actions: {
+        setShowBackDrop(context, payload) {
+            context.commit("setShowBackDrop", payload);
         },
     },
 });

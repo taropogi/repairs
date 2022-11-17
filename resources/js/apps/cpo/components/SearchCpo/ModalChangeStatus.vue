@@ -109,6 +109,7 @@
 <script>
 export default {
     emits: ["close-modal"],
+    inject: ["setShowBackDrop"],
     data() {
         return {
             selectedCpos: null,
@@ -186,7 +187,11 @@ export default {
     },
     mounted() {
         this.getSelectedPos();
+        this.setShowBackDrop(true);
         // console.log(this.selectedCpos.length);
+    },
+    unmounted() {
+        this.setShowBackDrop(false);
     },
 };
 </script>

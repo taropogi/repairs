@@ -19,10 +19,12 @@
 
 <script>
 import ModalChangeStatus from "../SearchCpo/ModalChangeStatus.vue";
+
 export default {
     components: {
         ModalChangeStatus,
     },
+
     data() {
         return {
             changeStatusMulti: false,
@@ -36,7 +38,8 @@ export default {
             this.changeStatusMulti = false;
         },
     },
+    mounted() {},
 };
 </script>
 
-<style></style>
+<style scoped></style>

@@ -28,6 +28,14 @@ export default {
     },
 
     methods: {
+        isCurrentlySelected() {
+            const selectedItem = this.selectedStatus.find(
+                (item) => item.id === this.status.id
+            );
+            if (selectedItem) {
+                this.isSelected = true;
+            }
+        },
         selectStatus() {
             if (this.isSelected) {
                 this.addSelectedStatus({
@@ -40,6 +48,9 @@ export default {
             }
         },
         ...mapActions("export", ["addSelectedStatus", "removeSelectedStatus"]),
+    },
+    mounted() {
+        this.isCurrentlySelected();
     },
 };
 </script>
