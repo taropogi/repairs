@@ -12,4 +12,10 @@ export default {
     updateSelectedCpoDeleted(context, payload) {
         context.commit("updateSelectedCpoDeleted", payload);
     },
+    removeSelectedPo(context, payload) {
+        context.commit("removeSelectedPo", payload);
+    },
+    addDeletedCpos(state, payload) {
+        state.commit("addDeletedCpos", payload);
+    },
 };

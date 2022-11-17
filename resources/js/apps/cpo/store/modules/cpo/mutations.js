@@ -22,6 +22,9 @@ export default {
     addSelectedPo(state, payload) {
         state.selectedPos.push(payload);
     },
+    addDeletedCpos(state, payload) {
+        state.deletedCpos.push(payload);
+    },
     removeSelectedPo(state, payload) {
         const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
         state.selectedPos = myArray;

@@ -9,4 +9,7 @@ export default {
     getSelectedPos(state) {
         return state.selectedPos;
     },
+    deletedCpos(state) {
+        return state.deletedCpos;
+    },
 };

@@ -11,6 +11,7 @@ const cpoModule = {
             editingHeaderRow: [], // what is currently editing cpo header, actual row from database
             genLinks: [],
             selectedPos: [],
+            deletedCpos: [],
         };
     },
     mutations,

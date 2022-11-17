@@ -52,25 +52,37 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["cpoId"],
     inject: ["setShowBackDrop"],
+    emits: ["deleted-cpo"],
     data() {
         return {
             headerRow: null,
             isDeleting: false,
         };
     },
+
     methods: {
+        ...mapActions("cpo", ["removeSelectedPo", "addDeletedCpos"]),
+        unselectPo() {
+            this.removeSelectedPo({
+                id: this.cpoId,
+            });
+        },
         async confirmDelete() {
             this.isDeleting = true;
             const res = await axios.post("api/cpo/destroy", {
                 cpoId: this.cpoId,
             });
             if (res.data) {
-                // this.unselectPo();
+                this.unselectPo();
+                this.addDeletedCpos({
+                    id: this.cpoId,
+                });
                 // this.isDeleted = true;
-                this.isDeleting = false;
+
                 this.$emit("deleted-cpo");
             }
         },

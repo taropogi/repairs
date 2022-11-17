@@ -1,13 +1,6 @@
 <template>
     <tr :class="trClasses" v-if="!isRemovedTr">
         <th>
-            <teleport to="body" v-if="isDeleteCpo">
-                <modal-delete-cpo
-                    :cpo-id="headerItem.id"
-                    @close-modal-delete-cpo="closeModalDeleteCpo"
-                    @deleted-cpo="deleteRow"
-                ></modal-delete-cpo
-            ></teleport>
             <div class="form-check">
                 <input
                     class="form-check-input"
@@ -41,7 +34,7 @@
                     v-if="!localHeaderItem.locked"
                     type="button"
                     class="btn btn-danger"
-                    @click="deleteCpo(localHeaderItem)"
+                    @click="deleteCpo"
                 >
                     Delete <i class="bi bi-trash-fill"></i>
                 </button>
@@ -77,9 +70,10 @@
 
 <script>
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
+import { mapGetters } from "vuex";
 export default {
     props: ["headerItem"],
-
+    emits: ["delete-cpo"],
     components: {
         ModalDeleteCpo,
     },
@@ -93,6 +87,13 @@ export default {
         };
     },
     watch: {
+        isDeletedx(value) {
+            if (value) {
+                setTimeout(() => {
+                    this.isRemovedTr = true;
+                }, 1000);
+            }
+        },
         isSelectedDeleted(value) {
             if (value) {
                 this.deleteRow();
@@ -111,6 +112,16 @@ export default {
         },
     },
     computed: {
+        ...mapGetters("cpo", ["deletedCpos"]),
+        isDeletedx() {
+            if (
+                this.deletedCpos.find((item) => item.id === this.headerItem.id)
+            ) {
+                return true;
+            }
+
+            return false;
+        },
         laravelData() {
             return this.$store.getters.laravelData;
         },
@@ -122,10 +133,10 @@ export default {
         trClasses() {
             return {
                 // "table-secondary": this.localHeaderItem.locked,
-                blink: this.isStatusUpdated && !this.isDeleted,
-                "table-success": this.isStatusUpdated && !this.isDeleted,
-                "table-danger": this.isDeleted,
-                "tr-exit": this.isDeleted,
+                blink: this.isStatusUpdated && !this.isDeletedx,
+                "table-success": this.isStatusUpdated && !this.isDeletedx,
+                "table-danger": this.isDeletedx,
+                "tr-exit": this.isDeletedx,
             };
         },
         selectedPos() {
@@ -208,7 +219,9 @@ export default {
             // });
         },
         deleteCpo() {
-            this.isDeleteCpo = true;
+            console.log("emit");
+            this.$emit("delete-cpo", { id: this.headerItem.id });
+            // this.isDeleteCpo = true;
             // this.$emit("open-delete-cpo", this.localHeaderItem.id);
             // // open modal
             // const res = await axios.post("/repairs/api/cpo/destroy", {

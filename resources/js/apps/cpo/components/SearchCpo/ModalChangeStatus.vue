@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade show" tabindex="-1" style="display: block">
-        <div class="modal-dialog modal-lg border border-primary">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
                     <h5 class="modal-title text-white">
@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     emits: ["close-modal"],
     inject: ["setShowBackDrop"],
@@ -127,6 +128,7 @@ export default {
         },
     },
     methods: {
+        ...mapActions("cpo", ["addDeletedCpos", "updateSelectedCpoDeleted"]),
         cancelDeleteConfirm() {
             this.showConfirmDelete = false;
         },
@@ -137,9 +139,13 @@ export default {
             if (res.data) {
                 this.deletedCpos = res.data.cpos_deleted;
                 for (const cpo of this.deletedCpos) {
-                    this.$store.dispatch("cpo/updateSelectedCpoDeleted", {
+                    this.updateSelectedCpoDeleted({
                         id: cpo.id,
                         isDeleted: true,
+                    });
+
+                    this.addDeletedCpos({
+                        id: cpo.id,
                     });
                 }
                 // console.log(this.deletedCpos);

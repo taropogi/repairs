@@ -2,6 +2,13 @@
     <div>
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
+            <modal-delete-cpo
+                v-if="deleteCpo"
+                :cpo-id="deleteCpo.id"
+                @close-modal-delete-cpo="closeModalDeleteCpo"
+                @deleted-cpo="closeModalDeleteCpo"
+            ></modal-delete-cpo>
+
             <table
                 class="table table-sm table-bordered table-striped table-hover"
             >
@@ -33,6 +40,7 @@
                         v-for="item in cpoHeaderList"
                         :key="item.id"
                         :header-item="item"
+                        @delete-cpo="openDeleteCpo"
                     ></header-list-item>
                 </tbody>
             </table>
@@ -43,21 +51,28 @@
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
+import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
+import { mapGetters } from "vuex";
 
 export default {
     components: {
         HeaderListItem,
         SpinnerLoading,
+        ModalDeleteCpo,
     },
     data() {
         return {
             cpoHeaderList: [],
             selectedHeaders: [],
             isSearching: false,
+
+            deleteCpo: null,
         };
     },
+
     props: ["searchCriteria"],
     computed: {
+        ...mapGetters("cpo", ["deletedCpos"]),
         selectedPosCount() {
             return this.selectedPos.length;
         },
@@ -81,6 +96,12 @@ export default {
     },
 
     methods: {
+        openDeleteCpo(cpoId) {
+            this.deleteCpo = cpoId;
+        },
+        closeModalDeleteCpo() {
+            this.deleteCpo = null;
+        },
         getCpoHeaders() {
             this.isSearching = true;
             axios
