@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="btn-group" role="group">
+        <div class="btn-group" role="group" v-if="false">
             <button type="button" class="btn btn-danger">Search</button>
             <button type="button" class="btn btn-warning" @click="exportPdf">
                 Export/PDF

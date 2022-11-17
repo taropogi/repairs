@@ -30,7 +30,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" v-if="!isDeleting">
                     <button
                         type="button"
                         class="btn btn-danger"
@@ -54,19 +54,23 @@
 <script>
 export default {
     props: ["cpoId"],
+    inject: ["setShowBackDrop"],
     data() {
         return {
             headerRow: null,
+            isDeleting: false,
         };
     },
     methods: {
         async confirmDelete() {
+            this.isDeleting = true;
             const res = await axios.post("api/cpo/destroy", {
                 cpoId: this.cpoId,
             });
             if (res.data) {
                 // this.unselectPo();
                 // this.isDeleted = true;
+                this.isDeleting = false;
                 this.$emit("deleted-cpo");
             }
         },
@@ -83,6 +87,10 @@ export default {
     },
     mounted() {
         this.getCpoHeader();
+        this.setShowBackDrop(true);
+    },
+    unmounted() {
+        this.setShowBackDrop(false);
     },
 };
 </script>
