@@ -74,12 +74,16 @@
                         </button>
                     </div>
                     <div v-else>
-                        <button
+                        <!-- <button
                             type="button"
                             class="btn btn-secondary m-2"
                             @click="closeModal"
                         >
                             Close
+                        </button> -->
+
+                        <button type="button" class="btn btn-warning m-2">
+                            Download PDFs
                         </button>
                         <button
                             type="button"

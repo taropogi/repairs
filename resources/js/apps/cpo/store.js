@@ -1,11 +1,13 @@
 import { createStore } from "vuex";
 import authModule from "./store/modules/auth/index.js";
 import cpoModule from "./store/modules/cpo/index.js";
+import exportModule from "./store/modules/export/index.js";
 
 const store = createStore({
     modules: {
         auth: authModule,
         cpo: cpoModule,
+        export: exportModule,
     },
     state() {
         return {

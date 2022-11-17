@@ -23,7 +23,9 @@
         </th>
 
         <td>
-            {{ headerItem.rpo_number }}
+            <label :for="id">
+                {{ headerItem.rpo_number }}
+            </label>
         </td>
         <td>
             {{ localHeaderItem.customer_name }}

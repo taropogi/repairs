@@ -1,0 +1,47 @@
+<template>
+    <div class="form-check">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            :value="status.id"
+            v-model="isSelected"
+            @change="selectStatus"
+            :id="status.id"
+        />
+        <label class="form-check-label" :for="status.id">
+            {{ status.status }}
+        </label>
+    </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+    props: ["status"],
+    data() {
+        return {
+            isSelected: false,
+        };
+    },
+    computed: {
+        ...mapGetters("export", ["selectedStatus"]),
+    },
+
+    methods: {
+        selectStatus() {
+            if (this.isSelected) {
+                this.addSelectedStatus({
+                    id: this.status.id,
+                });
+            } else {
+                this.removeSelectedStatus({
+                    id: this.status.id,
+                });
+            }
+        },
+        ...mapActions("export", ["addSelectedStatus", "removeSelectedStatus"]),
+    },
+};
+</script>
+
+<style></style>

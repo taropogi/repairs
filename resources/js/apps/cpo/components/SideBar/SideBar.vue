@@ -29,13 +29,10 @@
             </li>
         </ul>
 
-        <div class="d-grid gap-2" v-if="isNavExportActive">
-            <button class="btn btn-danger" type="button">Export PDF</button>
-            <button class="btn btn-success" type="button">Export Excel</button>
-        </div>
+        <export-buttons></export-buttons>
 
-        <MultiOptions v-if="selectedPosCount && isNavSearchActive">
-        </MultiOptions>
+        <multi-options v-if="selectedPosCount && isNavSearchActive">
+        </multi-options>
 
         <hr />
 
@@ -45,12 +42,12 @@
 
 <script>
 import UserOptions from "./UserOptions.vue";
-
+import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
 export default {
     components: {
         UserOptions,
-
+        ExportButtons,
         MultiOptions,
     },
     data() {

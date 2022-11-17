@@ -2,28 +2,7 @@
     <div class="p-2">
         <div class="row">
             <div class="col">
-                <div class="mb-3">
-                    <label class="form-label">CPO Status</label>
-                    <div
-                        class="form-check"
-                        v-for="status in cpoStatuses"
-                        :key="status.id + status.status"
-                    >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            :value="status.id"
-                            v-model="selectedStatuses"
-                            :id="status.id + 'status'"
-                        />
-                        <label
-                            class="form-check-label"
-                            :for="status.id + 'status'"
-                        >
-                            {{ status.status }}
-                        </label>
-                    </div>
-                </div>
+                <export-by-status></export-by-status>
             </div>
             <div class="col">
                 <div class="row">
@@ -108,7 +87,11 @@
 </template>
 
 <script>
+import ExportByStatus from "./ExportByStatus.vue";
 export default {
+    components: {
+        ExportByStatus,
+    },
     inject: ["laravelData"],
     data() {
         return {
