@@ -1,6 +1,8 @@
 <template>
-    <div class="mb-3">
-        <label class="form-label">CPO Status</label>
+    <div>
+        <h3 class="bg-primary p-2 text-white rounded">CPO Status</h3>
+        <span>Kindly specify a date range </span>
+
         <by-status-item
             v-for="status in cpoStatuses"
             :key="status.id + status.status"

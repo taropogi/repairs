@@ -10,39 +10,7 @@
             </div>
 
             <div class="col">
-                <div class="mb-3">
-                    <label for="date-change-status-from" class="form-label"
-                        >CPOs Change Status From</label
-                    >
-                    <input
-                        v-model="cpoChangedStatusDate.from"
-                        type="date"
-                        class="form-control"
-                        id="date-change-status-from"
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label for="date-change-status-to" class="form-label"
-                        >CPOs Change Status To</label
-                    >
-                    <input
-                        v-model="cpoChangedStatusDate.to"
-                        type="date"
-                        class="form-control"
-                        id="date-change-status-to"
-                    />
-                </div>
-                Changed to
-                <select class="form-select">
-                    <option
-                        v-for="status in cpoStatuses"
-                        :key="'status-changed-to' + status.id"
-                        :value="status.id"
-                    >
-                        {{ status.status }}
-                    </option>
-                </select>
+                <by-change-status></by-change-status>
             </div>
         </div>
 
@@ -61,21 +29,18 @@
 <script>
 import ExportByStatus from "./ExportByStatus.vue";
 import ExportByModified from "./ExportByModified.vue";
+import ByChangeStatus from "./ByChangeStatus.vue";
 export default {
     components: {
         ExportByStatus,
         ExportByModified,
+        ByChangeStatus,
     },
     inject: ["laravelData"],
     data() {
         return {
             cpoStatuses: null,
             selectedStatuses: [],
-
-            cpoChangedStatusDate: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
-            },
         };
     },
     computed: {

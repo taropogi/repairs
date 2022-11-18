@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="mb-3">
-            <label for="date-modified-from" class="form-label"
-                >CPOs Modified From
-            </label>
+        <h3 class="bg-success p-2 text-white rounded">Modified CPOs</h3>
+        <span>Kindly specify a date range </span>
+        <div class="my-3">
+            <label for="date-modified-from" class="form-label">From </label>
             <input
                 v-model="cpoModifiedDate.from"
                 type="date"
@@ -13,9 +13,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="date-modified-to" class="form-label"
-                >CPOs Modified From</label
-            >
+            <label for="date-modified-to" class="form-label">To</label>
             <input
                 v-model="cpoModifiedDate.to"
                 type="date"
