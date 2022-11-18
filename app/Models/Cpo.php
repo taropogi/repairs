@@ -12,7 +12,7 @@ class Cpo extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-    protected $with = ['status', 'status_history'];
+    protected $with = ['status', 'status_history', 'lines'];
 
     public function lines()
     {

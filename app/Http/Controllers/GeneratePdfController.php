@@ -17,22 +17,29 @@ class GeneratePdfController extends Controller
     }
     public function generatePdf(Request $request)
     {
-        $cpo = Cpo::where('id', $request->id)->first();
-        $data = [
-            'title' => $cpo->customer_name,
-            'date' => date('m/d/Y'),
-            'customer_name' => strtoupper($cpo->customer_name),
-            'customer_address' => strtoupper($cpo->customer_address),
-            'rpo_number' => strtoupper($cpo->rpo_number),
-            'contact_number' => strtoupper($cpo->contact_number),
-            'prepared_by' => strtoupper($cpo->prepared_by),
-            'authorized_by' => strtoupper($cpo->authorized_by),
-            'lines' => $cpo->lines,
-        ];
+        $cpo = Cpo::where('id', $request->id)->get();
+        $data['title'] = 'Multi Selected CPOS';
+        $data['cpos'] = $cpo;
+        $data['date'] = date('m/d/Y');
 
-        $pdf = PDF::loadView('pdf.samplePdf', $data);
+        $pdf = PDF::loadView('pdf.multiCpos', $data);
 
-        return $pdf->download('RPO#' . $cpo->rpo_number . '.pdf');
+        return $pdf->download('RPO#' . $cpo[0]->rpo_number . '.pdf');
+    }
+
+    public function generatePdfs(Request $request)
+    {
+        $cpos = Cpo::whereIn('id', explode(',', $request->id))->get();
+
+
+
+        $data['title'] = 'Multi Selected CPOS';
+        $data['date'] = date('m/d/Y');
+        $data['cpos'] = $cpos;
+
+        $pdf = PDF::loadView('pdf.multiCpos', $data);
+
+        return $pdf->download('Multiple CPOs.pdf');
     }
 
     public function listByCpoStatusPdf(Request $request)

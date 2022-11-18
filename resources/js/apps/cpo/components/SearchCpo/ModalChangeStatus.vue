@@ -82,7 +82,11 @@
                             Close
                         </button> -->
 
-                        <button type="button" class="btn btn-warning m-2">
+                        <button
+                            type="button"
+                            class="btn btn-warning m-2"
+                            @click="downloadPdfs"
+                        >
                             Download PDFs
                         </button>
                         <button
@@ -107,10 +111,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
     emits: ["close-modal"],
-    inject: ["setShowBackDrop"],
+    inject: ["setShowBackDrop", "laravelData"],
     data() {
         return {
             selectedCpos: null,
@@ -126,9 +130,20 @@ export default {
                 (cpo) => cpo.id
             );
         },
+        linkGeneratePdfs() {
+            return this.laravelData.route_list.find(
+                (route) => route.routeName === "generate-pdfs"
+            ).uri;
+        },
     },
     methods: {
         ...mapActions("cpo", ["addDeletedCpos", "updateSelectedCpoDeleted"]),
+
+        downloadPdfs() {
+            console.log("pdfs");
+            window.location.href =
+                this.linkGeneratePdfs + "/?id=" + this.selectedPosId;
+        },
         cancelDeleteConfirm() {
             this.showConfirmDelete = false;
         },

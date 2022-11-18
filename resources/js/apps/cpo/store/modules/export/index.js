@@ -7,6 +7,10 @@ const exportModule = {
     state() {
         return {
             selectedStatus: [],
+            cpoModifiedDate: {
+                from: new Date().toISOString().slice(0, 10),
+                to: new Date().toISOString().slice(0, 10),
+            },
         };
     },
     mutations,

@@ -19,6 +19,7 @@ use App\Http\Controllers\WelcomeController;
 
 //pdf generate
 Route::get('/generatePdf', [GeneratePdfController::class, 'generatePdf'])->name('generate-pdf');
+Route::get('/generatePdfs', [GeneratePdfController::class, 'generatePdfs'])->name('generate-pdfs');
 Route::get('/pdf/cpo/list/by/status', [GeneratePdfController::class, 'listByCpoStatusPdf'])->name('generate-pdf-by-status');
 Route::get('/xls/cpo/list/by/status', [GeneratePdfController::class, 'listByCpoStatusXls'])->name('generate-xls-by-status');
 

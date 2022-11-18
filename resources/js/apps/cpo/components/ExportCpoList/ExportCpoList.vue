@@ -4,73 +4,45 @@
             <div class="col">
                 <export-by-status></export-by-status>
             </div>
+
             <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label for="date-modified-from" class="form-label"
-                                >CPOs Modified From
-                            </label>
-                            <input
-                                v-model="cpoModifiedDate.from"
-                                type="date"
-                                class="form-control"
-                                id="date-modified-from"
-                            />
-                        </div>
+                <export-by-modified></export-by-modified>
+            </div>
 
-                        <div class="mb-3">
-                            <label for="date-modified-to" class="form-label"
-                                >CPOs Modified From</label
-                            >
-                            <input
-                                v-model="cpoModifiedDate.to"
-                                type="date"
-                                class="form-control"
-                                id="date-modified-to"
-                            />
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <label
-                                for="date-change-status-from"
-                                class="form-label"
-                                >CPOs Change Status From</label
-                            >
-                            <input
-                                v-model="cpoChangedStatusDate.from"
-                                type="date"
-                                class="form-control"
-                                id="date-change-status-from"
-                            />
-                        </div>
-
-                        <div class="mb-3">
-                            <label
-                                for="date-change-status-to"
-                                class="form-label"
-                                >CPOs Change Status To</label
-                            >
-                            <input
-                                v-model="cpoChangedStatusDate.to"
-                                type="date"
-                                class="form-control"
-                                id="date-change-status-to"
-                            />
-                        </div>
-                        Changed to
-                        <select class="form-select">
-                            <option
-                                v-for="status in cpoStatuses"
-                                :key="'status-changed-to' + status.id"
-                                :value="status.id"
-                            >
-                                {{ status.status }}
-                            </option>
-                        </select>
-                    </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="date-change-status-from" class="form-label"
+                        >CPOs Change Status From</label
+                    >
+                    <input
+                        v-model="cpoChangedStatusDate.from"
+                        type="date"
+                        class="form-control"
+                        id="date-change-status-from"
+                    />
                 </div>
+
+                <div class="mb-3">
+                    <label for="date-change-status-to" class="form-label"
+                        >CPOs Change Status To</label
+                    >
+                    <input
+                        v-model="cpoChangedStatusDate.to"
+                        type="date"
+                        class="form-control"
+                        id="date-change-status-to"
+                    />
+                </div>
+                Changed to
+                <select class="form-select">
+                    <option
+                        v-for="status in cpoStatuses"
+                        :key="'status-changed-to' + status.id"
+                        :value="status.id"
+                    >
+                        {{ status.status }}
+                    </option>
+                </select>
             </div>
         </div>
 
@@ -88,19 +60,18 @@
 
 <script>
 import ExportByStatus from "./ExportByStatus.vue";
+import ExportByModified from "./ExportByModified.vue";
 export default {
     components: {
         ExportByStatus,
+        ExportByModified,
     },
     inject: ["laravelData"],
     data() {
         return {
             cpoStatuses: null,
             selectedStatuses: [],
-            cpoModifiedDate: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
-            },
+
             cpoChangedStatusDate: {
                 from: new Date().toISOString().slice(0, 10),
                 to: new Date().toISOString().slice(0, 10),
