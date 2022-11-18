@@ -162,6 +162,33 @@ class CpoController extends Controller
         return $response;
     }
 
+    public function getHeadersChangedStatus(Request $request)
+    {
+        $response = [];
+        if ($request->date_from && $request->date_to && $request->status_to) {
+
+            $query = DB::table('header_status_histories as history')
+                ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
+                ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
+                ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
+                ->select('cpos.id', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
+                ->selectRaw('date(history.updated_at) as changed_date')
+                ->whereRaw("Date(history.updated_at) >= '" . $request->date_from . "'")
+                ->whereRaw("Date(history.updated_at) <= '" . $request->date_to . "'")
+                ->whereRaw("history.old_status_id is not null")
+                ->where("history.header_status_id", $request->status_to);
+
+            if ($request->only_current_status) {
+                $query->where("cpos.status_id", $request->status_to);
+            }
+
+            $response['cpos'] = $query->get();
+        }
+
+
+        return $response;
+    }
+
     public function getCpoHeaders(Request $request)
     {
 
@@ -257,6 +284,7 @@ class CpoController extends Controller
 
         $not_updated_cpos =  Cpo::whereIn('id',  $request->rpos)->get();
         foreach ($not_updated_cpos as $cpo) {
+            $old_status_id = $cpo->status->id;
             Cpo::where('id',  $cpo->id)
                 ->update([
                     'status_id' =>  $request->selected_status
@@ -264,6 +292,7 @@ class CpoController extends Controller
             if ($cpo->status->id <> $request->selected_status) {
                 $cpo->status_history()->create([
                     'header_status_id' => $request->selected_status,
+                    'old_status_id' =>  $old_status_id,
                     'changed_by' => auth()->user()->id
                 ]);
             }
@@ -297,8 +326,10 @@ class CpoController extends Controller
 
 
         if ($cpo->status_id !== $request->status_id) {
+            $old_status_id = $cpo->status_id;
             $cpo->status_history()->create([
                 'header_status_id' => $request->status_id,
+                'old_status_id' =>  $old_status_id,
                 'changed_by' => auth()->user()->id
             ]);
 

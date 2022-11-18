@@ -19,6 +19,7 @@ class CreateHeaderStatusHistoriesTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->integer('old_status_id')->nullable();
             $table->foreignId('header_status_id')
                 ->constrained()
                 ->onDelete('cascade')

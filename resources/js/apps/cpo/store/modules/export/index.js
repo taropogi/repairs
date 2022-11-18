@@ -8,13 +8,35 @@ const exportModule = {
         return {
             selectedStatus: [],
             cpoModifiedDate: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
+                from:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
+                to:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
             },
             cpoChangedStatusDate: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
+                from:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
+                to:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
             },
+            cpoChangedStatusTo: 2,
+            cpoChangedStatusCurrent: true,
         };
     },
     mutations,

@@ -32,8 +32,18 @@ export default {
     data() {
         return {
             cpoModifiedDateLocal: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
+                from:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
+                to:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
             },
         };
     },
@@ -47,6 +57,9 @@ export default {
                 ...this.cpoModifiedDateLocal,
             });
         },
+    },
+    mounted() {
+        this.setModifiedDate();
     },
 };
 </script>

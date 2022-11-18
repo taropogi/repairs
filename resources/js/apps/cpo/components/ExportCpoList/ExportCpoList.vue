@@ -22,24 +22,7 @@
                     style="height: 300px"
                     class="sticky-top bg-white border-bottom overflow-auto"
                 ></by-change-status>
-                <table class="table table-sm">
-                    <thead>
-                        <tr class="table-danger">
-                            <th scope="col">RPO #</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">32</th>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">234</th>
-                            <td>Jacob</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <list-changed-status></list-changed-status>
             </div>
         </div>
 
@@ -61,6 +44,7 @@ import ExportByModified from "./ExportByModified.vue";
 import ByChangeStatus from "./ByChangeStatus.vue";
 import ListByStatus from "./ListByStatus.vue";
 import ListByModified from "./ListByModified.vue";
+import ListChangedStatus from "./ListChangedStatus.vue";
 export default {
     components: {
         ExportByStatus,
@@ -68,6 +52,7 @@ export default {
         ByChangeStatus,
         ListByStatus,
         ListByModified,
+        ListChangedStatus,
     },
     inject: ["laravelData"],
     data() {

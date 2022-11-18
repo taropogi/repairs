@@ -54,7 +54,7 @@ export default {
         },
     },
     mounted() {
-        // this.getCpoByModified();
+        this.getCpoByModified();
     },
 };
 </script>

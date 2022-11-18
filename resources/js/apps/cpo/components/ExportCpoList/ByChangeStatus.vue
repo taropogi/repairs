@@ -24,7 +24,11 @@
             />
         </div>
         Changed Status to:
-        <select class="form-select">
+        <select
+            class="form-select"
+            v-model="selectedStatus"
+            @change="setChangeStatusTo"
+        >
             <option
                 v-for="status in cpoStatuses"
                 :key="'status-changed-to' + status.id"
@@ -33,23 +37,63 @@
                 {{ status.status }}
             </option>
         </select>
+
+        <div class="form-check my-3 form-switch">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                v-model="onlyCurrentStatus"
+                @change="setCurrentOnly"
+                id="only-current-status"
+            />
+            <label class="form-check-label" for="only-current-status">
+                Only with this current status
+            </label>
+        </div>
     </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     data() {
         return {
+            selectedStatus: 2,
             cpoStatuses: null,
+            onlyCurrentStatus: true,
             cpoChangedStatusDate: {
-                from: new Date().toISOString().slice(0, 10),
-                to: new Date().toISOString().slice(0, 10),
+                from:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
+                to:
+                    new Date().getFullYear() +
+                    "-" +
+                    (Number(new Date().getMonth()) + 1) +
+                    "-" +
+                    new Date().getDate(),
             },
         };
     },
     methods: {
+        ...mapActions("export", [
+            "setCpoChangedStatusDate",
+            "setCpoChangedStatusTo",
+            "setCpoChangedStatusCurrent",
+        ]),
+        setCurrentOnly() {
+            console.log("change");
+            this.setCpoChangedStatusCurrent(this.onlyCurrentStatus);
+        },
+        setChangeStatusTo() {
+            this.setCpoChangedStatusTo(this.selectedStatus);
+        },
         setChangeStatusDate() {
-            console.log("changed");
+            this.setCpoChangedStatusDate({
+                ...this.cpoChangedStatusDate,
+            });
         },
         async getDataCriteria() {
             await axios
@@ -65,6 +109,8 @@ export default {
     },
     mounted() {
         this.getDataCriteria();
+        this.setCpoChangedStatusTo(this.selectedStatus);
+        this.setCpoChangedStatusCurrent(this.onlyCurrentStatus);
     },
 };
 </script>

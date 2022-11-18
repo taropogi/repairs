@@ -18,4 +18,10 @@ export default {
     setCpoChangedStatusDate(state, payload) {
         state.cpoChangedStatusDate = payload;
     },
+    setCpoChangedStatusTo(state, payload) {
+        state.cpoChangedStatusTo = payload;
+    },
+    setCpoChangedStatusCurrent(state, payload) {
+        state.cpoChangedStatusCurrent = payload;
+    },
 };

@@ -8,4 +8,10 @@ export default {
     cpoChangedStatusDate(state) {
         return state.cpoChangedStatusDate;
     },
+    cpoChangedStatusTo(state) {
+        return state.cpoChangedStatusTo;
+    },
+    cpoChangedStatusCurrent(state) {
+        return state.cpoChangedStatusCurrent;
+    },
 };

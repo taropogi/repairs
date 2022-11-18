@@ -8,7 +8,14 @@ export default {
     setCpoModifiedDate(context, payload) {
         context.commit("setCpoModifiedDate", payload);
     },
-    setCpoChangedStatusDate(state, payload) {
-        context.commit("cpoChangedStatusDate", payload);
+    setCpoChangedStatusDate(context, payload) {
+        context.commit("setCpoChangedStatusDate", payload);
+    },
+    setCpoChangedStatusTo(context, payload) {
+        context.commit("setCpoChangedStatusTo", payload);
+    },
+
+    setCpoChangedStatusCurrent(context, payload) {
+        context.commit("setCpoChangedStatusCurrent", payload);
     },
 };

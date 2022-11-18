@@ -32,6 +32,7 @@ Route::post('cpo', [CpoController::class, 'create']);
 Route::post('cpo/update', [CpoController::class, 'update']);
 Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 Route::post('cpo/by/status', [CpoController::class, 'getHeadersByStatus']);
+Route::post('cpo/changed/status', [CpoController::class, 'getHeadersChangedStatus']);
 Route::post('cpo/by/modified', [CpoController::class, 'getHeadersByModified']);
 Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
 Route::get('cpo/lines/{cpo}', [CpoController::class, 'getCpoLines']);
