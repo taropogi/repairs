@@ -2,15 +2,44 @@
     <div class="p-2">
         <div class="row">
             <div class="col border-end">
-                <export-by-status></export-by-status>
+                <export-by-status
+                    style="height: 300px"
+                    class="sticky-top bg-white border-bottom overflow-auto"
+                ></export-by-status>
+                <list-by-status></list-by-status>
             </div>
 
             <div class="col border-end">
-                <export-by-modified></export-by-modified>
+                <export-by-modified
+                    style="height: 300px"
+                    class="sticky-top bg-white border-bottom overflow-auto"
+                ></export-by-modified>
+                <list-by-modified></list-by-modified>
             </div>
 
             <div class="col">
-                <by-change-status></by-change-status>
+                <by-change-status
+                    style="height: 300px"
+                    class="sticky-top bg-white border-bottom overflow-auto"
+                ></by-change-status>
+                <table class="table table-sm">
+                    <thead>
+                        <tr class="table-danger">
+                            <th scope="col">RPO #</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">32</th>
+                            <td>Mark</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">234</th>
+                            <td>Jacob</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -30,16 +59,19 @@
 import ExportByStatus from "./ExportByStatus.vue";
 import ExportByModified from "./ExportByModified.vue";
 import ByChangeStatus from "./ByChangeStatus.vue";
+import ListByStatus from "./ListByStatus.vue";
+import ListByModified from "./ListByModified.vue";
 export default {
     components: {
         ExportByStatus,
         ExportByModified,
         ByChangeStatus,
+        ListByStatus,
+        ListByModified,
     },
     inject: ["laravelData"],
     data() {
         return {
-            cpoStatuses: null,
             selectedStatuses: [],
         };
     },
@@ -71,17 +103,6 @@ export default {
                 "/?status_id=" +
                 this.selectedStatuses;
         },
-        async getDataCriteria() {
-            await axios
-                .get("api/export/criteria/data")
-                .then((response) => {
-                    // console.log("success");
-                    this.cpoStatuses = response.data.header_statuses;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
     },
     beforeCreate() {
         this.$store.commit("setActiveNav", {
@@ -89,7 +110,6 @@ export default {
         });
     },
     mounted() {
-        this.getDataCriteria();
         this.$store.commit("setMainPageTitleHeader", "CPO - Export");
     },
     updated() {

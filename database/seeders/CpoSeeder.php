@@ -14,6 +14,6 @@ class CpoSeeder extends Seeder
      */
     public function run()
     {
-        Cpo::factory()->times(100)->create();
+        Cpo::factory()->times(1000)->create();
     }
 }

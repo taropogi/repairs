@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\CpoLine;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
 use Illuminate\Support\Facades\Auth;
 
@@ -132,6 +133,34 @@ class CpoController extends Controller
         return $response;
     }
 
+
+    public function getHeadersByStatus(Request $request)
+    {
+        $response = [];
+
+        if ($request->status_ids && count($request->status_ids) > 0) {
+
+            $response['cpos'] = Cpo::whereIn('status_id', $request->status_ids)->get();
+        }
+
+        return $response;
+    }
+
+    public function getHeadersByModified(Request $request)
+    {
+
+        $response = [];
+
+        if ($request->date_from && $request->date_to) {
+
+            $response['cpos'] = Cpo::whereRaw(DB::raw("Date(updated_at) >= '" . $request->date_from . "'"))
+                ->whereRaw(DB::raw("Date(updated_at) <= '" . $request->date_to . "'"))->orderBy('updated_at', 'DESC')
+                ->whereRaw(DB::raw('updated_at <> created_at'))
+                ->get();
+        }
+
+        return $response;
+    }
 
     public function getCpoHeaders(Request $request)
     {

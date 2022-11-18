@@ -6,12 +6,14 @@ import router from "./router.js";
 import store from "./store.js";
 
 import SideBar from "./components/SideBar/SideBar.vue";
+import SpinnerLoading from "./components/UI/SpinnerLoading.vue";
 
 const app = createApp(App);
 app.use(router);
 app.use(store);
 
 app.component("side-bar", SideBar);
+app.component("spinner-loading", SpinnerLoading);
 
 app.config.unwrapInjectedRef = true;
 // console.log(app.config);

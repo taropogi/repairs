@@ -1,7 +1,7 @@
 <template>
     <div class="d-grid gap-2" v-if="isNavExportActive">
         <button class="btn btn-danger" type="button" @click="exportPdf">
-            Export PDF {{ selectedStatusCount }}
+            Export PDF
         </button>
         <button class="btn btn-success" type="button" @click="exportXls">
             Export Excel
@@ -15,7 +15,7 @@ export default {
     inject: ["laravelData"],
     computed: {
         ...mapGetters(["activeNav"]),
-        ...mapGetters("export", ["selectedStatus"]),
+        ...mapGetters("export", ["selectedStatus", "cpoModifiedDate"]),
         showExportBtns() {
             return this.selectedStatusCount > 0;
         },
@@ -44,13 +44,21 @@ export default {
             window.location.href =
                 this.linkXlsListByStatus +
                 "/?status_id=" +
-                this.selectedStatus.map((status) => status.id);
+                this.selectedStatus.map((status) => status.id) +
+                "&cpo_modified_from=" +
+                this.cpoModifiedDate.from +
+                "&cpo_modified_to=" +
+                this.cpoModifiedDate.to;
         },
         exportPdf() {
             window.location.href =
                 this.linkPdfListByStatus +
                 "/?status_id=" +
-                this.selectedStatus.map((status) => status.id);
+                this.selectedStatus.map((status) => status.id) +
+                "&cpo_modified_from=" +
+                this.cpoModifiedDate.from +
+                "&cpo_modified_to=" +
+                this.cpoModifiedDate.to;
         },
     },
 };

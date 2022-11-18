@@ -11,6 +11,10 @@ const exportModule = {
                 from: new Date().toISOString().slice(0, 10),
                 to: new Date().toISOString().slice(0, 10),
             },
+            cpoChangedStatusDate: {
+                from: new Date().toISOString().slice(0, 10),
+                to: new Date().toISOString().slice(0, 10),
+            },
         };
     },
     mutations,

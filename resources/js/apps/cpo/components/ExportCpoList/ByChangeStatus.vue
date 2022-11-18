@@ -9,6 +9,7 @@
                 type="date"
                 class="form-control"
                 id="date-change-status-from"
+                @change="setChangeStatusDate"
             />
         </div>
 
@@ -19,6 +20,7 @@
                 type="date"
                 class="form-control"
                 id="date-change-status-to"
+                @change="setChangeStatusDate"
             />
         </div>
         Changed Status to:
@@ -38,11 +40,31 @@
 export default {
     data() {
         return {
+            cpoStatuses: null,
             cpoChangedStatusDate: {
                 from: new Date().toISOString().slice(0, 10),
                 to: new Date().toISOString().slice(0, 10),
             },
         };
+    },
+    methods: {
+        setChangeStatusDate() {
+            console.log("changed");
+        },
+        async getDataCriteria() {
+            await axios
+                .get("api/export/criteria/data")
+                .then((response) => {
+                    // console.log("success");
+                    this.cpoStatuses = response.data.header_statuses;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+    },
+    mounted() {
+        this.getDataCriteria();
     },
 };
 </script>

@@ -68,7 +68,7 @@
 
     </table>
 
-    @if($cpos)
+    @if(isset($cpos))
     <p style="font-size: x-small;">
         LIST OF CPOS BY STATUS
     </p>
@@ -92,6 +92,43 @@
                 <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
                 <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
                 <td class="text-center"><small>{{ $header_statuses[$cpo->status_id] }}</small></td>
+
+            </tr>
+            @endforeach
+
+
+        </tbody>
+
+
+    </table>
+
+    @endif
+
+
+    @if(isset($cpos_modified))
+    <p style="font-size: x-small;">
+        LIST OF CPOS MODIFIED FROM {{ $modified_from }} TO {{ $modified_to }}
+    </p>
+
+    <table width="100%" style="border: 1px solid;" class="to-border">
+        <thead style="background-color: lightgray;">
+            <tr>
+                <td>#</td>
+                <th>RPO#</th>
+                <th>CUSTOMER</th>
+                <th>ADDRESS</th>
+                <th>Modified date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($cpos_modified as $cpo)
+            <tr>
+                <th scope="row">{{ $cpo->id }}</th>
+                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+                <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
+                <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
+                <td class="text-center"><small>{{ $cpo->updated_at }}</small></td>
 
             </tr>
             @endforeach

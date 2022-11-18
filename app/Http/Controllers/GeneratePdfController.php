@@ -7,6 +7,8 @@ use App\Models\Cpo;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Exports\ExportCpoByStatus;
+use App\Exports\ExportCpoLists;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GeneratePdfController extends Controller
@@ -44,38 +46,60 @@ class GeneratePdfController extends Controller
 
     public function listByCpoStatusPdf(Request $request)
     {
-        if ($request->status_id) {
-
-
-            $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
-
+        if ($request->status_id || ($request->cpo_modified_from && $request->cpo_modified_to)) {
+            $data['title'] = 'export';
+            $data['date'] = date('m/d/Y');
 
             $header_statuses = HeaderStatus::all();
             $header_statuses_indexed = [];
             foreach ($header_statuses as $status) {
                 $header_statuses_indexed[$status->id] = $status->status;
             }
+            $data['header_statuses'] =  $header_statuses_indexed;
 
 
-            $data = [
-                'title' => 'CPO list by status',
-                'cpos' => $cpos,
-                'header_statuses' => $header_statuses_indexed,
-                'date' => date('m/d/Y'),
-            ];
+
+
+
+
+            if ($request->status_id) {
+                $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
+                if (count($cpos) > 0) {
+
+                    $data['cpos'] =  $cpos;
+                }
+            }
+
+            if ($request->cpo_modified_from && $request->cpo_modified_to) {
+                // dd($request->cpo_modified_from . ' ' . $request->cpo_modified_to);
+                $cpos_modified = Cpo::whereRaw(DB::raw("Date(updated_at) >= '" . $request->cpo_modified_from . "'"))
+                    ->whereRaw(DB::raw("Date(updated_at) <= '" . $request->cpo_modified_to . "'"))
+                    ->whereRaw(DB::raw('updated_at <> created_at'))
+                    ->get();
+
+                // dd($cpos_modified);
+
+                $data['cpos_modified'] =  $cpos_modified;
+                $data['modified_from'] =  $request->cpo_modified_from;
+                $data['modified_to'] =  $request->cpo_modified_to;
+            };
 
             $pdf = PDF::loadView('pdf.cpoListByStatus', $data);
 
-
-
-            return  $pdf->download('CPO List By Status.pdf');
+            return  $pdf->download('CPO List.pdf');
         }
+
+
+        $pdf = PDF::loadView('pdf.no-result');
+        return  $pdf->download('NO-RESULT.pdf');
     }
 
     public function listByCpoStatusXls(Request $request)
     {
 
-        return Excel::download(new ExportCpoByStatus($request), 'CpoListByStatus.xlsx');
+        // return Excel::download(new ExportCpoByStatus($request), 'CpoListByStatus.xlsx');
+
+        return (new ExportCpoLists($request))->download('CPO List.xlsx');
     }
 
     public function testUser()

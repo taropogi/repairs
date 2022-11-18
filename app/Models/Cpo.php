@@ -10,14 +10,18 @@ class Cpo extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    // public $timestamps = false;
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
+
+
 
     public function lines()
     {
         return $this->hasMany(CpoLine::class);
     }
+
+
 
     public function status_history()
     {

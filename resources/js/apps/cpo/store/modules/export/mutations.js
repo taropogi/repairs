@@ -11,4 +11,11 @@ export default {
         );
         state.selectedStatus = myArray;
     },
+    setCpoModifiedDate(state, payload) {
+        state.cpoModifiedDate = payload;
+    },
+
+    setCpoChangedStatusDate(state, payload) {
+        state.cpoChangedStatusDate = payload;
+    },
 };

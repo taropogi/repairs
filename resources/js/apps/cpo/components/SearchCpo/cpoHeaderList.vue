@@ -52,14 +52,14 @@
 
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
-import SpinnerLoading from "../UI/SpinnerLoading.vue";
+
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 import { mapGetters } from "vuex";
 
 export default {
     components: {
         HeaderListItem,
-        SpinnerLoading,
+
         ModalDeleteCpo,
     },
     data() {
