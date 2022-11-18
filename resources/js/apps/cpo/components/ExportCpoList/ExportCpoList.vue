@@ -1,11 +1,11 @@
 <template>
     <div class="p-2">
         <div class="row">
-            <div class="col">
+            <div class="col border-end">
                 <export-by-status></export-by-status>
             </div>
 
-            <div class="col">
+            <div class="col border-end">
                 <export-by-modified></export-by-modified>
             </div>
 

@@ -1,7 +1,7 @@
 <template>
     <div class="d-grid gap-2" v-if="isNavExportActive">
         <button class="btn btn-danger" type="button" @click="exportPdf">
-            Export PDF
+            Export PDF {{ selectedStatusCount }}
         </button>
         <button class="btn btn-success" type="button" @click="exportXls">
             Export Excel
@@ -16,6 +16,12 @@ export default {
     computed: {
         ...mapGetters(["activeNav"]),
         ...mapGetters("export", ["selectedStatus"]),
+        showExportBtns() {
+            return this.selectedStatusCount > 0;
+        },
+        selectedStatusCount() {
+            return this.selectedStatus.length;
+        },
         isNavExportActive() {
             if (this.activeNav && this.activeNav.nav === "export-cpo") {
                 return true;
