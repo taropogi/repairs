@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h3 class="bg-success p-2 text-white rounded">Modified CPOs</h3>
+        <h3 class="bg-success p-2 text-white rounded">
+            Modified CPOs
+            <span v-if="searchedCount">({{ searchedCount }})</span>
+        </h3>
         <span>Kindly specify a date range </span>
         <div class="my-3">
             <label for="date-modified-from" class="form-label">From </label>
@@ -48,7 +51,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters("export", ["cpoModifiedDate"]),
+        ...mapGetters("export", ["cpoModifiedDate", "exportSearched"]),
+        searchedCount() {
+            return this.exportSearched.byModified.length;
+        },
     },
     methods: {
         ...mapActions("export", ["setCpoModifiedDate"]),

@@ -37,6 +37,11 @@ const exportModule = {
             },
             cpoChangedStatusTo: 2,
             cpoChangedStatusCurrent: true,
+            exportSearched: {
+                byStatus: [],
+                byModified: [],
+                byChangedStatus: [],
+            },
         };
     },
     mutations,

@@ -14,4 +14,7 @@ export default {
     cpoChangedStatusCurrent(state) {
         return state.cpoChangedStatusCurrent;
     },
+    exportSearched(state) {
+        return state.exportSearched;
+    },
 };

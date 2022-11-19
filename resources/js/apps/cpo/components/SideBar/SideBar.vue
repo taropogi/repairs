@@ -30,7 +30,7 @@
         </ul>
         <div v-if="userIsAdmin">
             <hr class="text-white" />
-            <admin-links></admin-links>
+            <admin-links-user></admin-links-user>
         </div>
 
         <transition name="export-btns">
@@ -60,14 +60,14 @@
 import UserOptions from "./UserOptions.vue";
 import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
-import AdminLinks from "./AdminLinks/AdminLinks.vue";
+import AdminLinksUser from "./AdminLinks/User.vue";
 import { mapGetters } from "vuex";
 export default {
     components: {
         UserOptions,
         ExportButtons,
         MultiOptions,
-        AdminLinks,
+        AdminLinksUser,
     },
     data() {
         return {};

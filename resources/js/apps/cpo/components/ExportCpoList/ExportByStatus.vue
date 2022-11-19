@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h3 class="bg-primary p-2 text-white rounded">CPO Status</h3>
+        <h3 class="bg-primary p-2 text-white rounded">
+            CPO Status
+            <span v-if="searchedCount">({{ searchedCount }})</span>
+        </h3>
         <span>Please select status</span>
 
         <by-status-item
@@ -25,7 +28,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters("export", ["selectedStatus"]),
+        ...mapGetters("export", ["selectedStatus", "exportSearched"]),
+        searchedCount() {
+            return this.exportSearched.byStatus.length;
+        },
     },
     methods: {
         async getDataCriteria() {

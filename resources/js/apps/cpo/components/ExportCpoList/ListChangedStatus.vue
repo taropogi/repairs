@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     data() {
         return {
@@ -90,8 +90,12 @@ export default {
                 this.isSearching = false;
                 this.cpos = res.data.cpos;
                 // console.log(res.data);
+                this.setExportSearched({
+                    byChangedStatus: this.cpos || [],
+                });
             }
         },
+        ...mapActions("export", ["setExportSearched"]),
     },
     mounted() {
         this.getCpoChangedStatus();

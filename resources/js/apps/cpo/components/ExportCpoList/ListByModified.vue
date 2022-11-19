@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     data() {
         return {
@@ -50,8 +50,12 @@ export default {
             if (res.data) {
                 this.isSearching = false;
                 this.cpos = res.data.cpos;
+                this.setExportSearched({
+                    byModified: this.cpos || [],
+                });
             }
         },
+        ...mapActions("export", ["setExportSearched"]),
     },
     mounted() {
         this.getCpoByModified();

@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h3 class="bg-danger p-2 text-white rounded">CPOs-Changed Status</h3>
+        <h3 class="bg-danger p-2 text-white rounded">
+            CPOs-Changed Status
+            <span v-if="searchedCount">({{ searchedCount }})</span>
+        </h3>
         <span>Kindly specify a date range </span>
         <div class="my-3">
             <label for="date-change-status-from" class="form-label">From</label>
@@ -54,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -76,6 +79,12 @@ export default {
                     new Date().getDate(),
             },
         };
+    },
+    computed: {
+        ...mapGetters("export", ["exportSearched"]),
+        searchedCount() {
+            return this.exportSearched.byChangedStatus.length;
+        },
     },
     methods: {
         ...mapActions("export", [

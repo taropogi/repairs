@@ -18,4 +18,8 @@ export default {
     setCpoChangedStatusCurrent(context, payload) {
         context.commit("setCpoChangedStatusCurrent", payload);
     },
+
+    setExportSearched(context, payload) {
+        context.commit("setExportSearched", payload);
+    },
 };

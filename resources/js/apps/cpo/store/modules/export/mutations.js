@@ -24,4 +24,11 @@ export default {
     setCpoChangedStatusCurrent(state, payload) {
         state.cpoChangedStatusCurrent = payload;
     },
+
+    setExportSearched(state, payload) {
+        state.exportSearched = {
+            ...state.exportSearched,
+            ...payload,
+        };
+    },
 };

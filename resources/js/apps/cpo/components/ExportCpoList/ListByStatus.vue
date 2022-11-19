@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     data() {
@@ -39,7 +39,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters("export", ["selectedStatus"]),
+        ...mapGetters("export", ["selectedStatus", "exportSearched"]),
     },
     methods: {
         async getCpoByStatus() {
@@ -50,8 +50,16 @@ export default {
             if (res.data) {
                 this.isSearching = false;
                 this.cpos = res.data.cpos;
+
+                this.setExportSearched({
+                    byStatus: this.cpos || [],
+                });
             }
         },
+        ...mapActions("export", ["setExportSearched"]),
+    },
+    mounted() {
+        this.getCpoByStatus();
     },
 };
 </script>
