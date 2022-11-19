@@ -2,7 +2,7 @@
     <div class="min-vh-100 sticky-top d-flex flex-column" v-if="isLoggedIn">
         <h2 class="text-white mt-5 mb-0">Menu</h2>
         <hr class="text-white" />
-        <ul class="nav nav-pills flex-column mb-auto my-2">
+        <ul class="nav nav-pills flex-column my-2">
             <li class="nav-item">
                 <router-link
                     :to="searchCpoLink"
@@ -28,15 +28,31 @@
                 >
             </li>
         </ul>
+        <div v-if="userIsAdmin">
+            <hr class="text-white" />
+            <admin-links></admin-links>
+        </div>
 
-        <export-buttons></export-buttons>
-
-        <multi-options v-if="selectedPosCount && isNavSearchActive">
-        </multi-options>
+        <transition name="export-btns">
+            <div v-if="isNavExportActive">
+                <hr class="text-white" />
+                <export-buttons></export-buttons>
+            </div>
+        </transition>
+        <transition name="export-btns">
+            <div v-if="selectedPosCount && isNavSearchActive">
+                <hr class="text-white" />
+                <multi-options> </multi-options>
+            </div>
+        </transition>
 
         <hr />
-
-        <user-options :user="loggedUser" @logOut="logOut"></user-options>
+        <div class="mb-auto"></div>
+        <user-options
+            class="mb-0"
+            :user="loggedUser"
+            @logOut="logOut"
+        ></user-options>
     </div>
 </template>
 
@@ -44,25 +60,27 @@
 import UserOptions from "./UserOptions.vue";
 import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
+import AdminLinks from "./AdminLinks/AdminLinks.vue";
+import { mapGetters } from "vuex";
 export default {
     components: {
         UserOptions,
         ExportButtons,
         MultiOptions,
+        AdminLinks,
     },
     data() {
         return {};
     },
     computed: {
+        ...mapGetters(["activeNav"]),
         selectedPos() {
             return this.$store.getters["cpo/getSelectedPos"];
         },
         selectedPosCount() {
             return this.selectedPos.length;
         },
-        activeNav() {
-            return this.$store.getters.activeNav;
-        },
+
         isNavSearchActive() {
             if (this.activeNav && this.activeNav.nav === "search-cpo") {
                 return true;
@@ -156,3 +174,30 @@ export default {
     },
 };
 </script>
+<style scoped>
+.export-btns-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.export-btns-enter-active {
+    transition: all 0.5s ease-out;
+}
+.export-btns-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.export-btns-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.export-btns-leave-active {
+    transition: all 0.5s ease-in;
+}
+.export-btns-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+</style>

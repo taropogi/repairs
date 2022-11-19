@@ -51,6 +51,10 @@
         font-size: 10px;
         border: none;
     }
+
+    .page-break {
+        page-break-after: always;
+    }
     </style>
 
 </head>
@@ -101,6 +105,9 @@
 
 
     </table>
+    <div class="page-break">
+
+    </div>
 
     @endif
 

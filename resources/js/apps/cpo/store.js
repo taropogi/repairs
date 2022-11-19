@@ -50,6 +50,9 @@ const store = createStore({
         setShowBackDrop(context, payload) {
             context.commit("setShowBackDrop", payload);
         },
+        setActiveNav(context, payload) {
+            context.commit("setActiveNav", payload);
+        },
     },
 });
 

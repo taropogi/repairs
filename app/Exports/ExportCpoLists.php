@@ -27,6 +27,7 @@ class ExportCpoLists implements WithMultipleSheets
 
         $sheets[] = new ExportCpoByStatus($this->request);
         $sheets[] = new ExportByModified($this->request);
+        $sheets[] = new ExportByChangedStatus($this->request);
 
 
         return $sheets;

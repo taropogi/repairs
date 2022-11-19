@@ -3,7 +3,17 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+export default {
+    methods: {
+        ...mapActions(["setActiveNav"]),
+    },
+    mounted() {
+        this.setActiveNav({
+            nav: "admin-user-list",
+        });
+    },
+};
 </script>
 
 <style></style>

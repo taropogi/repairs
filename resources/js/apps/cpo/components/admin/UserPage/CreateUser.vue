@@ -152,6 +152,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     data() {
         return {
@@ -204,9 +205,15 @@ export default {
                     console.log(error);
                 });
         },
+        ...mapActions(["setActiveNav"]),
     },
     beforeCreate() {
         this.$store.commit("setMainPageTitleHeader", "Register");
+    },
+    mounted() {
+        this.setActiveNav({
+            nav: "admin-user-create",
+        });
     },
 };
 </script>

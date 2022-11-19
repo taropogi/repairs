@@ -15,7 +15,13 @@ export default {
     inject: ["laravelData"],
     computed: {
         ...mapGetters(["activeNav"]),
-        ...mapGetters("export", ["selectedStatus", "cpoModifiedDate"]),
+        ...mapGetters("export", [
+            "selectedStatus",
+            "cpoModifiedDate",
+            "cpoChangedStatusDate",
+            "cpoChangedStatusTo",
+            "cpoChangedStatusCurrent",
+        ]),
         showExportBtns() {
             return this.selectedStatusCount > 0;
         },
@@ -48,7 +54,15 @@ export default {
                 "&cpo_modified_from=" +
                 this.cpoModifiedDate.from +
                 "&cpo_modified_to=" +
-                this.cpoModifiedDate.to;
+                this.cpoModifiedDate.to +
+                "&cpo_changed_date_from=" +
+                this.cpoChangedStatusDate.from +
+                "&cpo_changed_date_to=" +
+                this.cpoChangedStatusDate.to +
+                "&cpo_changed_status_to=" +
+                this.cpoChangedStatusTo +
+                "&cpo_changed_current_only=" +
+                this.cpoChangedStatusCurrent;
         },
         exportPdf() {
             window.location.href =
@@ -58,7 +72,11 @@ export default {
                 "&cpo_modified_from=" +
                 this.cpoModifiedDate.from +
                 "&cpo_modified_to=" +
-                this.cpoModifiedDate.to;
+                this.cpoModifiedDate.to +
+                "&cpo_changed_status_from=" +
+                this.cpoChangedStatusDate.from +
+                "&cpo_changed_status_to=" +
+                this.cpoChangedStatusDate.to;
         },
     },
 };

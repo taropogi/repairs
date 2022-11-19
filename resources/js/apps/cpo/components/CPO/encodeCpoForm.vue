@@ -1,83 +1,90 @@
 <template>
-    <div class="p-2">
-        <!-- <h4 class="text-center bg-primary text-white p-2">ENCODE</h4> -->
-        <form @submit.prevent="submitCpoForm">
-            <transition name="encode-cpo-success">
-                <div v-if="isSubmitSuccess" class="fixed-top">
-                    <div class="alert alert-success text-center" role="alert">
-                        <i class="bi bi-check2-all"></i>
-                        <strong
-                            >A new CPO header has been successfully
-                            inserted.</strong
-                        >
-                    </div>
-                </div>
-            </transition>
-
-            <div class="row">
-                <div class="col">
-                    <label>Customer Name</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model.trim="formData.customerName"
-                    />
-                </div>
-                <div class="col">
-                    <label>Customer Address</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model.trim="formData.customerAddress"
-                    />
-                </div>
-
-                <div class="col">
-                    <label>Contact Number</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.contactNumber"
-                    />
+    <div class="p-1">
+        <transition name="encode-cpo-success">
+            <div v-if="isSubmitSuccess" class="fixed-top">
+                <div class="alert alert-success text-center" role="alert">
+                    <i class="bi bi-check2-all"></i>
+                    <strong
+                        >A new CPO header has been successfully
+                        inserted.</strong
+                    >
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>RPO Number</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.rpoNumber"
-                    />
-                </div>
+        </transition>
 
-                <div class="col">
-                    <label>Prepared By</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.preparedBy"
-                    />
-                </div>
-                <div class="col">
-                    <label>Authorized By</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        required
-                        v-model="formData.authorizedBy"
-                    />
-                </div>
+        <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
+            <div class="col-md-6">
+                <label for="customer-name" class="form-label"
+                    >Customer Name</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="customer-name"
+                    required
+                    v-model.trim="formData.customerName"
+                />
+            </div>
+            <div class="col-md-6">
+                <label for="contact-number" class="form-label"
+                    >Contact Number</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="contact-number"
+                    required
+                    v-model="formData.contactNumber"
+                />
+            </div>
+            <div class="col-12">
+                <label for="address" class="form-label">Address</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    required
+                    v-model.trim="formData.customerAddress"
+                    placeholder="1234 Main St"
+                />
             </div>
 
-            <button type="submit" class="btn btn-sm btn-primary mt-2">
-                Submit
-            </button>
+            <div class="col-md-4">
+                <label for="prepared-by" class="form-label">Prepared By</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="prepared-by"
+                    required
+                    v-model="formData.preparedBy"
+                />
+            </div>
+            <div class="col-md-4">
+                <label for="authorized-by" class="form-label"
+                    >Authorized By</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="authorized-by"
+                    required
+                    v-model="formData.authorizedBy"
+                />
+            </div>
+            <div class="col-md-4">
+                <label for="rpo-number" class="form-label">RPO #</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="rpo-number"
+                    required
+                    v-model="formData.rpoNumber"
+                />
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 </template>
