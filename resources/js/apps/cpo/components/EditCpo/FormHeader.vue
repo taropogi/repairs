@@ -1,123 +1,190 @@
 <template>
-    <form @submit.prevent="submitCpoForm" v-if="headerRow">
-        <transition name="updated-header">
-            <div class="fixed-top p2" v-if="isSubmitSuccess">
-                <div class="alert alert-success text-center" role="alert">
-                    <i class="bi bi-check2-all"></i>
-                    <strong>Successful header update!</strong>
+    <div>
+        <!-- <form class="row g-3">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" />
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="inputPassword4"
+                />
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="inputAddress"
+                    placeholder="1234 Main St"
+                />
+            </div>
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Address 2</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="inputAddress2"
+                    placeholder="Apartment, studio, or floor"
+                />
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="inputCity" />
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                <select id="inputState" class="form-select">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="inputZip" />
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="gridCheck"
+                    />
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
                 </div>
             </div>
-        </transition>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </form> -->
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col">
-                        <label>Customer Name</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model.trim="headerRow.customer_name"
-                        />
-                    </div>
-                    <div class="col">
-                        <label>Customer Address</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model.trim="headerRow.customer_address"
-                        />
+        <form @submit.prevent="submitCpoForm" v-if="headerRow">
+            <transition name="updated-header">
+                <div class="fixed-top p2" v-if="isSubmitSuccess">
+                    <div class="alert alert-success text-center" role="alert">
+                        <i class="bi bi-check2-all"></i>
+                        <strong>Successful header update!</strong>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label>Contact Number</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model="headerRow.contact_number"
-                        />
-                    </div>
-                    <div class="col">
-                        <label>RPO Number</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model="headerRow.rpo_number"
-                        />
-                    </div>
-                </div>
+            </transition>
 
-                <div class="row">
-                    <div class="col">
-                        <label>Prepared By</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model="headerRow.prepared_by"
-                        />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col">
+                            <label>Customer Name</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="headerRow.customer_name"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Customer Address</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model.trim="headerRow.customer_address"
+                            />
+                        </div>
                     </div>
-                    <div class="col">
-                        <label>Authorized By</label>
-                        <input
-                            :disabled="headerRow.locked"
-                            type="text"
-                            class="form-control form-control-sm"
-                            required
-                            v-model="headerRow.authorized_by"
-                        />
+                    <div class="row">
+                        <div class="col">
+                            <label>Contact Number</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="headerRow.contact_number"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>RPO Number</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="headerRow.rpo_number"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label>Status</label>
-                        <select
-                            class="form-select form-select-sm"
-                            v-model="headerRow.status_id"
-                        >
-                            <option
-                                v-for="status in headerStatuses"
-                                :key="status.id"
-                                :value="status.id"
-                                :selected="status.id === headerStatus.id"
+
+                    <div class="row">
+                        <div class="col">
+                            <label>Prepared By</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="headerRow.prepared_by"
+                            />
+                        </div>
+                        <div class="col">
+                            <label>Authorized By</label>
+                            <input
+                                :disabled="headerRow.locked"
+                                type="text"
+                                class="form-control form-control-sm"
+                                required
+                                v-model="headerRow.authorized_by"
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Status</label>
+                            <select
+                                class="form-select form-select-sm"
+                                v-model="headerRow.status_id"
                             >
-                                {{ status.status }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col p-2">
-                        <h1 v-if="headerRow.locked">
-                            <span class="badge bg-success">COMPLETED </span>
-                        </h1>
+                                <option
+                                    v-for="status in headerStatuses"
+                                    :key="status.id"
+                                    :value="status.id"
+                                    :selected="status.id === headerStatus.id"
+                                >
+                                    {{ status.status }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col p-2">
+                            <h1 v-if="headerRow.locked">
+                                <span class="badge bg-success">COMPLETED </span>
+                            </h1>
+                        </div>
                     </div>
                 </div>
+                <div class="col-sm-6">
+                    <history-list
+                        v-if="!isUpdating"
+                        :header-id="headerRow.id"
+                    ></history-list>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <history-list
-                    v-if="!isUpdating"
-                    :header-id="headerRow.id"
-                ></history-list>
+
+            <div class="btn-group btn-group-sm">
+                <button type="submit" class="btn btn-success">Update</button>
+
+                <router-link
+                    :to="{ name: searchCpoLink }"
+                    class="btn btn-danger"
+                    >Cancel</router-link
+                >
             </div>
-        </div>
-
-        <div class="btn-group btn-group-sm">
-            <button type="submit" class="btn btn-success">Update</button>
-
-            <router-link :to="{ name: searchCpoLink }" class="btn btn-danger"
-                >Cancel</router-link
-            >
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <script>

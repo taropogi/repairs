@@ -49,7 +49,7 @@
         <hr />
         <div class="mb-auto"></div>
         <user-options
-            class="mb-0"
+            class="mb-0 p-5"
             :user="loggedUser"
             @logOut="logOut"
         ></user-options>

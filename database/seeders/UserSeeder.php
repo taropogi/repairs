@@ -28,6 +28,13 @@ class UserSeeder extends Seeder
                 'username' => "taro",
             ],
             [
+                'name' => "Admin Tester",
+                'email' => "admin@admin.com",
+                'password' => Hash::make("password"),
+                'is_admin' => true,
+                'username' => "admin",
+            ],
+            [
                 'name' => "Test User",
                 'email' => "test@test.com",
                 'password' => Hash::make("password"),
