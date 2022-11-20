@@ -73,10 +73,14 @@ export default {
                 this.cpoModifiedDate.from +
                 "&cpo_modified_to=" +
                 this.cpoModifiedDate.to +
-                "&cpo_changed_status_from=" +
+                "&cpo_changed_date_from=" +
                 this.cpoChangedStatusDate.from +
+                "&cpo_changed_date_to=" +
+                this.cpoChangedStatusDate.to +
                 "&cpo_changed_status_to=" +
-                this.cpoChangedStatusDate.to;
+                this.cpoChangedStatusTo +
+                "&cpo_changed_current_only=" +
+                this.cpoChangedStatusCurrent;
         },
     },
 };

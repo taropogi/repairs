@@ -28,7 +28,7 @@
 
                         <th scope="col">RPO #</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Address</th>
+                        <!-- <th scope="col">Address</th> -->
                         <th scope="col">Contact#</th>
                         <th scope="col">Prepared By</th>
                         <th scope="col">Authorized By</th>

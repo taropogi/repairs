@@ -15,6 +15,8 @@ import ExportCpoList from "./components/ExportCpoList/ExportCpoList.vue";
 //admin
 import UserSearch from "./components/admin/UserPage/UserSearch.vue";
 import CreateUser from "./components/admin/UserPage/CreateUser.vue";
+import StatusSearch from "./components/admin/StatusPage/StatusSearch.vue";
+import StatusCreate from "./components/admin/StatusPage/StatusCreate.vue";
 
 import store from "./store";
 
@@ -117,6 +119,16 @@ const router = createRouter({
                     path: "user/create",
                     component: CreateUser,
                     name: "admin-user-create",
+                },
+                {
+                    path: "cpo/status/search",
+                    component: StatusSearch,
+                    name: "admin-status-search",
+                },
+                {
+                    path: "cpo/status/create",
+                    component: StatusCreate,
+                    name: "admin-status-create",
                 },
             ],
         },

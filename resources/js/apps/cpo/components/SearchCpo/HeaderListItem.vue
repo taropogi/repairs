@@ -23,7 +23,7 @@
         <td>
             {{ localHeaderItem.customer_name }}
         </td>
-        <td>{{ localHeaderItem.customer_address }}</td>
+        <!-- <td>{{ localHeaderItem.customer_address }}</td> -->
         <td>{{ localHeaderItem.contact_number }}</td>
         <td>{{ localHeaderItem.prepared_by }}</td>
         <td>{{ localHeaderItem.authorized_by }}</td>

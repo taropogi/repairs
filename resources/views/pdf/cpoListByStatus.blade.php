@@ -105,14 +105,23 @@
 
 
     </table>
-    <div class="page-break">
 
-    </div>
 
     @endif
 
 
     @if(isset($cpos_modified))
+    <div class="page-break"> </div>
+    <table width="100%">
+        <tr>
+            <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td align="right">
+                {{ $date }}
+            </td>
+
+        </tr>
+
+    </table>
     <p style="font-size: x-small;">
         LIST OF CPOS MODIFIED FROM {{ $modified_from }} TO {{ $modified_to }}
     </p>
@@ -145,6 +154,60 @@
 
 
     </table>
+
+
+
+    @endif
+
+    @if(isset($cpos_changed_status))
+    <div class="page-break">
+    </div>
+    <table width="100%">
+        <tr>
+            <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td align="right">
+                {{ $date }}
+            </td>
+
+        </tr>
+
+    </table>
+    <p style="font-size: x-small;">
+        LIST OF CPOS CHANGED STATUS FROM {{ $changed_status_from }} TO {{ $changed_status_to }}
+    </p>
+
+    <table width="100%" style="border: 1px solid;" class="to-border">
+        <thead style="background-color: lightgray;">
+            <tr>
+                <td>#</td>
+                <th>RPO#</th>
+                <th>Modified date</th>
+                <th>Status From</th>
+                <th>Status To</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($cpos_changed_status as $cpo)
+            <tr>
+                <th scope="row">{{ $cpo->id }}</th>
+                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+                <td class="text-center"><small>{{ $cpo->changed_date }}</small></td>
+                <td class="text-center"><small>{{ $cpo->status_old }}</small></td>
+                <td class="text-center"><small>{{ $cpo->status_new }}</small></td>
+
+            </tr>
+            @endforeach
+
+
+        </tbody>
+
+
+    </table>
+
+
+
+
 
     @endif
 </body>

@@ -25,7 +25,8 @@ class WelcomeController extends Controller
         $data['data'] = [
             'app_url' => env('APP_URL'),
             'app_url_root_folder' => env('APP_URL_ROOT_FOLDER'),
-            'route_list' => $route_list
+            'route_list' => $route_list,
+            'side_bar_image' => asset('images/times-trans.png'),
 
         ];
         return view('layouts.app', $data);

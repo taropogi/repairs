@@ -1,6 +1,11 @@
 <template>
     <div class="min-vh-100 sticky-top d-flex flex-column" v-if="isLoggedIn">
-        <h2 class="text-white mt-5 mb-0">Menu</h2>
+        <img
+            :src="laravelData.side_bar_image"
+            class="img-fluid mt-3"
+            style="width: 50%"
+        />
+        <!-- <h2 class="text-white mt-5 mb-0">Menu</h2> -->
         <hr class="text-white" />
         <ul class="nav nav-pills flex-column my-2">
             <li class="nav-item">
@@ -31,6 +36,8 @@
         <div v-if="userIsAdmin">
             <hr class="text-white" />
             <admin-links-user></admin-links-user>
+            <hr class="text-white" />
+            <admin-links-status></admin-links-status>
         </div>
 
         <transition name="export-btns">
@@ -61,13 +68,16 @@ import UserOptions from "./UserOptions.vue";
 import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
 import AdminLinksUser from "./AdminLinks/User.vue";
+import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
 import { mapGetters } from "vuex";
 export default {
+    inject: ["laravelData"],
     components: {
         UserOptions,
         ExportButtons,
         MultiOptions,
         AdminLinksUser,
+        AdminLinksStatus,
     },
     data() {
         return {};

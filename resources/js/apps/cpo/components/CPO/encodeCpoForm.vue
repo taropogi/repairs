@@ -1,6 +1,6 @@
 <template>
     <div class="p-1">
-        <transition name="encode-cpo-success">
+        <!-- <transition name="encode-cpo-success">
             <div v-if="isSubmitSuccess" class="fixed-top">
                 <div class="alert alert-success text-center" role="alert">
                     <i class="bi bi-check2-all"></i>
@@ -10,9 +10,9 @@
                     >
                 </div>
             </div>
-        </transition>
+        </transition> -->
 
-        <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
+        <form class="row g-3 p-5 border" @submit.prevent="submitCpoForm">
             <div class="col-md-6">
                 <label for="customer-name" class="form-label"
                     >Customer Name</label
@@ -172,7 +172,7 @@ export default {
 </script>
 
 <style>
-.encode-cpo-success-enter-from {
+/* .encode-cpo-success-enter-from {
     opacity: 0;
     transform: translateY(-30px);
 }
@@ -196,5 +196,5 @@ export default {
 .encode-cpo-success-leave-to {
     opacity: 0;
     transform: translateY(-30px);
-}
+} */
 </style>
