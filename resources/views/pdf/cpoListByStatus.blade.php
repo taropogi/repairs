@@ -83,7 +83,7 @@
     <table width="100%" style="border: 1px solid;" class="to-border">
         <thead style="background-color: lightgray;">
             <tr>
-                <td>#</td>
+
                 <th>RPO#</th>
                 <th>CUSTOMER</th>
                 <th>ADDRESS</th>
@@ -95,7 +95,7 @@
             @foreach($cpos as $cpo)
             <tr>
                 <th scope="row">{{ $cpo->id }}</th>
-                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+
                 <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
                 <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
                 <td class="text-center"><small>{{ $header_statuses[$cpo->status_id] }}</small></td>
@@ -136,7 +136,7 @@
     <table width="100%" style="border: 1px solid;" class="to-border">
         <thead style="background-color: lightgray;">
             <tr>
-                <td>#</td>
+
                 <th>RPO#</th>
                 <th>CUSTOMER</th>
                 <th>ADDRESS</th>
@@ -148,7 +148,7 @@
             @foreach($cpos_modified as $cpo)
             <tr>
                 <th scope="row">{{ $cpo->id }}</th>
-                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+
                 <td class="text-center"><small>{{ $cpo->customer_name }}</small></td>
                 <td class="text-center"><small>{{ $cpo->customer_address }}</small></td>
                 <td class="text-center"><small>{{ $cpo->updated_at }}</small></td>
@@ -186,7 +186,7 @@
     <table width="100%" style="border: 1px solid;" class="to-border">
         <thead style="background-color: lightgray;">
             <tr>
-                <td>#</td>
+
                 <th>RPO#</th>
                 <th>Modified date</th>
                 <th>Status From</th>
@@ -198,7 +198,7 @@
             @foreach($cpos_changed_status as $cpo)
             <tr>
                 <th scope="row">{{ $cpo->id }}</th>
-                <td class="text-center"><small>{{ $cpo->rpo_number }}</small></td>
+
                 <td class="text-center"><small>{{ $cpo->changed_date }}</small></td>
                 <td class="text-center"><small>{{ $cpo->status_old }}</small></td>
                 <td class="text-center"><small>{{ $cpo->status_new }}</small></td>

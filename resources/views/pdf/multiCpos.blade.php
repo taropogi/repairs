@@ -76,7 +76,7 @@
         <table width="100%">
             <tr>
                 <td><small><strong>NAME:</strong> {{ $cpo['customer_name'] }}</small></td>
-                <td><small><strong>RPO#:</strong> {{ $cpo['rpo_number'] }}</small></td>
+                <td><small><strong>RPO#:</strong> {{ $cpo['id'] }}</small></td>
                 <td><small><strong>DATE:</strong> {{ $date }}</small></td>
             </tr>
             <tr>

@@ -25,7 +25,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
     {
         $cpos = DB::table('cpos')
             // ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
-            ->select('cpos.id', 'rpo_number', 'customer_name', 'customer_address', 'updated_at')
+            ->select('cpos.id', 'customer_name', 'customer_address', 'updated_at')
             ->whereRaw(DB::raw("Date(cpos.updated_at) <= '" . $this->request->cpo_modified_to . "'"))
             ->whereRaw(DB::raw("Date(cpos.updated_at) >= '" . $this->request->cpo_modified_from . "'"))
             ->whereRaw(DB::raw('cpos.updated_at <> cpos.created_at'))
@@ -42,7 +42,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
     public function headings(): array
     {
         return [
-            'ID',
+
             'RPO#',
             'Customer Name',
             'Address',

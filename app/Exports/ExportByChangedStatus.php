@@ -38,7 +38,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
             ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
             ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
             ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
-            ->select('cpos.id', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
+            ->select('cpos.id', 'status_to.status as status_new', 'status_from.status as status_old')
             ->selectRaw('date(history.updated_at) as changed_date')
             ->whereRaw("Date(history.updated_at) >= '" . $this->request->cpo_changed_date_from . "'")
             ->whereRaw("Date(history.updated_at) <= '" . $this->request->cpo_changed_date_to . "'")
@@ -59,7 +59,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
     public function headings(): array
     {
         return [
-            'ID',
+
             'RPO#',
             'Status From',
             'Status To',

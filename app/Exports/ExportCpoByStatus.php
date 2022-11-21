@@ -25,7 +25,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     {
         $cpos = DB::table('cpos')
             ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
-            ->select('cpos.id', 'rpo_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
+            ->select('cpos.id', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
             ->whereIn('status_id', explode(',', $this->request->status_id))
             ->get();
 
@@ -42,7 +42,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     public function headings(): array
     {
         return [
-            'ID',
+
             'RPO#',
             'Customer Name',
             'Address',
