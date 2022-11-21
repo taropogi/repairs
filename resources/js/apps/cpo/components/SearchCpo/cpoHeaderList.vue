@@ -16,7 +16,9 @@
                 <thead class="table-success">
                     <tr>
                         <th class="col tex-center">
-                            [{{ selectedPosCount }}] CPO#
+                            RPO#
+                            <br />
+                            [{{ selectedPosCount }}]
                             <!-- <div class="form-check">
                             <input
                                 class="form-check-input"
@@ -26,7 +28,7 @@
                         </div> -->
                         </th>
 
-                        <th scope="col">RPO #</th>
+                        <!-- <th scope="col">RPO #</th> -->
                         <th scope="col">Name</th>
                         <!-- <th scope="col">Address</th> -->
                         <th scope="col">Contact#</th>

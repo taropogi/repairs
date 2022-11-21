@@ -41,7 +41,7 @@ class CpoController extends Controller
             'customerName' => ['required'],
             'customerAddress' => ['required'],
             'contactNumber' => ['required'],
-            'rpoNumber' => ['required'],
+            // 'rpoNumber' => ['required'],
             'preparedBy' => ['required'],
             'authorizedBy' => ['required'],
         ]);
@@ -50,7 +50,7 @@ class CpoController extends Controller
             'customer_name' => $request->customerName,
             'customer_address' => $request->customerAddress,
             'contact_number' => $request->contactNumber,
-            'rpo_number' => $request->rpoNumber,
+            // 'rpo_number' => $request->rpoNumber,
             'prepared_by' => $request->preparedBy,
             'authorized_by' => $request->authorizedBy,
             'status_id' => 1,
@@ -318,7 +318,7 @@ class CpoController extends Controller
         $cpo->customer_name = $request->customer_name;
         $cpo->customer_address = $request->customer_address;
         $cpo->contact_number = $request->contact_number;
-        $cpo->rpo_number = $request->rpo_number;
+        // $cpo->rpo_number = $request->rpo_number;
         $cpo->prepared_by = $request->prepared_by;
         $cpo->authorized_by = $request->authorized_by;
         $cpo->locked = $request->locked;

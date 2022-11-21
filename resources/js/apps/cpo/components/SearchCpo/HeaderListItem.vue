@@ -15,11 +15,11 @@
             </div>
         </th>
 
-        <td>
+        <!-- <td>
             <label :for="id">
                 {{ headerItem.rpo_number }}
             </label>
-        </td>
+        </td> -->
         <td>
             {{ localHeaderItem.customer_name }}
         </td>
@@ -275,6 +275,9 @@ export default {
 </script>
 
 <style scoped>
+tr:hover {
+    font-weight: bold;
+}
 .tr-exit {
     animation: trExit 0.5s forwards;
 }

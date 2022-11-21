@@ -101,7 +101,10 @@ class GeneratePdfController extends Controller
 
 
 
-                $data['cpos_changed_status'] =  $cpos_changed_status;
+                if (count($cpos_changed_status)) {
+                    $data['cpos_changed_status'] =  $cpos_changed_status;
+                }
+
                 $data['changed_status_from'] =  $request->cpo_changed_date_from;
                 $data['changed_status_to'] =  $request->cpo_changed_date_to;
             }

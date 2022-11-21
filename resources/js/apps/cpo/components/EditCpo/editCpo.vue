@@ -13,6 +13,7 @@
 <script>
 import headerLines from "./headerLines.vue";
 import FormHeader from "./FormHeader.vue";
+import { mapActions } from "vuex";
 
 export default {
     components: {
@@ -29,6 +30,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(["setActiveNav"]),
         setHeaderRow(headerRow) {
             this.headerRow = headerRow;
         },
@@ -42,6 +44,9 @@ export default {
     mounted() {
         //  console.log("mounted");
         // this.getCpoHeaderRow();
+        this.setActiveNav({
+            nav: "edit-cpo",
+        });
     },
     updated() {
         //   console.log("new value: " + this.lineDetails.length);

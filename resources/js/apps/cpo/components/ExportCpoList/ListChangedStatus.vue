@@ -21,7 +21,7 @@
                                 },
                             }"
                         >
-                            {{ cpo.rpo_number }}
+                            {{ cpo.id }}
                         </router-link>
                     </th>
                     <td>
@@ -68,8 +68,9 @@ export default {
             "cpoChangedStatusTo",
             "cpoChangedStatusCurrent",
         ]),
+        ...mapGetters("auth", ["loggedUser"]),
         editHeaderLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser.is_admin) {
                 return "admin-edit-cpo";
             }
 

@@ -71,7 +71,7 @@
                     v-model="formData.authorizedBy"
                 />
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <label for="rpo-number" class="form-label">RPO #</label>
                 <input
                     type="text"
@@ -80,7 +80,7 @@
                     required
                     v-model="formData.rpoNumber"
                 />
-            </div>
+            </div> -->
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -97,7 +97,7 @@ export default {
                 customerName: "",
                 customerAddress: "",
                 contactNumber: "",
-                rpoNumber: "",
+                // rpoNumber: "",
                 preparedBy: "",
                 authorizedBy: "",
             },

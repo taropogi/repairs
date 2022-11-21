@@ -11,7 +11,16 @@
             <tbody>
                 <tr v-for="cpo in cpos" :key="cpo.id">
                     <th scope="row">
-                        {{ cpo.rpo_number }}
+                        <router-link
+                            :to="{
+                                name: editHeaderLink,
+                                params: {
+                                    id: cpo.id,
+                                },
+                            }"
+                        >
+                            {{ cpo.id }}
+                        </router-link>
                     </th>
                     <td>{{ cpo.status.status }}</td>
                 </tr>
@@ -40,6 +49,14 @@ export default {
     },
     computed: {
         ...mapGetters("export", ["selectedStatus", "exportSearched"]),
+        ...mapGetters("auth", ["loggedUser"]),
+        editHeaderLink() {
+            if (this.loggedUser.is_admin) {
+                return "admin-edit-cpo";
+            }
+
+            return "edit-cpo";
+        },
     },
     methods: {
         async getCpoByStatus() {

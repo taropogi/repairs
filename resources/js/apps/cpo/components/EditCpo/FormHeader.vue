@@ -89,8 +89,8 @@
                                 class="form-control"
                                 id="rpo-number"
                                 required
-                                v-model="headerRow.rpo_number"
-                                :disabled="headerRow.locked"
+                                v-model="headerRow.id"
+                                disabled
                             />
                         </div>
 

@@ -61,6 +61,9 @@
 
 <body>
 
+
+
+    @if(isset($cpos))
     <table width="100%">
         <tr>
             <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
@@ -72,7 +75,7 @@
 
     </table>
 
-    @if(isset($cpos))
+
     <p style="font-size: x-small;">
         LIST OF CPOS BY STATUS
     </p>
@@ -111,7 +114,11 @@
 
 
     @if(isset($cpos_modified))
+    @if(isset($cpos))
     <div class="page-break"> </div>
+
+    @endif
+
     <table width="100%">
         <tr>
             <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>

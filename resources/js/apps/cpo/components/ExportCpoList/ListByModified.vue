@@ -10,7 +10,18 @@
             </thead>
             <tbody>
                 <tr v-for="cpo in cpos" :key="cpo.id">
-                    <th scope="row">{{ cpo.rpo_number }}</th>
+                    <th scope="row">
+                        <router-link
+                            :to="{
+                                name: editHeaderLink,
+                                params: {
+                                    id: cpo.id,
+                                },
+                            }"
+                        >
+                            {{ cpo.id }}
+                        </router-link>
+                    </th>
                     <td>
                         {{ cpo.updated_at.slice(0, 10) }}
                     </td>
@@ -39,6 +50,14 @@ export default {
     },
     computed: {
         ...mapGetters("export", ["cpoModifiedDate"]),
+        ...mapGetters("auth", ["loggedUser"]),
+        editHeaderLink() {
+            if (this.loggedUser.is_admin) {
+                return "admin-edit-cpo";
+            }
+
+            return "edit-cpo";
+        },
     },
     methods: {
         async getCpoByModified() {
