@@ -26,7 +26,7 @@ class GeneratePdfController extends Controller
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
-        return $pdf->download('RPO#' . $cpo[0]->rpo_number . '.pdf');
+        return $pdf->download('RPO#' . $cpo[0]->id . '.pdf');
     }
 
     public function generatePdfs(Request $request)
