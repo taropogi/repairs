@@ -34,7 +34,7 @@ Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
 Route::post('cpo/by/status', [CpoController::class, 'getHeadersByStatus']);
 Route::post('cpo/changed/status', [CpoController::class, 'getHeadersChangedStatus']);
 Route::post('cpo/by/modified', [CpoController::class, 'getHeadersByModified']);
-Route::get('cpo/{cpo}', [CpoController::class, 'getCpoHeader']);
+Route::get('cpo/{cpo}', [CpoController::class, 'show']);
 Route::get('cpo/lines/{cpo}', [CpoController::class, 'getCpoLines']);
 Route::post('cpo/lines/updateAllLines', [CpoController::class, 'updateAllLines']);
 Route::post('cpo/destroy', [CpoController::class, 'destroy']);
@@ -55,6 +55,10 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
 
 Route::get('login', [LoginController::class, 'login']);
+
+
+//users
+Route::get('users/list', [UserController::class, 'getUserList']);
 
 
 

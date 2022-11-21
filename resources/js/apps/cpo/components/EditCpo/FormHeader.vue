@@ -1,68 +1,5 @@
 <template>
     <div>
-        <!-- <form class="row g-3">
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" />
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input
-                    type="password"
-                    class="form-control"
-                    id="inputPassword4"
-                />
-            </div>
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="inputAddress"
-                    placeholder="1234 Main St"
-                />
-            </div>
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Address 2</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="inputAddress2"
-                    placeholder="Apartment, studio, or floor"
-                />
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity" />
-            </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="inputZip" />
-            </div>
-            <div class="col-12">
-                <div class="form-check">
-                    <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="gridCheck"
-                    />
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
-        </form> -->
-
         <form @submit.prevent="submitCpoForm" v-if="headerRow">
             <transition name="updated-header">
                 <div class="fixed-top p2" v-if="isSubmitSuccess">
@@ -76,78 +13,100 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="row">
-                        <div class="col">
-                            <label>Customer Name</label>
+                        <div class="col-md-6">
+                            <label for="customer-name" class="form-label"
+                                >Customer Name</label
+                            >
                             <input
-                                :disabled="headerRow.locked"
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control"
+                                id="customer-name"
                                 required
+                                :disabled="headerRow.locked"
                                 v-model.trim="headerRow.customer_name"
                             />
                         </div>
-                        <div class="col">
-                            <label>Customer Address</label>
+                        <div class="col-md-6">
+                            <label for="contact-number" class="form-label"
+                                >Contact #</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="contact-number"
+                                required
+                                :disabled="headerRow.locked"
+                                v-model="headerRow.contact_number"
+                            />
+                        </div>
+                        <div class="col-12">
+                            <label for="customer-address" class="form-label"
+                                >Address</label
+                            >
                             <input
                                 :disabled="headerRow.locked"
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control"
+                                id="customer-address"
+                                placeholder="1234 Main St"
                                 required
                                 v-model.trim="headerRow.customer_address"
                             />
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Contact Number</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.contact_number"
-                            />
-                        </div>
-                        <div class="col">
-                            <label>RPO Number</label>
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control form-control-sm"
-                                required
-                                v-model="headerRow.rpo_number"
-                            />
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <label>Prepared By</label>
+                        <div class="col-md-6">
+                            <label for="prepared-by" class="form-label"
+                                >Prepared By</label
+                            >
                             <input
-                                :disabled="headerRow.locked"
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control"
+                                id="prepared-by"
                                 required
+                                :disabled="headerRow.locked"
                                 v-model="headerRow.prepared_by"
                             />
                         </div>
-                        <div class="col">
-                            <label>Authorized By</label>
+                        <div class="col-md-6">
+                            <label for="authorized-by" class="form-label"
+                                >Authorized By</label
+                            >
                             <input
-                                :disabled="headerRow.locked"
                                 type="text"
-                                class="form-control form-control-sm"
+                                class="form-control"
+                                id="prepared-by"
                                 required
+                                :disabled="headerRow.locked"
                                 v-model="headerRow.authorized_by"
                             />
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Status</label>
+                        <div class="col-md-6">
+                            <label for="rpo-number" class="form-label"
+                                >RPO #</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="rpo-number"
+                                required
+                                v-model="headerRow.rpo_number"
+                                :disabled="headerRow.locked"
+                            />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="cpo-statuses" class="form-label"
+                                >Status
+                                <span
+                                    class="badge bg-success"
+                                    v-if="headerRow.locked"
+                                    >COMPLETED
+                                </span>
+                            </label>
                             <select
-                                class="form-select form-select-sm"
+                                class="form-select"
                                 v-model="headerRow.status_id"
+                                id="cpo-statuses"
                             >
                                 <option
                                     v-for="status in headerStatuses"
@@ -159,11 +118,6 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col p-2">
-                            <h1 v-if="headerRow.locked">
-                                <span class="badge bg-success">COMPLETED </span>
-                            </h1>
-                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -174,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="btn-group btn-group-sm">
+            <div class="btn-group py-2">
                 <button type="submit" class="btn btn-success">Update</button>
 
                 <router-link

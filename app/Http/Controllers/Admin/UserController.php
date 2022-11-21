@@ -33,6 +33,18 @@ class UserController extends Controller
     {
     }
 
+
+    public function getUserList(Request $request)
+    {
+
+        $response = [];
+        $response['users'] = User::orderBy('is_admin', 'DESC')->orderBy('updated_at', 'DESC')->get();
+
+
+
+        return $response;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

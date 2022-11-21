@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cpo;
 use App\Models\User;
+use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,8 +16,9 @@ class TestController extends Controller
     }
     public function test()
     {
-        $cpo = Cpo::find(1);
+        $response['cpo'] = Cpo::find(6)->toSql();
 
-        echo $cpo->taro;
+
+        dd($response);
     }
 }

@@ -66,12 +66,17 @@ class CpoController extends Controller
 
         return $response;
     }
-    public function getCpoHeader(Cpo $cpo)
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Cpo  $cpo
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Cpo $cpo)
     {
-
-
-
-
         // $this->sortLineNumbers($cpo);
 
         $response['cpo'] = $cpo;
@@ -176,7 +181,9 @@ class CpoController extends Controller
                 ->whereRaw("Date(history.updated_at) >= '" . $request->date_from . "'")
                 ->whereRaw("Date(history.updated_at) <= '" . $request->date_to . "'")
                 ->whereRaw("history.old_status_id is not null")
-                ->where("history.header_status_id", $request->status_to);
+                ->where("history.header_status_id", $request->status_to)
+                ->whereNull("cpos.deleted_at");
+
 
             if ($request->only_current_status) {
                 $query->where("cpos.status_id", $request->status_to);
@@ -240,16 +247,8 @@ class CpoController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cpo  $cpo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cpo $cpo)
-    {
-        //
-    }
+
+
 
     /**
      * Show the form for editing the specified resource.
