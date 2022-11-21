@@ -2,7 +2,7 @@ export default {
     setEditingHeaderRow(context, payload) {
         context.commit("setEditingHeaderId", payload);
         context.commit("setEditingHeaderRow");
-        console.log(context.state.editingHeaderRow);
+        // console.log(context.state.editingHeaderRow);
     },
 
     updateSelectedCpoStatus(context, payload) {
@@ -17,5 +17,9 @@ export default {
     },
     addDeletedCpos(state, payload) {
         state.commit("addDeletedCpos", payload);
+    },
+
+    addSelectedPo(context, payload) {
+        context.commit("addSelectedPo", payload);
     },
 };

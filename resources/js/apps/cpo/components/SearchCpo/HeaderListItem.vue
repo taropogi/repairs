@@ -21,7 +21,9 @@
             </label>
         </td> -->
         <td>
-            {{ localHeaderItem.customer_name }}
+            <label class="form-check-label" :for="id">
+                {{ localHeaderItem.customer_name }}
+            </label>
         </td>
         <!-- <td>{{ localHeaderItem.customer_address }}</td> -->
         <td>{{ localHeaderItem.contact_number }}</td>
@@ -69,14 +71,11 @@
 </template>
 
 <script>
-import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["headerItem"],
     emits: ["delete-cpo", "deleted-cpo"],
-    components: {
-        ModalDeleteCpo,
-    },
+
     data() {
         return {
             localHeaderItem: this.headerItem,
@@ -103,7 +102,7 @@ export default {
         isStatusUpdated(value) {
             if (value) {
                 setTimeout(() => {
-                    this.$store.dispatch("cpo/updateSelectedCpoStatus", {
+                    this.updateSelectedCpoStatus({
                         id: this.headerItem.id,
                         isStatusUpdated: false,
                     });
@@ -113,7 +112,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters("cpo", ["deletedCpos"]),
+        ...mapGetters("cpo", ["deletedCpos", "getSelectedPos"]),
         isDeletedx() {
             if (
                 this.deletedCpos.find((item) => item.id === this.headerItem.id)
@@ -141,11 +140,11 @@ export default {
             };
         },
         selectedPos() {
-            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedPos = this.getSelectedPos;
             return selectedPos;
         },
         isStatusUpdated() {
-            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedPos = this.getSelectedPos;
             const selectedItem = selectedPos.find(
                 (item) => item.id === this.headerItem.id
             );
@@ -157,7 +156,7 @@ export default {
         },
 
         isSelectedDeleted() {
-            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedPos = this.getSelectedPos;
             const selectedItem = selectedPos.find(
                 (item) => item.id === this.headerItem.id
             );
@@ -184,6 +183,11 @@ export default {
     },
 
     methods: {
+        ...mapActions("cpo", [
+            "addSelectedPo",
+            "removeSelectedPo",
+            "updateSelectedCpoStatus",
+        ]),
         deleteRow() {
             this.isDeleted = true;
             setTimeout(() => {
@@ -191,9 +195,7 @@ export default {
                 this.isRemovedTr = true;
             }, 1000);
         },
-        closeModalDeleteCpo() {
-            this.isDeleteCpo = false;
-        },
+
         async getUpdatedHeader() {
             const res = await axios.get("api/cpo/" + this.localHeaderItem.id);
             if (res.data) {
@@ -203,7 +205,7 @@ export default {
         },
         selectPo() {
             if (this.isSelected) {
-                this.$store.commit("cpo/addSelectedPo", {
+                this.addSelectedPo({
                     id: this.localHeaderItem.id,
                     row: this.localHeaderItem,
                     isStatusUpdated: false,
@@ -235,7 +237,7 @@ export default {
             // }
         },
         unselectPo() {
-            this.$store.commit("cpo/removeSelectedPo", {
+            this.removeSelectedPo({
                 id: this.localHeaderItem.id,
             });
         },
@@ -257,7 +259,7 @@ export default {
             // this.$emit("editCpo", cpoItemHeader);
         },
         isCurrentlySelected() {
-            const selectedPos = this.$store.getters["cpo/getSelectedPos"];
+            const selectedPos = this.getSelectedPos;
             const selectedItem = selectedPos.find(
                 (num) => num.id === this.localHeaderItem.id
             );

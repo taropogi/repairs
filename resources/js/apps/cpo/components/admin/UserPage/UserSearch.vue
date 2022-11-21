@@ -1,7 +1,7 @@
 <template>
     <div>
-        <user-search-from></user-search-from>
-        <user-list></user-list>
+        <user-search-from @search-user="searchUsers"></user-search-from>
+        <user-list :search-criteria="searchCriteria"></user-list>
     </div>
 </template>
 
@@ -14,8 +14,16 @@ export default {
         UserList,
         UserSearchFrom,
     },
+    data() {
+        return {
+            searchCriteria: {},
+        };
+    },
     methods: {
         ...mapActions(["setActiveNav"]),
+        async searchUsers(searchCriteria) {
+            this.searchCriteria = searchCriteria;
+        },
     },
     mounted() {
         this.setActiveNav({

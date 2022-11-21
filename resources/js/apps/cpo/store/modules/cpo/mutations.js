@@ -33,12 +33,17 @@ export default {
         const selectedItem = state.selectedPos.find(
             (el) => el.id === payload.id
         );
+
         const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
-        const isStatusUpdated = {
-            ...selectedItem,
-            isStatusUpdated: payload.isStatusUpdated,
-        };
-        myArray.push(isStatusUpdated);
+
+        selectedItem.isStatusUpdated = payload.isStatusUpdated;
+        // const isStatusUpdated = {
+        //     ...selectedItem,
+        //     isStatusUpdated: payload.isStatusUpdated,
+        // };
+
+        // console.log(selectedItem);
+        myArray.push(selectedItem);
         state.selectedPos = myArray;
     },
 
@@ -47,11 +52,10 @@ export default {
             (el) => el.id === payload.id
         );
         const myArray = state.selectedPos.filter((el) => el.id !== payload.id);
-        const isSelectedDeleted = {
-            ...selectedItem,
-            isDeleted: payload.isDeleted,
-        };
-        myArray.push(isSelectedDeleted);
+
+        selectedItem.isDeleted = payload.isDeleted;
+
+        myArray.push(selectedItem);
         state.selectedPos = myArray;
     },
 };

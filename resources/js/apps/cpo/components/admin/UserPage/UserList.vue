@@ -5,6 +5,7 @@
                 <tr class="table-primary">
                     <th scope="col">Username</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Admin</th>
                     <th>Actions</th>
                 </tr>
@@ -26,6 +27,15 @@ export default {
     components: {
         UserItem,
     },
+    props: ["searchCriteria"],
+    watch: {
+        searchCriteria: {
+            handler(newVal, oldVal) {
+                this.getUserList();
+            },
+            deep: true,
+        },
+    },
     data() {
         return {
             userList: null,
@@ -36,21 +46,12 @@ export default {
             await axios
                 .get("/api/users/list", {
                     params: {
-                        // ...this.searchCriteria,
-                        // searchName: this.searchCriteria.searchName || "",
-                        // searchAddress: this.searchCriteria.searchAddress || "",
-                        // searchContact:
-                        //     this.searchCriteria.searchContactNumber || "",
-                        // searchRpo: this.searchCriteria.searchRpoNumber || "",
-                        // searchPrepared:
-                        //     this.searchCriteria.searchPreparedBy || "",
-                        // searchAuthorized:
-                        //     this.searchCriteria.searchAuthorizedBy || "",
+                        ...this.searchCriteria,
                     },
                 })
                 .then((response) => {
                     this.userList = response.data.users;
-                    console.log(response.data);
+                    // console.log(response.data);
                 })
                 .catch((error) => {
                     // console.log(error);

@@ -10,19 +10,27 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'isAdmin']);
-    }
+
     public function index()
     {
         //
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +46,27 @@ class UserController extends Controller
     {
 
         $response = [];
-        $response['users'] = User::orderBy('is_admin', 'DESC')->orderBy('updated_at', 'DESC')->get();
+
+        $users_query = User::orderBy('is_admin', 'DESC')->orderBy('updated_at', 'DESC');
+        if ($request->username) {
+            $users_query = $users_query->where('username', 'LIKE', '%' . $request->username . '%');
+        }
+
+        if ($request->name) {
+            $users_query = $users_query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        if ($request->email) {
+            $users_query = $users_query->where('email', 'LIKE', '%' . $request->email . '%');
+        }
+
+        if ($request->isAdmin && $request->isAdmin === 'true') {
+            $users_query = $users_query->where('is_admin', true);
+        }
+
+
+
+        $response['users'] = $users_query->get();
 
 
 

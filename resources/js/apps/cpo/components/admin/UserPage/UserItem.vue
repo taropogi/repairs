@@ -4,6 +4,7 @@
             {{ user.username }}
         </th>
         <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
         <td>{{ isAdmin }}</td>
         <td>
             <div class="btn-group btn-group-sm" role="group">

@@ -5,7 +5,7 @@
                 <label>Username</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control"
                     @input="search"
                     v-model.lazy="searchCriteria.username"
                 />
@@ -14,29 +14,30 @@
                         v-model.lazy="searchCriteria.isAdmin"
                         class="form-check-input"
                         type="checkbox"
-                        id="flexSwitchCheckDefault"
+                        id="is-admin"
+                        @change="search"
                     />
-                    <label class="form-check-label" for="flexSwitchCheckDefault"
-                        >Admin</label
-                    >
+                    <label class="form-check-label" for="is-admin">Admin</label>
                 </div>
             </div>
             <div class="col">
-                <label>Name</label>
+                <label for="name">Name</label>
                 <input
+                    id="name"
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control"
                     @input="search"
                     v-model.lazy="searchCriteria.name"
                 />
             </div>
             <div class="col">
-                <label>Email</label>
+                <label for="email">Email</label>
                 <input
+                    id="email"
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control"
                     @input="search"
-                    v-model.lazy="searchCriteria.emailAddress"
+                    v-model.lazy="searchCriteria.email"
                 />
             </div>
         </div>
@@ -45,7 +46,7 @@
 
 <script>
 export default {
-    emits: ["search-cpo-header"],
+    emits: ["search-user"],
     data() {
         return {
             onInputDelayedSeconds: 0,
@@ -53,17 +54,15 @@ export default {
             searchCriteria: {
                 username: "",
                 name: "",
-                emailAddress: "",
+                email: "",
                 isAdmin: false,
-                searchPreparedBy: "",
-                searchAuthorizedBy: "",
             },
         };
     },
 
     methods: {
         search() {
-            this.$emit("search-cpo-header", this.searchCriteria);
+            this.$emit("search-user", this.searchCriteria);
         },
     },
     mounted() {
