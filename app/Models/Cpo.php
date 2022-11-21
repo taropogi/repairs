@@ -18,7 +18,7 @@ class Cpo extends Model
 
     public function lines()
     {
-        return $this->hasMany(CpoLine::class);
+        return $this->hasMany(CpoLine::class)->orderBy('line_number', 'ASC');
     }
 
 

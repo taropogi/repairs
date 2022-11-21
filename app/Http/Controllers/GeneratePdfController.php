@@ -8,18 +8,26 @@ use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Exports\ExportCpoByStatus;
 use App\Exports\ExportCpoLists;
+use App\Traits\FormatLines;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GeneratePdfController extends Controller
 {
+    use FormatLines;
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+
+
+
     public function generatePdf(Request $request)
     {
+        $this->sortLineNumbers($request->id);
         $cpo = Cpo::where('id', $request->id)->get();
+        // $this->sortLineNumbers($cpo);
         $data['title'] = 'Multi Selected CPOS';
         $data['cpos'] = $cpo;
         $data['date'] = date('m/d/Y');
@@ -31,7 +39,13 @@ class GeneratePdfController extends Controller
 
     public function generatePdfs(Request $request)
     {
-        $cpos = Cpo::whereIn('id', explode(',', $request->id))->get();
+        $ids_arr = explode(',', $request->id);
+
+        foreach ($ids_arr as $id) {
+            $this->sortLineNumbers($id);
+        }
+
+        $cpos = Cpo::whereIn('id', $ids_arr)->get();
 
 
 

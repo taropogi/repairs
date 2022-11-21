@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cpo;
 use App\Models\User;
 use App\Models\CpoLine;
+use App\Traits\FormatLines;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CpoController extends Controller
 {
+    use FormatLines;
+
     /**
      * Display a listing of the resource.
      *
@@ -89,15 +92,6 @@ class CpoController extends Controller
         return  $response;
     }
 
-    private function sortLineNumbers(Cpo $cpo)
-    {
-        $lines = $cpo->lines;
-        $line_number = 1;
-        foreach ($lines as $key => $line) {
-            $line->line_number = $line_number;
-            $line_number++;
-        }
-    }
 
     public function updateAllLines(Request $request)
     {
@@ -130,10 +124,15 @@ class CpoController extends Controller
         return $request;
     }
 
+
+
     public function getCpoLines(Cpo $cpo)
     {
-        $this->sortLineNumbers($cpo);
-        $response['lines'] = $cpo->lines;
+        $this->sortLineNumbers($cpo->id);
+
+        $selected_cpo = Cpo::find($cpo->id);
+
+        $response['lines'] = $selected_cpo->lines;
 
         return $response;
     }

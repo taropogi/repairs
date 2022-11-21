@@ -14,8 +14,9 @@ class CpoLineFactory extends Factory
      */
     public function definition()
     {
+        $cpo = Cpo::all()->random();
         return [
-            'cpo_id' => Cpo::all()->random()->id,
+            'cpo_id' => $cpo->id,
             'line_number' => 1,
             'description' => $this->faker->text(50),
             'comments' => $this->faker->text(50),
