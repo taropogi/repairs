@@ -12,7 +12,13 @@
                     EDIT
                 </router-link>
 
-                <button type="button" class="btn btn-danger">DELETE</button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="deleteUser"
+                >
+                    DELETE
+                </button>
             </div>
         </td>
     </tr>
@@ -21,6 +27,7 @@
 <script>
 export default {
     props: ["user"],
+    emits: ["delete-user"],
     computed: {
         isAdmin() {
             return this.user.is_admin ? "Yes" : "";
@@ -32,6 +39,11 @@ export default {
                     id: this.user.id,
                 },
             };
+        },
+    },
+    methods: {
+        deleteUser() {
+            this.$emit("delete-user", this.user);
         },
     },
 };

@@ -1,5 +1,11 @@
 <template>
     <div class="p-5">
+        <modal-delete-user
+            v-if="deleteUser"
+            :user="deleteUser"
+            @close="deleteUser = null"
+            @deleted-user="getUserList"
+        ></modal-delete-user>
         <table class="table table-striped" v-if="userList">
             <thead>
                 <tr class="table-primary">
@@ -15,6 +21,7 @@
                     v-for="user in userList"
                     :key="user.id"
                     :user="user"
+                    @delete-user="openDeleteUserModal"
                 ></user-item>
             </tbody>
         </table>
@@ -23,11 +30,20 @@
 
 <script>
 import UserItem from "./UserItem.vue";
+import ModalDeleteUser from "./ModalDeleteUser.vue";
 export default {
     components: {
         UserItem,
+        ModalDeleteUser,
     },
     props: ["searchCriteria"],
+    data() {
+        return {
+            deleteUser: null,
+            userList: null,
+        };
+    },
+
     watch: {
         searchCriteria: {
             handler(newVal, oldVal) {
@@ -36,13 +52,12 @@ export default {
             deep: true,
         },
     },
-    data() {
-        return {
-            userList: null,
-        };
-    },
     methods: {
+        openDeleteUserModal(user) {
+            this.deleteUser = user;
+        },
         async getUserList() {
+            this.deleteUser = null;
             await axios
                 .get("/api/users/list", {
                     params: {

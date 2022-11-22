@@ -61,6 +61,7 @@ Route::get('login', [LoginController::class, 'login']);
 Route::get('users/list', [UserController::class, 'getUserList']);
 Route::get('users/edit/{user}', [UserController::class, 'edit']);
 Route::post('users/update', [UserController::class, 'update']);
+Route::post('users/delete/{user}', [UserController::class, 'destroy']);
 
 
 //export
