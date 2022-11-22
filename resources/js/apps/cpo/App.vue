@@ -106,4 +106,8 @@ export default {
     opacity: 0;
     transform: translateY(-30px);
 }
+
+label {
+    font-weight: bold;
+}
 </style>

@@ -14,10 +14,11 @@
 
         <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
             <div class="col-md-12">
-                <label for="oracle-customer-name" class="form-label"
-                    >Customer Name (ORACLE)</label
-                >
+                <label for="oracle-customer-name" class="form-label">
+                    Customer Name (ORACLE)
+                </label>
                 <select
+                    size="10"
                     class="form-select"
                     id="oracle-customer-name"
                     v-model="defaultOracleCustomer.id"

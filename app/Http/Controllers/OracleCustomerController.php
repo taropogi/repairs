@@ -18,7 +18,8 @@ class OracleCustomerController extends Controller
     }
     public function index()
     {
-        $oracle_customers = OracleCustomer::all();
+        $oracle_customers = OracleCustomer::where('status', 'A')
+            ->where('account_name', 'not like', "%(CLOSED)%")->get();
 
         $response['oracle_customers'] = $oracle_customers;
 
