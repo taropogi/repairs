@@ -57,6 +57,7 @@ class CpoController extends Controller
             'prepared_by' => $request->preparedBy,
             'authorized_by' => $request->authorizedBy,
             'status_id' => 1,
+            'oracle_customer_id' => $request->oracleId,
         ]);
 
         $new_cpo->status_history()->create([

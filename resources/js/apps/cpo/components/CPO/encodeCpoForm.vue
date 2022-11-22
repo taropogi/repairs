@@ -12,38 +12,42 @@
             </div>
         </transition> -->
 
-        <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
-            <div class="col-md-12">
-                <label for="oracle-customer-name" class="form-label">
-                    Customer Name (ORACLE)
-                </label>
-                <select
-                    size="10"
-                    class="form-select"
-                    id="oracle-customer-name"
-                    v-model="defaultOracleCustomer.id"
-                    @change="setDefaultShipToAddress"
-                >
-                    <option
-                        v-for="customer in oracleCustomers"
-                        :key="customer.cust_account_id"
-                        :value="customer.cust_account_id"
+        <spinner-loading v-if="!oracleCustomers"></spinner-loading>
+
+        <form class="row g-3 p-5" @submit.prevent="submitCpoForm" v-else>
+            <div>
+                <div class="col-md-12">
+                    <label for="oracle-customer-name" class="form-label">
+                        Customer Name (ORACLE)
+                    </label>
+                    <select
+                        size="10"
+                        class="form-select"
+                        id="oracle-customer-name"
+                        v-model="defaultOracleCustomer.id"
+                        @change="setDefaultShipToAddress"
                     >
-                        {{ customer.account_name }}
-                    </option>
-                </select>
-            </div>
-            <div class="col-md-12">
-                <label for="oracle-shipto-address" class="form-label"
-                    >Shipto Address (ORACLE)</label
-                >
-                <input
-                    type="text"
-                    class="form-control"
-                    id="oracle-shipto-address"
-                    disabled
-                    v-model="defaultOracleCustomer.shipToAddress"
-                />
+                        <option
+                            v-for="customer in oracleCustomers"
+                            :key="customer.cust_account_id"
+                            :value="customer.cust_account_id"
+                        >
+                            {{ customer.account_name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <label for="oracle-shipto-address" class="form-label"
+                        >Shipto Address (ORACLE)</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="oracle-shipto-address"
+                        disabled
+                        v-model="defaultOracleCustomer.shipToAddress"
+                    />
+                </div>
             </div>
 
             <div class="col-md-12">
@@ -165,7 +169,10 @@ export default {
         async submitCpoForm() {
             // this.isSubmitSuccess = false;
             await axios
-                .post("api/cpo", this.formData)
+                .post("api/cpo", {
+                    ...this.formData,
+                    oracleId: this.defaultOracleCustomer.id,
+                })
                 .then((response) => {
                     this.isSubmitSuccess = true;
                     this.resetForm();
