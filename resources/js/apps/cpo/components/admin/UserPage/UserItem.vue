@@ -8,7 +8,10 @@
         <td>{{ isAdmin }}</td>
         <td>
             <div class="btn-group btn-group-sm" role="group">
-                <button type="button" class="btn btn-primary">EDIT</button>
+                <router-link class="btn btn-primary" :to="editUserLink">
+                    EDIT
+                </router-link>
+
                 <button type="button" class="btn btn-danger">DELETE</button>
             </div>
         </td>
@@ -21,6 +24,14 @@ export default {
     computed: {
         isAdmin() {
             return this.user.is_admin ? "Yes" : "";
+        },
+        editUserLink() {
+            return {
+                name: "admin-user-edit",
+                params: {
+                    id: this.user.id,
+                },
+            };
         },
     },
 };

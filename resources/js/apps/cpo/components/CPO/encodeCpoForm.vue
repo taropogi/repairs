@@ -12,7 +12,7 @@
             </div>
         </transition> -->
 
-        <form class="row g-3 p-5 border" @submit.prevent="submitCpoForm">
+        <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
             <div class="col-md-6">
                 <label for="customer-name" class="form-label"
                     >Customer Name</label

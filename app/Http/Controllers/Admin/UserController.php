@@ -110,6 +110,7 @@ class UserController extends Controller
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'is_admin' => $request->isAdmin,
+            'email' => $request->email,
         ]);
 
 
@@ -127,9 +128,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $response['user'] = $user;
     }
 
     /**
@@ -138,9 +139,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $response['user'] = $user;
+
+        return $response;
     }
 
     /**
