@@ -10,5 +10,6 @@ class OracleCustomer extends Model
 
     protected $connection = 'admin';
     protected $table = 'tblHCA_Final';
+
     use HasFactory;
 }

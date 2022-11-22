@@ -13,7 +13,39 @@
         </transition> -->
 
         <form class="row g-3 p-5" @submit.prevent="submitCpoForm">
-            <div class="col-md-6">
+            <div class="col-md-12">
+                <label for="oracle-customer-name" class="form-label"
+                    >Customer Name (ORACLE)</label
+                >
+                <select
+                    class="form-select"
+                    id="oracle-customer-name"
+                    v-model="defaultOracleCustomer.id"
+                    @change="setDefaultShipToAddress"
+                >
+                    <option
+                        v-for="customer in oracleCustomers"
+                        :key="customer.cust_account_id"
+                        :value="customer.cust_account_id"
+                    >
+                        {{ customer.account_name }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label for="oracle-shipto-address" class="form-label"
+                    >Shipto Address (ORACLE)</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="oracle-shipto-address"
+                    disabled
+                    v-model="defaultOracleCustomer.shipToAddress"
+                />
+            </div>
+
+            <div class="col-md-12">
                 <label for="customer-name" class="form-label"
                     >Customer Name</label
                 >
@@ -25,18 +57,7 @@
                     v-model.trim="formData.customerName"
                 />
             </div>
-            <div class="col-md-6">
-                <label for="contact-number" class="form-label"
-                    >Contact Number</label
-                >
-                <input
-                    type="text"
-                    class="form-control"
-                    id="contact-number"
-                    required
-                    v-model="formData.contactNumber"
-                />
-            </div>
+
             <div class="col-12">
                 <label for="address" class="form-label">Address</label>
                 <input
@@ -46,6 +67,19 @@
                     required
                     v-model.trim="formData.customerAddress"
                     placeholder="1234 Main St"
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label for="contact-number" class="form-label"
+                    >Contact Number</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="contact-number"
+                    required
+                    v-model="formData.contactNumber"
                 />
             </div>
 
@@ -93,6 +127,11 @@
 export default {
     data() {
         return {
+            oracleCustomers: null,
+            defaultOracleCustomer: {
+                id: 3234415,
+                shipToAddress: "",
+            },
             formData: {
                 customerName: "",
                 customerAddress: "",
@@ -105,6 +144,23 @@ export default {
         };
     },
     methods: {
+        setDefaultShipToAddress() {
+            this.defaultOracleCustomer.shipToAddress =
+                this.oracleCustomers.find(
+                    (el) => el.cust_account_id === this.defaultOracleCustomer.id
+                ).address1;
+        },
+        async getOracleCustomers() {
+            await axios
+                .get("api/oracle/customers")
+                .then((res) => {
+                    this.oracleCustomers = res.data.oracle_customers;
+                    this.setDefaultShipToAddress();
+                })
+                .catch((error) => {
+                    console.log("error here");
+                });
+        },
         async submitCpoForm() {
             // this.isSubmitSuccess = false;
             await axios
@@ -166,6 +222,7 @@ export default {
         });
     },
     mounted() {
+        this.getOracleCustomers();
         this.$emit("refresh-header-list");
     },
 };

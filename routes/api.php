@@ -7,6 +7,8 @@ use App\Http\Controllers\ExportListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OracleCustomerController;
+
 // use App\Http\Controllers\RegisterController;
 
 
@@ -62,6 +64,11 @@ Route::get('users/list', [UserController::class, 'getUserList']);
 Route::get('users/edit/{user}', [UserController::class, 'edit']);
 Route::post('users/update', [UserController::class, 'update']);
 Route::post('users/delete/{user}', [UserController::class, 'destroy']);
+
+
+
+//oracle customers
+Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
 
 
 //export
