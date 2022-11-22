@@ -6,6 +6,7 @@ use App\Models\Cpo;
 use App\Models\User;
 use App\Traits\FormatLines;
 use App\Models\HeaderStatus;
+use App\Models\OracleCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,9 +19,8 @@ class TestController extends Controller
     }
     public function test()
     {
-        $response['cpo'] = Cpo::find(6)->toSql();
+        $customers = OracleCustomer::all();
 
-
-        dd($response);
+        dd($customers);
     }
 }

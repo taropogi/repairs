@@ -16,6 +16,7 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('action')->nullable();
+            $table->string('description')->nullable();
             $table->foreignId('user_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
