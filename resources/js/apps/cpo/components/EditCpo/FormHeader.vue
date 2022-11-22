@@ -1,9 +1,14 @@
 <template>
     <div>
+        <modal-status-history
+            v-if="showStatusHistory"
+            @close="showStatusHistory = false"
+            :header-id="headerRow.id"
+        ></modal-status-history>
         <spinner-loading
             v-if="!(headerRow && oracleCustomers)"
         ></spinner-loading>
-        <form @submit.prevent="submitCpoForm" v-else>
+        <form class="row g-3 p-2" @submit.prevent="submitCpoForm" v-else>
             <transition name="updated-header">
                 <div class="fixed-top p2" v-if="isSubmitSuccess">
                     <div class="alert alert-success text-center" role="alert">
@@ -13,7 +18,7 @@
                 </div>
             </transition>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="oracle-customer-name" class="form-label">
                     CUSTOMER NAME (ORACLE)
                 </label>
@@ -29,146 +34,134 @@
                         :key="customer.cust_account_id"
                         :value="customer.cust_account_id"
                     >
-                        {{ customer.cust_account_id }} -
                         {{ customer.account_name }}
                     </option>
                 </select>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="oracle-shipto-address" class="form-label"
                     >SHIPTP ADDRESS (ORACLE)</label
+                >
+
+                <textarea
+                    style="resize: none"
+                    class="form-control"
+                    id="oracle-shipto-address"
+                    rows="10"
+                    disabled
+                    v-model="defaultOracleCustomer.shipToAddress"
+                ></textarea>
+            </div>
+
+            <div class="col-md-6">
+                <label for="customer-name" class="form-label"
+                    >Customer Name</label
                 >
                 <input
                     type="text"
                     class="form-control"
-                    id="oracle-shipto-address"
-                    disabled
-                    v-model="defaultOracleCustomer.shipToAddress"
+                    id="customer-name"
+                    required
+                    :disabled="headerRow.locked"
+                    v-model.trim="headerRow.customer_name"
                 />
             </div>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="customer-name" class="form-label"
-                                >Customer Name</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="customer-name"
-                                required
-                                :disabled="headerRow.locked"
-                                v-model.trim="headerRow.customer_name"
-                            />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="contact-number" class="form-label"
-                                >Contact #</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="contact-number"
-                                required
-                                :disabled="headerRow.locked"
-                                v-model="headerRow.contact_number"
-                            />
-                        </div>
-                        <div class="col-12">
-                            <label for="customer-address" class="form-label"
-                                >Address</label
-                            >
-                            <input
-                                :disabled="headerRow.locked"
-                                type="text"
-                                class="form-control"
-                                id="customer-address"
-                                placeholder="1234 Main St"
-                                required
-                                v-model.trim="headerRow.customer_address"
-                            />
-                        </div>
+            <div class="col-md-6">
+                <label for="customer-address" class="form-label">Address</label>
+                <input
+                    :disabled="headerRow.locked"
+                    type="text"
+                    class="form-control"
+                    id="customer-address"
+                    placeholder="1234 Main St"
+                    required
+                    v-model.trim="headerRow.customer_address"
+                />
+            </div>
 
-                        <div class="col-md-6">
-                            <label for="prepared-by" class="form-label"
-                                >Prepared By</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="prepared-by"
-                                required
-                                :disabled="headerRow.locked"
-                                v-model="headerRow.prepared_by"
-                            />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="authorized-by" class="form-label"
-                                >Authorized By</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="prepared-by"
-                                required
-                                :disabled="headerRow.locked"
-                                v-model="headerRow.authorized_by"
-                            />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="rpo-number" class="form-label"
-                                >RPO #</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="rpo-number"
-                                required
-                                v-model="headerRow.id"
-                                disabled
-                            />
-                        </div>
+            <div class="col-md-4">
+                <label for="contact-number" class="form-label">Contact #</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="contact-number"
+                    required
+                    :disabled="headerRow.locked"
+                    v-model="headerRow.contact_number"
+                />
+            </div>
 
-                        <div class="col-md-6">
-                            <label for="cpo-statuses" class="form-label"
-                                >Status
-                                <span
-                                    class="badge bg-success"
-                                    v-if="headerRow.locked"
-                                    >COMPLETED
-                                </span>
-                            </label>
-                            <select
-                                class="form-select"
-                                v-model="headerRow.status_id"
-                                id="cpo-statuses"
-                            >
-                                <option
-                                    v-for="status in headerStatuses"
-                                    :key="status.id"
-                                    :value="status.id"
-                                    :selected="status.id === headerStatus.id"
-                                >
-                                    {{ status.status }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <history-list
-                        v-if="!isUpdating"
-                        :header-id="headerRow.id"
-                    ></history-list>
-                </div>
+            <div class="col-md-4">
+                <label for="prepared-by" class="form-label">Prepared By</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="prepared-by"
+                    required
+                    :disabled="headerRow.locked"
+                    v-model="headerRow.prepared_by"
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label for="authorized-by" class="form-label"
+                    >Authorized By</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="prepared-by"
+                    required
+                    :disabled="headerRow.locked"
+                    v-model="headerRow.authorized_by"
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label for="rpo-number" class="form-label">RPO #</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="rpo-number"
+                    required
+                    v-model="headerRow.id"
+                    disabled
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label for="cpo-statuses" class="form-label"
+                    >Status
+                    <span class="badge bg-success" v-if="headerRow.locked"
+                        >COMPLETED
+                    </span>
+                </label>
+                <select
+                    class="form-select"
+                    v-model="headerRow.status_id"
+                    id="cpo-statuses"
+                >
+                    <option
+                        v-for="status in headerStatuses"
+                        :key="status.id"
+                        :value="status.id"
+                        :selected="status.id === headerStatus.id"
+                    >
+                        {{ status.status }}
+                    </option>
+                </select>
             </div>
 
             <div class="btn-group py-2">
                 <button type="submit" class="btn btn-success">Update</button>
 
-                <button class="btn btn-warning">Status History</button>
+                <a
+                    href="#"
+                    class="btn btn-warning"
+                    @click="showStatusHistory = true"
+                    >Status History</a
+                >
 
                 <router-link
                     :to="{ name: searchCpoLink }"
@@ -181,10 +174,10 @@
 </template>
 
 <script>
-import historyList from "../StatusHistory/historyList.vue";
+import ModalStatusHistory from "./ModalStatusHistory.vue";
 export default {
     components: {
-        historyList,
+        ModalStatusHistory,
     },
     props: ["id"],
     data() {
@@ -197,6 +190,7 @@ export default {
                 id: 3234415,
                 shipToAddress: "",
             },
+            showStatusHistory: false,
         };
     },
     watch: {},
@@ -210,7 +204,7 @@ export default {
     },
     methods: {
         setDefaultShipToAddress() {
-            console.log(typeof this.defaultOracleCustomer.id);
+            // console.log(typeof this.defaultOracleCustomer.id);
             this.defaultOracleCustomer.shipToAddress =
                 this.oracleCustomers.find(
                     (el) =>
@@ -270,7 +264,7 @@ export default {
                 .then((response) => {
                     // console.log(response);
                     this.isSubmitSuccess = true;
-                    console.log("done update");
+                    // console.log("done update");
                     // this.gotoSearchPage();
                     this.getCpoHeaderRow();
 

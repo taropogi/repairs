@@ -15,7 +15,7 @@
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
 
         <form class="row g-3 p-5" @submit.prevent="submitCpoForm" v-else>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="oracle-customer-name" class="form-label">
                     CUSTOMER NAME (ORACLE)
                 </label>
@@ -35,20 +35,22 @@
                     </option>
                 </select>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="oracle-shipto-address" class="form-label"
                     >SHIPTP ADDRESS (ORACLE)</label
                 >
-                <input
-                    type="text"
+
+                <textarea
+                    style="resize: none"
                     class="form-control"
                     id="oracle-shipto-address"
+                    rows="10"
                     disabled
                     v-model="defaultOracleCustomer.shipToAddress"
-                />
+                ></textarea>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="customer-name" class="form-label"
                     >Customer Name</label
                 >
@@ -61,7 +63,7 @@
                 />
             </div>
 
-            <div class="col-12">
+            <div class="col-6">
                 <label for="address" class="form-label">Address</label>
                 <input
                     type="text"
