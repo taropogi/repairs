@@ -60,6 +60,7 @@ Route::get('login', [LoginController::class, 'login']);
 //users
 Route::get('users/list', [UserController::class, 'getUserList']);
 Route::get('users/edit/{user}', [UserController::class, 'edit']);
+Route::post('users/update', [UserController::class, 'update']);
 
 
 //export

@@ -153,9 +153,42 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'username' => ['required', 'unique:users,username,' . $request->id],
+            'password' => ['nullable', 'confirmed', 'min:6'],
+            'is_admin' => ['required'],
+        ]);
+
+
+        if ($validator->fails()) {
+            $response['errors']   = $validator->getMessageBag()->toArray();
+            return $response;
+        }
+
+
+
+        $user = User::find($request->id);
+        $user->username = $request->username;
+        $user->name = $request->name;
+
+
+
+        if ($request->password && $request->password !== "") {
+            $user->password =  Hash::make($request->password);
+        }
+
+        $user->is_admin = $request->is_admin;
+
+        $user->update();
+
+        $response['user'] = $user;
+
+
+        return $response;
     }
 
     /**

@@ -49,7 +49,6 @@
                         'is-invalid': isPasswordInValid,
                     }"
                     name="password"
-                    required
                 />
             </div>
 
@@ -65,7 +64,6 @@
                         'is-invalid': isPasswordInValid,
                     }"
                     id="confirm_password"
-                    required
                     v-model="user.password_confirmation"
                 />
             </div>
@@ -135,6 +133,8 @@ export default {
                     // console.log(response);
                     this.user = response.data.user;
                     this.user.is_admin = this.user.is_admin === 1;
+                    this.user.password = "";
+                    this.user.password_confirmation = "";
                     // console.log(this.user.is_admin);
                     // if (response.data.errors) {
                     //     this.formErrors = response.data.errors;
@@ -149,16 +149,17 @@ export default {
                 })
                 .catch((error) => {
                     console.log("errors");
+
                     console.log(error);
                 });
         },
         async submitUpdateForm() {
-            // console.log(this.formData);
+            // console.log(this.user);
             this.formErrors = null;
             await axios
-                .post("api/register", this.formData)
+                .post("api/users/update", this.user)
                 .then((response) => {
-                    // console.log(response.data.req);
+                    console.log(response.data);
                     if (response.data.errors) {
                         this.formErrors = response.data.errors;
                         // console.log(this.formErrors);
@@ -172,6 +173,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log("errors");
+
                     console.log(error);
                 });
         },
