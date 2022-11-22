@@ -1,6 +1,9 @@
 <template>
     <div>
-        <form @submit.prevent="submitCpoForm" v-if="headerRow">
+        <spinner-loading
+            v-if="!(headerRow && oracleCustomers)"
+        ></spinner-loading>
+        <form @submit.prevent="submitCpoForm" v-else>
             <transition name="updated-header">
                 <div class="fixed-top p2" v-if="isSubmitSuccess">
                     <div class="alert alert-success text-center" role="alert">
@@ -9,6 +12,40 @@
                     </div>
                 </div>
             </transition>
+
+            <div class="col-md-12">
+                <label for="oracle-customer-name" class="form-label">
+                    CUSTOMER NAME (ORACLE)
+                </label>
+                <select
+                    size="10"
+                    class="form-select"
+                    id="oracle-customer-name"
+                    v-model="defaultOracleCustomer.id"
+                    @change="setDefaultShipToAddress"
+                >
+                    <option
+                        v-for="customer in oracleCustomers"
+                        :key="customer.cust_account_id"
+                        :value="customer.cust_account_id"
+                    >
+                        {{ customer.cust_account_id }} -
+                        {{ customer.account_name }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label for="oracle-shipto-address" class="form-label"
+                    >SHIPTP ADDRESS (ORACLE)</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="oracle-shipto-address"
+                    disabled
+                    v-model="defaultOracleCustomer.shipToAddress"
+                />
+            </div>
 
             <div class="row">
                 <div class="col-sm-6">
@@ -131,6 +168,8 @@
             <div class="btn-group py-2">
                 <button type="submit" class="btn btn-success">Update</button>
 
+                <button class="btn btn-warning">Status History</button>
+
                 <router-link
                     :to="{ name: searchCpoLink }"
                     class="btn btn-danger"
@@ -150,11 +189,17 @@ export default {
     props: ["id"],
     data() {
         return {
+            oracleCustomers: null,
             headerRow: null,
             isUpdating: false,
             isSubmitSuccess: false,
+            defaultOracleCustomer: {
+                id: 3234415,
+                shipToAddress: "",
+            },
         };
     },
+    watch: {},
     computed: {
         searchCpoLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
@@ -164,6 +209,26 @@ export default {
         },
     },
     methods: {
+        setDefaultShipToAddress() {
+            console.log(typeof this.defaultOracleCustomer.id);
+            this.defaultOracleCustomer.shipToAddress =
+                this.oracleCustomers.find(
+                    (el) =>
+                        el.cust_account_id ===
+                        Number(this.defaultOracleCustomer.id)
+                ).address1;
+        },
+        async getOracleCustomers() {
+            await axios
+                .get("api/oracle/customers")
+                .then((res) => {
+                    this.oracleCustomers = res.data.oracle_customers;
+                    this.setDefaultShipToAddress();
+                })
+                .catch((error) => {
+                    console.log("error herexxxx");
+                });
+        },
         gotoSearchPage() {
             this.$router.push({
                 name: this.searchCpoLink,
@@ -178,6 +243,12 @@ export default {
                     this.headerStatus = response.data.cpo.status;
 
                     this.headerRow = response.data.cpo;
+                    this.getOracleCustomers();
+                    if (this.headerRow.oracle_customer_id) {
+                        this.defaultOracleCustomer.id =
+                            this.headerRow.oracle_customer_id;
+                    }
+
                     this.$emit("searched-header-row", this.headerRow);
                     // console.log("hahahahalskdfjlaskdfjl");
                 })
@@ -191,7 +262,11 @@ export default {
             //   console.log("submit edit");
             // console.log(this.headerRow);
             await axios
-                .post("api/cpo/update", this.headerRow)
+                .post("api/cpo/update", {
+                    ...this.headerRow,
+                    oracleId: this.defaultOracleCustomer.id,
+                    oracleShipto: this.defaultOracleCustomer.shipToAddress,
+                })
                 .then((response) => {
                     // console.log(response);
                     this.isSubmitSuccess = true;
@@ -211,6 +286,8 @@ export default {
     },
     mounted() {
         this.getCpoHeaderRow();
+
+        // this.setDefaultShipToAddress();
     },
 };
 </script>

@@ -58,6 +58,7 @@ class CpoController extends Controller
             'authorized_by' => $request->authorizedBy,
             'status_id' => 1,
             'oracle_customer_id' => $request->oracleId,
+            'oracle_customer_shipto' => $request->oracleShipto,
         ]);
 
         $new_cpo->status_history()->create([
@@ -322,6 +323,9 @@ class CpoController extends Controller
         $cpo->prepared_by = $request->prepared_by;
         $cpo->authorized_by = $request->authorized_by;
         $cpo->locked = $request->locked;
+
+        $cpo->oracle_customer_id = $request->oracleId;
+        $cpo->oracle_customer_shipto = $request->oracleShipto;
 
 
         if ($cpo->status_id !== $request->status_id) {
