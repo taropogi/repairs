@@ -7,6 +7,7 @@ import store from "./store.js";
 
 import SideBar from "./components/SideBar/SideBar.vue";
 import SpinnerLoading from "./components/UI/SpinnerLoading.vue";
+import BaseModal from "./components/Modals/BaseModal.vue";
 
 const app = createApp(App);
 app.use(router);
@@ -14,6 +15,7 @@ app.use(store);
 
 app.component("side-bar", SideBar);
 app.component("spinner-loading", SpinnerLoading);
+app.component("base-modal", BaseModal);
 
 app.config.unwrapInjectedRef = true;
 // console.log(app.config);

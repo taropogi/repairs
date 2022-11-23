@@ -222,7 +222,7 @@ export default {
             // });
         },
         deleteCpo() {
-            console.log("emit");
+            // console.log("emit");
             this.$emit("delete-cpo", { id: this.headerItem.id });
             // this.isDeleteCpo = true;
             // this.$emit("open-delete-cpo", this.localHeaderItem.id);

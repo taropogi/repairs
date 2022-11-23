@@ -1,80 +1,77 @@
 <template>
-    <div class="modal fade show" tabindex="-1" style="display: block">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title text-white">
-                        <strong>Multiple RPO Change Status</strong>
-                    </h5>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        @click="closeModal"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <div v-if="showConfirmDelete" class="text-center p-5">
-                        <h1>Confirm delete</h1>
-                    </div>
-                    <div v-if="selectedCpos && !showConfirmDelete">
-                        Change status to:
+    <base-modal>
+        <template #header>
+            <h5 class="modal-title text-white">
+                <strong>Multiple RPO Change Status</strong>
+            </h5>
+            <button
+                type="button"
+                class="btn-close"
+                @click="closeModal"
+            ></button>
+        </template>
+        <template #body>
+            <div v-if="showConfirmDelete" class="text-center p-5">
+                <h1>Confirm delete</h1>
+            </div>
+            <div v-if="selectedCpos && !showConfirmDelete">
+                Change status to:
 
-                        <select class="form-select" v-model="selectedStatus">
-                            <option
-                                v-for="status in headerStatuses"
-                                :key="status.id + status.status"
-                                :value="status.id"
-                            >
-                                {{ status.status }}
-                            </option>
-                        </select>
-                        <table
-                            class="table table-sm mt-2 table-striped"
-                            v-if="selectedCpos"
-                        >
-                            <thead>
-                                <tr class="table-primary">
-                                    <th scope="col">CPO#</th>
-                                    <th scope="col">RPO #</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="cpo in selectedCpos" :key="cpo.id">
-                                    <th scope="row">{{ cpo.id }}</th>
-                                    <td>{{ cpo.rpo_number }}</td>
-                                    <td>
-                                        {{
-                                            headerStatuses.find(
-                                                (status) =>
-                                                    status.id === cpo.status_id
-                                            ).status
-                                        }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div v-if="showConfirmDelete">
-                        <button
-                            type="button"
-                            class="btn btn-danger m-2"
-                            @click="confirmDeleteYes"
-                        >
-                            Yes
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary m-2"
-                            @click="cancelDeleteConfirm"
-                        >
-                            No
-                        </button>
-                    </div>
-                    <div v-else>
-                        <!-- <button
+                <select class="form-select" v-model="selectedStatus">
+                    <option
+                        v-for="status in headerStatuses"
+                        :key="status.id + status.status"
+                        :value="status.id"
+                    >
+                        {{ status.status }}
+                    </option>
+                </select>
+                <table
+                    class="table table-sm mt-2 table-striped"
+                    v-if="selectedCpos"
+                >
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">CPO#</th>
+                            <th scope="col">RPO #</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="cpo in selectedCpos" :key="cpo.id">
+                            <th scope="row">{{ cpo.id }}</th>
+                            <td>{{ cpo.rpo_number }}</td>
+                            <td>
+                                {{
+                                    headerStatuses.find(
+                                        (status) => status.id === cpo.status_id
+                                    ).status
+                                }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <template #default>
+            <div v-if="showConfirmDelete">
+                <button
+                    type="button"
+                    class="btn btn-danger m-2"
+                    @click="confirmDeleteYes"
+                >
+                    Yes
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary m-2"
+                    @click="cancelDeleteConfirm"
+                >
+                    No
+                </button>
+            </div>
+            <div v-else>
+                <!-- <button
                             type="button"
                             class="btn btn-secondary m-2"
                             @click="closeModal"
@@ -82,39 +79,37 @@
                             Close
                         </button> -->
 
-                        <button
-                            type="button"
-                            class="btn btn-warning m-2"
-                            @click="downloadPdfs"
-                        >
-                            Download PDFs
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary m-2"
-                            @click="saveChanges"
-                        >
-                            Save changes
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-danger m-2"
-                            @click="confirmDelete"
-                        >
-                            Delete
-                        </button>
-                    </div>
-                </div>
+                <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    @click="downloadPdfs"
+                >
+                    Download PDFs
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary m-2"
+                    @click="saveChanges"
+                >
+                    Save changes
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger m-2"
+                    @click="confirmDelete"
+                >
+                    Delete
+                </button>
             </div>
-        </div>
-    </div>
+        </template>
+    </base-modal>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
     emits: ["close-modal"],
-    inject: ["setShowBackDrop", "laravelData"],
+    inject: ["laravelData"],
     data() {
         return {
             selectedCpos: null,
@@ -208,11 +203,6 @@ export default {
     },
     mounted() {
         this.getSelectedPos();
-        this.setShowBackDrop(true);
-        // console.log(this.selectedCpos.length);
-    },
-    unmounted() {
-        this.setShowBackDrop(false);
     },
 };
 </script>

@@ -1,61 +1,53 @@
 <template>
-    <div class="modal fade show" tabindex="-1" style="display: block">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title text-white">
-                        <strong>Are you sure to delete this CPO?</strong>
-                    </h5>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        @click="$emit('close-modal-delete-cpo')"
-                    ></button>
-                </div>
-                <div class="modal-body" v-if="headerRow">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr class="table-primary">
-                                <th scope="col">CPO#</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">{{ headerRow.id }}</th>
-                                <td>{{ headerRow.customer_name }}</td>
-                                <td>{{ headerRow.status.status }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer" v-if="!isDeleting">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="confirmDelete"
-                    >
-                        Yes
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        @click="$emit('close-modal-delete-cpo')"
-                    >
-                        No
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <base-modal>
+        <template #header>
+            <h5 class="modal-title text-white">
+                <strong>Are you sure to delete this CPO?</strong>
+            </h5>
+            <button
+                type="button"
+                class="btn-close"
+                @click="$emit('close-modal-delete-cpo')"
+            ></button>
+        </template>
+        <template #body v-if="headerRow">
+            <table class="table table-sm">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">CPO#</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ headerRow.id }}</th>
+                        <td>{{ headerRow.customer_name }}</td>
+                        <td>{{ headerRow.status.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+        <template #default v-if="!isDeleting">
+            <button type="button" class="btn btn-danger" @click="confirmDelete">
+                Yes
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                @click="$emit('close-modal-delete-cpo')"
+            >
+                No
+            </button>
+        </template>
+    </base-modal>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["cpoId"],
-    inject: ["setShowBackDrop"],
+
     emits: ["deleted-cpo", "close-modal-delete-cpo"],
     data() {
         return {
@@ -99,10 +91,6 @@ export default {
     },
     mounted() {
         this.getCpoHeader();
-        this.setShowBackDrop(true);
-    },
-    unmounted() {
-        this.setShowBackDrop(false);
     },
 };
 </script>
