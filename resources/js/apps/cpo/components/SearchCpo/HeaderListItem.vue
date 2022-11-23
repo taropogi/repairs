@@ -38,7 +38,7 @@
                     class="btn btn-danger"
                     @click="deleteCpo"
                 >
-                    Delete <i class="bi bi-trash-fill"></i>
+                    Delete
                 </button>
 
                 <button
@@ -46,7 +46,7 @@
                     class="btn btn-success"
                     @click="editCpoHeader"
                 >
-                    Edit <i class="bi bi-pencil-fill"></i>
+                    View/Edit
                 </button>
                 <button
                     v-if="!localHeaderItem.locked"
@@ -54,7 +54,7 @@
                     class="btn btn-info"
                     @click="printCPOPdf"
                 >
-                    PDF <i class="bi bi-download"></i>
+                    PDF
                 </button>
 
                 <button

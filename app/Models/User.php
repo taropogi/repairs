@@ -39,6 +39,11 @@ class User extends Authenticatable
     ];
 
 
+    public function created_pdfs()
+    {
+        return $this->hasMany(CpoPdfHistory::class);
+    }
+
     public function activities()
     {
         return $this->hasMany(Activity::class);

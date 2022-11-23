@@ -1,151 +1,137 @@
 <template>
-    <transition name="saved-line">
-        <tr>
-            <th scope="row">{{ lineDetails.line_number }}</th>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.description"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    v-model="lineDetails.price"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    v-model="lineDetails.hcopy"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    v-model="lineDetails.qty_returned"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    v-model="lineDetails.unit"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    v-model="lineDetails.qty_inspect"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.good_condition"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.good_condition"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.minor_repair_clean"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.repair_parts_needed"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.damaged"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                    v-model="lineDetails.comments"
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    :disabled="headerIsLocked"
-                />
-            </td>
-            <td>
-                <span class="badge bg-secondary" v-if="headerIsLocked"
-                    >LOCKED</span
+    <tr>
+        <th scope="row">{{ lineDetails.line_number }}</th>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.description"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                v-model="lineDetails.price"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                v-model="lineDetails.hcopy"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                v-model="lineDetails.qty_returned"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                v-model="lineDetails.unit"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                v-model="lineDetails.qty_inspect"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.good_condition"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.minor_repair_clean"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.minor_repair_clean"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.repair_parts_needed"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.damaged"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+                v-model="lineDetails.comments"
+            />
+        </td>
+        <td>
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                :disabled="headerIsLocked"
+            />
+        </td>
+        <td>
+            <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
+            <div class="btn-group btn-group-sm" role="group" v-else>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    @click="saveLine"
+                    v-if="!lineUpdating"
                 >
-                <div class="btn-group btn-group-sm" role="group" v-else>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        @click="saveLine"
-                        v-if="!lineUpdating"
-                    >
-                        Save
-                    </button>
-                    <button
-                        class="btn btn-primary"
-                        type="button"
-                        disabled
-                        v-else
-                    >
-                        <span class="spinner-border spinner-border-sm"></span>
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="deleteLine"
-                        v-if="!isDeleting"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        class="btn btn-danger"
-                        type="button"
-                        disabled
-                        v-else
-                    >
-                        <span class="spinner-border spinner-border-sm"></span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-    </transition>
+                    Save
+                </button>
+                <button class="btn btn-primary" type="button" disabled v-else>
+                    <span class="spinner-border spinner-border-sm"></span>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="deleteLine"
+                    v-if="!isDeleting"
+                >
+                    Delete
+                </button>
+                <button class="btn btn-danger" type="button" disabled v-else>
+                    <span class="spinner-border spinner-border-sm"></span>
+                </button>
+            </div>
+        </td>
+    </tr>
 </template>
 
 <script>
@@ -206,31 +192,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.saved-line-enter-from {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.saved-line-enter-active {
-    transition: all 0.3s ease-out;
-}
-.saved-line-enter-to {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.saved-line-leave-from {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.saved-line-leave-active {
-    transition: all 0.3s ease-in;
-}
-.saved-line-leave-to {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-</style>

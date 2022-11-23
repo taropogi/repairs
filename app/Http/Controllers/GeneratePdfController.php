@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use PDF;
 use App\Models\Cpo;
+use App\Traits\FormatLines;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
-use App\Exports\ExportCpoByStatus;
 use App\Exports\ExportCpoLists;
-use App\Traits\FormatLines;
+use App\Exports\ExportCpoByStatus;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class GeneratePdfController extends Controller
 {
@@ -21,11 +22,33 @@ class GeneratePdfController extends Controller
     }
 
 
+    private function generateCpoPdf($cpo_id)
+    {
 
+        $this->sortLineNumbers($cpo_id);
+        $cpo = Cpo::where('id', $cpo_id)->get();
+
+        $data['title'] = 'RPO#' . $cpo[0]->id;
+        $data['cpos'] = $cpo;
+        $data['date'] = date('m/d/Y');
+
+        $pdf = PDF::loadView('pdf.multiCpos', $data);
+
+        $file_name = $cpo[0]->id . '-' . date("Y-m-d h-i-s a", time()) . '.pdf';
+        Storage::put('public/pdfs/rpo/' . $cpo[0]->id . '/' . $file_name, $pdf->output());
+
+        $cpo[0]->pdf_history()->create(
+            [
+                'created_by' => auth()->user()->id,
+                'file_name' => $file_name
+            ]
+        );
+    }
 
     public function generatePdf(Request $request)
     {
-        $this->sortLineNumbers($request->id);
+        // $this->sortLineNumbers($request->id);
+        $this->generateCpoPdf($request->id);
         $cpo = Cpo::where('id', $request->id)->get();
         // $this->sortLineNumbers($cpo);
         $data['title'] = 'Multi Selected CPOS';
@@ -42,7 +65,7 @@ class GeneratePdfController extends Controller
         $ids_arr = explode(',', $request->id);
 
         foreach ($ids_arr as $id) {
-            $this->sortLineNumbers($id);
+            $this->generateCpoPdf($id);
         }
 
         $cpos = Cpo::whereIn('id', $ids_arr)->get();
@@ -53,7 +76,11 @@ class GeneratePdfController extends Controller
         $data['date'] = date('m/d/Y');
         $data['cpos'] = $cpos;
 
+
+
         $pdf = PDF::loadView('pdf.multiCpos', $data);
+
+
 
         return $pdf->download('Multiple CPOs.pdf');
     }

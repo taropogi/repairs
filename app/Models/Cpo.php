@@ -21,6 +21,10 @@ class Cpo extends Model
         return $this->hasMany(CpoLine::class)->orderBy('line_number', 'ASC');
     }
 
+    public function pdf_history()
+    {
+        return $this->hasMany(CpoPdfHistory::class);
+    }
 
 
     public function status_history()

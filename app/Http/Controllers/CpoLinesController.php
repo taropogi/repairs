@@ -90,6 +90,11 @@ class CpoLinesController extends Controller
         $cpoLine->price = $request->price;
         $cpoLine->hcopy = $request->hcopy;
         $cpoLine->qty_returned = $request->qty_returned;
+        $cpoLine->unit = $request->unit;
+        $cpoLine->qty_inspect = $request->qty_inspect;
+        $cpoLine->good_condition = $request->good_condition;
+        $cpoLine->minor_repair_clean = $request->minor_repair_clean;
+        $cpoLine->repair_parts_needed = $request->repair_parts_needed;
         $cpoLine->update();
 
         $cpo = Cpo::find($cpoLine->cpo_id);
