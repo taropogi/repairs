@@ -156,12 +156,10 @@
             <div class="btn-group">
                 <button type="submit" class="btn btn-success">Update</button>
 
-                <a
-                    href="#"
-                    class="btn btn-warning"
-                    @click="showStatusHistory = true"
-                    >Status History</a
+                <span class="btn btn-warning" @click="showStatusHistory = true"
+                    >Status History</span
                 >
+
                 <a href="#" class="btn btn-info" @click="printCPOPdf"
                     >Download PDF</a
                 >
