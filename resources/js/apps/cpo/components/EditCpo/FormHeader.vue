@@ -153,7 +153,7 @@
                 </select>
             </div>
 
-            <div class="btn-group py-2">
+            <div class="btn-group">
                 <button type="submit" class="btn btn-success">Update</button>
 
                 <a
@@ -161,6 +161,9 @@
                     class="btn btn-warning"
                     @click="showStatusHistory = true"
                     >Status History</a
+                >
+                <a href="#" class="btn btn-info" @click="printCPOPdf"
+                    >Download PDF</a
                 >
 
                 <router-link
@@ -181,6 +184,7 @@ export default {
         ModalStatusHistory,
     },
     props: ["id"],
+    inject: ["laravelData"],
     data() {
         return {
             headerRow: null,
@@ -202,8 +206,19 @@ export default {
             }
             return "search-cpo";
         },
+        linkGeneratePdf() {
+            return this.laravelData.route_list.find(
+                (route) => route.routeName === "generate-pdf"
+            ).uri;
+        },
     },
     methods: {
+        printCPOPdf() {
+            window.location.href = this.linkGeneratePdf + "/?id=" + this.id;
+
+            // window.location.href =
+            //     this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
+        },
         setDefaultShipToAddress() {
             // console.log(typeof this.defaultOracleCustomer.id);
             const selectedCustomer = this.oracleCustomers.find(
