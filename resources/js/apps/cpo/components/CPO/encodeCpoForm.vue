@@ -151,10 +151,19 @@ export default {
     },
     methods: {
         setDefaultShipToAddress() {
+            // console.log(typeof this.defaultOracleCustomer.id);
+            const selectedCustomer = this.oracleCustomers.find(
+                (el) =>
+                    el.cust_account_id === Number(this.defaultOracleCustomer.id)
+            );
             this.defaultOracleCustomer.shipToAddress =
-                this.oracleCustomers.find(
-                    (el) => el.cust_account_id === this.defaultOracleCustomer.id
-                ).address1;
+                selectedCustomer.address1 +
+                " " +
+                (selectedCustomer.address2 ?? "") +
+                ", " +
+                (selectedCustomer.city ?? "") +
+                ", " +
+                (selectedCustomer.province ?? "");
         },
 
         async submitCpoForm() {
