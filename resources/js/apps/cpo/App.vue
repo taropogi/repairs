@@ -1,17 +1,20 @@
 <template>
-    <main class="container-fluid" v-if="oracleCustomers">
-        <div :class="{ backdrop: showBackDrop }"></div>
+    <div>
+        <spinner-loading v-if="!oracleCustomers"></spinner-loading>
+        <main class="container-fluid" v-else>
+            <div :class="{ backdrop: showBackDrop }"></div>
 
-        <!-- <the-header></the-header>
+            <!-- <the-header></the-header>
         <side-bar></side-bar>
 
         <hr /> -->
-        <router-view v-slot="slotProps">
-            <transition name="app-router" mode="out-in">
-                <component :is="slotProps.Component"></component>
-            </transition>
-        </router-view>
-    </main>
+            <router-view v-slot="slotProps">
+                <transition name="app-router" mode="out-in">
+                    <component :is="slotProps.Component"></component>
+                </transition>
+            </router-view>
+        </main>
+    </div>
 </template>
 
 <script>

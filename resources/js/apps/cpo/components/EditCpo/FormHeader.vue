@@ -234,6 +234,8 @@ export default {
                             this.headerRow.oracle_customer_id;
                     }
 
+                    this.setDefaultShipToAddress();
+
                     this.$emit("searched-header-row", this.headerRow);
                     // console.log("hahahahalskdfjlaskdfjl");
                 })
