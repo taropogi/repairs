@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-6">
                 <label for="oracle-shipto-address" class="form-label"
-                    >SHIPTP ADDRESS (ORACLE)</label
+                    >SHIPTO ADDRESS (ORACLE)</label
                 >
 
                 <textarea
