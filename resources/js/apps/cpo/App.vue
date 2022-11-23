@@ -1,6 +1,7 @@
 <template>
-    <main class="container-fluid">
+    <main class="container-fluid" v-if="oracleCustomers">
         <div :class="{ backdrop: showBackDrop }"></div>
+
         <!-- <the-header></the-header>
         <side-bar></side-bar>
 
@@ -28,10 +29,10 @@ export default {
         return { laravelData: null };
     },
     methods: {
-        ...mapActions(["setShowBackDrop"]),
+        ...mapActions(["setShowBackDrop", "setOracleCustomers"]),
     },
     computed: {
-        ...mapGetters(["showBackDrop"]),
+        ...mapGetters(["showBackDrop", "oracleCustomers"]),
     },
     provide() {
         return {
@@ -61,7 +62,7 @@ export default {
         this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
 
         this.laravelData = window.laravelData;
-
+        this.setOracleCustomers();
         // this.laravelData = window.laravelData;
         // console.log(this.laravelData);
         // console.log(this.$store.getters["auth/isLoggedIn"]);

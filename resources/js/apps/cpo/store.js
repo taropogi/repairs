@@ -16,6 +16,7 @@ const store = createStore({
             laravelData: null,
             activeNav: null,
             showBackDrop: false,
+            oracleCustomers: null,
         };
     },
     mutations: {
@@ -31,6 +32,16 @@ const store = createStore({
         setShowBackDrop(state, payload) {
             state.showBackDrop = payload;
         },
+        setOracleCustomers(state) {
+            axios
+                .get("api/oracle/customers")
+                .then((res) => {
+                    state.oracleCustomers = res.data.oracle_customers;
+                })
+                .catch((error) => {
+                    console.log("can't fectch oracle customers");
+                });
+        },
     },
     getters: {
         showBackDrop(state) {
@@ -45,6 +56,9 @@ const store = createStore({
         activeNav(state) {
             return state.activeNav;
         },
+        oracleCustomers(state) {
+            return state.oracleCustomers;
+        },
     },
     actions: {
         setShowBackDrop(context, payload) {
@@ -52,6 +66,9 @@ const store = createStore({
         },
         setActiveNav(context, payload) {
             context.commit("setActiveNav", payload);
+        },
+        setOracleCustomers(context) {
+            context.commit("setOracleCustomers");
         },
     },
 });

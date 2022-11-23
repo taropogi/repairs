@@ -175,6 +175,7 @@
 
 <script>
 import ModalStatusHistory from "./ModalStatusHistory.vue";
+import { mapGetters } from "vuex";
 export default {
     components: {
         ModalStatusHistory,
@@ -182,7 +183,6 @@ export default {
     props: ["id"],
     data() {
         return {
-            oracleCustomers: null,
             headerRow: null,
             isUpdating: false,
             isSubmitSuccess: false,
@@ -195,6 +195,7 @@ export default {
     },
     watch: {},
     computed: {
+        ...mapGetters(["oracleCustomers"]),
         searchCpoLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
                 return "admin-search-cpo";
@@ -212,17 +213,7 @@ export default {
                         Number(this.defaultOracleCustomer.id)
                 ).address1;
         },
-        async getOracleCustomers() {
-            await axios
-                .get("api/oracle/customers")
-                .then((res) => {
-                    this.oracleCustomers = res.data.oracle_customers;
-                    this.setDefaultShipToAddress();
-                })
-                .catch((error) => {
-                    console.log("error herexxxx");
-                });
-        },
+
         gotoSearchPage() {
             this.$router.push({
                 name: this.searchCpoLink,
@@ -237,7 +228,7 @@ export default {
                     this.headerStatus = response.data.cpo.status;
 
                     this.headerRow = response.data.cpo;
-                    this.getOracleCustomers();
+
                     if (this.headerRow.oracle_customer_id) {
                         this.defaultOracleCustomer.id =
                             this.headerRow.oracle_customer_id;

@@ -129,10 +129,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            oracleCustomers: null,
+            // oracleCustomers: null,
             defaultOracleCustomer: {
                 id: 3234415,
                 shipToAddress: "",
@@ -155,17 +156,7 @@ export default {
                     (el) => el.cust_account_id === this.defaultOracleCustomer.id
                 ).address1;
         },
-        async getOracleCustomers() {
-            await axios
-                .get("api/oracle/customers")
-                .then((res) => {
-                    this.oracleCustomers = res.data.oracle_customers;
-                    this.setDefaultShipToAddress();
-                })
-                .catch((error) => {
-                    console.log("error here");
-                });
-        },
+
         async submitCpoForm() {
             // this.isSubmitSuccess = false;
             await axios
@@ -210,6 +201,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(["oracleCustomers"]),
         editHeaderLink() {
             if (this.$store.getters["auth/loggedUser"].is_admin) {
                 return "admin-edit-cpo";
@@ -231,7 +223,8 @@ export default {
         });
     },
     mounted() {
-        this.getOracleCustomers();
+        this.setDefaultShipToAddress();
+        // this.getOracleCustomers();
         this.$emit("refresh-header-list");
     },
 };
