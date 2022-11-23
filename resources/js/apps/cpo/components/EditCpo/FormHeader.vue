@@ -131,7 +131,7 @@
                 />
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <label for="cpo-statuses" class="form-label"
                     >Status
                     <span class="badge bg-success" v-if="headerRow.locked"
