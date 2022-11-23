@@ -10,11 +10,12 @@ use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
+use App\Traits\GeneratePdf;
 use Illuminate\Support\Facades\Auth;
 
 class CpoController extends Controller
 {
-    use FormatLines;
+    use FormatLines, GeneratePdf;
 
     /**
      * Display a listing of the resource.
@@ -312,6 +313,12 @@ class CpoController extends Controller
         return $response;
     }
 
+    public function getPdfHistory(Cpo $cpo)
+    {
+
+        return $cpo->pdf_history;
+    }
+
     public function update(Request $request)
     {
         $cpo = Cpo::find($request->id);
@@ -354,6 +361,7 @@ class CpoController extends Controller
     {
         if ($change_to_status_id == $this->completed_status_id) {
             Cpo::where('id', $cpo_id)->update(['locked' => true]);
+            $this->generateCpoPdf($cpo_id);
         } else {
             Cpo::where('id', $cpo_id)->update(['locked' => false]);
         }

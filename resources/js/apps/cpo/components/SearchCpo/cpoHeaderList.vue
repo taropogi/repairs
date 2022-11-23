@@ -10,6 +10,14 @@
                 ></modal-delete-cpo>
             </teleport>
 
+            <teleport to="body">
+                <modal-pdf-history
+                    v-if="showPdfHistoryId"
+                    :id="showPdfHistoryId"
+                    @close="showPdfHistoryId = null"
+                ></modal-pdf-history>
+            </teleport>
+
             <table
                 class="table table-sm table-bordered table-striped table-hover"
             >
@@ -45,6 +53,11 @@
                         :header-item="item"
                         @delete-cpo="openDeleteCpo"
                         @deleted-cpo="deleteCpoConfirm"
+                        @show-pdf-history="
+                            (cpo) => {
+                                showPdfHistoryId = cpo.id;
+                            }
+                        "
                     ></header-list-item>
                 </tbody>
             </table>
@@ -54,14 +67,14 @@
 
 <script>
 import HeaderListItem from "./HeaderListItem.vue";
-
+import ModalPdfHistory from "../Modals/PdfHistory.vue";
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 import { mapGetters } from "vuex";
 
 export default {
     components: {
         HeaderListItem,
-
+        ModalPdfHistory,
         ModalDeleteCpo,
     },
     data() {
@@ -69,7 +82,7 @@ export default {
             cpoHeaderList: [],
             selectedHeaders: [],
             isSearching: false,
-
+            showPdfHistoryId: null,
             deleteCpo: null,
         };
     },

@@ -43,6 +43,7 @@ Route::post('cpo/destroy', [CpoController::class, 'destroy']);
 Route::post('cpo/destroy/multi', [CpoController::class, 'destroyMulti']);
 Route::post('cpo/selected', [CpoController::class, 'selectedCpos']);
 Route::post('cpo/selected/update/status', [CpoController::class, 'changeStatusSelectedCpos']);
+Route::get('cpo/pdf/history/{cpo}', [CpoController::class, 'getPdfHistory']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
@@ -69,6 +70,9 @@ Route::post('users/delete/{user}', [UserController::class, 'destroy']);
 
 //oracle customers
 Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
+
+//pdf history
+// Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
 
 
 //export

@@ -52,7 +52,7 @@ export default {
         ...mapGetters("export", ["cpoModifiedDate"]),
         ...mapGetters("auth", ["loggedUser"]),
         editHeaderLink() {
-            if (this.loggedUser.is_admin) {
+            if (this.loggedUser && this.loggedUser.is_admin) {
                 return "admin-edit-cpo";
             }
 

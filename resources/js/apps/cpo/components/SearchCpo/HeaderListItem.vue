@@ -74,7 +74,7 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["headerItem"],
-    emits: ["delete-cpo", "deleted-cpo"],
+    emits: ["delete-cpo", "deleted-cpo", "show-pdf-history"],
 
     data() {
         return {
@@ -243,11 +243,9 @@ export default {
         },
 
         printCPOPdf() {
+            // this.$emit("show-pdf-history", { id: this.localHeaderItem.id });
             window.location.href =
                 this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
-
-            // window.location.href =
-            //     this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
         },
         editCpoHeader() {
             this.$router.push({

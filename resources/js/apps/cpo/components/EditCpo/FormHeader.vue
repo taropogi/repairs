@@ -141,6 +141,7 @@
                     class="form-select"
                     v-model="headerRow.status_id"
                     id="cpo-statuses"
+                    :disabled="headerRow.locked"
                 >
                     <option
                         v-for="status in headerStatuses"
