@@ -1,17 +1,5 @@
 <template>
-    <div class="p-1">
-        <!-- <transition name="encode-cpo-success">
-            <div v-if="isSubmitSuccess" class="fixed-top">
-                <div class="alert alert-success text-center" role="alert">
-                    <i class="bi bi-check2-all"></i>
-                    <strong
-                        >A new CPO header has been successfully
-                        inserted.</strong
-                    >
-                </div>
-            </div>
-        </transition> -->
-
+    <div class="m-5 shadow-lg p-3 mb-5 bg-body rounded">
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
 
         <form class="row g-3 p-5" @submit.prevent="submitCpoForm" v-else>
@@ -238,31 +226,3 @@ export default {
     },
 };
 </script>
-
-<style>
-/* .encode-cpo-success-enter-from {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.encode-cpo-success-enter-active {
-    transition: all 0.5s ease-out;
-}
-.encode-cpo-success-enter-to {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.encode-cpo-success-leave-from {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.encode-cpo-success-leave-active {
-    transition: all 0.5s ease-in;
-}
-.encode-cpo-success-leave-to {
-    opacity: 0;
-    transform: translateY(-30px);
-} */
-</style>
