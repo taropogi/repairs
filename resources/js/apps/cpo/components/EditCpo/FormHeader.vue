@@ -23,6 +23,7 @@
                     CUSTOMER NAME (ORACLE)
                 </label>
                 <select
+                    :disabled="headerRow.locked"
                     size="10"
                     class="form-select"
                     id="oracle-customer-name"
