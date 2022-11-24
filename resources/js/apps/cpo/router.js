@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import loginPage from "./components/pages/loginPage.vue";
+import LoginTrans from "./components/LoginScreen/LoginTrans.vue";
 // import registerPage from "./components/pages/registerPage.vue";
 import SearchCpo from "./components/SearchCpo/SearchCpo.vue";
 import cpoPage from "./components/pages/cpoPage.vue";
@@ -143,6 +144,8 @@ const router = createRouter({
         {
             path: window.laravelData.app_url_root_folder + "/login",
             component: loginPage,
+            // component: LoginTrans,
+
             name: "login-page",
             meta: {
                 requiresUnAuth: true,

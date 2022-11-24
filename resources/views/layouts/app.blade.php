@@ -21,10 +21,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}?v={{ Str::random(40) }}" rel="stylesheet">
+
 </head>
 
 <body>
-
 
 
     <div id="app">

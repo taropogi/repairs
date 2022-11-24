@@ -1,7 +1,10 @@
 <template>
     <div>
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-        <main class="container-fluid" v-else>
+        <main
+            :class="{ 'container-fluid': $route.name !== 'login-page' }"
+            v-else
+        >
             <div :class="{ backdrop: showBackDrop }"></div>
 
             <!-- <the-header></the-header>

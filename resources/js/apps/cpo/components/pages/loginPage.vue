@@ -1,11 +1,16 @@
 <template>
-    <div class="container mt-5">
+    <div
+        class="container-fluid"
+        :style="{
+            'background-image': 'url(images/login-bg.jpg)',
+        }"
+    >
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+            <div class="col-md-4 mt-5">
+                <div class="card login-container text-white">
                     <div class="card-header">Login</div>
 
-                    <div class="card-body">
+                    <div class="card-body p-5">
                         <form
                             method="POST"
                             action="#"
@@ -57,7 +62,7 @@
                             <div class="row m-0" v-if="showError">
                                 <div class="col-md-6 offset-md-4">
                                     <div
-                                        class="alert alert-danger d-flex align-items-center p-2"
+                                        class="alert alert-danger d-flex align-items-center p-1"
                                         role="alert"
                                     >
                                         <svg
@@ -134,6 +139,7 @@
 
 <script>
 export default {
+    inject: ["laravelData"],
     data() {
         return {
             loginFormData: {
@@ -200,9 +206,19 @@ export default {
         this.$store.commit("setMainPageTitleHeader", "Login");
     },
     mounted() {
-        // console.log(this.inputValidClasses);
+        console.log(this.laravelData.side_bar_image);
     },
 };
 </script>
+<style scoped>
+.container-fluid {
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+}
 
-<style></style>
+.login-container {
+    background-color: hsl(200, 100%, 6%, 0.5);
+    box-shadow: 0 0 15px 0 hsl(200, 100%, 6%, 0.5);
+}
+</style>
