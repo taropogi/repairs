@@ -1,16 +1,9 @@
 <template>
     <div>
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-        <main
-            :class="{ 'container-fluid': true || $route.name !== 'login-page' }"
-            v-else
-        >
+        <main class="container-fluid" v-else>
             <div :class="{ backdrop: showBackDrop }"></div>
 
-            <!-- <the-header></the-header>
-        <side-bar></side-bar>
-
-        <hr /> -->
             <router-view v-slot="slotProps">
                 <transition name="app-router" mode="out-in">
                     <component :is="slotProps.Component"></component>
@@ -21,16 +14,10 @@
 </template>
 
 <script>
-import TheHeader from "./components/header/TheHeader.vue";
-import SideBar from "./components/SideBar/SideBar.vue";
-import { computed } from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { computed } from "vue";
 
 export default {
-    components: {
-        TheHeader,
-        SideBar,
-    },
     data() {
         return { laravelData: null };
     },
@@ -66,13 +53,8 @@ export default {
     },
     mounted() {
         this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
-
         this.laravelData = window.laravelData;
         this.setOracleCustomers();
-        // this.laravelData = window.laravelData;
-        // console.log(this.laravelData);
-        // console.log(this.$store.getters["auth/isLoggedIn"]);
-        // console.log(this.$store.getters["auth/loggedUser"]);
     },
 };
 </script>

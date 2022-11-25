@@ -25,6 +25,10 @@ import store from "./store";
 const router = createRouter({
     history: createWebHistory(), // manage the history, using crateWebHistory means using the default browser history management
     routes: [
+        // {
+        //     path: "/",
+        //     redirect: { name: "login-page" },
+        // },
         {
             path: window.laravelData.app_url_root_folder,
             redirect: { name: "login-page" },
