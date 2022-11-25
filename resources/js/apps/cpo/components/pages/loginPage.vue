@@ -1,6 +1,6 @@
 <template>
     <div
-        class="container-fluid"
+        class="row"
         :style="{
             'background-image': 'url(images/login-bg.jpg)',
         }"
@@ -188,7 +188,7 @@ export default {
 };
 </script>
 <style scoped>
-.container-fluid {
+.row {
     height: 100vh;
     width: 100vw;
     background-size: cover;
