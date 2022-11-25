@@ -1,6 +1,9 @@
 <template>
     <div class="p-2">
-        <spinner-loading v-if="isSearching"> </spinner-loading>
+        <spinner-loading v-if="isSearching && !error"> </spinner-loading>
+        <h1 v-else-if="error">
+            {{ error }}
+        </h1>
         <div class="my-2" v-else>
             <teleport to="body">
                 <modal-delete-cpo
@@ -84,6 +87,7 @@ export default {
             isSearching: false,
             showPdfHistoryId: null,
             deleteCpo: null,
+            error: null,
         };
     },
 
@@ -137,6 +141,7 @@ export default {
         },
         getCpoHeaders() {
             this.isSearching = true;
+            this.error = null;
             axios
                 .get("api/cpo", {
                     params: {
@@ -161,7 +166,7 @@ export default {
                     //console.log(response.data[0].updatedAtReadable);
                 })
                 .catch((error) => {
-                    // console.log(error);
+                    this.error = error;
                 });
         },
     },

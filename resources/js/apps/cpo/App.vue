@@ -34,22 +34,22 @@ export default {
         };
     },
     created() {
-        if (
-            this.$store.getters["auth/isLoggedIn"] &&
-            this.$store.getters["auth/loggedUser"].is_admin
-        ) {
-            this.$store.commit("cpo/setGenLinks", [
-                {
-                    "search-cpo": "admin-search-cpo",
-                },
-            ]);
-        } else {
-            this.$store.commit("cpo/setGenLinks", [
-                {
-                    "search-cpo": "search-cpo",
-                },
-            ]);
-        }
+        // if (
+        //     this.$store.getters["auth/isLoggedIn"] &&
+        //     this.$store.getters["auth/loggedUser"].is_admin
+        // ) {
+        //     this.$store.commit("cpo/setGenLinks", [
+        //         {
+        //             "search-cpo": "admin-search-cpo",
+        //         },
+        //     ]);
+        // } else {
+        //     this.$store.commit("cpo/setGenLinks", [
+        //         {
+        //             "search-cpo": "search-cpo",
+        //         },
+        //     ]);
+        // }
     },
     mounted() {
         this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
