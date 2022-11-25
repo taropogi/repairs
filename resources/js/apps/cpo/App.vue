@@ -88,9 +88,11 @@ export default {
     z-index: 10;
     opacity: 0.8;
 }
+
 * {
     font-size: 12px;
 }
+
 .app-router-enter-from {
     opacity: 0;
     transform: translateY(-30px);

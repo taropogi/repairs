@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-2">
         <spinner-loading v-if="isSearching"> </spinner-loading>
         <div class="my-2" v-else>
             <teleport to="body">
