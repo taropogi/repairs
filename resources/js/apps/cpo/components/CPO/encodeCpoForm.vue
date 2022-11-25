@@ -1,5 +1,5 @@
 <template>
-    <div class="m-5 shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="m-5 p-3 mb-5 bg-body rounded">
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
 
         <form class="row g-3 p-5" @submit.prevent="submitCpoForm" v-else>
@@ -9,7 +9,7 @@
                 </label>
                 <select
                     size="10"
-                    class="form-select"
+                    class="form-select shadow"
                     id="oracle-customer-name"
                     v-model="defaultOracleCustomer.id"
                     @change="setDefaultShipToAddress"
@@ -44,7 +44,7 @@
                 >
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow"
                     id="customer-name"
                     required
                     v-model.trim="formData.customerName"
@@ -55,7 +55,7 @@
                 <label for="address" class="form-label">Address</label>
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow"
                     id="address"
                     required
                     v-model.trim="formData.customerAddress"
@@ -69,7 +69,7 @@
                 >
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow"
                     id="contact-number"
                     required
                     v-model="formData.contactNumber"
@@ -80,7 +80,7 @@
                 <label for="prepared-by" class="form-label">Prepared By</label>
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow"
                     id="prepared-by"
                     required
                     v-model="formData.preparedBy"
@@ -92,7 +92,7 @@
                 >
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control shadow"
                     id="authorized-by"
                     required
                     v-model="formData.authorizedBy"

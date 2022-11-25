@@ -1,11 +1,11 @@
 <template>
-    <form class="sticky-top bg-secondary text-white p-2 m-0">
+    <form class="sticky-top p-2 m-0">
         <div class="row">
             <div class="col">
                 <label>Customer Name</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchName"
                 />
@@ -14,7 +14,7 @@
                 <label>Customer Address</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchAddress"
                 />
@@ -23,7 +23,7 @@
                 <label>Contact #</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchContactNumber"
                 />
@@ -34,7 +34,7 @@
                 <label>RPO #</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchRpoNumber"
                 />
@@ -43,7 +43,7 @@
                 <label>Prepared By</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchPreparedBy"
                 />
@@ -52,7 +52,7 @@
                 <label>Authorized By</label>
                 <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-control shadow"
                     @input="search"
                     v-model.lazy="searchCriteria.searchAuthorizedBy"
                 />
