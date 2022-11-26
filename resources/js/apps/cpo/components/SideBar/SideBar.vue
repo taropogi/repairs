@@ -33,9 +33,7 @@
                 >
             </li>
         </ul>
-        <ul class="text-white">
-            <li>Test</li>
-        </ul>
+
         <div v-if="userIsAdmin">
             <hr class="text-white" />
             <admin-links-user></admin-links-user>
