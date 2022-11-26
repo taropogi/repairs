@@ -157,11 +157,14 @@ export default {
                     this.addDeletedCpos({
                         id: cpo.id,
                     });
+
+                    // this.$emit("deleted-cpo", {
+                    //     id: cpo.id,
+                    // });
                 }
                 // console.log(this.deletedCpos);
                 // this.unselectPo();
                 // this.isDeleted = true;
-                // this.$emit("deleted-cpo");
             }
 
             this.$emit("close-modal");

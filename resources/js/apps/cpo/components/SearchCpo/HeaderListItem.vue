@@ -1,5 +1,5 @@
 <template>
-    <tr :class="trClasses" v-if="!isRemovedTr">
+    <tr :class="trClasses">
         <th>
             <div class="form-check">
                 <input
@@ -136,7 +136,7 @@ export default {
                 blink: this.isStatusUpdated && !this.isDeletedx,
                 "table-success": this.isStatusUpdated && !this.isDeletedx,
                 "table-danger": this.isDeletedx,
-                "tr-exit": this.isDeletedx,
+                // "tr-exit": this.isDeletedx,
             };
         },
         selectedPos() {

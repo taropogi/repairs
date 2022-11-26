@@ -10,6 +10,7 @@
                     v-if="deleteCpo"
                     :cpo-id="deleteCpo.id"
                     @close-modal-delete-cpo="closeModalDeleteCpo"
+                    @deleted-cpo="deleteCpoConfirm"
                 ></modal-delete-cpo>
             </teleport>
 
@@ -49,20 +50,20 @@
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+
+                <transition-group tag="tbody" name="cpo-list">
                     <header-list-item
                         v-for="item in cpoHeaderList"
                         :key="item.id"
                         :header-item="item"
                         @delete-cpo="openDeleteCpo"
-                        @deleted-cpo="deleteCpoConfirm"
                         @show-pdf-history="
                             (cpo) => {
                                 showPdfHistoryId = cpo.id;
                             }
                         "
                     ></header-list-item>
-                </tbody>
+                </transition-group>
             </table>
         </div>
     </div>
@@ -105,6 +106,15 @@ export default {
         },
     },
     watch: {
+        deletedCpos: {
+            handler(newVal, oldVal) {
+                for (const cpo of newVal) {
+                    console.log("ok " + cpo.id);
+                    this.deleteCpoConfirm(cpo);
+                }
+            },
+            deep: true,
+        },
         cpoListCount(value) {
             if (value <= 40) {
                 // console.log("search");
@@ -129,9 +139,9 @@ export default {
         openDeleteCpo(cpoId) {
             this.deleteCpo = cpoId;
         },
-        deleteCpoConfirm(deletedCpoId) {
+        deleteCpoConfirm(deleteCpo) {
             const filteredList = this.cpoHeaderList.filter(
-                (el) => el.id !== deletedCpoId.id
+                (el) => el.id !== deleteCpo.id
             );
             this.cpoHeaderList = filteredList;
             this.closeModalDeleteCpo();
@@ -179,4 +189,21 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cpo-list-leave-from {
+    opacity: 1;
+    transform: translateX(0);
+}
+.cpo-list-leave-active {
+    transition: all 1s ease-in;
+    position: absolute;
+}
+.cpo-list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.cpo-list-move {
+    transition: transform 0.8s ease;
+}
+</style>

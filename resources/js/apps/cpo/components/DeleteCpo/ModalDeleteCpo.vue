@@ -70,9 +70,9 @@ export default {
             });
             if (res.data) {
                 this.unselectPo();
-                this.addDeletedCpos({
-                    id: this.cpoId,
-                });
+                // this.addDeletedCpos({
+                //     id: this.cpoId,
+                // });
                 // this.isDeleted = true;
 
                 this.$emit("deleted-cpo", { id: this.cpoId });
