@@ -34,8 +34,6 @@
             </li>
         </ul>
 
-        <h1 class="text-white">test here</h1>
-
         <div v-if="userIsAdmin">
             <hr class="text-white" />
             <admin-links-user></admin-links-user>
