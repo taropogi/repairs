@@ -29,11 +29,11 @@
                     :to="linkExportCpo"
                     class="nav-link text-white"
                     :class="{ active: isNavExportActive }"
-                    >Export CPO listx</router-link
+                    >Export CPO list</router-link
                 >
             </li>
         </ul>
-        <h1 class="text-white">test here</h1>
+
         <div v-if="userIsAdmin">
             <hr class="text-white" />
             <admin-links-user></admin-links-user>
