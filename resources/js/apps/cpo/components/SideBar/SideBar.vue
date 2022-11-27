@@ -29,7 +29,7 @@
                     :to="linkExportCpo"
                     class="nav-link text-white"
                     :class="{ active: isNavExportActive }"
-                    >Export CPO list</router-link
+                    >Export CPO listx</router-link
                 >
             </li>
         </ul>
