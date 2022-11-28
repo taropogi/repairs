@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     inject: ["laravelData"],
     data() {
@@ -107,6 +108,7 @@ export default {
     },
 
     methods: {
+        ...mapActions("auth", ["setIsLoggedIn", "setUser"]),
         submitLoginForm() {
             this.isValidating = true;
             axios.get("sanctum/csrf-cookie").then((response) => {
@@ -115,8 +117,8 @@ export default {
                     .post("api/login", this.loginFormData)
                     .then((response) => {
                         // console.log(response.data);
-                        this.$store.commit("auth/setIsLoggedIn", true);
-                        this.$store.commit("auth/setUser", response.data);
+                        this.setIsLoggedIn(true);
+                        this.setUser(response.data);
 
                         this.$router.push({
                             name: this.redirectLink,

@@ -200,8 +200,9 @@ export default {
     watch: {},
     computed: {
         ...mapGetters(["oracleCustomers"]),
+        ...mapGetters("auth", ["loggedUser"]),
         searchCpoLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser && this.loggedUser.is_admin) {
                 return "admin-search-cpo";
             }
             return "search-cpo";

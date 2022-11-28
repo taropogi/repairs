@@ -70,7 +70,7 @@ import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
 import AdminLinksUser from "./AdminLinks/User.vue";
 import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     inject: ["laravelData"],
     components: {
@@ -85,6 +85,7 @@ export default {
     },
     computed: {
         ...mapGetters(["activeNav"]),
+        ...mapGetters("auth", ["isLoggedIn", "loggedUser"]),
         selectedPos() {
             return this.$store.getters["cpo/getSelectedPos"];
         },
@@ -139,7 +140,7 @@ export default {
             };
         },
         linkExportCpo() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser && this.loggedUser.is_admin) {
                 return {
                     name: "admin-export-cpo-list",
                 };
@@ -150,32 +151,26 @@ export default {
             };
         },
         encodeCpoPageLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser && this.loggedUser.is_admin) {
                 return { name: "admin-encode-cpo" };
             }
             return { name: "encode-cpo" };
         },
         searchCpoLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser && this.loggedUser.is_admin) {
                 return { name: "admin-search-cpo" };
             }
             return { name: "search-cpo" };
         },
-
-        isLoggedIn() {
-            // return false;
-            return this.$store.getters["auth/isLoggedIn"];
-        },
-        loggedUser() {
-            return this.$store.getters["auth/loggedUser"];
-        },
     },
     methods: {
+        ...mapActions("auth", ["logOutUser"]),
         logOut() {
             axios.post("api/logout").then((response) => {
                 // console.log(response.data);
-                this.$store.commit("auth/setIsLoggedIn", false);
-                this.$store.commit("auth/setUser", null);
+                this.logOutUser();
+                // this.$store.commit("auth/setIsLoggedIn", false);
+                // this.$store.commit("auth/setUser", null);
 
                 this.$router.push({
                     name: "login-page",

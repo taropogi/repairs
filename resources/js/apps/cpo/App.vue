@@ -23,6 +23,7 @@ export default {
     },
     methods: {
         ...mapActions(["setShowBackDrop", "setOracleCustomers"]),
+        ...mapActions("auth", ["tryLogin"]),
     },
     computed: {
         ...mapGetters(["showBackDrop", "oracleCustomers"]),
@@ -33,7 +34,9 @@ export default {
             laravelData: computed(() => this.laravelData),
         };
     },
-    created() {},
+    created() {
+        this.tryLogin();
+    },
     mounted() {
         this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
         this.laravelData = window.laravelData;
