@@ -375,9 +375,22 @@ class CpoController extends Controller
      */
     public function destroy(Request $request)
     {
-        $cpo = Cpo::find($request->cpoId);
-        $cpo->delete();
+        $this->deleteCpo($request->cpoId);
+
+
         return $request;
+    }
+
+    private function deleteCpo($cpo_id)
+    {
+        $cpo = Cpo::find($cpo_id);
+
+        auth()->user()->activities()->create([
+            'action' => 'Delete CPO',
+            'description' => 'Deleted CPO with ID:' . $cpo->id
+        ]);
+
+        $cpo->delete();
     }
 
     public function destroyMulti(Request $request)
@@ -385,10 +398,15 @@ class CpoController extends Controller
         $cpos_to_delete = Cpo::whereIn('id', $request->selectedCpos)->get();
 
 
-        $cpos = Cpo::whereIn('id', $request->selectedCpos);
-        $cpos->delete();
+
+
+        foreach ($cpos_to_delete as $cpo) {
+            $this->deleteCpo($cpo->id);
+        }
+
 
         $response['cpos_deleted'] = $cpos_to_delete;
+
 
         return $response;
     }
