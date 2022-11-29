@@ -135,7 +135,7 @@ export default {
     },
     mounted() {
         this.getCpoLines();
-        console.log("headerId: " + this.headerId);
+        // console.log("headerId: " + this.headerId);
     },
 };
 </script>

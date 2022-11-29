@@ -29,7 +29,7 @@ export default {
             return this.selectedStatus.length;
         },
         isNavExportActive() {
-            if (this.activeNav && this.activeNav.nav === "export-cpo") {
+            if (this.activeNav?.nav === "export-cpo") {
                 return true;
             }
             return false;

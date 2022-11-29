@@ -94,32 +94,28 @@ export default {
         },
 
         isNavSearchActive() {
-            if (this.activeNav && this.activeNav.nav === "search-cpo") {
+            if (this.activeNav?.nav === "search-cpo") {
                 return true;
             }
             return false;
         },
         isNavExportActive() {
-            if (this.activeNav && this.activeNav.nav === "export-cpo") {
+            if (this.activeNav?.nav === "export-cpo") {
                 return true;
             }
             return false;
         },
         isNavEncodeActive() {
-            if (this.activeNav && this.activeNav.nav === "encode-cpo") {
+            if (this.activeNav?.nav === "encode-cpo") {
                 return true;
             }
             return false;
         },
         userIsAdmin() {
-            return (
-                this.isLoggedIn && this.loggedUser && this.loggedUser.is_admin
-            );
+            return this.isLoggedIn && this.loggedUser?.is_admin;
         },
         userIsUser() {
-            return (
-                this.isLoggedIn && this.loggedUser && !this.loggedUser.is_admin
-            );
+            return this.isLoggedIn && !this.loggedUser?.is_admin;
         },
         mainPageHeader() {
             return this.$store.getters.mainPageTitleHeader;
@@ -140,7 +136,7 @@ export default {
             };
         },
         linkExportCpo() {
-            if (this.loggedUser && this.loggedUser.is_admin) {
+            if (this.loggedUser?.is_admin) {
                 return {
                     name: "admin-export-cpo-list",
                 };
@@ -151,13 +147,13 @@ export default {
             };
         },
         encodeCpoPageLink() {
-            if (this.loggedUser && this.loggedUser.is_admin) {
+            if (this.loggedUser?.is_admin) {
                 return { name: "admin-encode-cpo" };
             }
             return { name: "encode-cpo" };
         },
         searchCpoLink() {
-            if (this.loggedUser && this.loggedUser.is_admin) {
+            if (this.loggedUser?.is_admin) {
                 return { name: "admin-search-cpo" };
             }
             return { name: "search-cpo" };

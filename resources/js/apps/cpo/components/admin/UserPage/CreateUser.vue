@@ -120,14 +120,14 @@ export default {
     },
     computed: {
         isUsernameInvalid() {
-            if (this.formErrors && this.formErrors.username) {
+            if (this.formErrors?.username) {
                 return true;
             }
             return false;
         },
 
         isPasswordInValid() {
-            if (this.formErrors && this.formErrors.password) {
+            if (this.formErrors?.password) {
                 return true;
             }
             return false;

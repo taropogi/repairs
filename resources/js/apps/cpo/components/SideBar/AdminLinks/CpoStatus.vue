@@ -35,16 +35,13 @@ export default {
             };
         },
         isNavAdminStatusCreateActive() {
-            if (
-                this.activeNav &&
-                this.activeNav.nav === "admin-status-create"
-            ) {
+            if (this.activeNav?.nav === "admin-status-create") {
                 return true;
             }
             return false;
         },
         isNavAdminStatusListActive() {
-            if (this.activeNav && this.activeNav.nav === "admin-status-list") {
+            if (this.activeNav?.nav === "admin-status-list") {
                 return true;
             }
             return false;

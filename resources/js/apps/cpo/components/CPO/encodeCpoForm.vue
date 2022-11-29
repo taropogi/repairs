@@ -199,15 +199,16 @@ export default {
     },
     computed: {
         ...mapGetters(["oracleCustomers"]),
+        ...mapGetters("auth", ["loggedUser"]),
         editHeaderLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser.is_admin) {
                 return "admin-edit-cpo";
             }
 
             return "edit-cpo";
         },
         searchCpoLink() {
-            if (this.$store.getters["auth/loggedUser"].is_admin) {
+            if (this.loggedUser.is_admin) {
                 return "admin-search-cpo";
             }
             return "search-cpo";
