@@ -20,7 +20,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('images/times-trans.png') }}">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?v={{ Str::random(40) }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?v=x{{ Str::random(40) }}" rel="stylesheet">
 
 </head>
 
