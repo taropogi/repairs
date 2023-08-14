@@ -28,4 +28,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal {
+    z-index: 10001;
+}
+</style>

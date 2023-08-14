@@ -53,7 +53,7 @@ export default {
     height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.75);
-    z-index: 10;
+    z-index: 10000;
     opacity: 0.8;
 }
 
