@@ -1,6 +1,8 @@
 <template>
     <div>
+        <h4 class="text-center bg-success text-white p-2">SEARCH CPO</h4>
         <search-form @search-cpo-header="mySearch"></search-form>
+
         <cpo-header-list
             :search-criteria="searchCriteria"
             @edit-cpo="editCpo"

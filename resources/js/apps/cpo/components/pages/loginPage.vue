@@ -177,6 +177,7 @@ export default {
 .login-container {
     background-color: hsl(200, 100%, 6%, 0.5);
     box-shadow: 0 0 15px 0 hsl(200, 100%, 6%, 0.5);
+    /* box-shadow: rgba(0, 0, 0, 0.5); */
 
     top: 10%;
 }

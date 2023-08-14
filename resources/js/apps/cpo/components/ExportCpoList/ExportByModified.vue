@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="bg-success p-2 text-white rounded">
+        <h3 class="bg-info p-2 text-white rounded">
             Modified CPOs
             <span v-if="searchedCount">({{ searchedCount }})</span>
         </h3>

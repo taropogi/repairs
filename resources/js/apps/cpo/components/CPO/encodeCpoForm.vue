@@ -1,118 +1,114 @@
 <template>
-    <div class="m-5 p-3 mb-5 bg-body rounded">
+    <div class="">
+        <h4 class="text-center bg-success text-white p-2">ENCODE CPO</h4>
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-
-        <form class="row g-3 p-5" @submit.prevent="submitCpoForm" v-else>
-            <div class="col-md-6">
-                <label for="oracle-customer-name" class="form-label">
-                    CUSTOMER NAME (ORACLE)
-                </label>
-                <select
-                    size="10"
-                    class="form-select shadow"
-                    id="oracle-customer-name"
-                    v-model="defaultOracleCustomer.id"
-                    @change="setDefaultShipToAddress"
-                >
-                    <option
-                        v-for="customer in oracleCustomers"
-                        :key="customer.cust_account_id"
-                        :value="customer.cust_account_id"
+        <div v-else>
+            <form class="row g-3 m-2" @submit.prevent="submitCpoForm">
+                <div class="col-md-6">
+                    <label for="oracle-customer-name" class="form-label">
+                        CUSTOMER NAME (ORACLE)
+                    </label>
+                    <select
+                        size="10"
+                        class="form-select shadow"
+                        id="oracle-customer-name"
+                        v-model="defaultOracleCustomer.id"
+                        @change="setDefaultShipToAddress"
                     >
-                        {{ customer.account_name }}
-                    </option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="oracle-shipto-address" class="form-label"
-                    >SHIPTO ADDRESS (ORACLE)</label
-                >
+                        <option
+                            v-for="customer in oracleCustomers"
+                            :key="customer.cust_account_id"
+                            :value="customer.cust_account_id"
+                        >
+                            {{ customer.account_name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="oracle-shipto-address" class="form-label"
+                        >SHIPTO ADDRESS (ORACLE)</label
+                    >
 
-                <textarea
-                    style="resize: none"
-                    class="form-control"
-                    id="oracle-shipto-address"
-                    rows="10"
-                    disabled
-                    v-model="defaultOracleCustomer.shipToAddress"
-                ></textarea>
-            </div>
+                    <textarea
+                        style="resize: none"
+                        class="form-control"
+                        id="oracle-shipto-address"
+                        rows="10"
+                        disabled
+                        v-model="defaultOracleCustomer.shipToAddress"
+                    ></textarea>
+                </div>
 
-            <div class="col-md-6">
-                <label for="customer-name" class="form-label"
-                    >Customer Name</label
-                >
-                <input
-                    type="text"
-                    class="form-control shadow"
-                    id="customer-name"
-                    required
-                    v-model.trim="formData.customerName"
-                />
-            </div>
+                <div class="col-md-6">
+                    <label for="customer-name" class="form-label"
+                        >Customer Name</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control shadow"
+                        id="customer-name"
+                        required
+                        v-model.trim="formData.customerName"
+                    />
+                </div>
 
-            <div class="col-6">
-                <label for="address" class="form-label">Address</label>
-                <input
-                    type="text"
-                    class="form-control shadow"
-                    id="address"
-                    required
-                    v-model.trim="formData.customerAddress"
-                    placeholder="1234 Main St"
-                />
-            </div>
+                <div class="col-6">
+                    <label for="address" class="form-label">Address</label>
+                    <input
+                        type="text"
+                        class="form-control shadow"
+                        id="address"
+                        required
+                        v-model.trim="formData.customerAddress"
+                        placeholder="1234 Main St"
+                    />
+                </div>
 
-            <div class="col-md-4">
-                <label for="contact-number" class="form-label"
-                    >Contact Number</label
-                >
-                <input
-                    type="text"
-                    class="form-control shadow"
-                    id="contact-number"
-                    required
-                    v-model="formData.contactNumber"
-                />
-            </div>
+                <div class="col-md-4">
+                    <label for="contact-number" class="form-label"
+                        >Contact Number</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control shadow"
+                        id="contact-number"
+                        required
+                        v-model="formData.contactNumber"
+                    />
+                </div>
 
-            <div class="col-md-4">
-                <label for="prepared-by" class="form-label">Prepared By</label>
-                <input
-                    type="text"
-                    class="form-control shadow"
-                    id="prepared-by"
-                    required
-                    v-model="formData.preparedBy"
-                />
-            </div>
-            <div class="col-md-4">
-                <label for="authorized-by" class="form-label"
-                    >Authorized By</label
-                >
-                <input
-                    type="text"
-                    class="form-control shadow"
-                    id="authorized-by"
-                    required
-                    v-model="formData.authorizedBy"
-                />
-            </div>
-            <!-- <div class="col-md-4">
-                <label for="rpo-number" class="form-label">RPO #</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="rpo-number"
-                    required
-                    v-model="formData.rpoNumber"
-                />
-            </div> -->
+                <div class="col-md-4">
+                    <label for="prepared-by" class="form-label"
+                        >Prepared By</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control shadow"
+                        id="prepared-by"
+                        required
+                        v-model="formData.preparedBy"
+                    />
+                </div>
+                <div class="col-md-4">
+                    <label for="authorized-by" class="form-label"
+                        >Authorized By</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control shadow"
+                        id="authorized-by"
+                        required
+                        v-model="formData.authorizedBy"
+                    />
+                </div>
 
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 

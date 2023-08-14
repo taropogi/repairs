@@ -1,6 +1,7 @@
 <template>
-    <div class="p-2">
-        <div class="row">
+    <div class="">
+        <h4 class="text-center bg-success text-white p-2">EXPORT CPO</h4>
+        <div class="row m-2">
             <div class="col border-end">
                 <export-by-status
                     style="height: 300px"
