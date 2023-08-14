@@ -178,6 +178,6 @@ export default {
     background-color: hsl(200, 100%, 6%, 0.5);
     box-shadow: 0 0 15px 0 hsl(200, 100%, 6%, 0.5);
 
-    top: 30%;
+    top: 10%;
 }
 </style>

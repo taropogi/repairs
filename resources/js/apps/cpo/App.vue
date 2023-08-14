@@ -46,6 +46,9 @@ export default {
 </script>
 
 <style>
+.modal {
+    z-index: 10001;
+}
 .backdrop {
     position: fixed;
     top: 0;
