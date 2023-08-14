@@ -68,7 +68,7 @@
                                 type="submit"
                                 class="btn btn-primary"
                             >
-                                Login test
+                                Login
                             </button>
 
                             <button
