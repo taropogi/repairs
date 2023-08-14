@@ -1,5 +1,5 @@
 <template>
-    <form class="sticky-top p-2 m-0 bg-white">
+    <form class="p-2 m-0 bg-white">
         <div class="row">
             <div class="col">
                 <label>Customer Name</label>
