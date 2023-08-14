@@ -57,9 +57,9 @@ export default {
     opacity: 0.8;
 }
 
-* {
+/* * {
     font-size: 12px;
-}
+} */
 
 .app-router-enter-from {
     opacity: 0;
