@@ -12,7 +12,11 @@
         </template>
         <template #body>
             <div v-if="showConfirmDelete" class="text-center p-5">
-                <h1>Confirm delete</h1>
+                <p>
+                    You are about to delete the {{ selectedPosCount }} records.
+                    This action cannot be undone.
+                </p>
+                <p>Are you sure you want to proceed?</p>
             </div>
             <div v-if="selectedCpos && !showConfirmDelete">
                 Change status to:
@@ -120,10 +124,12 @@ export default {
         };
     },
     computed: {
+        ...mapGetters("cpo", ["getSelectedPos"]),
+        selectedPosCount() {
+            return this.getSelectedPos.length;
+        },
         selectedPosId() {
-            return this.$store.getters["cpo/getSelectedPos"].map(
-                (cpo) => cpo.id
-            );
+            return this.getSelectedPos.map((cpo) => cpo.id);
         },
         linkGeneratePdfs() {
             return this.laravelData.route_list.find(
@@ -157,14 +163,7 @@ export default {
                     this.addDeletedCpos({
                         id: cpo.id,
                     });
-
-                    // this.$emit("deleted-cpo", {
-                    //     id: cpo.id,
-                    // });
                 }
-                // console.log(this.deletedCpos);
-                // this.unselectPo();
-                // this.isDeleted = true;
             }
 
             this.$emit("close-modal");
@@ -173,7 +172,6 @@ export default {
             this.showConfirmDelete = true;
         },
         closeModal() {
-            // console.log("close");
             this.$emit("close-modal");
         },
         async saveChanges() {
@@ -193,7 +191,7 @@ export default {
             this.$emit("close-modal");
         },
 
-        async getSelectedPos() {
+        async loadSelectedPos() {
             const res = await axios.post("api/cpo/selected", {
                 rpos: this.selectedPosId,
             });
@@ -205,7 +203,7 @@ export default {
         },
     },
     mounted() {
-        this.getSelectedPos();
+        this.loadSelectedPos();
     },
 };
 </script>
