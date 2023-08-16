@@ -61,7 +61,7 @@ export default {
 }
 
 * {
-    font-size: 0.8rem;
+    font-size: 12px;
 }
 
 .app-router-enter-from {
