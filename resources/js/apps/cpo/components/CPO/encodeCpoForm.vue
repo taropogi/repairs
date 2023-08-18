@@ -2,9 +2,9 @@
     <div class="">
         <h4 class="text-center bg-success text-white p-2">ENCODE CPO</h4>
         <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-        <div v-else>
+        <div class="w-75 m-auto" v-else>
             <form class="row g-3 m-2" @submit.prevent="submitCpoForm">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="oracle-customer-name" class="form-label">
                         CUSTOMER NAME (ORACLE)
                     </label>
@@ -24,7 +24,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="oracle-shipto-address" class="form-label"
                         >SHIPTO ADDRESS (ORACLE)</label
                     >
