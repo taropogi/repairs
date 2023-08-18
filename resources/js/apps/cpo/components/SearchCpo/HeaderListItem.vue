@@ -26,10 +26,26 @@
             </label>
         </td>
         <!-- <td>{{ localHeaderItem.customer_address }}</td> -->
-        <td>{{ localHeaderItem.contact_number }}</td>
-        <td>{{ localHeaderItem.prepared_by }}</td>
-        <td>{{ localHeaderItem.authorized_by }}</td>
-        <td>{{ localHeaderItem.status.status }}</td>
+        <td>
+            <label class="form-check-label" :for="id">{{
+                localHeaderItem.contact_number
+            }}</label>
+        </td>
+        <td>
+            <label class="form-check-label" :for="id">{{
+                localHeaderItem.prepared_by
+            }}</label>
+        </td>
+        <td>
+            <label class="form-check-label" :for="id">{{
+                localHeaderItem.authorized_by
+            }}</label>
+        </td>
+        <td>
+            <label class="form-check-label" :for="id">{{
+                localHeaderItem.status.status
+            }}</label>
+        </td>
         <td>
             <div class="btn-group btn-group-sm" role="group">
                 <button
@@ -277,6 +293,10 @@ export default {
 <style scoped>
 tr:hover {
     font-weight: bold;
+}
+
+label:hover {
+    cursor: pointer;
 }
 .tr-exit {
     animation: trExit 0.5s forwards;
