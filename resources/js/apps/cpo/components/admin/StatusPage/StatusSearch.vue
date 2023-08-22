@@ -1,5 +1,18 @@
 <template>
-    <h1>Status Search</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test</td>
+                <td>test</td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
