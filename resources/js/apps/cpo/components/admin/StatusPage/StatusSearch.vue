@@ -9,7 +9,20 @@
         <tbody v-if="statuses">
             <tr v-for="status in statuses" :key="status.id">
                 <td>{{ status.status }}</td>
-                <td>test</td>
+                <td>
+                    <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Basic outlined example"
+                    >
+                        <button type="button" class="btn btn-outline-primary">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                            Delete
+                        </button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
