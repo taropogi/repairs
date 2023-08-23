@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CpoController;
 use App\Http\Controllers\CpoLinesController;
@@ -28,6 +29,9 @@ use App\Http\Controllers\OracleCustomerController;
 Route::middleware('auth:sanctum')->get('user', function (Request $request) { // this is for token authentication and SPA authentication
     return $request->user();
 });
+
+//cpo statuses
+Route::get('statuses', [StatusController::class, 'index']);
 
 //cpo
 Route::post('cpo', [CpoController::class, 'create']);
