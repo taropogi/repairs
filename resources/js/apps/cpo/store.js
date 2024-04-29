@@ -34,7 +34,7 @@ const store = createStore({
         },
         setOracleCustomers(state) {
             axios
-                .get("api/oracle/customers")
+                .get("/api/oracle/customers")
                 .then((res) => {
                     state.oracleCustomers = res.data.oracle_customers;
                 })

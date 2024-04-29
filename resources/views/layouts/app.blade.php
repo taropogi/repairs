@@ -30,9 +30,10 @@
     <div id="app">
     </div>
 
+
     <!-- Styles -->
     <script>
-        window.laravelData = @json($data);
+    window.laravelData = @json($data);
     </script>
     <script src="{{ asset('js/app.js') }}?v={{ Str::random(40) }}"></script>
 </body>
