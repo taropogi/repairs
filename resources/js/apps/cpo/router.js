@@ -80,7 +80,7 @@ const router = createRouter({
         },
 
         {
-            path: window.laravelData.app_url_root_folder + "/admin",
+            path: "/admin",
             component: AdminPage,
             name: "admin-page",
             redirect: { name: "admin-search-cpo" },
