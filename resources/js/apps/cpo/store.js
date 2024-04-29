@@ -32,15 +32,13 @@ const store = createStore({
         setShowBackDrop(state, payload) {
             state.showBackDrop = payload;
         },
-        setOracleCustomers(state) {
-            axios
-                .get("/api/oracle/customers")
-                .then((res) => {
-                    state.oracleCustomers = res.data.oracle_customers;
-                })
-                .catch((error) => {
-                    console.log("can't fectch oracle customers");
-                });
+        async setOracleCustomers(state) {
+            try {
+                const res = await axios.get("/api/oracle/customers");
+                state.oracleCustomers = res.data.oracle_customers;
+            } catch (error) {
+                console.log("can't fectch oracle customers: " + error);
+            }
         },
     },
     getters: {
