@@ -26,7 +26,7 @@ const router = createRouter({
     history: createWebHistory(), // manage the history, using crateWebHistory means using the default browser history management
     routes: [
         {
-            path: window.laravelData.app_url_root_folder,
+            path: "/",
             redirect: { name: "login-page" },
         },
         // {
@@ -39,7 +39,7 @@ const router = createRouter({
         // },
 
         {
-            path: window.laravelData.app_url_root_folder + "/user/cpo",
+            path: "/user/cpo",
             component: cpoPage,
             name: "cpo-page",
             meta: {
@@ -142,7 +142,7 @@ const router = createRouter({
         },
 
         {
-            path: window.laravelData.app_url_root_folder + "/login",
+            path: "/login",
             component: loginPage,
             // component: LoginTrans,
 
