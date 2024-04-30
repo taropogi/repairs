@@ -163,7 +163,7 @@ export default {
         ...mapActions("auth", ["logOutUser"]),
         async logOut() {
             try {
-                const res = await axios.post("api/logout");
+                const res = await axios.post("/api/logout");
                 // console.log(response.data);
                 this.logOutUser();
                 // this.$store.commit("auth/setIsLoggedIn", false);
