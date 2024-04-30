@@ -161,8 +161,9 @@ export default {
     },
     methods: {
         ...mapActions("auth", ["logOutUser"]),
-        logOut() {
-            axios.post("api/logout").then((response) => {
+        async logOut() {
+            try {
+                const res = await axios.post("api/logout");
                 // console.log(response.data);
                 this.logOutUser();
                 // this.$store.commit("auth/setIsLoggedIn", false);
@@ -171,7 +172,9 @@ export default {
                 this.$router.push({
                     name: "login-page",
                 });
-            });
+            } catch (error) {
+                console.error(error);
+            }
         },
     },
 };

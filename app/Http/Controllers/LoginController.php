@@ -61,7 +61,7 @@ class LoginController extends Controller
             Auth::logout();
         }
 
-        // return $response;
+        return '';
     }
 
     /**
