@@ -16,7 +16,7 @@ This is a website created by Richard Bernisca.
 
 ## laravel.log could not be opened?
 
--   If you are receive this error, probably you are running in linux. Try to run `chmod -R 777 storage`;
+-   If you are receive this error, probably you are running in linux. Try to run `chmod -R 777 storage` or `chown -R apache:apache /var/www/html/repairs2/storage/logs`
 
 ## Notes
 
