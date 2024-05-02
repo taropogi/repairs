@@ -37,7 +37,8 @@ const store = createStore({
                 const res = await axios.get("/api/oracle/customers");
                 state.oracleCustomers = res.data.oracle_customers;
             } catch (error) {
-                console.log("can't fectch oracle customers: " + error);
+                console.log("error talaga");
+                console.log("can't fectch oracle customersx: " + error);
             }
         },
     },
