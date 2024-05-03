@@ -29,9 +29,7 @@
 
     <div id="app">
     </div>
-<h1>
-    test
-</h1>
+ 
 
     <!-- Styles -->
     <script>
