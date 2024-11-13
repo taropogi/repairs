@@ -36,6 +36,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions' => 'array',
     ];
 
 
@@ -65,5 +66,14 @@ class User extends Authenticatable
             return true;
         }
         return $this->permissions->contains('name', $permission);
+    }
+
+    public function hasPermission($permission)
+    {
+        if ($this->is_admin) {
+            return true;
+        }
+        $permissions = $this->permissions ?? [];
+        return in_array($permission, $permissions);
     }
 }

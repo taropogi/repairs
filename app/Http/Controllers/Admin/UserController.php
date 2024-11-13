@@ -37,9 +37,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-    }
+    public function create() {}
 
 
     public function getUserList(Request $request)
@@ -111,11 +109,13 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'is_admin' => $request->isAdmin,
             'email' => $request->email,
+            'permissions' => $request->permissions,
         ]);
 
 
 
         $response['new_user'] = $new_user;
+        $response['permissions'] = $request->permissions;
 
 
 
