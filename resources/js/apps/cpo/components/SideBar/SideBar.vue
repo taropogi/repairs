@@ -13,7 +13,7 @@
           :to="searchCpoLink"
           class="nav-link text-white"
           :class="{ active: isNavSearchActive }"
-          >Search CPO-test
+          >Search CPO
         </router-link>
       </li>
       <li>
@@ -39,6 +39,8 @@
       <admin-links-user></admin-links-user>
       <hr class="text-white" />
       <admin-links-status></admin-links-status>
+      <!-- <hr class="text-white" />
+      <admin-links-permissions></admin-links-permissions> -->
     </div>
 
     <transition name="export-btns">
@@ -70,6 +72,7 @@ import ExportButtons from "./ExportButtons/ExportButtons.vue";
 import MultiOptions from "./MultiOptions.vue";
 import AdminLinksUser from "./AdminLinks/User.vue";
 import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
+import AdminLinksPermissions from "./AdminLinks/Permissions.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   inject: ["laravelData"],
@@ -79,6 +82,7 @@ export default {
     MultiOptions,
     AdminLinksUser,
     AdminLinksStatus,
+    AdminLinksPermissions,
   },
   data() {
     return {};

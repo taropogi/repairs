@@ -53,4 +53,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(HeaderStatusHistory::class);
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function hasPermissionTo($permission)
+    {
+        if ($this->is_admin) {
+            return true;
+        }
+        return $this->permissions->contains('name', $permission);
+    }
 }
