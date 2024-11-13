@@ -102,6 +102,7 @@
         type="text"
         class="form-control form-control-sm"
         :disabled="headerIsLocked"
+        v-model="lineDetails.order_number"
       />
     </td>
     <td>
