@@ -95,6 +95,7 @@ class CpoLinesController extends Controller
         $cpoLine->good_condition = $request->good_condition;
         $cpoLine->minor_repair_clean = $request->minor_repair_clean;
         $cpoLine->repair_parts_needed = $request->repair_parts_needed;
+        $cpoLine->date = $request->date;
         $cpoLine->update();
 
         $cpo = Cpo::find($cpoLine->cpo_id);
