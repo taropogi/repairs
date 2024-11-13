@@ -13,8 +13,9 @@ class AddPermissionsToUsersTable extends Migration
      */
     public function up()
     {
+        $this->down();
         Schema::table('users', function (Blueprint $table) {
-            $table->json('permissions')->nullable()->after('is_admin');
+            $table->text('permissions')->nullable()->after('is_admin');
         });
     }
 
