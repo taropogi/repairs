@@ -14,7 +14,7 @@ class AddDateToCpoLinesTable extends Migration
     public function up()
     {
         Schema::table('cpo_lines', function (Blueprint $table) {
-            //
+            $table->date('date')->after('cpo_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddDateToCpoLinesTable extends Migration
     public function down()
     {
         Schema::table('cpo_lines', function (Blueprint $table) {
-            //
+            $table->dropColumn('date');
         });
     }
 }
