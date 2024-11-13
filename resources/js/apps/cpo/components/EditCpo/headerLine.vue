@@ -54,7 +54,7 @@
         type="text"
         class="form-control form-control-sm"
         :disabled="headerIsLocked"
-        v-model="lineDetails.good_condition"
+        v-model="lineDetails.date"
       />
     </td>
     <td>
