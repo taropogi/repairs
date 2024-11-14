@@ -105,7 +105,7 @@
         v-model="lineDetails.order_number"
       />
     </td>
-    <td>
+    <td v-if="canEditCpo">
       <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
       <div class="btn-group btn-group-sm" role="group" v-else>
         <button
@@ -136,8 +136,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: ["lineDetails", "headerIsLocked"],
+
   data() {
     return {
       lineUpdating: false,
@@ -147,6 +149,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters("auth", ["canEditCpo"]),
     isLocked() {
       return {
         disabled: this.headerIsLocked,

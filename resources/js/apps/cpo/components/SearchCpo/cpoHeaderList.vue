@@ -45,7 +45,7 @@
             <th scope="col">Prepared By</th>
             <th scope="col">Authorized By</th>
             <th scope="col">Status</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Actionsx</th>
           </tr>
         </thead>
 
@@ -72,6 +72,7 @@ import HeaderListItem from "./HeaderListItem.vue";
 import ModalPdfHistory from "../Modals/PdfHistory.vue";
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 import { mapGetters } from "vuex";
+import { map } from "lodash";
 
 export default {
   components: {

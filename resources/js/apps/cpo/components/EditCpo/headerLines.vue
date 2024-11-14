@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-sm">
+    <table class="table table-sm" v-if="lines.length > 0">
       <thead class="table-warning">
         <tr>
           <th scope="col">#</th>
@@ -17,7 +17,7 @@
           <th scope="col">Damaged</th>
           <th scope="col">Comments</th>
           <th scope="col">Doc #</th>
-          <th scope="col">Actions</th>
+          <th scope="col" v-if="canEditCpo">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +32,11 @@
       </tbody>
     </table>
 
-    <div class="btn-group btn-group-sm" role="group" v-if="!headerIsLocked">
+    <div
+      class="btn-group btn-group-sm"
+      role="group"
+      v-if="!headerIsLocked && canEditCpo"
+    >
       <button
         v-if="!isInsertingNewLine"
         class="btn btn-primary"
@@ -69,11 +73,15 @@
 
 <script>
 import headerLine from "./headerLine.vue";
+import { mapGetters } from "vuex";
 export default {
   components: {
     headerLine,
   },
   props: ["headerId", "headerIsLocked"],
+  computed: {
+    ...mapGetters("auth", ["canEditCpo"]),
+  },
   data() {
     return {
       lines: [],

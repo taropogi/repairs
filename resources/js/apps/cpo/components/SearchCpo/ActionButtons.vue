@@ -11,7 +11,7 @@
     </button>
 
     <button type="button" class="btn btn-success" @click="editCpoHeader">
-      View/Edit
+      View{{ canEditCpo ? "/Edit" : "" }}
     </button>
     <button
       v-if="!localHeaderItem.locked"
@@ -46,7 +46,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["canDeleteCpo"]),
+    ...mapGetters("auth", ["canDeleteCpo", "canEditCpo"]),
     // hasPermissions() {
     //   return this.loggedUser.permissions ? true : false;
     // },
