@@ -3,7 +3,11 @@
     <button
       v-if="!localHeaderItem.locked"
       type="button"
-      class="btn btn-danger"
+      class="btn"
+      :class="{
+        'btn-danger': canDeleteCpo,
+        'btn-secondary': !canDeleteCpo,
+      }"
       @click="deleteCpo"
       :disabled="!canDeleteCpo"
     >
@@ -16,8 +20,13 @@
     <button
       v-if="!localHeaderItem.locked"
       type="button"
-      class="btn btn-info"
+      class="btn"
+      :class="{
+        'btn-info': canDownloadCpoPdf,
+        'btn-secondary': !canDownloadCpoPdf,
+      }"
       @click="printCPOPdf"
+      :disabled="!canDownloadCpoPdf"
     >
       PDF
     </button>
@@ -46,7 +55,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["canDeleteCpo", "canEditCpo"]),
+    ...mapGetters("auth", ["canDeleteCpo", "canEditCpo", "canDownloadCpoPdf"]),
     // hasPermissions() {
     //   return this.loggedUser.permissions ? true : false;
     // },

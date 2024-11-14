@@ -150,15 +150,33 @@
       </div>
 
       <div class="btn-group">
-        <button type="submit" class="btn btn-success" :disabled="!canEditCpo">
-          Update {{ !canEditCpo ? "(Restricted)" : "" }}
+        <button
+          type="submit"
+          class="btn"
+          :class="{
+            'btn-success': canEditCpo,
+            'btn-secondary': !canEditCpo,
+          }"
+          :disabled="!canEditCpo"
+        >
+          Update
         </button>
 
         <span class="btn btn-warning" @click="showStatusHistory = true"
           >Status History</span
         >
 
-        <a href="#" class="btn btn-info" @click="printCPOPdf">Download PDF</a>
+        <a
+          href="#"
+          class="btn"
+          @click="printCPOPdf"
+          :class="{
+            disabled: !canDownloadCpoPdf,
+            'btn-info': canDownloadCpoPdf,
+            'btn-secondary': !canDownloadCpoPdf,
+          }"
+          >Download PDF</a
+        >
 
         <router-link :to="{ name: searchCpoLink }" class="btn btn-danger"
           >Cancel</router-link
@@ -192,7 +210,7 @@ export default {
   watch: {},
   computed: {
     ...mapGetters(["oracleCustomers"]),
-    ...mapGetters("auth", ["loggedUser", "canEditCpo"]),
+    ...mapGetters("auth", ["loggedUser", "canEditCpo", "canDownloadCpoPdf"]),
     searchCpoLink() {
       if (this.loggedUser && this.loggedUser.is_admin) {
         return "admin-search-cpo";
@@ -290,5 +308,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
