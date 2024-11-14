@@ -21,21 +21,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex/dist/vuex.cjs.js";
+
 export default {
   emits: ["update:modelValue"],
+  computed: {
+    ...mapGetters("cpo", ["permissions"]),
+  },
   props: {
     modelValue: {
       type: Array,
       default: () => [],
     },
   },
+
   data() {
     return {
-      permissions: [
-        { description: "Encode CPO", name: "encode-cpo" },
-        { description: "Edit CPO", name: "edit-cpo" },
-        { description: "Delete CPO", name: "delete-cpo" },
-      ],
       selectedPermissions: this.modelValue,
     };
   },

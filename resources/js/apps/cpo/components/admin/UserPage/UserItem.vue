@@ -33,10 +33,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: ["user"],
   emits: ["delete-user"],
   computed: {
+    ...mapGetters({
+      allowedPermissions: "cpo/permissions",
+    }),
     permissions() {
       if (this.user.is_admin) {
         return "Admin";
@@ -46,7 +50,9 @@ export default {
         return [];
       }
 
-      return this.user.permissions;
+      return this.user.permissions.filter((permission) =>
+        this.allowedPermissions.some((allowed) => allowed.name === permission)
+      );
     },
     isAdmin() {
       return this.user.is_admin ? "Yes" : "";
