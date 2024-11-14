@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h3>Select Permissions</h3>
+  <div class="permissions-container p-3 border rounded bg-light">
+    <h3 class="mb-3">Select Permissions</h3>
     <div
-      class="form-check"
+      class="form-check mb-2"
       v-for="permission in permissions"
       :key="permission.name"
     >
@@ -13,9 +13,9 @@
         :value="permission.name"
         v-model="selectedPermissions"
       />
-      <label class="form-check-label" :for="permission.name">{{
-        permission.description
-      }}</label>
+      <label class="form-check-label ms-2" :for="permission.name">
+        {{ permission.description }}
+      </label>
     </div>
   </div>
 </template>
@@ -32,12 +32,9 @@ export default {
   data() {
     return {
       permissions: [
-        { description: "Create CPO", name: "create-cpo" },
+        { description: "Encode CPO", name: "encode-cpo" },
         { description: "Edit CPO", name: "edit-cpo" },
         { description: "Delete CPO", name: "delete-cpo" },
-        { description: "Create User", name: "create-user" },
-        { description: "Edit User", name: "edit-user" },
-        { description: "Delete User", name: "delete-user" },
       ],
       selectedPermissions: this.modelValue,
     };
@@ -53,4 +50,29 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.permissions-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.permissions-container h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  font-size: 1rem;
+}
+</style>

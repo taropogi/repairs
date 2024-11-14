@@ -42,14 +42,9 @@ export default {
     // });
   },
   mounted() {
-    //  console.log("mounted");
-    // this.getCpoHeaderRow();
     this.setActiveNav({
       nav: "edit-cpo",
     });
-  },
-  updated() {
-    //   console.log("new value: " + this.lineDetails.length);
   },
 };
 </script>

@@ -81,7 +81,10 @@
         </div>
       </div>
 
-      <input-permissions v-model="formData.permissions" />
+      <input-permissions
+        v-model="formData.permissions"
+        v-if="!formData.isAdmin"
+      />
 
       <div v-if="formErrors">
         <ul>
