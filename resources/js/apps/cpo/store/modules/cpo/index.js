@@ -13,9 +13,10 @@ const cpoModule = {
       selectedPos: [],
       deletedCpos: [],
       permissions: [
-        { description: "Encode CPO", name: "encode-cpo" },
-        { description: "Edit CPO", name: "edit-cpo" },
-        { description: "Delete CPO", name: "delete-cpo" },
+        { description: "Encode CPO", name: "cpo-encode" },
+        { description: "Edit CPO", name: "cpo-edit" },
+        { description: "Delete CPO", name: "cpo-delete" },
+        { description: "Download CPO PDF file", name: "cpo-download-pdf" },
       ],
     };
   },
