@@ -10,6 +10,11 @@ export default {
     if (state.user.is_admin || state.user.permissions.includes("cpo-delete"))
       return true;
   },
+  canEncodeCpo(state) {
+    if (!state.user) return false;
+    if (state.user.is_admin || state.user.permissions.includes("cpo-encode"))
+      return true;
+  },
   userHasPermission(state) {
     return state.user.permissions || state.user.is_admin ? true : false;
   },
