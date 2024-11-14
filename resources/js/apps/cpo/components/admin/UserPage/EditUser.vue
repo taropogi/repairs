@@ -143,9 +143,7 @@ export default {
         this.user.is_admin = this.user.is_admin === 1;
         this.user.password = "";
         this.user.password_confirmation = "";
-        // this.user.permissions = this.user.permissions.map((permission) => {
-        //   return { name: permission };
-        // });
+        this.user.permissions = this.user.permissions ?? [];
         console.log(this.user.permissions);
       } catch (error) {
         // console.log("errors");
