@@ -2,13 +2,10 @@
   <div class="btn-group btn-group-sm" role="group">
     <button
       v-if="!localHeaderItem.locked"
-      :title="
-        !hasPermissions ? 'You do not have permission to delete this CPO' : ''
-      "
       type="button"
       class="btn btn-danger"
       @click="deleteCpo"
-      :disabled="!hasPermissions || !hasDeletePermission"
+      :disabled="!canDeleteCpo"
     >
       Delete
     </button>
@@ -49,10 +46,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["hasDeletePermission"]),
-    hasPermissions() {
-      return this.loggedUser.permissions ? true : false;
-    },
+    ...mapGetters("auth", ["canDeleteCpo"]),
+    // hasPermissions() {
+    //   return this.loggedUser.permissions ? true : false;
+    // },
     laravelData() {
       return this.$store.getters.laravelData;
     },
