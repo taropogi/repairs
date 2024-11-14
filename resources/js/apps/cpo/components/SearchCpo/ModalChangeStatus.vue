@@ -17,7 +17,11 @@
       <div v-if="selectedCpos && !showConfirmDelete">
         Change status to:
 
-        <select class="form-select" v-model="selectedStatus">
+        <select
+          class="form-select"
+          v-model="selectedStatus"
+          :disabled="!canEditCpo"
+        >
           <option
             v-for="status in headerStatuses"
             :key="status.id + status.status"
@@ -75,15 +79,37 @@
                             Close
                         </button> -->
 
-        <button type="button" class="btn btn-warning m-2" @click="downloadPdfs">
+        <button
+          type="button"
+          class="btn m-2"
+          @click="downloadPdfs"
+          :disabled="!canDownloadCpoPdf"
+          :class="{
+            'btn-warning': canDownloadCpoPdf,
+            'btn-secondary': !canDownloadCpoPdf,
+          }"
+        >
           Download PDFs
         </button>
-        <button type="button" class="btn btn-primary m-2" @click="saveChanges">
+        <button
+          type="button"
+          class="btn m-2"
+          @click="saveChanges"
+          :disabled="!canEditCpo"
+          :class="{
+            'btn-primary': canEditCpo,
+            'btn-secondary': !canEditCpo,
+          }"
+        >
           Save changes
         </button>
         <button
           type="button"
-          class="btn btn-danger m-2"
+          class="btn m-2"
+          :class="{
+            'btn-danger': canDeleteCpo,
+            'btn-secondary': !canDeleteCpo,
+          }"
           @click="confirmDelete"
           :disabled="!canDeleteCpo"
         >
@@ -110,7 +136,7 @@ export default {
   },
   computed: {
     ...mapGetters("cpo", ["getSelectedPos"]),
-    ...mapGetters("auth", ["canDeleteCpo"]),
+    ...mapGetters("auth", ["canDeleteCpo", "canDownloadCpoPdf", "canEditCpo"]),
     selectedPosCount() {
       return this.getSelectedPos.length;
     },
