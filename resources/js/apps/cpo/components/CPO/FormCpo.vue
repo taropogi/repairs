@@ -5,7 +5,7 @@
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <div class="w-75 m-auto" v-else>
       <form class="row g-3 m-2" @submit.prevent="submitCpoForm">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <label for="oracle-customer-name" class="form-label">
             CUSTOMER NAME (ORACLE)
           </label>
@@ -26,34 +26,36 @@
           </select>
         </div>
         <div class="col-md-6">
-          <label for="oracle-shipto-address" class="form-label"
-            >SHIPTO ADDRESS (ORACLE)</label
-          >
+          <div class="col-md-12">
+            <label for="oracle-shipto-address" class="form-label"
+              >SHIPTO ADDRESS (ORACLE)</label
+            >
 
-          <textarea
-            style="resize: none"
-            class="form-control"
-            id="oracle-shipto-address"
-            rows="3"
-            disabled
-            :value="defaultOracleCustomer.shipToAddress"
-          >
-          </textarea>
-        </div>
-        <div class="col-md-6">
-          <label for="oracle-shipto-address" class="form-label"
-            >SALES REPRESENTATIVE (ORACLE)</label
-          >
+            <textarea
+              style="resize: none"
+              class="form-control"
+              id="oracle-shipto-address"
+              rows="3"
+              disabled
+              :value="defaultOracleCustomer.shipToAddress"
+            >
+            </textarea>
+          </div>
+          <div class="col-md-12 mt-2">
+            <label for="oracle-shipto-address" class="form-label"
+              >SALES REPRESENTATIVE (ORACLE)</label
+            >
 
-          <textarea
-            style="resize: none"
-            class="form-control"
-            id="oracle-shipto-address"
-            rows="3"
-            disabled
-            :value="defaultOracleCustomer.srepName"
-          >
-          </textarea>
+            <textarea
+              style="resize: none"
+              class="form-control"
+              id="oracle-shipto-address"
+              rows="3"
+              disabled
+              :value="defaultOracleCustomer.srepName"
+            >
+            </textarea>
+          </div>
         </div>
 
         <div class="col-md-6">
