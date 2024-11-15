@@ -63,7 +63,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         <label for="contact-number" class="form-label">Contact #</label>
         <input
           type="text"

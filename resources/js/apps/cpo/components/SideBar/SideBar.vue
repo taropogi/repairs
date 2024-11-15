@@ -12,8 +12,11 @@
         <router-link
           :to="searchCpoLink"
           class="nav-link text-white"
-          :class="{ active: isNavSearchActive }"
-          >Search CPO
+          :class="{ active: isNavSearchActive || isNavUpdateActive }"
+          ><i class="bi bi-search me-2"></i> Search CPO
+          <span class="badge bg-success" v-if="isNavUpdateActive"
+            >UPDATE PAGE <span v-if="!canEditCpo">(VIEW)</span></span
+          >
         </router-link>
       </li>
       <li>
@@ -21,7 +24,7 @@
           :to="encodeCpoPageLink"
           class="nav-link text-white"
           :class="{ active: isNavEncodeActive }"
-          >Encode CPO</router-link
+          ><i class="bi bi-pencil-square me-2"></i> Encode CPO</router-link
         >
       </li>
       <li>
@@ -29,7 +32,7 @@
           :to="linkExportCpo"
           class="nav-link text-white"
           :class="{ active: isNavExportActive }"
-          >Export CPO list</router-link
+          ><i class="bi bi-box-arrow-up me-2"></i> Export CPO list</router-link
         >
       </li>
     </ul>
@@ -89,7 +92,7 @@ export default {
   },
   computed: {
     ...mapGetters(["activeNav"]),
-    ...mapGetters("auth", ["isLoggedIn", "loggedUser"]),
+    ...mapGetters("auth", ["isLoggedIn", "loggedUser", "canEditCpo"]),
     selectedPos() {
       return this.$store.getters["cpo/getSelectedPos"];
     },
@@ -99,6 +102,12 @@ export default {
 
     isNavSearchActive() {
       if (this.activeNav?.nav === "search-cpo") {
+        return true;
+      }
+      return false;
+    },
+    isNavUpdateActive() {
+      if (this.activeNav?.nav === "edit-cpo") {
         return true;
       }
       return false;
