@@ -4,7 +4,7 @@
     <h4 class="text-center bg-success text-white p-2">ENCODE CPO</h4>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <div class="form-container" v-else>
-      <form class="row g-3 m-2" @submit.prevent="submitCpoForm">
+      <form class="row g-1 m-2" @submit.prevent="submitCpoForm">
         <div class="col-md-6">
           <label for="oracle-customer-name" class="form-label">
             CUSTOMER NAME (ORACLE)

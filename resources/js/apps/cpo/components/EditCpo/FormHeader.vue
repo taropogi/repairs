@@ -1,7 +1,7 @@
 <template>
   <div>
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
-    <form class="row g-3 p-2" @submit.prevent="submitCpoForm" v-else>
+    <form class="row g-1 p-2" @submit.prevent="submitCpoForm" v-else>
       <transition name="updated-header">
         <div class="fixed-top p2" v-if="isSubmitSuccess">
           <div class="alert alert-success text-center" role="alert">
@@ -38,7 +38,7 @@
         />
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="customer-name" class="form-label">Customer Name</label>
         <input
           type="text"
@@ -50,7 +50,7 @@
         />
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="customer-address" class="form-label">Address</label>
         <input
           :disabled="headerRow.locked || !canEditCpo"
@@ -63,7 +63,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="contact-number" class="form-label">Contact #</label>
         <input
           type="text"
@@ -75,7 +75,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="prepared-by" class="form-label">Prepared By</label>
         <input
           type="text"
@@ -87,7 +87,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="authorized-by" class="form-label">Authorized By</label>
         <input
           type="text"
@@ -99,7 +99,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="rpo-number" class="form-label">RPO #</label>
         <input
           type="text"
@@ -111,7 +111,7 @@
         />
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-3">
         <label for="cpo-statuses" class="form-label"
           >Status
           <span class="badge bg-success" v-if="headerRow.locked"

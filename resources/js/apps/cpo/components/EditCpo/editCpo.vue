@@ -1,13 +1,17 @@
 <template>
-  <div class="p-2">
+  <div>
     <loading-overlay v-if="isUpdating" :text="'Updating, please wait . . '" />
+    <div class="sticky-top bg-white">
+      <h4 class="text-center bg-success text-white p-2">UPDATE CPO</h4>
+    </div>
+
     <form-header
       @searched-header-row="setHeaderRow"
       :id="id"
       @updating="isUpdating = true"
       @updated="isUpdating = false"
     ></form-header>
-    <hr />
+
     <header-lines
       class="mt-2"
       v-if="headerRow"
