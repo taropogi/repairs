@@ -121,7 +121,7 @@
 
 <style scoped>
 .form-container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
   padding: 20px;
   background-color: #f8f9fa;
