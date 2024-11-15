@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :class="{ blink: isUpdated }">
     <th scope="row">{{ lineDetails.line_number }}</th>
     <td>
       <input
@@ -142,13 +142,14 @@ export default {
       lineUpdating: false,
       isDeleted: false,
       isDeleting: false,
+      isUpdated: false,
     };
   },
 
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
     isDisabled() {
-      return this.headerIsLocked || !this.canEditCpo;
+      return this.headerIsLocked || !this.canEditCpo || this.lineUpdating;
     },
     showTr() {
       return !this.lineUpdating;
@@ -156,12 +157,19 @@ export default {
   },
 
   methods: {
+    blinkTr() {
+      this.isUpdated = true;
+      setTimeout(() => {
+        this.isUpdated = false;
+      }, 2000); // 2 seconds
+    },
     async saveLine() {
       //locally save
       this.lineUpdating = true;
       //  console.log(this.lineDetailsLocal);
       try {
         await axios.post("api/cpoline/update/", this.lineDetails);
+        this.blinkTr();
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -190,3 +198,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@keyframes blink {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: green;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.blink {
+  animation: blink 2s ease-in-out;
+}
+</style>
