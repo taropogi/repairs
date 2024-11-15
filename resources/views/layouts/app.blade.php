@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -29,12 +29,12 @@
 
     <div id="app">
     </div>
-     
- 
+
+
 
     <!-- Styles -->
     <script>
-    window.laravelData = @json($data);
+        window.laravelData = @json($data);
     </script>
     <script src="{{ asset('js/app.js') }}?v={{ Str::random(40) }}"></script>
 </body>

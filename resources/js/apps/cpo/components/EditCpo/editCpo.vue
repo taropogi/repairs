@@ -7,6 +7,7 @@
       @updating="isUpdating = true"
       @updated="isUpdating = false"
     ></form-header>
+    <hr />
     <header-lines
       class="mt-2"
       v-if="headerRow"

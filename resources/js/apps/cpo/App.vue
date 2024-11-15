@@ -46,6 +46,14 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container-fluid {
+  font-family: "Roboto", sans-serif;
+}
+
 .modal {
   z-index: 10001;
 }
