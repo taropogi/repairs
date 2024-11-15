@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading-overlay v-if="isUpdating" :text="'Updating, please wait . . '" />
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-3 p-2" @submit.prevent="submitCpoForm" v-else>
       <transition name="updated-header">
@@ -144,15 +143,14 @@
 import ModalStatusHistory from "./ModalStatusHistory.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import ActionButtons from "./ActionButtons.vue";
-import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     ModalStatusHistory,
     OracleCustomerDetails,
     ActionButtons,
-    LoadingOverlay,
   },
+  emits: ["searched-header-row", "updating", "updated"],
   props: ["id"],
   inject: ["laravelData"],
   data() {
@@ -195,14 +193,14 @@ export default {
     async submitCpoForm() {
       try {
         this.isSubmitSuccess = false;
-        this.isUpdating = true;
+        this.$emit("updating");
 
         await axios.post("api/cpo/update", {
           ...this.headerRow,
           oracleId: this.defaultOracleCustomer.id,
           oracleShipto: this.defaultOracleCustomer.shipToAddress,
         });
-        console.log("after await");
+        // console.log("after await");
         this.isSubmitSuccess = true;
 
         this.getCpoHeaderRow();
@@ -215,6 +213,7 @@ export default {
         console.log("error submit");
       } finally {
         this.isUpdating = false;
+        this.$emit("updated");
       }
     },
   },

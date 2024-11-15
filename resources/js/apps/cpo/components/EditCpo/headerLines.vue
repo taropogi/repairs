@@ -38,30 +38,29 @@
       v-if="!headerIsLocked && canEditCpo"
     >
       <button
-        v-if="!isInsertingNewLine"
         class="btn btn-primary"
+        type="button"
+        :disabled="isInsertingNewLine || isSavingAllLines"
         @click="addNewLine"
       >
-        Add new line
-      </button>
-      <button class="btn btn-primary" type="button" disabled v-else>
-        Add new line
+        <span> Add new line</span>
         <span
+          v-if="isInsertingNewLine"
           class="spinner-border spinner-border-sm"
           role="status"
           aria-hidden="true"
         ></span>
       </button>
+
       <button
         class="btn btn-success"
+        type="button"
         @click="saveAllLines"
-        v-if="!isSavingAllLines"
+        :disabled="isSavingAllLines || isInsertingNewLine"
       >
-        Save All lines
-      </button>
-      <button class="btn btn-success" type="button" disabled v-else>
-        Save All lines
+        <span> Save All lines </span>
         <span
+          v-if="isSavingAllLines"
           class="spinner-border spinner-border-sm"
           role="status"
           aria-hidden="true"
@@ -94,7 +93,7 @@ export default {
     async addNewLine() {
       this.isInsertingNewLine = true;
       try {
-        const res = await axios.post("api/cpoline/", { id: this.headerId });
+        await axios.post("api/cpoline/", { id: this.headerId });
 
         this.getCpoLines();
 
@@ -106,28 +105,18 @@ export default {
       }
     },
     async saveAllLines() {
-      this.isSavingAllLines = true;
       try {
+        this.isSavingAllLines = true;
+        this.$emit("updatingLines");
         await axios.post("api/cpo/lines/updateAllLines/", {
           cpoId: this.headerId,
           cpoLines: this.lines,
         });
-
-        this.isSavingAllLines = false;
-        //this.getCpoLines();
-        // this.isUpdatedAllLinesSuccess = true;
-        // console.log("save all", res);
-        // this.getCpoHeaderRow();
-        // this.$emit("updated-header-lines");
-        // setTimeout(() => {
-        //     this.isUpdatedAllLinesSuccess = false;
-        // }, 3000);
-        // console.log(res.data);
-        // console.log("saved all");
       } catch (error) {
         console.log(error.message);
       } finally {
         this.isSavingAllLines = false;
+        this.$emit("updatedLines");
       }
     },
     async getCpoLines() {

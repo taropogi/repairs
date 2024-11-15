@@ -99,7 +99,7 @@ class CpoController extends Controller
 
     public function updateAllLines(Request $request)
     {
-
+        sleep(1);
         $cpo = Cpo::find($request->cpoId);
 
         foreach ($request->cpoLines as $key => $item) {
@@ -114,11 +114,14 @@ class CpoController extends Controller
             $cpoLine->qty_returned = $itemObj->qty_returned;
             $cpoLine->unit = $itemObj->unit;
             $cpoLine->qty_inspect = $itemObj->qty_inspect;
+            $cpoLine->date = $itemObj->date;
             $cpoLine->good_condition = $itemObj->good_condition;
             $cpoLine->minor_repair_clean = $itemObj->minor_repair_clean;
             $cpoLine->repair_parts_needed = $itemObj->repair_parts_needed;
             $cpoLine->damaged = $itemObj->damaged;
             $cpoLine->comments = $itemObj->comments;
+            $cpoLine->order_number = $itemObj->order_number;
+
 
             $cpoLine->update();
         }

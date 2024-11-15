@@ -43,6 +43,7 @@ class CpoLinesController extends Controller
      */
     public function store(Request $request)
     {
+
         $cpo = Cpo::where('id', $request->id)->first();
         $cpo->lines()->create([
             'line_number' => $cpo->lines()->count() + 1,

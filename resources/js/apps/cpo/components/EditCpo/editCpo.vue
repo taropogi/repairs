@@ -1,11 +1,19 @@
 <template>
   <div class="p-2">
-    <form-header @searched-header-row="setHeaderRow" :id="id"></form-header>
+    <loading-overlay v-if="isUpdating" :text="'Updating, please wait . . '" />
+    <form-header
+      @searched-header-row="setHeaderRow"
+      :id="id"
+      @updating="isUpdating = true"
+      @updated="isUpdating = false"
+    ></form-header>
     <header-lines
       class="mt-2"
       v-if="headerRow"
       :header-id="id"
       :header-is-locked="headerRow.locked"
+      @updating-lines="isUpdating = true"
+      @updated-lines="isUpdating = false"
     ></header-lines>
   </div>
 </template>
@@ -13,19 +21,21 @@
 <script>
 import headerLines from "./headerLines.vue";
 import FormHeader from "./FormHeader.vue";
+import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapActions } from "vuex";
 
 export default {
   components: {
     FormHeader,
     headerLines,
+    LoadingOverlay,
   },
   props: ["id"],
 
   data() {
     return {
       headerRow: null,
-
+      isUpdating: false,
       isUpdatedAllLinesSuccess: false,
     };
   },
