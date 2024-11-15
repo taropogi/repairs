@@ -68,9 +68,9 @@ body {
   opacity: 0.8;
 }
 
-* {
-  font-size: 12px;
-}
+/* * {
+  font-size: 14px;
+} */
 
 .app-router-enter-from {
   opacity: 0;
