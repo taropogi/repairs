@@ -58,6 +58,13 @@ class GeneratePdfController extends Controller
         $data['date'] = date('m/d/Y');
         $data['random_str'] = Str::random(10);
 
+
+        $imagePath = public_path('images/times-trans.png');
+        $imageData = base64_encode(file_get_contents($imagePath));
+        $data['image_src'] = 'data:image/png;base64,' . $imageData;
+
+
+
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
         return $pdf->download('RPO#' . $cpo[0]->id . '.pdf');
