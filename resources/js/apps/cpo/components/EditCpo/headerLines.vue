@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-sm" v-if="lines.length > 0">
+    <table class="table table-sm table-hover" v-if="lines.length > 0">
       <thead class="table-warning">
         <tr>
           <th scope="col">#</th>
