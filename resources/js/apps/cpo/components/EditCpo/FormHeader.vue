@@ -1,10 +1,6 @@
 <template>
   <div>
-    <modal-status-history
-      v-if="showStatusHistory"
-      @close="showStatusHistory = false"
-      :header-id="headerRow.id"
-    ></modal-status-history>
+    <loading-overlay v-if="isUpdating" :text="'Updating, please wait . . '" />
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-3 p-2" @submit.prevent="submitCpoForm" v-else>
       <transition name="updated-header">
@@ -139,40 +135,7 @@
           </option>
         </select>
       </div>
-
-      <div class="btn-group">
-        <button
-          type="submit"
-          class="btn"
-          :class="{
-            'btn-success': canEditCpo,
-            'btn-secondary': !canEditCpo,
-          }"
-          :disabled="!canEditCpo"
-        >
-          Update
-        </button>
-
-        <span class="btn btn-warning" @click="showStatusHistory = true"
-          >Status History</span
-        >
-
-        <a
-          href="#"
-          class="btn"
-          @click="printCPOPdf"
-          :class="{
-            disabled: !canDownloadCpoPdf,
-            'btn-info': canDownloadCpoPdf,
-            'btn-secondary': !canDownloadCpoPdf,
-          }"
-          >Download PDF</a
-        >
-
-        <router-link :to="{ name: searchCpoLink }" class="btn btn-danger"
-          >Cancel</router-link
-        >
-      </div>
+      <action-buttons :cpo-id="headerRow.id" />
     </form>
   </div>
 </template>
@@ -180,11 +143,15 @@
 <script>
 import ModalStatusHistory from "./ModalStatusHistory.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
+import ActionButtons from "./ActionButtons.vue";
+import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     ModalStatusHistory,
     OracleCustomerDetails,
+    ActionButtons,
+    LoadingOverlay,
   },
   props: ["id"],
   inject: ["laravelData"],
@@ -203,31 +170,8 @@ export default {
   computed: {
     ...mapGetters(["oracleCustomers"]),
     ...mapGetters("auth", ["loggedUser", "canEditCpo", "canDownloadCpoPdf"]),
-    searchCpoLink() {
-      if (this.loggedUser && this.loggedUser.is_admin) {
-        return "admin-search-cpo";
-      }
-      return "search-cpo";
-    },
-    linkGeneratePdf() {
-      return this.laravelData.route_list.find(
-        (route) => route.routeName === "generate-pdf"
-      ).uri;
-    },
   },
   methods: {
-    printCPOPdf() {
-      window.location.href = this.linkGeneratePdf + "/?id=" + this.id;
-
-      // window.location.href =
-      //     this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
-    },
-
-    gotoSearchPage() {
-      this.$router.push({
-        name: this.searchCpoLink,
-      });
-    },
     async getCpoHeaderRow() {
       try {
         const res = await axios.get("api/cpo/" + this.id);
@@ -261,12 +205,13 @@ export default {
 
         this.getCpoHeaderRow();
 
-        this.isUpdating = false;
         setTimeout(() => {
           this.isSubmitSuccess = false;
         }, 3000);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        this.isUpdating = false;
       }
     },
   },

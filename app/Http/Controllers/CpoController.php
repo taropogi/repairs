@@ -322,6 +322,8 @@ class CpoController extends Controller
 
     public function update(Request $request)
     {
+
+        sleep(2);
         $cpo = Cpo::find($request->id);
 
         $cpo->customer_name = $request->customer_name;
