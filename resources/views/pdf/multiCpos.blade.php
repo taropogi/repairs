@@ -82,18 +82,21 @@
         <table width="100%">
             <tr>
                 <td><small><strong>NAME:</strong> {{ $cpo['customer_name'] }}</small></td>
-                <td><small><strong>RPO#:</strong> {{ $cpo['id'] }}</small></td>
+                <td><small><strong>AUTHORIZED BY:</strong> {{ $cpo['authorized_by'] }} </small></td>
                 <td><small><strong>DATE:</strong> {{ $date }}</small></td>
             </tr>
             <tr>
-                <td colspan="2"><small><strong>ADDRESS:</strong> {{ $cpo['customer_address'] }}</small></td>
+                <td rowspan="2" style="max-width: 200px;"><small><strong>ADDRESS:</strong>
+                        {{ $cpo['customer_address'] }}</small></td>
                 <td><small><strong>CONTACT:</strong> {{ $cpo['contact_number'] }}</small></td>
+
             </tr>
             <tr>
 
-                <td><small><strong>PREPARED BY:</strong> {{ $cpo['prepared_by'] }} </small></td>
+
                 <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
-                <td><small><strong>AUTHORIZED BY:</strong> {{ $cpo['authorized_by'] }} </small></td>
+                <td><small><strong>PREPARED BY:</strong> {{ $cpo['prepared_by'] }} </small></td>
+
             </tr>
 
 
