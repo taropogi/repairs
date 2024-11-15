@@ -38,18 +38,9 @@
         </select>
       </div>
       <div class="col-md-6">
-        <label for="oracle-shipto-address" class="form-label"
-          >SHIPTO ADDRESS (ORACLE)</label
-        >
-
-        <textarea
-          style="resize: none"
-          class="form-control"
-          id="oracle-shipto-address"
-          rows="10"
-          disabled
-          v-model="defaultOracleCustomer.shipToAddress"
-        ></textarea>
+        <oracle-customer-details
+          :selected-customer-id="defaultOracleCustomer.id"
+        />
       </div>
 
       <div class="col-md-6">
@@ -188,10 +179,12 @@
 
 <script>
 import ModalStatusHistory from "./ModalStatusHistory.vue";
+import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     ModalStatusHistory,
+    OracleCustomerDetails,
   },
   props: ["id"],
   inject: ["laravelData"],
@@ -202,7 +195,6 @@ export default {
       isSubmitSuccess: false,
       defaultOracleCustomer: {
         id: 3234415,
-        shipToAddress: "",
       },
       showStatusHistory: false,
     };
@@ -230,81 +222,56 @@ export default {
       // window.location.href =
       //     this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
     },
-    setDefaultShipToAddress() {
-      // console.log(typeof this.defaultOracleCustomer.id);
-      const selectedCustomer = this.oracleCustomers.find(
-        (el) => el.cust_account_id === Number(this.defaultOracleCustomer.id)
-      );
-      this.defaultOracleCustomer.shipToAddress =
-        selectedCustomer.address1 +
-        " " +
-        (selectedCustomer.address2 ?? "") +
-        ", " +
-        (selectedCustomer.city ?? "") +
-        ", " +
-        (selectedCustomer.province ?? "");
-    },
 
     gotoSearchPage() {
       this.$router.push({
         name: this.searchCpoLink,
       });
     },
-    getCpoHeaderRow() {
-      // console.log("get row");
-      axios
-        .get("api/cpo/" + this.id)
-        .then((response) => {
-          this.headerStatuses = response.data.header_statuses;
-          this.headerStatus = response.data.cpo.status;
+    async getCpoHeaderRow() {
+      try {
+        const res = await axios.get("api/cpo/" + this.id);
 
-          this.headerRow = response.data.cpo;
+        this.headerStatuses = res.data.header_statuses;
+        this.headerStatus = res.data.cpo.status;
 
-          if (this.headerRow.oracle_customer_id) {
-            this.defaultOracleCustomer.id = this.headerRow.oracle_customer_id;
-          }
+        this.headerRow = res.data.cpo;
 
-          this.setDefaultShipToAddress();
+        if (this.headerRow.oracle_customer_id) {
+          this.defaultOracleCustomer.id = +this.headerRow.oracle_customer_id;
+        }
 
-          this.$emit("searched-header-row", this.headerRow);
-          // console.log("hahahahalskdfjlaskdfjl");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        this.$emit("searched-header-row", this.headerRow);
+      } catch (error) {
+        console.log(error);
+      }
     },
     async submitCpoForm() {
-      this.isSubmitSuccess = false;
-      this.isUpdating = true;
-      //   console.log("submit edit");
-      // console.log(this.headerRow);
-      await axios
-        .post("api/cpo/update", {
+      try {
+        this.isSubmitSuccess = false;
+        this.isUpdating = true;
+
+        await axios.post("api/cpo/update", {
           ...this.headerRow,
           oracleId: this.defaultOracleCustomer.id,
           oracleShipto: this.defaultOracleCustomer.shipToAddress,
-        })
-        .then((response) => {
-          // console.log(response);
-          this.isSubmitSuccess = true;
-          // console.log("done update");
-          // this.gotoSearchPage();
-          this.getCpoHeaderRow();
-
-          this.isUpdating = false;
-          setTimeout(() => {
-            this.isSubmitSuccess = false;
-          }, 3000);
-        })
-        .catch((error) => {
-          console.log(error);
         });
+
+        this.isSubmitSuccess = true;
+
+        this.getCpoHeaderRow();
+
+        this.isUpdating = false;
+        setTimeout(() => {
+          this.isSubmitSuccess = false;
+        }, 3000);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
   mounted() {
     this.getCpoHeaderRow();
-
-    // this.setDefaultShipToAddress();
   },
 };
 </script>

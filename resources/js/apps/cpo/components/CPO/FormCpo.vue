@@ -26,34 +26,9 @@
           </select>
         </div>
         <div class="col-md-6">
-          <div class="col-md-12">
-            <label for="oracle-shipto-address" class="form-label">
-              SHIPTO ADDRESS (ORACLE)
-            </label>
-            <textarea
-              style="resize: none; height: 50px"
-              class="form-control shadow"
-              id="oracle-shipto-address"
-              rows="2"
-              disabled
-              :value="defaultOracleCustomer.shipToAddress"
-            >
-            </textarea>
-          </div>
-          <div class="col-md-12 mt-2">
-            <label for="oracle-srep-name" class="form-label">
-              SALES REPRESENTATIVE (ORACLE)
-            </label>
-            <textarea
-              style="resize: none; height: 50px"
-              class="form-control shadow"
-              id="oracle-srep-name"
-              rows="2"
-              disabled
-              :value="defaultOracleCustomer.srepName"
-            >
-            </textarea>
-          </div>
+          <oracle-customer-details
+            :selected-customer-id="defaultOracleCustomer.id"
+          />
         </div>
 
         <div class="col-md-6">
@@ -146,9 +121,11 @@
 <script>
 import { mapGetters } from "vuex";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
+import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 export default {
   components: {
     LoadingOverlay,
+    OracleCustomerDetails,
   },
   data() {
     return {
