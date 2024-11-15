@@ -64,12 +64,17 @@
     <div>
         <table width="100%">
             <tr>
-                <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
-                <td align="right">
-                    <h3>________________ PULL OUT FORM</h3>
+                <td valign="top" style="width: 20%;">
+                    <img src="{{ asset('images/times-trans.png') }}" alt="" width="100%" />
+                </td>
+                <td valign="middle" style="width: 60%; text-align: center;">
+                    <strong>PULL OUT FORM</strong>
+                </td>
+                <td align="right" style="width: 20%;">
+                    <h1 style="margin-top: 0;">RPO# <span
+                            style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['id'] }}</span></h1>
                 </td>
             </tr>
-
         </table>
         <br>
 

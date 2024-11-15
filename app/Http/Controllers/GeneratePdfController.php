@@ -60,8 +60,19 @@ class GeneratePdfController extends Controller
         return $pdf->download('RPO#' . $cpo[0]->id . '.pdf');
     }
 
+
     public function generatePdfs(Request $request)
     {
+        /**
+         * Generate multiple PDFs based on the provided IDs in the request.
+         *
+         * This method takes a comma-separated list of IDs from the request,
+         * generates individual PDFs for each ID, and then combines them into
+         * a single PDF for download.
+         *
+         * @param \Illuminate\Http\Request $request The incoming request containing the IDs.
+         * @return \Illuminate\Http\Response The response containing the generated PDF for download.
+         */
         $ids_arr = explode(',', $request->id);
 
         foreach ($ids_arr as $id) {
