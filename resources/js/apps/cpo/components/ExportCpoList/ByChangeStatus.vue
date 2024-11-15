@@ -5,7 +5,7 @@
       <span v-if="searchedCount">({{ searchedCount }})</span>
     </p>
     <span>Kindly specify a date range </span>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-sm-6">
         <label for="date-change-status-from" class="form-label">From</label>
         <input
