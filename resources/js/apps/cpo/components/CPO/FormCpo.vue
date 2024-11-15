@@ -25,7 +25,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
           <label for="oracle-shipto-address" class="form-label"
             >SHIPTO ADDRESS (ORACLE)</label
           >
@@ -34,10 +34,26 @@
             style="resize: none"
             class="form-control"
             id="oracle-shipto-address"
-            rows="10"
+            rows="3"
             disabled
-            v-model="defaultOracleCustomer.shipToAddress"
-          ></textarea>
+            :value="defaultOracleCustomer.shipToAddress"
+          >
+          </textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="oracle-shipto-address" class="form-label"
+            >SALES REPRESENTATIVE (ORACLE)</label
+          >
+
+          <textarea
+            style="resize: none"
+            class="form-control"
+            id="oracle-shipto-address"
+            rows="3"
+            disabled
+            :value="defaultOracleCustomer.srepName"
+          >
+          </textarea>
         </div>
 
         <div class="col-md-6">
@@ -116,6 +132,7 @@ export default {
       defaultOracleCustomer: {
         id: 3234415,
         shipToAddress: "",
+        srepName: "",
       },
       formData: {
         customerName: "",
@@ -135,6 +152,7 @@ export default {
       const selectedCustomer = this.oracleCustomers.find(
         (el) => el.cust_account_id === Number(this.defaultOracleCustomer.id)
       );
+      // console.log(selectedCustomer);
       this.defaultOracleCustomer.shipToAddress =
         selectedCustomer.address1 +
         " " +
@@ -143,6 +161,8 @@ export default {
         (selectedCustomer.city ?? "") +
         ", " +
         (selectedCustomer.province ?? "");
+
+      this.defaultOracleCustomer.srepName = selectedCustomer.salesrep_name;
     },
 
     async submitCpoForm() {
@@ -191,6 +211,11 @@ export default {
   computed: {
     ...mapGetters(["oracleCustomers"]),
     ...mapGetters("auth", ["loggedUser"]),
+    shipToSalesRep() {
+      return `${this.defaultOracleCustomer.shipToAddress}
+      Sales Rep: ${this.defaultOracleCustomer.srepName}
+      `;
+    },
     editHeaderLink() {
       if (this.loggedUser.is_admin) {
         return "admin-edit-cpo";
@@ -209,6 +234,7 @@ export default {
   mounted() {
     this.setDefaultShipToAddress();
     // this.getOracleCustomers();
+    // console.log(this.oracleCustomers);
     this.$emit("refresh-header-list");
   },
 };
