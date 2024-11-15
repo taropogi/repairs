@@ -41,7 +41,7 @@ class CpoController extends Controller
      */
     public function create(Request $request)
     {
-        sleep(2);
+
         $request->validate([
             'customerName' => ['required'],
             'customerAddress' => ['required'],
@@ -70,7 +70,8 @@ class CpoController extends Controller
 
         $response['cpo'] = $new_cpo;
 
-
+        // set delay time sleep for 2 seconds
+        sleep(2);
         return $response;
     }
 
@@ -99,7 +100,7 @@ class CpoController extends Controller
 
     public function updateAllLines(Request $request)
     {
-        sleep(1);
+
         $cpo = Cpo::find($request->cpoId);
 
         foreach ($request->cpoLines as $key => $item) {
@@ -126,6 +127,8 @@ class CpoController extends Controller
             $cpoLine->update();
         }
 
+        // set delay time sleep for 0.5 second
+        usleep(500000);
         $cpo->touch();
 
         return $request;
@@ -236,8 +239,9 @@ class CpoController extends Controller
         $response['cpos'] = $cpos;
         $response['limit_per_page'] = 0;
 
-        //sleep for 0.5 second
-        sleep(0.5);
+
+        // set delay time sleep for 0.5 second
+        usleep(500000);
 
         return $response;
     }
@@ -326,7 +330,7 @@ class CpoController extends Controller
     public function update(Request $request)
     {
 
-        sleep(2);
+
         $cpo = Cpo::find($request->id);
 
         $cpo->customer_name = $request->customer_name;
@@ -359,7 +363,8 @@ class CpoController extends Controller
             $this->checkIfCompletedStatus($request->id, $request->status_id);
         }
 
-
+        // set delay time sleep for 0.5 second
+        usleep(500000);
         return $cpo;
     }
 
