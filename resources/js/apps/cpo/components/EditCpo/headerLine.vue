@@ -205,7 +205,7 @@ export default {
     background-color: transparent;
   }
   50% {
-    background-color: green;
+    background-color: rgba(40, 167, 69, 1);
   }
   100% {
     background-color: transparent;
