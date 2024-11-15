@@ -5,7 +5,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.description"
       />
     </td>
@@ -14,7 +14,7 @@
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.price"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
       />
     </td>
     <td>
@@ -22,7 +22,7 @@
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.hcopy"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
       />
     </td>
     <td>
@@ -30,7 +30,7 @@
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.qty_returned"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
       />
     </td>
     <td>
@@ -38,7 +38,7 @@
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.unit"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
       />
     </td>
     <td>
@@ -46,14 +46,14 @@
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.qty_inspect"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
       />
     </td>
     <td>
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.date"
       />
     </td>
@@ -61,7 +61,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.good_condition"
       />
     </td>
@@ -69,7 +69,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.minor_repair_clean"
       />
     </td>
@@ -77,7 +77,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.repair_parts_needed"
       />
     </td>
@@ -85,7 +85,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.damaged"
       />
     </td>
@@ -93,7 +93,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.comments"
       />
     </td>
@@ -101,7 +101,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        :disabled="headerIsLocked"
+        :disabled="isDisabled"
         v-model="lineDetails.order_number"
       />
     </td>
@@ -150,10 +150,8 @@ export default {
 
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
-    isLocked() {
-      return {
-        disabled: this.headerIsLocked,
-      };
+    isDisabled() {
+      return this.headerIsLocked || !this.canEditCpo;
     },
     showTr() {
       return !this.lineUpdating;
