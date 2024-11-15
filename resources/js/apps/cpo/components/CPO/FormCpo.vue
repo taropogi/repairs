@@ -3,7 +3,7 @@
     <loading-overlay :text="'Saving, please wait . . . '" v-if="isEncoding" />
     <h4 class="text-center bg-success text-white p-2">ENCODE CPO</h4>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-    <div class="w-75 m-auto" v-else>
+    <div class="form-container" v-else>
       <form class="row g-3 m-2" @submit.prevent="submitCpoForm">
         <div class="col-md-6">
           <label for="oracle-customer-name" class="form-label">
@@ -27,30 +27,28 @@
         </div>
         <div class="col-md-6">
           <div class="col-md-12">
-            <label for="oracle-shipto-address" class="form-label"
-              >SHIPTO ADDRESS (ORACLE)</label
-            >
-
+            <label for="oracle-shipto-address" class="form-label">
+              SHIPTO ADDRESS (ORACLE)
+            </label>
             <textarea
-              style="resize: none"
-              class="form-control"
+              style="resize: none; height: 50px"
+              class="form-control shadow"
               id="oracle-shipto-address"
-              rows="3"
+              rows="2"
               disabled
               :value="defaultOracleCustomer.shipToAddress"
             >
             </textarea>
           </div>
           <div class="col-md-12 mt-2">
-            <label for="oracle-shipto-address" class="form-label"
-              >SALES REPRESENTATIVE (ORACLE)</label
-            >
-
+            <label for="oracle-srep-name" class="form-label">
+              SALES REPRESENTATIVE (ORACLE)
+            </label>
             <textarea
-              style="resize: none"
-              class="form-control"
-              id="oracle-shipto-address"
-              rows="3"
+              style="resize: none; height: 50px"
+              class="form-control shadow"
+              id="oracle-srep-name"
+              rows="2"
               disabled
               :value="defaultOracleCustomer.srepName"
             >
@@ -113,14 +111,38 @@
           />
         </div>
 
-        <div class="col-12" v-if="!isEncoding">
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-12 text-center" v-if="!isEncoding">
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
       </form>
     </div>
   </div>
 </template>
 
+<style scoped>
+.form-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control,
+.form-select {
+  border-radius: 5px;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+}
+</style>
 <script>
 import { mapGetters } from "vuex";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
@@ -235,8 +257,6 @@ export default {
 
   mounted() {
     this.setDefaultShipToAddress();
-    // this.getOracleCustomers();
-    // console.log(this.oracleCustomers);
     this.$emit("refresh-header-list");
   },
 };
