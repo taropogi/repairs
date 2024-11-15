@@ -14,6 +14,8 @@ class Cpo extends Model
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
 
+    protected $appends = ['formatted_id'];
+
 
 
     public function lines()
@@ -35,5 +37,11 @@ class Cpo extends Model
     public function status()
     {
         return $this->belongsTo(HeaderStatus::class);
+    }
+
+    // Accessor for formatted ID
+    public function getFormattedIdAttribute()
+    {
+        return str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 }

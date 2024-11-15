@@ -10,7 +10,7 @@
           @change="selectPo"
         />
         <label class="form-check-label" :for="id">
-          {{ localHeaderItem.id }}
+          {{ localHeaderItem.formatted_id }}
         </label>
       </div>
     </th>
@@ -240,7 +240,7 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.isSelectedRow);
+    // console.log(this.localHeaderItem);
     this.isCurrentlySelected();
     // this.isSelected = true;
   },

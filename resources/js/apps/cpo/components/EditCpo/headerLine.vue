@@ -1,5 +1,5 @@
 <template>
-  <tr :class="{ blink: isUpdated }">
+  <tr :class="{ blink: isUpdated, 'blink-deleted': isDeleted }">
     <th scope="row">{{ lineDetails.line_number }}</th>
     <td>
       <input
@@ -149,7 +149,12 @@ export default {
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
     isDisabled() {
-      return this.headerIsLocked || !this.canEditCpo || this.lineUpdating;
+      return (
+        this.headerIsLocked ||
+        !this.canEditCpo ||
+        this.lineUpdating ||
+        this.isDeleting
+      );
     },
     showTr() {
       return !this.lineUpdating;
@@ -157,11 +162,27 @@ export default {
   },
 
   methods: {
-    blinkTr() {
-      this.isUpdated = true;
-      setTimeout(() => {
-        this.isUpdated = false;
-      }, 2000); // 2 seconds
+    blinkTr(isDelete = false) {
+      if (isDelete) {
+        this.isDeleted = true;
+      } else {
+        this.isUpdated = true;
+      }
+
+      setTimeout(
+        () => {
+          if (isDelete) {
+            // this.isDeleted = false;
+          } else {
+            this.isUpdated = false;
+          }
+
+          if (isDelete) {
+            this.$emit("deleteLine", this.lineDetails.id);
+          }
+        },
+        isDelete ? 500 : 2000
+      ); // 1 second
     },
     async saveLine() {
       //locally save
@@ -185,10 +206,7 @@ export default {
           id: this.lineDetails.id,
         });
 
-        //    this.isDeleted = true;
-        this.$emit("deleteLine", this.lineDetails.id);
-        //console.log(res);
-        //  this.getCpoHeaderRow();
+        this.blinkTr(true);
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -200,6 +218,22 @@ export default {
 </script>
 
 <style scoped>
+@keyframes blink-deleted {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.blink-deleted {
+  animation: blink-deleted 0.5s ease-in-out;
+}
+
 @keyframes blink {
   0% {
     background-color: transparent;

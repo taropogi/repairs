@@ -106,7 +106,7 @@
           class="form-control"
           id="rpo-number"
           required
-          v-model="headerRow.id"
+          v-model="headerRow.formatted_id"
           disabled
         />
       </div>

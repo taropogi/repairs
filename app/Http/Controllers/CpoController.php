@@ -232,7 +232,7 @@ class CpoController extends Controller
 
 
 
-        $cpos = $cpos->take(50)->with('status')->get();
+        $cpos = $cpos->take(50)->get();
 
 
         // $response['req'] = $request->header('X-XSRF-TOKEN');

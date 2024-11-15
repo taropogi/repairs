@@ -32,11 +32,7 @@
       </tbody>
     </table>
 
-    <div
-      class="btn-group btn-group-sm"
-      role="group"
-      v-if="!headerIsLocked && canEditCpo"
-    >
+    <div class="btn-group btn-group-sm" v-if="!headerIsLocked && canEditCpo">
       <button
         class="btn btn-primary"
         type="button"
@@ -47,8 +43,6 @@
         <span
           v-if="isInsertingNewLine"
           class="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true"
         ></span>
       </button>
 
@@ -57,6 +51,7 @@
         type="button"
         @click="saveAllLines"
         :disabled="isSavingAllLines || isInsertingNewLine"
+        v-if="lines.length > 0"
       >
         <span> Save All lines </span>
         <span

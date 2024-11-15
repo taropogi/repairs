@@ -68,12 +68,13 @@
                 <td valign="top" style="width: 20%;">
                     <img src="{{ $image_src }}" alt="" width="100%" />
                 </td>
-                <td valign="middle" style="width: 60%; text-align: center;">
+                <td valign="middle" style="width: 40%; text-align: center;">
                     <strong>PULL OUT FORM</strong>
                 </td>
-                <td align="right" style="width: 20%;">
+                <td align="right" style="width: 30%;">
                     <h1 style="margin-top: 0;">RPO# <span
-                            style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['id'] }}</span></h1>
+                            style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['formatted_id'] }}</span>
+                    </h1>
                 </td>
             </tr>
         </table>
