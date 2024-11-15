@@ -41,6 +41,7 @@ class CpoController extends Controller
      */
     public function create(Request $request)
     {
+        sleep(2);
         $request->validate([
             'customerName' => ['required'],
             'customerAddress' => ['required'],

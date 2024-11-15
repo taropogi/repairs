@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading-overlay :text="'Saving, please wait . . . '" />
     <no-encode-permission v-if="!canEncodeCpo" />
     <form-cpo v-else />
   </div>
@@ -25,5 +26,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

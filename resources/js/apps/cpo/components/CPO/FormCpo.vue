@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading-overlay :text="'Saving, please wait . . . '" v-if="isEncoding" />
     <h4 class="text-center bg-success text-white p-2">ENCODE CPO</h4>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <div class="w-75 m-auto" v-else>
@@ -94,7 +95,7 @@
           />
         </div>
 
-        <div class="col-12">
+        <div class="col-12" v-if="!isEncoding">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
@@ -104,7 +105,11 @@
 
 <script>
 import { mapGetters } from "vuex";
+import LoadingOverlay from "../UI/LoadingOverlay.vue";
 export default {
+  components: {
+    LoadingOverlay,
+  },
   data() {
     return {
       // oracleCustomers: null,
@@ -121,6 +126,7 @@ export default {
         authorizedBy: "",
       },
       isSubmitSuccess: false,
+      isEncoding: false,
     };
   },
   methods: {
@@ -140,25 +146,25 @@ export default {
     },
 
     async submitCpoForm() {
-      // this.isSubmitSuccess = false;
-      await axios
-        .post("api/cpo", {
+      try {
+        this.isEncoding = true;
+        const res = await axios.post("api/cpo", {
           ...this.formData,
           oracleId: this.defaultOracleCustomer.id,
           oracleShipto: this.defaultOracleCustomer.shipToAddress,
-        })
-        .then((response) => {
-          this.isSubmitSuccess = true;
-          this.resetForm();
-          // this.gotoSearchPage();
-          this.gotoEditCpoPage(response.data.cpo.id);
-          setTimeout(() => {
-            this.isSubmitSuccess = false;
-          }, 3000);
-        })
-        .catch((error) => {
-          console.log(error);
         });
+        this.isSubmitSuccess = true;
+        this.resetForm();
+        // this.gotoSearchPage();
+        this.gotoEditCpoPage(res.data.cpo.id);
+        setTimeout(() => {
+          this.isSubmitSuccess = false;
+        }, 3000);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.isEncoding = false;
+      }
     },
     resetForm() {
       this.formData.customerName = "";

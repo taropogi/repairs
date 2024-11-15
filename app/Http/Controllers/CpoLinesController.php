@@ -100,6 +100,9 @@ class CpoLinesController extends Controller
         $cpoLine->update();
 
         $cpo = Cpo::find($cpoLine->cpo_id);
+
+        // set delay time sleep for 1 second
+        sleep(2);
         $cpo->touch();
 
         return $cpoLine;
