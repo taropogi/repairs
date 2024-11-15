@@ -180,6 +180,7 @@ export default {
         this.headerStatus = res.data.cpo.status;
 
         this.headerRow = res.data.cpo;
+        // console.log(this.headerRow);
 
         if (this.headerRow.oracle_customer_id) {
           this.defaultOracleCustomer.id = +this.headerRow.oracle_customer_id;
@@ -187,7 +188,8 @@ export default {
 
         this.$emit("searched-header-row", this.headerRow);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
+        console.log("error hahah");
       }
     },
     async submitCpoForm() {
@@ -200,7 +202,7 @@ export default {
           oracleId: this.defaultOracleCustomer.id,
           oracleShipto: this.defaultOracleCustomer.shipToAddress,
         });
-
+        console.log("after await");
         this.isSubmitSuccess = true;
 
         this.getCpoHeaderRow();
@@ -210,6 +212,7 @@ export default {
         }, 3000);
       } catch (error) {
         console.log(error.message);
+        console.log("error submit");
       } finally {
         this.isUpdating = false;
       }
