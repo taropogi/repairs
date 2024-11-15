@@ -116,6 +116,7 @@ class CpoLinesController extends Controller
      */
     public function destroy(Request $request)
     {
+        sleep(1);
         $cpoLine = CpoLine::where('id', $request->id)->first();
         $cpoLine->delete();
         return $cpoLine;

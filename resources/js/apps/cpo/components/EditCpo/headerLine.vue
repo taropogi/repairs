@@ -112,23 +112,20 @@
           type="button"
           class="btn btn-primary"
           @click="saveLine"
-          v-if="!lineUpdating"
+          :disabled="lineUpdating || isDeleting"
         >
-          Save
+          <span v-if="!lineUpdating">Save</span>
+          <span v-else class="spinner-border spinner-border-sm"> </span>
         </button>
-        <button class="btn btn-primary" type="button" disabled v-else>
-          <span class="spinner-border spinner-border-sm"></span>
-        </button>
+
         <button
           type="button"
           class="btn btn-danger"
           @click="deleteLine"
-          v-if="!isDeleting"
+          :disabled="lineUpdating || isDeleting"
         >
-          Delete
-        </button>
-        <button class="btn btn-danger" type="button" disabled v-else>
-          <span class="spinner-border spinner-border-sm"></span>
+          <span v-if="!isDeleting"> Delete</span>
+          <span class="spinner-border spinner-border-sm" v-else></span>
         </button>
       </div>
     </td>
@@ -173,21 +170,22 @@ export default {
 
       // this.$emit("saveLine", this.lineDetailsLocal);
     },
-    deleteLine() {
-      this.isDeleting = true;
-      axios
-        .post("api/cpoline/destroy/", {
+    async deleteLine() {
+      try {
+        this.isDeleting = true;
+        await axios.post("api/cpoline/destroy/", {
           id: this.lineDetails.id,
-        })
-        .then((res) => {
-          //    this.isDeleted = true;
-          this.$emit("deleteLine", this.lineDetails.id);
-          //console.log(res);
-          //  this.getCpoHeaderRow();
-        })
-        .catch((err) => {
-          console.log(err);
         });
+
+        //    this.isDeleted = true;
+        this.$emit("deleteLine", this.lineDetails.id);
+        //console.log(res);
+        //  this.getCpoHeaderRow();
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        this.isDeleting = false;
+      }
     },
   },
 };
