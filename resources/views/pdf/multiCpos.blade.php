@@ -61,15 +61,12 @@
 
 <body>
     @foreach($cpos as $cpo)
-    <?php
-    // Generate a random string
-    $randomString = bin2hex(random_bytes(8));
-    ?>
+
     <div>
         <table width="100%">
             <tr>
                 <td valign="top" style="width: 20%;">
-                    <img src="{{ asset('images/times-trans.png?v=' . $randomString) }}" alt="" width="100%" />
+                    <img src="{{ asset('images/times-trans.png?v=' . $random_str) }}" alt="" width="100%" />
                 </td>
                 <td valign="middle" style="width: 60%; text-align: center;">
                     <strong>PULL OUT FORM</strong>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use App\Models\Cpo;
 use App\Traits\FormatLines;
+use Illuminate\Support\Str;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Exports\ExportCpoLists;
@@ -31,6 +32,7 @@ class GeneratePdfController extends Controller
         $data['title'] = 'RPO#' . $cpo[0]->id;
         $data['cpos'] = $cpo;
         $data['date'] = date('m/d/Y');
+        $data['random_str'] = Str::random(10);
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
@@ -54,6 +56,7 @@ class GeneratePdfController extends Controller
         $data['title'] = 'Multi Selected CPOS';
         $data['cpos'] = $cpo;
         $data['date'] = date('m/d/Y');
+        $data['random_str'] = Str::random(10);
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
