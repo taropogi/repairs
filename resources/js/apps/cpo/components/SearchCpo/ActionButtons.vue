@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-group btn-group-sm" role="group">
+  <div class="btn-group btn-group-sm">
     <button
       type="button"
       class="btn"
@@ -29,23 +29,11 @@
     >
       <i class="bi bi-file-earmark-pdf"></i>
     </button>
-
-    <!-- <button
-      type="button"
-      class="btn btn-lg btn-warning"
-      v-if="localHeaderItem.locked"
-      disabled
-      title="Locked"
-      ref="lockedButton"
-    >
-      <i class="bi bi-lock-fill"></i>
-    </button> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { Tooltip } from "bootstrap";
 export default {
   emits: ["delete-cpo"],
   props: {
@@ -96,13 +84,6 @@ export default {
       });
       // this.$emit("editCpo", cpoItemHeader);
     },
-  },
-  mounted() {
-    // Initialize Bootstrap tooltips
-    const tooltipTriggerList = [].slice.call(this.$refs);
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new Tooltip(tooltipTriggerEl);
-    });
   },
 };
 </script>

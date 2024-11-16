@@ -93,36 +93,23 @@ export default {
   computed: {
     ...mapGetters(["activeNav"]),
     ...mapGetters("auth", ["isLoggedIn", "loggedUser", "canEditCpo"]),
-    selectedPos() {
-      return this.$store.getters["cpo/getSelectedPos"];
-    },
+    ...mapGetters("cpo", ["selectedPos"]),
+
     selectedPosCount() {
       return this.selectedPos.length;
     },
 
     isNavSearchActive() {
-      if (this.activeNav?.nav === "search-cpo") {
-        return true;
-      }
-      return false;
+      return this.activeNav?.nav === "search-cpo" ? true : false;
     },
     isNavUpdateActive() {
-      if (this.activeNav?.nav === "edit-cpo") {
-        return true;
-      }
-      return false;
+      return this.activeNav?.nav === "edit-cpo" ? true : false;
     },
     isNavExportActive() {
-      if (this.activeNav?.nav === "export-cpo") {
-        return true;
-      }
-      return false;
+      return this.activeNav?.nav === "export-cpo" ? true : false;
     },
     isNavEncodeActive() {
-      if (this.activeNav?.nav === "encode-cpo") {
-        return true;
-      }
-      return false;
+      return this.activeNav?.nav === "encode-cpo" ? true : false;
     },
     userIsAdmin() {
       return this.isLoggedIn && this.loggedUser?.is_admin;

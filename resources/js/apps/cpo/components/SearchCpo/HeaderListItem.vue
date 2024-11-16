@@ -1,5 +1,12 @@
 <template>
-  <tr :class="trClasses">
+  <tr
+    :class="trClasses"
+    :title="
+      localHeaderItem.is_completed
+        ? `${localHeaderItem.formatted_id} is already completed. Can no longer update.`
+        : ''
+    "
+  >
     <th>
       <div class="form-check">
         <input
@@ -15,7 +22,7 @@
             class="bi bi-lock-fill"
             v-if="localHeaderItem.is_completed"
             :class="{
-              'text-success': localHeaderItem.is_completed,
+              'text-warning': localHeaderItem.is_completed,
               'mx-2': localHeaderItem.is_completed,
             }"
           ></i>
