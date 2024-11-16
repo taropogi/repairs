@@ -32,6 +32,8 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) { // 
 
 //cpo statuses
 Route::get('statuses', [StatusController::class, 'index']);
+// update status
+Route::put('status/update', [StatusController::class, 'update']);
 
 //cpo
 Route::post('cpo', [CpoController::class, 'create']);

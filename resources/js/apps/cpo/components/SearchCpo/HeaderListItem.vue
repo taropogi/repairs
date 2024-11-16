@@ -10,16 +10,19 @@
           @change="selectPo"
         />
         <label class="form-check-label" :for="id">
-          {{ localHeaderItem.formatted_id }}
+          <span>{{ localHeaderItem.formatted_id }}</span>
+          <i
+            class="bi bi-lock-fill"
+            v-if="localHeaderItem.is_completed"
+            :class="{
+              'text-success': localHeaderItem.is_completed,
+              'mx-2': localHeaderItem.is_completed,
+            }"
+          ></i>
         </label>
       </div>
     </th>
 
-    <!-- <td>
-            <label :for="id">
-                {{ headerItem.rpo_number }}
-            </label>
-        </td> -->
     <td>
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.customer_name }}
@@ -248,6 +251,9 @@ export default {
 </script>
 
 <style scoped>
+label {
+  font-weight: normarl;
+}
 tr:hover {
   font-weight: bold;
 }

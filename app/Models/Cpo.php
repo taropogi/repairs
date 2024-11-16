@@ -14,7 +14,7 @@ class Cpo extends Model
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
 
-    protected $appends = ['formatted_id'];
+    protected $appends = ['formatted_id', 'is_completed'];
 
 
 
@@ -43,5 +43,11 @@ class Cpo extends Model
     public function getFormattedIdAttribute()
     {
         return str_pad($this->id, 6, '0', STR_PAD_LEFT);
+    }
+
+    // Accessor for checking if the Cpo is completed
+    public function getIsCompletedAttribute()
+    {
+        return $this->status_id == 6;
     }
 }

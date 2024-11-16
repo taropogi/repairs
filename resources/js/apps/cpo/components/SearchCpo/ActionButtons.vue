@@ -1,7 +1,6 @@
 <template>
   <div class="btn-group btn-group-sm" role="group">
     <button
-      v-if="!localHeaderItem.locked"
       type="button"
       class="btn"
       :class="{
@@ -9,16 +8,16 @@
         'btn-secondary': !canDeleteCpo,
       }"
       @click="deleteCpo"
-      :disabled="!canDeleteCpo"
+      :disabled="!canDeleteCpo || localHeaderItem.locked"
     >
-      Delete
+      <i class="bi bi-trash"></i>
     </button>
 
     <button type="button" class="btn btn-success" @click="editCpoHeader">
-      View{{ canEditCpo ? "/Edit" : "" }}
+      <i class="bi bi-eye me-1" v-if="!canEditCpo"></i>
+      <i class="bi bi-pencil-square me-1" v-else></i>
     </button>
     <button
-      v-if="!localHeaderItem.locked"
       type="button"
       class="btn"
       :class="{
@@ -26,25 +25,27 @@
         'btn-secondary': !canDownloadCpoPdf,
       }"
       @click="printCPOPdf"
-      :disabled="!canDownloadCpoPdf"
+      :disabled="!canDownloadCpoPdf || localHeaderItem.locked"
     >
-      PDF
+      <i class="bi bi-file-earmark-pdf"></i>
     </button>
 
-    <button
+    <!-- <button
       type="button"
-      class="btn btn-lg btn-primary"
+      class="btn btn-lg btn-warning"
       v-if="localHeaderItem.locked"
       disabled
+      title="Locked"
+      ref="lockedButton"
     >
-      LOCKED
-    </button>
+      <i class="bi bi-lock-fill"></i>
+    </button> -->
   </div>
 </template>
 
 <script>
-import { map } from "lodash";
 import { mapGetters } from "vuex";
+import { Tooltip } from "bootstrap";
 export default {
   emits: ["delete-cpo"],
   props: {
@@ -95,6 +96,13 @@ export default {
       });
       // this.$emit("editCpo", cpoItemHeader);
     },
+  },
+  mounted() {
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(this.$refs);
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new Tooltip(tooltipTriggerEl);
+    });
   },
 };
 </script>

@@ -45,7 +45,7 @@
             <th scope="col">Prepared By</th>
             <th scope="col">Authorized By</th>
             <th scope="col">Status</th>
-            <th scope="col">Actionsx</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
 

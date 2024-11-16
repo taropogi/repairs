@@ -70,9 +70,14 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $status = HeaderStatus::find($request->id);
+        $status->status = $request->status;
+        $status->save();
+
+        return response()->json(['status' => 'success', 'message' => 'Status updated successfully!']);
     }
 
     /**
