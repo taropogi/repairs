@@ -2,9 +2,6 @@
   <div class="pb-3">
     <label for="oracle-customer-name" class="form-label">
       CUSTOMER NAME (ORACLE) /
-      <strong class="text-danger"
-        >Result: {{ filteredOracleCustomers.length }}</strong
-      >
     </label>
     <!-- Add search input -->
     <input
@@ -15,7 +12,11 @@
       placeholder="Search Oracle Customer"
     />
     <!-- Put result text -->
-
+    <p class="text-center m-1 bg-primary">
+      <strong class="text-white"
+        >Result: {{ filteredOracleCustomers.length }}</strong
+      >
+    </p>
     <select
       size="10"
       class="form-select shadow"
