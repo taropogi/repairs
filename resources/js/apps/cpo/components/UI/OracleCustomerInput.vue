@@ -1,7 +1,10 @@
 <template>
   <div>
     <label for="oracle-customer-name" class="form-label">
-      CUSTOMER NAME (ORACLE) / Result: {{ oracleCustomers.length }}
+      CUSTOMER NAME (ORACLE) /
+      <span class="text-danger"
+        >Result: {{ filteredOracleCustomers.length }}</span
+      >
     </label>
     <!-- Add search input -->
     <input
