@@ -97,13 +97,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.nowrap {
-  white-space: nowrap;
-}
-.tooltip-wrapper {
-  display: inline-block;
-  position: relative;
-}
-</style>

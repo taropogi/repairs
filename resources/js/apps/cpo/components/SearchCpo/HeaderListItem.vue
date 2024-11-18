@@ -17,15 +17,17 @@
           @change="selectPo"
         />
         <label class="form-check-label" :for="id">
-          <span>{{ localHeaderItem.formatted_id }}</span>
-          <i
-            class="bi bi-lock-fill"
-            v-if="localHeaderItem.is_completed"
-            :class="{
-              'text-warning': localHeaderItem.is_completed,
-              'mx-2': localHeaderItem.is_completed,
-            }"
-          ></i>
+          <span class="nowrap"
+            >{{ localHeaderItem.formatted_id }}
+            <i
+              class="bi bi-lock-fill"
+              v-if="localHeaderItem.is_completed"
+              :class="{
+                'text-warning': localHeaderItem.is_completed,
+                'mx-2': localHeaderItem.is_completed,
+              }"
+            ></i
+          ></span>
         </label>
       </div>
     </th>

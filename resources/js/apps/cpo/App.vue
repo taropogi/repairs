@@ -98,4 +98,12 @@ body {
 label {
   font-weight: bold;
 }
+
+.nowrap {
+  white-space: nowrap;
+}
+.tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+}
 </style>
