@@ -8,7 +8,7 @@
       type="text"
       class="form-control shadow mb-2 border border-primary border-2"
       v-model="searchOracleCustomerStr"
-      @input="searchOracleCustomer"
+      @input="debouncedSearch"
       placeholder="Search Oracle Customer"
     />
     <!-- Put result text -->
@@ -37,6 +37,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import debounce from "lodash/debounce";
 
 export default {
   // props modelValue Number type
@@ -52,30 +53,27 @@ export default {
         shipToAddress: "",
         srepName: "",
       },
+      filteredOracleCustomers: [],
     };
   },
   computed: {
     ...mapGetters(["oracleCustomers"]),
-    filteredOracleCustomers() {
-      return this.oracleCustomers.filter((customer) =>
-        customer.account_name
-          .toLowerCase()
-          .includes(this.searchOracleCustomerStr.toLowerCase())
-      );
-    },
   },
 
   methods: {
     searchOracleCustomer() {
-      if (this.searchOracleCustomerStr === "") {
-        return;
-      }
       this.searchedOracleCustomerId = this.oracleCustomers.find((el) =>
         el.account_name
           .toLowerCase()
           .includes(this.searchOracleCustomerStr.toLowerCase())
       )?.cust_account_id;
       this.defaultOracleCustomer.id = this.searchedOracleCustomerId;
+
+      this.filteredOracleCustomers = this.oracleCustomers.filter((customer) =>
+        customer.account_name
+          .toLowerCase()
+          .includes(this.searchOracleCustomerStr.toLowerCase())
+      );
     },
     setDefaultShipToAddress() {
       // console.log(typeof this.defaultOracleCustomer.id);
@@ -101,6 +99,9 @@ export default {
   mounted() {
     this.searchOracleCustomer();
     this.setDefaultShipToAddress();
+  },
+  created() {
+    this.debouncedSearch = debounce(this.searchOracleCustomer, 300);
   },
 };
 </script>
