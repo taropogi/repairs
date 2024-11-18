@@ -171,8 +171,8 @@ export default {
 
         // this.$emit("searched-header-row", this.headerRow);
       } catch (error) {
-        console.log(error.message);
-        console.log("error hahah");
+        console.error(error.message);
+        // console.log("error hahah");
       }
     },
     async submitCpoForm() {

@@ -1,16 +1,17 @@
 <template>
   <div>
     <label for="oracle-customer-name" class="form-label">
-      CUSTOMER NAME (ORACLExx)
+      CUSTOMER NAME (ORACLE) / Result: {{ oracleCustomers.length }}
     </label>
     <!-- Add search input -->
     <input
       type="text"
       class="form-control shadow mb-2"
-      v-model="searchOracleCustomer"
-      @input="searchOracleCustomers"
+      v-model="searchOracleCustomerStr"
+      @input="searchOracleCustomer"
       placeholder="Search Oracle Customer"
     />
+
     <select
       size="10"
       class="form-select shadow"
@@ -19,8 +20,8 @@
       @change="setDefaultShipToAddress"
     >
       <option
-        v-for="customer in oracleCustomers"
-        :key="customer.cust_account_id"
+        v-for="customer in filteredOracleCustomers"
+        :key="customer"
         :value="customer.cust_account_id"
       >
         {{ customer.account_name }}
@@ -39,7 +40,8 @@ export default {
   emits: ["update:modelValue"],
   data() {
     return {
-      searchOracleCustomer: "",
+      searchOracleCustomerStr: "",
+      searchedOracleCustomerId: null,
       defaultOracleCustomer: {
         id: this.modelValue?.id || 3234415,
         shipToAddress: "",
@@ -49,8 +51,27 @@ export default {
   },
   computed: {
     ...mapGetters(["oracleCustomers"]),
+    filteredOracleCustomers() {
+      return this.oracleCustomers.filter((customer) =>
+        customer.account_name
+          .toLowerCase()
+          .includes(this.searchOracleCustomerStr.toLowerCase())
+      );
+    },
   },
+
   methods: {
+    searchOracleCustomer() {
+      if (this.searchOracleCustomerStr === "") {
+        return;
+      }
+      this.searchedOracleCustomerId = this.oracleCustomers.find((el) =>
+        el.account_name
+          .toLowerCase()
+          .includes(this.searchOracleCustomerStr.toLowerCase())
+      )?.cust_account_id;
+      this.defaultOracleCustomer.id = this.searchedOracleCustomerId;
+    },
     setDefaultShipToAddress() {
       // console.log(typeof this.defaultOracleCustomer.id);
       const selectedCustomer = this.oracleCustomers.find(
@@ -73,6 +94,7 @@ export default {
     },
   },
   mounted() {
+    this.searchOracleCustomer();
     this.setDefaultShipToAddress();
   },
 };
