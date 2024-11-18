@@ -2,7 +2,7 @@
   <div class="btn-group btn-group-sm">
     <button
       type="button"
-      class="btn"
+      class="btn tooltip-wrapper"
       :class="{
         'btn-danger': canDeleteCpo,
         'btn-secondary': !canDeleteCpo,
@@ -10,16 +10,24 @@
       @click="deleteCpo"
       :disabled="!canDeleteCpo || localHeaderItem.locked"
     >
-      <i class="bi bi-trash"></i>
+      <span class="nowrap"> <i class="bi bi-trash"></i> Delete </span>
     </button>
 
-    <button type="button" class="btn btn-success" @click="editCpoHeader">
-      <i class="bi bi-eye me-1" v-if="!canEditCpo"></i>
-      <i class="bi bi-pencil-square me-1" v-else></i>
+    <button
+      type="button"
+      class="btn btn-success tooltip-wrapper"
+      @click="editCpoHeader"
+    >
+      <span v-if="!canEditCpo" class="nowrap">
+        <i class="bi bi-eye me-1"></i> View
+      </span>
+      <span v-else class="nowrap">
+        <i class="bi bi-pencil-square me-1"></i> Edit
+      </span>
     </button>
     <button
       type="button"
-      class="btn"
+      class="btn tooltip-wrapper"
       :class="{
         'btn-info': canDownloadCpoPdf,
         'btn-secondary': !canDownloadCpoPdf,
@@ -27,7 +35,9 @@
       @click="printCPOPdf"
       :disabled="!canDownloadCpoPdf || localHeaderItem.locked"
     >
-      <i class="bi bi-file-earmark-pdf"></i>
+      <span class="nowrap">
+        <i class="bi bi-file-earmark-pdf text-sm"></i> PDF
+      </span>
     </button>
   </div>
 </template>
@@ -87,3 +97,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.nowrap {
+  white-space: nowrap;
+}
+.tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+}
+</style>
