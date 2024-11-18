@@ -16,7 +16,7 @@
       </div>
       <div class="col-md-6">
         <oracle-customer-details
-          :selected-customer-id="defaultOracleCustomer?.id"
+          :selected-customer-id="defaultOracleCustomer?.id || 3234415"
         />
       </div>
 
