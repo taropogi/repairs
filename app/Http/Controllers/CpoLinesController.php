@@ -98,6 +98,7 @@ class CpoLinesController extends Controller
         $cpoLine->repair_parts_needed = $request->repair_parts_needed;
         $cpoLine->date = $request->date;
         $cpoLine->order_number = $request->order_number;
+        $cpoLine->comments = $request->comments;
         $cpoLine->update();
 
         $cpo = Cpo::find($cpoLine->cpo_id);

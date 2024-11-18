@@ -6,28 +6,11 @@
     <div class="form-container" v-else>
       <form class="row g-1 m-2" @submit.prevent="submitCpoForm">
         <div class="col-md-6">
-          <label for="oracle-customer-name" class="form-label">
-            CUSTOMER NAME (ORACLE)
-          </label>
-          <select
-            size="10"
-            class="form-select shadow"
-            id="oracle-customer-name"
-            v-model="defaultOracleCustomer.id"
-            @change="setDefaultShipToAddress"
-          >
-            <option
-              v-for="customer in oracleCustomers"
-              :key="customer.cust_account_id"
-              :value="customer.cust_account_id"
-            >
-              {{ customer.account_name }}
-            </option>
-          </select>
+          <oracle-customer-input v-model="selectedCustomer" />
         </div>
         <div class="col-md-6">
           <oracle-customer-details
-            :selected-customer-id="defaultOracleCustomer.id"
+            :selected-customer-id="selectedCustomer?.id"
           />
         </div>
 
@@ -94,47 +77,22 @@
   </div>
 </template>
 
-<style scoped>
-.form-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-label {
-  font-weight: bold;
-}
-
-.form-control,
-.form-select {
-  border-radius: 5px;
-}
-
-.btn-primary {
-  padding: 10px 20px;
-  font-size: 1.1rem;
-}
-</style>
 <script>
 import { mapGetters } from "vuex";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
+import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
 export default {
   components: {
     LoadingOverlay,
     OracleCustomerDetails,
+    OracleCustomerInput,
   },
   data() {
     return {
       // oracleCustomers: null,
-      defaultOracleCustomer: {
-        id: 3234415,
-        shipToAddress: "",
-        srepName: "",
-      },
+      selectedCustomer: null,
+
       formData: {
         customerName: "",
         customerAddress: "",
@@ -148,31 +106,13 @@ export default {
     };
   },
   methods: {
-    setDefaultShipToAddress() {
-      // console.log(typeof this.defaultOracleCustomer.id);
-      const selectedCustomer = this.oracleCustomers.find(
-        (el) => el.cust_account_id === Number(this.defaultOracleCustomer.id)
-      );
-      // console.log(selectedCustomer);
-      this.defaultOracleCustomer.shipToAddress =
-        selectedCustomer.address1 +
-        " " +
-        (selectedCustomer.address2 ?? "") +
-        ", " +
-        (selectedCustomer.city ?? "") +
-        ", " +
-        (selectedCustomer.province ?? "");
-
-      this.defaultOracleCustomer.srepName = selectedCustomer.salesrep_name;
-    },
-
     async submitCpoForm() {
       try {
         this.isEncoding = true;
         const res = await axios.post("api/cpo", {
           ...this.formData,
-          oracleId: this.defaultOracleCustomer.id,
-          oracleShipto: this.defaultOracleCustomer.shipToAddress,
+          oracleId: this.selectedCustomer.id,
+          oracleShipto: this.selectedCustomer.shipToAddress,
         });
         this.isSubmitSuccess = true;
         this.resetForm();
@@ -212,11 +152,7 @@ export default {
   computed: {
     ...mapGetters(["oracleCustomers"]),
     ...mapGetters("auth", ["loggedUser"]),
-    shipToSalesRep() {
-      return `${this.defaultOracleCustomer.shipToAddress}
-      Sales Rep: ${this.defaultOracleCustomer.srepName}
-      `;
-    },
+
     editHeaderLink() {
       if (this.loggedUser.is_admin) {
         return "admin-edit-cpo";
@@ -233,8 +169,32 @@ export default {
   },
 
   mounted() {
-    this.setDefaultShipToAddress();
     this.$emit("refresh-header-list");
   },
 };
 </script>
+
+<style scoped>
+.form-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control,
+.form-select {
+  border-radius: 5px;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+}
+</style>

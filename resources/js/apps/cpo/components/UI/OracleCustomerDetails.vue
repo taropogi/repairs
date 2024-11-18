@@ -37,8 +37,8 @@ export default {
   props: {
     selectedCustomerId: {
       type: Number,
-      required: false,
-      default: "3234415",
+      required: true,
+      default: 3234415,
     },
   },
   watch: {

@@ -20,6 +20,7 @@ class OracleCustomerController extends Controller
     {
         $oracle_customers = OracleCustomer::select('cust_account_id', 'account_number', 'account_name', 'address1', 'address2', 'province', 'city', 'salesrep_name')->where('status', 'A')
             ->where('account_name', 'not like', "%(CLOSED)%")
+            ->orderBy('account_name', 'ASC')
             ->get();
 
         $response['oracle_customers'] = $oracle_customers;
