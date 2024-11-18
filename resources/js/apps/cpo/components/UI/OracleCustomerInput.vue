@@ -33,13 +33,15 @@
 import { mapGetters } from "vuex";
 
 export default {
+  // props modelValue Number type
+  props: ["modelValue"],
   // emit updateModel
   emits: ["update:modelValue"],
   data() {
     return {
       searchOracleCustomer: "",
       defaultOracleCustomer: {
-        id: 3234415,
+        id: this.modelValue?.id || 3234415,
         shipToAddress: "",
         srepName: "",
       },

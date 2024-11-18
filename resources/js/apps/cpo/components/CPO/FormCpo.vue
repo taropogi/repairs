@@ -90,7 +90,6 @@ export default {
   },
   data() {
     return {
-      // oracleCustomers: null,
       selectedCustomer: null,
 
       formData: {

@@ -12,29 +12,11 @@
       </transition>
 
       <div class="col-md-6">
-        <label for="oracle-customer-name" class="form-label">
-          CUSTOMER NAME (ORACLE)
-        </label>
-        <select
-          :disabled="headerRow.locked || !canEditCpo"
-          size="10"
-          class="form-select"
-          id="oracle-customer-name"
-          v-model="defaultOracleCustomer.id"
-          @change="setDefaultShipToAddress"
-        >
-          <option
-            v-for="customer in oracleCustomers"
-            :key="customer.cust_account_id"
-            :value="customer.cust_account_id"
-          >
-            {{ customer.account_name }}
-          </option>
-        </select>
+        <oracle-customer-input v-model="defaultOracleCustomer" />
       </div>
       <div class="col-md-6">
         <oracle-customer-details
-          :selected-customer-id="defaultOracleCustomer.id"
+          :selected-customer-id="defaultOracleCustomer?.id"
         />
       </div>
 
@@ -143,12 +125,14 @@
 import ModalStatusHistory from "./ModalStatusHistory.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import ActionButtons from "./ActionButtons.vue";
+import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     ModalStatusHistory,
     OracleCustomerDetails,
     ActionButtons,
+    OracleCustomerInput,
   },
   emits: ["searched-header-row", "updating", "updated"],
   props: ["id"],
@@ -159,7 +143,7 @@ export default {
       isUpdating: false,
       isSubmitSuccess: false,
       defaultOracleCustomer: {
-        id: 3234415,
+        id: null,
       },
       showStatusHistory: false,
     };
@@ -181,10 +165,11 @@ export default {
         // console.log(this.headerRow);
 
         if (this.headerRow.oracle_customer_id) {
+          // console.log(this.headerRow.oracle_customer_id);
           this.defaultOracleCustomer.id = +this.headerRow.oracle_customer_id;
         }
 
-        this.$emit("searched-header-row", this.headerRow);
+        // this.$emit("searched-header-row", this.headerRow);
       } catch (error) {
         console.log(error.message);
         console.log("error hahah");
