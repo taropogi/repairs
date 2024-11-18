@@ -1,19 +1,20 @@
 <template>
-  <div>
+  <div class="pb-3">
     <label for="oracle-customer-name" class="form-label">
       CUSTOMER NAME (ORACLE) /
-      <span class="text-danger"
-        >Result: {{ filteredOracleCustomers.length }}</span
+      <strong class="text-danger"
+        >Result: {{ filteredOracleCustomers.length }}</strong
       >
     </label>
     <!-- Add search input -->
     <input
       type="text"
-      class="form-control shadow mb-2"
+      class="form-control shadow mb-2 border border-primary border-2"
       v-model="searchOracleCustomerStr"
       @input="searchOracleCustomer"
       placeholder="Search Oracle Customer"
     />
+    <!-- Put result text -->
 
     <select
       size="10"
