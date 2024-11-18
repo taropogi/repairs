@@ -162,7 +162,7 @@ export default {
         this.headerStatus = res.data.cpo.status;
 
         this.headerRow = res.data.cpo;
-        // console.log(this.headerRow);
+        this.$emit("searched-header-row", this.headerRow);
 
         if (this.headerRow.oracle_customer_id) {
           // console.log(this.headerRow.oracle_customer_id);
