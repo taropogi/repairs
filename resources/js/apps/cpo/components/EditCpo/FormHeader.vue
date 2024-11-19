@@ -12,7 +12,10 @@
       </transition>
 
       <div class="col-md-6">
-        <oracle-customer-input v-model="defaultOracleCustomer" />
+        <oracle-customer-input
+          v-model="defaultOracleCustomer"
+          :is-locked="headerRow.locked || !canEditCpo"
+        />
       </div>
       <div class="col-md-6">
         <oracle-customer-details
