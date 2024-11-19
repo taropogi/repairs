@@ -29,8 +29,8 @@
       type="button"
       class="btn tooltip-wrapper"
       :class="{
-        'btn-info': canDownloadCpoPdf,
-        'btn-secondary': !canDownloadCpoPdf,
+        'btn-info': canDownloadCpoPdf && !localHeaderItem.locked,
+        'btn-secondary': !canDownloadCpoPdf || localHeaderItem.locked,
       }"
       @click="printCPOPdf"
       :disabled="!canDownloadCpoPdf || localHeaderItem.locked"
