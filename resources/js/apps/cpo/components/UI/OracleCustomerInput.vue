@@ -1,7 +1,7 @@
 <template>
   <div class="pb-3">
     <label for="oracle-customer-name" class="form-label">
-      CUSTOMER NAME (ORACLE) /
+      CUSTOMER NAME (ORACLE)
     </label>
     <!-- Add search input -->
     <input
@@ -40,7 +40,7 @@ import { mapGetters } from "vuex";
 import debounce from "lodash/debounce";
 
 export default {
-  // props modelValue Number type
+  // props modelValue Number type with default
   props: ["modelValue"],
   // emit updateModel
   emits: ["update:modelValue"],
@@ -62,18 +62,20 @@ export default {
 
   methods: {
     searchOracleCustomer() {
-      this.searchedOracleCustomerId = this.oracleCustomers.find((el) =>
-        el.account_name
-          .toLowerCase()
-          .includes(this.searchOracleCustomerStr.toLowerCase())
-      )?.cust_account_id;
-      this.defaultOracleCustomer.id = this.searchedOracleCustomerId;
-
       this.filteredOracleCustomers = this.oracleCustomers.filter((customer) =>
         customer.account_name
           .toLowerCase()
           .includes(this.searchOracleCustomerStr.toLowerCase())
       );
+
+      this.searchedOracleCustomerId =
+        this.defaultOracleCustomer.id ??
+        this.filteredOracleCustomers.find((el) =>
+          el.account_name
+            .toLowerCase()
+            .includes(this.searchOracleCustomerStr.toLowerCase())
+        )?.cust_account_id;
+      this.defaultOracleCustomer.id = this.searchedOracleCustomerId;
     },
     setDefaultShipToAddress() {
       // console.log(typeof this.defaultOracleCustomer.id);
