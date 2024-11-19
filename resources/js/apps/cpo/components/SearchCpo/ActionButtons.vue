@@ -2,7 +2,7 @@
   <div class="btn-group btn-group-sm">
     <button
       type="button"
-      class="btn tooltip-wrapper"
+      class="btn tooltip-wrapper py-0"
       :class="{
         'btn-danger': canDeleteCpo && !localHeaderItem.locked,
         'btn-secondary': !canDeleteCpo || localHeaderItem.locked,
@@ -15,7 +15,7 @@
 
     <button
       type="button"
-      class="btn btn-success tooltip-wrapper"
+      class="btn btn-success tooltip-wrapper py-0"
       @click="editCpoHeader"
     >
       <span v-if="!canEditCpo" class="nowrap">
@@ -27,7 +27,7 @@
     </button>
     <button
       type="button"
-      class="btn tooltip-wrapper"
+      class="btn tooltip-wrapper py-0"
       :class="{
         'btn-info': canDownloadCpoPdf && !localHeaderItem.locked,
         'btn-secondary': !canDownloadCpoPdf || localHeaderItem.locked,
