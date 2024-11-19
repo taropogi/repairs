@@ -24,6 +24,7 @@
         id="oracle-customer-name"
         v-model="defaultOracleCustomer.id"
         @change="setDefaultShipToAddress"
+        ref="oracleCustomerSelect"
       >
         <option
           v-for="customer in filteredOracleCustomers"
@@ -119,6 +120,7 @@ export default {
 
       this.defaultOracleCustomer.srepName = selectedCustomer.salesrep_name;
       this.defaultOracleCustomer.accountName = selectedCustomer.account_name;
+
       // emit updateModel
       this.$emit("update:modelValue", this.defaultOracleCustomer);
     },
