@@ -110,17 +110,17 @@
       <div class="btn-group btn-group-sm" role="group" v-else>
         <button
           type="button"
-          class="btn btn-primary p-0 px-1"
+          class="btn btn-primary"
           @click="saveLine"
           :disabled="lineUpdating || isDeleting"
         >
-          <span v-if="!lineUpdating">Save</span>
+          <span v-if="!lineUpdating"> Save</span>
           <span v-else class="spinner-border spinner-border-sm"> </span>
         </button>
 
         <button
           type="button"
-          class="btn btn-danger p-0 px-1"
+          class="btn btn-danger"
           @click="deleteLine"
           :disabled="lineUpdating || isDeleting"
         >
