@@ -110,7 +110,7 @@
       <div class="btn-group btn-group-sm" role="group" v-else>
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-primary py-0"
           @click="saveLine"
           :disabled="lineUpdating || isDeleting"
         >
@@ -120,7 +120,7 @@
 
         <button
           type="button"
-          class="btn btn-danger"
+          class="btn btn-danger py-0"
           @click="deleteLine"
           :disabled="lineUpdating || isDeleting"
         >
