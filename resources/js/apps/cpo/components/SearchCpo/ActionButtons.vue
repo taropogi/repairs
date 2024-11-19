@@ -4,8 +4,8 @@
       type="button"
       class="btn tooltip-wrapper"
       :class="{
-        'btn-danger': canDeleteCpo,
-        'btn-secondary': !canDeleteCpo,
+        'btn-danger': canDeleteCpo && !localHeaderItem.locked,
+        'btn-secondary': !canDeleteCpo || localHeaderItem.locked,
       }"
       @click="deleteCpo"
       :disabled="!canDeleteCpo || localHeaderItem.locked"
