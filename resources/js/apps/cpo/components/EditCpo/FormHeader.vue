@@ -11,28 +11,30 @@
         </div>
       </transition>
 
-      <div class="col-md-6 p-2">
+      <div class="col-md-4 p-2">
         <oracle-customer-input
           v-model="defaultOracleCustomer"
           :is-locked="headerRow.locked || !canEditCpo"
         />
       </div>
-      <div class="col-md-6 p-2">
+      <div class="col-md-4 p-2">
         <oracle-customer-details
           :selected-customer-id="defaultOracleCustomer?.id || 3234415"
         />
       </div>
-      <div class="col-md-3 d-flex align-items-center p-0">
-        <h1 class="m-0 p-0">RPO#: {{ headerRow.formatted_id }}</h1>
-        <!-- <label for="rpo-number" class="form-label">RPO #</label>
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <h1>RPO#: {{ headerRow.formatted_id }}</h1>
+      </div>
+      <div class="col-md-3">
+        <label for="date-encoded" class="form-label">Date Encoded</label>
         <input
           type="text"
           class="form-control"
-          id="rpo-number"
+          id="date-encoded"
           required
-          v-model="headerRow.formatted_id"
-          disabled
-        /> -->
+          disabled="true"
+          v-model.trim="formattedDate"
+        />
       </div>
 
       <div class="col-md-3">
@@ -142,6 +144,7 @@ import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import ActionButtons from "./ActionButtons.vue";
 import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
 import { mapGetters } from "vuex";
+import { format } from "date-fns";
 export default {
   components: {
     ModalStatusHistory,
@@ -167,6 +170,11 @@ export default {
   computed: {
     ...mapGetters(["oracleCustomers"]),
     ...mapGetters("auth", ["loggedUser", "canEditCpo", "canDownloadCpoPdf"]),
+    formattedDate() {
+      return this.headerRow.created_at
+        ? format(new Date(this.headerRow.created_at), "MMMM dd, yyyy hh:mm a")
+        : "";
+    },
   },
   methods: {
     async getCpoHeaderRow() {

@@ -42,7 +42,7 @@ class Cpo extends Model
     // Accessor for formatted ID
     public function getFormattedIdAttribute()
     {
-        return str_pad($this->id, 6, '0', STR_PAD_LEFT);
+        return str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
 
     // Accessor for checking if the Cpo is completed

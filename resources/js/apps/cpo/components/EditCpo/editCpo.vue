@@ -5,22 +5,24 @@
       <h4 class="text-center bg-success text-white p-2">UPDATE CPO</h4>
     </div>
 
-    <form-header
-      @searched-header-row="setHeaderRow"
-      :id="id"
-      @updating="isUpdating = true"
-      @updated="isUpdating = false"
-    ></form-header>
+    <div class="p-2 border-top">
+      <form-header
+        @searched-header-row="setHeaderRow"
+        :id="id"
+        @updating="isUpdating = true"
+        @updated="isUpdating = false"
+      ></form-header>
 
-    <header-lines
-      class="mt-2"
-      :header-id="id"
-      v-if="headerRow"
-      :header-is-locked="headerRow.locked"
-      @searched-header-row="setHeaderRow"
-      @updating-lines="isUpdating = true"
-      @updated-lines="isUpdating = false"
-    ></header-lines>
+      <header-lines
+        class="mt-2"
+        :header-id="id"
+        v-if="headerRow"
+        :header-is-locked="headerRow.locked"
+        @searched-header-row="setHeaderRow"
+        @updating-lines="isUpdating = true"
+        @updated-lines="isUpdating = false"
+      ></header-lines>
+    </div>
   </div>
 </template>
 
