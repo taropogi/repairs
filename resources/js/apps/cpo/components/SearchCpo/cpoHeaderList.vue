@@ -26,9 +26,7 @@
         <thead class="table-success">
           <tr>
             <th class="col tex-center">
-              RPO#
-              <br />
-              [{{ selectedPosCount }}]
+              RPO# [{{ selectedPosCount }}]
               <!-- <div class="form-check">
                             <input
                                 class="form-check-input"
