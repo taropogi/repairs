@@ -25,7 +25,7 @@
       <div class="col-md-4 d-flex justify-content-center align-items-center">
         <h1>RPO#: {{ headerRow.formatted_id }}</h1>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="date-encoded" class="form-label">Date Encoded</label>
         <input
           type="text"
@@ -37,7 +37,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="customer-name" class="form-label">Customer Name</label>
         <input
           type="text"
@@ -49,7 +49,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="customer-address" class="form-label">Address</label>
         <input
           :disabled="headerRow.locked || !canEditCpo"
@@ -62,7 +62,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="contact-number" class="form-label">Contact #</label>
         <input
           type="text"
@@ -74,7 +74,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="prepared-by" class="form-label">Prepared By</label>
         <input
           type="text"
@@ -86,7 +86,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="authorized-by" class="form-label">Authorized By</label>
         <input
           type="text"
@@ -97,7 +97,7 @@
           v-model="headerRow.authorized_by"
         />
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="customer-reference-number" class="form-label"
           >Customer Reference #</label
         >
@@ -110,7 +110,7 @@
         />
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 p-2">
         <label for="cpo-statuses" class="form-label"
           >Status
           <span class="badge bg-success" v-if="headerRow.locked"
