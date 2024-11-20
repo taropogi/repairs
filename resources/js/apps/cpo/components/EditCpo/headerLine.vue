@@ -42,12 +42,28 @@
       />
     </td>
     <td>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="lineDetails.unit"
-        :disabled="isDisabled"
-      />
+      <div v-if="itemsUom.length > 0">
+        <!-- <input
+          type="text"
+          class="form-control form-control-sm"
+          v-model="lineDetails.unit"
+          :disabled="isDisabled"
+        /> -->
+        <!-- loop items_uom prop here as dropdown -->
+        <select
+          class="form-select form-select-sm"
+          v-model="lineDetails.unit"
+          :disabled="isDisabled"
+        >
+          <option
+            v-for="uom in itemsUom"
+            :key="uom"
+            :value="uom.primary_uom_code"
+          >
+            {{ uom.primary_uom_code }} - {{ uom.primary_unit_of_measure }}
+          </option>
+        </select>
+      </div>
     </td>
     <td>
       <input
@@ -136,7 +152,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["lineDetails", "headerIsLocked"],
+  props: ["lineDetails", "headerIsLocked", "itemsUom"],
 
   data() {
     return {
@@ -188,10 +204,11 @@ export default {
     async saveLine() {
       //locally save
       this.lineUpdating = true;
-      //  console.log(this.lineDetailsLocal);
+      console.log(this.lineDetails);
       try {
-        await axios.post("api/cpoline/update/", this.lineDetails);
+        const res = await axios.post("api/cpoline/update/", this.lineDetails);
         this.blinkTr();
+        // console.log(res);
       } catch (error) {
         console.log(error.message);
       } finally {

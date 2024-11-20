@@ -14,7 +14,7 @@
       <div class="col-md-4 p-2">
         <oracle-customer-input
           v-model="defaultOracleCustomer"
-          :is-locked="headerRow.locked || !canEditCpo"
+          :is-locked="!!(headerRow.locked || !canEditCpo)"
         />
       </div>
       <div class="col-md-4 p-2">

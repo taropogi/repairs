@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
 use App\Traits\GeneratePdf;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
 
 class CpoController extends Controller
 {
@@ -144,6 +145,11 @@ class CpoController extends Controller
         $selected_cpo = Cpo::find($cpo->id);
 
         $response['lines'] = $selected_cpo->lines;
+
+        // get items from Item model 
+        $response['items_uom'] = Item::select('primary_uom_code', 'primary_unit_of_measure')->distinct()->get();
+
+
 
         return $response;
     }

@@ -31,6 +31,7 @@
           :line-number="index + 1"
           :line-details="line"
           :header-is-locked="headerIsLocked"
+          :items-uom="items_uom"
           @delete-line="getCpoLines"
         ></header-line>
       </tbody>
@@ -83,6 +84,7 @@ export default {
   data() {
     return {
       lines: [],
+      items_uom: [],
       isInsertingNewLine: false,
       isSavingAllLines: false,
     };
@@ -123,7 +125,7 @@ export default {
         const res = await axios.get("api/cpo/lines/" + this.headerId);
 
         this.lines = res.data.lines;
-        //console.log(this.lines);
+        this.items_uom = res.data.items_uom;
       } catch (error) {
         console.log(error.message);
         // alert(error.message);

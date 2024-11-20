@@ -18,7 +18,6 @@
         :header-id="id"
         v-if="headerRow"
         :header-is-locked="headerRow.locked"
-        @searched-header-row="setHeaderRow"
         @updating-lines="isUpdating = true"
         @updated-lines="isUpdating = false"
       ></header-lines>

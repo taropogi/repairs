@@ -107,7 +107,9 @@ class CpoLinesController extends Controller
         $cpo->touch();
         // set delay time sleep for 0.5 second
         usleep(500000);
-        return $cpoLine;
+
+        $response['cpoLine']    = $cpoLine;
+        return $response;
     }
 
     /**
