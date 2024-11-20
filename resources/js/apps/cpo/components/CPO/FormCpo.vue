@@ -5,16 +5,16 @@
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <div class="form-container" v-else>
       <form class="row g-1 m-2" @submit.prevent="submitCpoForm">
-        <div class="col-md-6">
+        <div class="col-md-6 p-2">
           <oracle-customer-input v-model="selectedCustomer" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 p-2">
           <oracle-customer-details
             :selected-customer-id="selectedCustomer?.id"
           />
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="customer-name" class="form-label">Customer Name</label>
           <input
             type="text"
@@ -25,7 +25,7 @@
           />
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
           <label for="address" class="form-label">Address</label>
           <input
             type="text"
@@ -69,6 +69,19 @@
           />
         </div>
 
+        <div class="col-md-4">
+          <label for="customer-reference-number" class="form-label"
+            >Customer Reference Number</label
+          >
+          <input
+            type="text"
+            class="form-control shadow"
+            id="customer-reference-number"
+            required
+            v-model="formData.customerReferenceNumber"
+          />
+        </div>
+
         <div class="col-12 text-center" v-if="!isEncoding">
           <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
@@ -99,6 +112,7 @@ export default {
         // rpoNumber: "",
         preparedBy: "",
         authorizedBy: "",
+        customerReferenceNumber: "",
       },
       isSubmitSuccess: false,
       isEncoding: false,

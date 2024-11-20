@@ -61,6 +61,7 @@ class CpoController extends Controller
             'status_id' => 1,
             'oracle_customer_id' => $request->oracleId,
             'oracle_customer_shipto' => $request->oracleShipto,
+            'customer_reference_number' => $request->customerReferenceNumber
         ]);
 
         $new_cpo->status_history()->create([

@@ -14,7 +14,7 @@ class AddCustomerReferenceNumberToCposTable extends Migration
     public function up()
     {
         Schema::table('cpos', function (Blueprint $table) {
-            //
+            $table->string('customer_reference_number')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddCustomerReferenceNumberToCposTable extends Migration
     public function down()
     {
         Schema::table('cpos', function (Blueprint $table) {
-            //
+            $table->dropColumn('customer_reference_number');
         });
     }
 }
