@@ -14,7 +14,7 @@
           />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 p-2">
           <label for="customer-name" class="form-label">Customer Name</label>
           <input
             type="text"
@@ -25,7 +25,7 @@
           />
         </div>
 
-        <div class="col-4">
+        <div class="col-4 p-2">
           <label for="address" class="form-label">Address</label>
           <input
             type="text"
@@ -37,7 +37,7 @@
           />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 p-2">
           <label for="contact-number" class="form-label">Contact Number</label>
           <input
             type="text"
@@ -48,7 +48,7 @@
           />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 p-2">
           <label for="prepared-by" class="form-label">Prepared By</label>
           <input
             type="text"
@@ -58,7 +58,7 @@
             v-model="formData.preparedBy"
           />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 p-2">
           <label for="authorized-by" class="form-label">Authorized By</label>
           <input
             type="text"
@@ -69,7 +69,7 @@
           />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 p-2">
           <label for="customer-reference-number" class="form-label"
             >Customer Reference Number</label
           >
