@@ -77,7 +77,7 @@
         <input
           type="text"
           class="form-control"
-          id="prepared-by"
+          id="authorized-by"
           required
           :disabled="headerRow.locked || !canEditCpo"
           v-model="headerRow.authorized_by"

@@ -21,6 +21,14 @@
       <input
         type="text"
         class="form-control form-control-sm"
+        :disabled="isDisabled"
+        v-model="lineDetails.order_number"
+      />
+    </td>
+    <td>
+      <input
+        type="text"
+        class="form-control form-control-sm"
         v-model="lineDetails.hcopy"
         :disabled="isDisabled"
       />
@@ -97,14 +105,7 @@
         v-model="lineDetails.comments"
       />
     </td>
-    <td>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        :disabled="isDisabled"
-        v-model="lineDetails.order_number"
-      />
-    </td>
+
     <td v-if="canEditCpo">
       <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
       <div class="btn-group btn-group-sm" role="group" v-else>

@@ -9,6 +9,7 @@
           <th scope="col">#</th>
           <th scope="col">Description</th>
           <th scope="col">Price</th>
+          <th scope="col">Doc #</th>
           <th scope="col">HCopy</th>
           <th scope="col">Qty Returned</th>
           <th scope="col">Unit</th>
@@ -19,7 +20,7 @@
           <th scope="col">Repair/Parts Needed</th>
           <th scope="col">Damaged</th>
           <th scope="col">Comments</th>
-          <th scope="col">Doc #</th>
+
           <th scope="col" v-if="canEditCpo">Actions</th>
         </tr>
       </thead>
