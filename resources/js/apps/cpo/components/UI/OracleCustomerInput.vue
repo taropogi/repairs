@@ -19,8 +19,8 @@
         >
       </p>
       <select
-        size="10"
-        class="form-select shadow"
+        size="5"
+        class="form-select shadow border border-primary border-2"
         id="oracle-customer-name"
         v-model="defaultOracleCustomer.id"
         @change="setDefaultShipToAddress"

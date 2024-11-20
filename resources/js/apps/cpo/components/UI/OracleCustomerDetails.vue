@@ -8,7 +8,6 @@
         style="resize: none; height: 50px"
         class="form-control shadow"
         id="oracle-shipto-address"
-        rows="2"
         disabled
         :value="customerDetails.shipToAddress"
       >
@@ -22,7 +21,6 @@
         style="resize: none; height: 50px"
         class="form-control shadow"
         id="oracle-srep-name"
-        rows="2"
         disabled
         :value="customerDetails.srepName"
       >

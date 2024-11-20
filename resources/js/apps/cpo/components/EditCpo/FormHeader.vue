@@ -11,19 +11,31 @@
         </div>
       </transition>
 
-      <div class="col-md-6">
+      <div class="col-md-6 p-2">
         <oracle-customer-input
           v-model="defaultOracleCustomer"
           :is-locked="headerRow.locked || !canEditCpo"
         />
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 p-2">
         <oracle-customer-details
           :selected-customer-id="defaultOracleCustomer?.id || 3234415"
         />
       </div>
+      <div class="col-md-3 d-flex align-items-center p-0">
+        <h1 class="m-0 p-0">RPO#: {{ headerRow.formatted_id }}</h1>
+        <!-- <label for="rpo-number" class="form-label">RPO #</label>
+        <input
+          type="text"
+          class="form-control"
+          id="rpo-number"
+          required
+          v-model="headerRow.formatted_id"
+          disabled
+        /> -->
+      </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="customer-name" class="form-label">Customer Name</label>
         <input
           type="text"
@@ -35,7 +47,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="customer-address" class="form-label">Address</label>
         <input
           :disabled="headerRow.locked || !canEditCpo"
@@ -48,7 +60,7 @@
         />
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label for="contact-number" class="form-label">Contact #</label>
         <input
           type="text"
@@ -83,16 +95,16 @@
           v-model="headerRow.authorized_by"
         />
       </div>
-
       <div class="col-md-3">
-        <label for="rpo-number" class="form-label">RPO #</label>
+        <label for="customer-reference-number" class="form-label"
+          >Customer Reference #</label
+        >
         <input
           type="text"
           class="form-control"
-          id="rpo-number"
-          required
-          v-model="headerRow.formatted_id"
-          disabled
+          id="customer-reference-number"
+          :disabled="headerRow.locked || !canEditCpo"
+          v-model="headerRow.customer_reference_number"
         />
       </div>
 

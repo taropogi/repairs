@@ -344,6 +344,7 @@ class CpoController extends Controller
 
         $cpo->oracle_customer_id = $request->oracleId;
         $cpo->oracle_customer_shipto = $request->oracleShipto;
+        $cpo->customer_reference_number = $request->customer_reference_number;
 
 
         if ($cpo->status_id !== $request->status_id) {
