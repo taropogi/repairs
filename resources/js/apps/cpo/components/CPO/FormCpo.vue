@@ -6,7 +6,7 @@
     <div class="form-container" v-else>
       <form class="row g-1 m-2" @submit.prevent="submitCpoForm">
         <div class="col-md-6 p-2">
-          <oracle-customer-input v-model="selectedCustomer" />
+          <oracle-customer-input v-model="selectedCustomer" :input-size="15" />
         </div>
         <div class="col-md-6 p-2">
           <oracle-customer-details

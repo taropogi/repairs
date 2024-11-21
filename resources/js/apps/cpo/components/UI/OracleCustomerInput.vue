@@ -19,7 +19,7 @@
         >
       </p>
       <select
-        size="5"
+        :size="inputSize"
         class="form-select shadow border border-primary border-2"
         id="oracle-customer-name"
         v-model="defaultOracleCustomer.id"
@@ -65,6 +65,11 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    inputSize: {
+      type: Number,
+      required: false,
+      default: 5,
     },
   },
   // emit updateModel
