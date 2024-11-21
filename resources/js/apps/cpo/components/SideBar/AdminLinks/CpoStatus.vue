@@ -9,14 +9,14 @@
         <i class="bi bi-list-check me-2"></i> Status List
       </router-link>
     </li>
-    <li>
+    <!-- <li>
       <router-link
         :to="adminCreateUserLink"
         class="nav-link text-white"
         :class="{ active: isNavAdminStatusCreateActive }"
         >Create New Status</router-link
       >
-    </li>
+    </li> -->
   </ul>
 </template>
 

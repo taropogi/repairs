@@ -1,26 +1,29 @@
 <template>
-  <table class="table table-sm table-hover table-striped">
-    <thead>
-      <tr class="table-primary">
-        <th scope="col">Status</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody v-if="statuses">
-      <status-item
-        v-for="status in statuses"
-        :key="status.id"
-        :status="status"
-        :is-editing-id="isEditingId"
-        @edit="
-          (id) => {
-            isEditingId = id;
-          }
-        "
-        @status-updated="updatedStatus"
-      />
-    </tbody>
-  </table>
+  <div class="p-2">
+    <h1>Status List</h1>
+    <table class="table table-sm table-hover table-striped">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody v-if="statuses">
+        <status-item
+          v-for="status in statuses"
+          :key="status.id"
+          :status="status"
+          :is-editing-id="isEditingId"
+          @edit="
+            (id) => {
+              isEditingId = id;
+            }
+          "
+          @status-updated="updatedStatus"
+        />
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
