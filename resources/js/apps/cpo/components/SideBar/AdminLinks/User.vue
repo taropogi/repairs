@@ -5,7 +5,8 @@
         :to="adminSearchUserLink"
         class="nav-link text-white"
         :class="{ active: isNavAdminUserListActive }"
-        >User List
+      >
+        <i class="bi bi-people me-2"></i> User List
       </router-link>
     </li>
     <li>
@@ -13,7 +14,9 @@
         :to="adminCreateUserLink"
         class="nav-link text-white"
         :class="{ active: isNavAdminUserCreateActive }"
-        >Create New User</router-link
+      >
+        <i class="bi bi-person-plus me-2"></i>
+        Create New User</router-link
       >
     </li>
   </ul>
