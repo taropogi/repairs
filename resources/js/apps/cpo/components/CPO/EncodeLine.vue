@@ -146,6 +146,12 @@ export default {
       isDeleting: false,
     };
   },
+  methods: {
+    deleteLine() {
+      this.isDeleting = true;
+      this.$emit("delete-line", this.line);
+    },
+  },
 };
 </script>
 

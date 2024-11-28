@@ -35,6 +35,7 @@
             :key="line.id"
             :line="line"
             :items-uom="itemsUom"
+            @delete-line="deleteLine"
           />
         </tbody>
       </table>
@@ -70,6 +71,11 @@ export default {
     };
   },
   methods: {
+    resetLineNumber() {
+      this.localLines.forEach((line, index) => {
+        line.lineNumber = index + 1;
+      });
+    },
     async getItemsUom() {
       try {
         const response = await axios.get("/api/items/uom_distinct");
@@ -78,6 +84,12 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    deleteLine(line) {
+      const index = this.localLines.findIndex((l) => l.id === line.id);
+      this.localLines.splice(index, 1);
+      this.resetLineNumber();
+      this.$emit("update:modelValue", this.localLines);
     },
   },
   mounted() {
