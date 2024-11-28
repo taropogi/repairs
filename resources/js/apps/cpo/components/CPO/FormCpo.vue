@@ -102,7 +102,8 @@
 
           <div class="col-12 text-center" v-if="!isEncoding">
             <div class="btn-group mt-3" role="group">
-              <button type="button" class="btn btn-secondary" @click="addLine">
+              <button type="button" class="btn btn-warning" @click="addLine">
+                <i class="bi bi-plus"></i>
                 Add New Line
               </button>
               <button
@@ -111,6 +112,7 @@
                 class="btn btn-primary"
                 :disabled="formData.lines.length === 0"
               >
+                <i class="bi bi-check-circle"></i>
                 Submit
               </button>
             </div>
