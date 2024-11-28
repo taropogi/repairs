@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="alert alert-warning align-items-center" role="alert">
+      <h3>Are you with the details?</h3>
+      <br />
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" @click="cancel">
+          No, Cancel
+        </button>
+        <button type="button" class="btn btn-primary" @click="confirm">
+          Yes, Confirm
+        </button>
+      </div>
+    </div>
+
     <h6 class="bg-success p-2 text-white">Customer Details (Oracle)</h6>
     <table class="table table-bordered">
       <tbody>
@@ -151,10 +164,6 @@
         </tr>
       </tbody>
     </table>
-
-    <p>Are you sure with the details?</p>
-    <button type="submit" class="btn btn-primary" @click="confirm">Yes</button>
-    <button type="button" class="btn btn-secondary" @click="cancel">No</button>
   </div>
 </template>
 
