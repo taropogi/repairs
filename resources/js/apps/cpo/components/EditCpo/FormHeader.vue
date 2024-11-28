@@ -3,10 +3,12 @@
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-1 p-2" @submit.prevent="submitCpoForm" v-else>
       <transition name="updated-header">
-        <div class="fixed-top p2" v-if="isSubmitSuccess">
+        <div class="fixed-top" v-if="isSubmitSuccess">
           <div class="alert alert-success text-center" role="alert">
             <i class="bi bi-check2-all"></i>
-            <strong>Successful header update!</strong>
+            <strong class="text-danger">
+              CPO Header Updated Successfully!
+            </strong>
           </div>
         </div>
       </transition>

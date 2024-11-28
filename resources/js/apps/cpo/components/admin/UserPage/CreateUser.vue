@@ -145,9 +145,9 @@ export default {
     async submitRegisterForm() {
       this.formErrors = null;
       try {
-        console.log(this.formData.permissions);
+        // console.log(this.formData.permissions);
         const res = await axios.post("api/register", this.formData);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.errors) {
           this.formErrors = res.data.errors;
           // console.log(this.formErrors);

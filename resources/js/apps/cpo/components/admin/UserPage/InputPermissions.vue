@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex/dist/vuex.cjs.js";
+import { mapGetters } from "vuex";
 
 export default {
   emits: ["update:modelValue"],
