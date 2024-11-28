@@ -106,6 +106,7 @@
                 Add New Line
               </button>
               <button
+                v-if="formData.lines.length > 0"
                 type="submit"
                 class="btn btn-primary"
                 :disabled="formData.lines.length === 0"
