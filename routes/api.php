@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OracleCustomerController;
+use App\Http\Controllers\Tdw1DataController;
 
 // use App\Http\Controllers\RegisterController;
 
@@ -76,6 +77,9 @@ Route::post('users/delete/{user}', [UserController::class, 'destroy']);
 
 //oracle customers
 Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
+
+//tdw1 items
+Route::get('items/uom_distinct', [Tdw1DataController::class, 'items_uom']);
 
 //pdf history
 // Route::get('oracle/customers', [OracleCustomerController::class, 'index']);

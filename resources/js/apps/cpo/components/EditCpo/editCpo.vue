@@ -15,9 +15,9 @@
 
       <header-lines
         class="mt-2"
-        :header-id="id"
+        :header-id="+id"
         v-if="headerRow"
-        :header-is-locked="headerRow.locked"
+        :header-is-locked="!!headerRow.locked"
         @updating-lines="isUpdating = true"
         @updated-lines="isUpdating = false"
       ></header-lines>

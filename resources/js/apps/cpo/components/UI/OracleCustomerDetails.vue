@@ -4,6 +4,10 @@
       <label for="oracle-shipto-address" class="form-label">
         SHIPTO ADDRESS (ORACLE)
       </label>
+
+      <!-- <div class="form-control-plaintext shadow p-2" id="oracle-shipto-address">
+        {{ customerDetails.shipToAddress }}
+      </div> -->
       <textarea
         style="resize: none; height: 50px"
         class="form-control shadow"
@@ -17,6 +21,10 @@
       <label for="oracle-srep-name" class="form-label">
         SALES REPRESENTATIVE (ORACLE)
       </label>
+
+      <!-- <div class="form-control-plaintext shadow p-2" id="oracle-srep-name">
+        {{ customerDetails.srepName }}
+      </div> -->
       <textarea
         style="resize: none; height: 50px"
         class="form-control shadow"
@@ -78,5 +86,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

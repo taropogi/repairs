@@ -72,8 +72,30 @@ class CpoController extends Controller
 
         $response['cpo'] = $new_cpo;
 
+        $response['lines'] = $request->lines;
+
+        // insert lines to cpo
+        foreach ($request->lines as $key => $item) {
+            $new_cpo->lines()->create([
+                'line_number' => $item['lineNumber'],
+                'description' => $item['description'] ?? null,
+                'price' => $item['price'] ?? null,
+                'hcopy' => $item['hcopy'] ?? null,
+                'qty_returned' => $item['qtyReturned'] ?? null,
+                'unit' => $item['unit'] ?? null,
+                'qty_inspect' => $item['qtyInspect'] ?? null,
+                'date' => $item['date'] ?? null,
+                'good_condition' => $item['goodCondition'] ?? null,
+                'minor_repair_clean' => $item['minorRepairClean'] ?? null,
+                'repair_parts_needed' => $item['repairPartsNeeded'] ?? null,
+                'damaged' => $item['damaged'] ?? null,
+                'comments' => $item['comments'] ?? null,
+                'order_number' => $item['orderNumber'] ?? null
+            ]);
+        }
+
         // set delay time sleep for 2 seconds
-        sleep(2);
+        sleep(1);
         return $response;
     }
 

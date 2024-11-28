@@ -77,7 +77,17 @@ export default {
   components: {
     headerLine,
   },
-  props: ["headerId", "headerIsLocked"],
+  // props: ["headerId", "headerIsLocked"],
+  props: {
+    headerId: {
+      type: Number,
+      required: true,
+    },
+    headerIsLocked: {
+      type: Boolean,
+      required: true,
+    },
+  },
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
   },
