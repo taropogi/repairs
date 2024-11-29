@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">{{ headerRow.id }}</th>
+            <th scope="row">{{ headerRow.formatted_id }}</th>
             <td>{{ headerRow.customer_name }}</td>
             <td>{{ headerRow.status.status }}</td>
           </tr>
