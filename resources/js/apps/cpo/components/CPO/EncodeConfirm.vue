@@ -20,7 +20,7 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th>Cutomer Name (Oracle)</th>
+          <th style="width: 200px">Customer Name (Oracle)</th>
           <td>
             {{ selectedCustomer?.accountName }}
           </td>
@@ -43,12 +43,12 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th>Cutomer Name</th>
+          <th style="width: 200px">Cutomer Name</th>
           <td>
             {{ localFormData?.customerName }}
           </td>
 
-          <th>Address</th>
+          <th style="width: 200px">Address</th>
           <td>
             {{ localFormData?.customerAddress }}
           </td>
