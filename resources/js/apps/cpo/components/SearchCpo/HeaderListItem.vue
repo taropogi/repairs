@@ -31,7 +31,11 @@
         </label>
       </div>
     </th>
-
+    <td>
+      <label class="form-check-label" :for="id">
+        {{ formattedDate }}
+      </label>
+    </td>
     <td>
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.customer_name }}
@@ -71,6 +75,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ActionButtons from "./ActionButtons.vue";
+import { formatShortDate } from "../../utils/dateUtils";
 export default {
   components: {
     ActionButtons,
@@ -115,6 +120,9 @@ export default {
   },
   computed: {
     ...mapGetters("cpo", ["deletedCpos", "getSelectedPos"]),
+    formattedDate() {
+      return formatShortDate(this.localHeaderItem.created_at);
+    },
     isDeletedx() {
       if (this.deletedCpos.find((item) => item.id === this.headerItem.id)) {
         return true;

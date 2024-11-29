@@ -36,7 +36,7 @@
                         </div> -->
             </th>
 
-            <!-- <th scope="col">RPO #</th> -->
+            <th scope="col">Date Encoded</th>
             <th scope="col">Name</th>
             <!-- <th scope="col">Address</th> -->
             <th scope="col">Contact#</th>

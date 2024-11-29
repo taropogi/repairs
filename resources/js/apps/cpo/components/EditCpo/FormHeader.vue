@@ -35,7 +35,7 @@
           id="date-encoded"
           required
           disabled="true"
-          v-model.trim="formattedDate"
+          :value="formattedDate"
         />
       </div>
 
@@ -146,7 +146,7 @@ import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import ActionButtons from "./ActionButtons.vue";
 import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
 import { mapGetters } from "vuex";
-import { format } from "date-fns";
+import { formatDate } from "../../utils/dateUtils";
 export default {
   components: {
     ModalStatusHistory,
@@ -173,9 +173,7 @@ export default {
     ...mapGetters(["oracleCustomers"]),
     ...mapGetters("auth", ["loggedUser", "canEditCpo", "canDownloadCpoPdf"]),
     formattedDate() {
-      return this.headerRow.created_at
-        ? format(new Date(this.headerRow.created_at), "MMMM dd, yyyy hh:mm a")
-        : "";
+      return formatDate(this.headerRow.created_at);
     },
   },
   methods: {
