@@ -8,7 +8,7 @@
       CONFIRM DETAILS
     </h4>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
-    <div class="form-container" v-else>
+    <div v-else>
       <form @submit.prevent="submitConfirm">
         <div class="row g-1 m-2 py-2" v-show="!isConfirming">
           <div class="col-md-6 p-2">
