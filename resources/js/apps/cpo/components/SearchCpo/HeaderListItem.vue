@@ -33,7 +33,16 @@
     </th>
     <td>
       <label class="form-check-label" :for="id">
-        {{ formattedDate }}
+        <span v-if="!isToday">
+          {{ formattedDate }}
+        </span>
+        <span v-else>
+          <span class="badge bg-success">
+            <small>TODAY</small>
+          </span>
+          |
+          {{ formatDateTimeOnly }}
+        </span>
       </label>
     </td>
     <td>
@@ -75,7 +84,11 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ActionButtons from "./ActionButtons.vue";
-import { formatShortDate } from "../../utils/dateUtils";
+import {
+  formatShortDate,
+  isToday,
+  formatDateTimeOnly,
+} from "../../utils/dateUtils";
 export default {
   components: {
     ActionButtons,
@@ -122,6 +135,12 @@ export default {
     ...mapGetters("cpo", ["deletedCpos", "getSelectedPos"]),
     formattedDate() {
       return formatShortDate(this.localHeaderItem.created_at);
+    },
+    isToday() {
+      return isToday(this.localHeaderItem.created_at);
+    },
+    formatDateTimeOnly() {
+      return formatDateTimeOnly(this.localHeaderItem.created_at);
     },
     isDeletedx() {
       if (this.deletedCpos.find((item) => item.id === this.headerItem.id)) {
