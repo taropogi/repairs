@@ -249,14 +249,16 @@ class CpoController extends Controller
         if ($request->searchContact) {
             $cpos = $cpos->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
         }
-        if ($request->searchRpoNumber) {
-            $cpos = $cpos->where('rpo_number', 'LIKE', '%' . $request->searchRpoNumber . '%');
-        }
+
         if ($request->searchPrepared) {
             $cpos = $cpos->where('prepared_by', 'LIKE', '%' . $request->searchPrepared . '%');
         }
         if ($request->searchAuthorized) {
             $cpos = $cpos->where('authorized_by', 'LIKE', '%' . $request->searchAuthorized . '%');
+        }
+
+        if ($request->searchRpoNumber) {
+            $cpos = $cpos->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
         }
 
 
