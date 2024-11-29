@@ -4,9 +4,7 @@
     <h4 class="text-center bg-success text-white p-2" v-if="!isConfirming">
       ENCODE CPO
     </h4>
-    <h4 class="text-center bg-warning text-white p-2" v-else>
-      CONFIRM DETAILS
-    </h4>
+    <h4 class="text-center bg-warning p-2" v-else>CONFIRM DETAILS</h4>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <div v-else>
       <form @submit.prevent="submitConfirm">

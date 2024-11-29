@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="alert alert-warning align-items-center" role="alert">
+    <div
+      class="alert alert-warning align-items-center text-center"
+      role="alert"
+    >
       <h3>Are you sure with the details?</h3>
       <br />
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" @click="cancel">
+        <button type="button" class="btn btn-danger" @click="cancel">
           No, Cancel
         </button>
         <button type="button" class="btn btn-primary" @click="confirm">
