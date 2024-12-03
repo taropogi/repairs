@@ -78,6 +78,7 @@ export default {
     headerLine,
   },
   // props: ["headerId", "headerIsLocked"],
+  inject: ["showNotification"],
   props: {
     headerId: {
       type: Number,
@@ -107,7 +108,10 @@ export default {
         await axios.post("api/cpoline/", { id: this.headerId });
 
         this.getCpoLines();
-
+        this.showNotification({
+          message: "New empty line was added",
+          type: "info",
+        });
         // console.log(this.lineDetails);
       } catch (error) {
         console.log(err);
@@ -122,6 +126,10 @@ export default {
         await axios.post("api/cpo/lines/updateAllLines/", {
           cpoId: this.headerId,
           cpoLines: this.lines,
+        });
+        this.showNotification({
+          message: "All lines were saved",
+          type: "success",
         });
       } catch (error) {
         console.log(error.message);
