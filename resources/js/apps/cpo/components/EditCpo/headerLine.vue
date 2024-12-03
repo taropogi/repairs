@@ -229,6 +229,10 @@ export default {
         });
 
         this.blinkTr(true);
+        this.showNotification({
+          message: `Line# ${this.lineDetails.line_number} has been deleted`,
+          type: "error",
+        });
       } catch (error) {
         console.log(error.message);
       } finally {
