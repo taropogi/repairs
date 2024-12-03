@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { format } from "date-fns";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["cpoId"],
@@ -76,7 +77,10 @@ export default {
           // });
           // this.isDeleted = true;
 
-          this.$emit("deleted-cpo", { id: this.cpoId });
+          this.$emit("deleted-cpo", {
+            id: this.cpoId,
+            formatted_id: this.headerRow.formatted_id,
+          });
         }
       } catch (error) {
         console.log(error);

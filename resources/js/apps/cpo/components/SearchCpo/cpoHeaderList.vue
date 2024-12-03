@@ -90,6 +90,7 @@ export default {
   },
 
   props: ["searchCriteria"],
+  inject: ["showNotification"],
   computed: {
     ...mapGetters("cpo", ["deletedCpos"]),
     cpoListCount() {
@@ -137,11 +138,16 @@ export default {
       this.deleteCpo = cpoId;
     },
     deleteCpoConfirm(deleteCpo) {
+      console.log(deleteCpo);
       const filteredList = this.cpoHeaderList.filter(
         (el) => el.id !== deleteCpo.id
       );
       this.cpoHeaderList = filteredList;
       this.closeModalDeleteCpo();
+      this.showNotification({
+        message: `CPO# ${deleteCpo.formatted_id} has been deleted`,
+        type: "error",
+      });
     },
     closeModalDeleteCpo() {
       this.deleteCpo = null;

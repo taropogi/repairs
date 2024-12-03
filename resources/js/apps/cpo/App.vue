@@ -40,6 +40,7 @@ export default {
         if (type === "success") toast.success(message);
         if (type === "info") toast.info(message);
         if (type === "warning") toast.warning(message);
+        if (type === "error") toast.error(message);
       },
     };
   },
