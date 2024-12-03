@@ -16,6 +16,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { computed } from "vue";
+import { useToast } from "vue-toastification";
 
 export default {
   data() {
@@ -32,6 +33,14 @@ export default {
     return {
       setShowBackDrop: this.setShowBackDrop,
       laravelData: computed(() => this.laravelData),
+      showNotification(toastData) {
+        const toast = useToast();
+        const { message, type = "success" } = toastData;
+
+        if (type === "success") toast.success(message);
+        if (type === "info") toast.info(message);
+        if (type === "warning") toast.warning(message);
+      },
     };
   },
   created() {

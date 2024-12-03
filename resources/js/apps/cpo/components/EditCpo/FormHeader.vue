@@ -2,17 +2,6 @@
   <div>
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-1 p-2" @submit.prevent="submitCpoForm" v-else>
-      <transition name="updated-header">
-        <div class="fixed-top" v-if="isSubmitSuccess">
-          <div class="alert alert-success text-center" role="alert">
-            <i class="bi bi-check2-all"></i>
-            <strong class="text-danger">
-              CPO Header Updated Successfully!
-            </strong>
-          </div>
-        </div>
-      </transition>
-
       <div class="col-md-4 p-2">
         <oracle-customer-input
           v-model="defaultOracleCustomer"
@@ -156,7 +145,7 @@ export default {
   },
   emits: ["searched-header-row", "updating", "updated"],
   props: ["id"],
-  inject: ["laravelData"],
+  inject: ["laravelData", "showNotification"],
   data() {
     return {
       headerRow: null,
@@ -212,10 +201,10 @@ export default {
         this.isSubmitSuccess = true;
 
         this.getCpoHeaderRow();
-
-        setTimeout(() => {
-          this.isSubmitSuccess = false;
-        }, 3000);
+        this.showNotification({
+          message: `RPO# ${this.headerRow.formatted_id}  Header Updated Successfully!`,
+          type: "success",
+        });
       } catch (error) {
         console.log(error.message);
         console.log("error submit");
