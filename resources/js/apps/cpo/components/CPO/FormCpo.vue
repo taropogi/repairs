@@ -130,6 +130,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { useToast } from "vue-toastification";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
@@ -165,6 +166,10 @@ export default {
     };
   },
   methods: {
+    showNotification(message) {
+      const toast = useToast();
+      toast.success(message);
+    },
     confirmForm() {
       this.isConfirming = true;
     },
@@ -196,6 +201,7 @@ export default {
         // this.resetForm();
         console.log(res.data.lines);
         // this.gotoSearchPage();
+        this.showNotification("CPO successfully encoded.");
         this.gotoEditCpoPage(res.data.cpo.id);
         setTimeout(() => {
           this.isSubmitSuccess = false;
