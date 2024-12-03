@@ -162,7 +162,7 @@ export default {
       isUpdated: false,
     };
   },
-
+  inject: ["showNotification"],
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
     isDisabled() {
@@ -204,10 +204,14 @@ export default {
     async saveLine() {
       //locally save
       this.lineUpdating = true;
-      console.log(this.lineDetails);
+      // console.log(this.lineDetails);
       try {
         const res = await axios.post("api/cpoline/update/", this.lineDetails);
         this.blinkTr();
+        this.showNotification({
+          message: `Line# ${this.lineDetails.line_number} has been updated`,
+          type: "success",
+        });
         // console.log(res);
       } catch (error) {
         console.log(error.message);
