@@ -13,7 +13,7 @@ const app = createApp(App);
 app.use(router);
 app.use(store);
 app.use(Toast, {
-  position: POSITION.TOP_RIGHT,
+  position: POSITION.BOTTOM_RIGHT,
 });
 
 app.component("side-bar", SideBar);

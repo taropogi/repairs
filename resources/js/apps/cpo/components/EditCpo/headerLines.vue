@@ -108,8 +108,9 @@ export default {
         await axios.post("api/cpoline/", { id: this.headerId });
 
         this.getCpoLines();
+
         this.showNotification({
-          message: "New empty line was added",
+          message: `Line# ${this.lines.length + 1} - New empty line was added`,
           type: "info",
         });
         // console.log(this.lineDetails);
