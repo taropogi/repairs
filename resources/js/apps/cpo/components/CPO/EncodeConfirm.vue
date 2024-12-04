@@ -95,8 +95,6 @@
           <th scope="col">Repair/Parts Needed</th>
           <th scope="col">Damaged</th>
           <th scope="col">Comments</th>
-
-          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -123,18 +121,7 @@
           </td>
 
           <td>
-            <!-- <div v-if="itemsUom.length > 0">
-        <select class="form-select form-select-sm" v-model="line.unit">
-          <option
-            v-for="uom in itemsUom"
-            :key="uom"
-            :value="uom.primary_uom_code"
-          >
-            {{ uom.primary_uom_code }} -
-            {{ uom.primary_unit_of_measure }}
-          </option>
-        </select>
-      </div> -->
+            {{ line.unit }}
           </td>
 
           <td>
