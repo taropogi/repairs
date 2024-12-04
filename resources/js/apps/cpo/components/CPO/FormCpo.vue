@@ -186,7 +186,9 @@ export default {
     },
     async submitCpoForm() {
       try {
-        console.log(this.formData.lines);
+        // console.log("lines");
+        // console.log(this.formData.lines);
+
         this.isEncoding = true;
         const res = await axios.post("api/cpo", {
           ...this.formData,

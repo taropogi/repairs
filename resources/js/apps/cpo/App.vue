@@ -116,4 +116,9 @@ label {
   display: inline-block;
   position: relative;
 }
+
+/* Custom hover color for table rows */
+.table-hover tbody tr:hover {
+  background-color: #d4edda;
+}
 </style>
