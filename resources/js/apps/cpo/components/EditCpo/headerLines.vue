@@ -8,20 +8,20 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Doc #</th>
-          <th scope="col">HCopy</th>
-          <th scope="col">Qty Returned</th>
-          <th scope="col">Unit</th>
-          <th scope="col">Qty Inspect</th>
-          <th scope="col">Date</th>
-          <th scope="col">Good Condition</th>
-          <th scope="col">Minor Repair/Clean</th>
-          <th scope="col">Repair/Parts Needed</th>
-          <th scope="col">Damaged</th>
+          <th scope="col" style="width: 50px">Price</th>
+          <th scope="col" style="width: 100px">Doc #</th>
+          <th scope="col" style="width: 100px">HCopy</th>
+          <th scope="col" style="width: 50px">Qty Returned</th>
+          <th scope="col" style="width: 100px">Unit</th>
+          <th scope="col" style="width: 50px">Qty Inspect</th>
+          <th scope="col" style="width: 100px">Date</th>
+          <th scope="col" style="width: 50px">Good Condition</th>
+          <th scope="col" style="width: 50px">Minor Repair/Clean</th>
+          <th scope="col" style="width: 50px">Repair/Parts Needed</th>
+          <th scope="col" style="width: 50px">Damaged</th>
           <th scope="col">Comments</th>
 
-          <th scope="col" v-if="canEditCpo">Actions</th>
+          <th scope="col" v-if="canEditCpo" style="width: 100px">Actions</th>
         </tr>
       </thead>
       <tbody>

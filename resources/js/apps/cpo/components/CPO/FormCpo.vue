@@ -193,6 +193,7 @@ export default {
           oracleId: this.selectedCustomer.id,
           oracleShipto: this.selectedCustomer.shipToAddress,
         });
+        // console.log(res.data);
         this.isSubmitSuccess = true;
         // this.resetForm();
 
