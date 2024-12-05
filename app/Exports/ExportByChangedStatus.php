@@ -38,7 +38,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
             ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
             ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
             ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
-            ->select('cpos.id', 'status_to.status as status_new', 'status_from.status as status_old')
+            ->select('cpos.id', 'cpos.customer_reference_number', 'status_to.status as status_new', 'status_from.status as status_old')
             ->selectRaw('date(history.updated_at) as changed_date')
             ->whereRaw("Date(history.updated_at) >= '" . $this->request->cpo_changed_date_from . "'")
             ->whereRaw("Date(history.updated_at) <= '" . $this->request->cpo_changed_date_to . "'")
@@ -51,6 +51,11 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
 
         $cpos = $query->get();
 
+        $cpos = $cpos->map(function ($item) {
+            $item->id = str_pad($item->id, 5, '0', STR_PAD_LEFT);
+            return $item;
+        });
+
 
 
         return $cpos;
@@ -61,6 +66,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
         return [
 
             'RPO#',
+            'REF#',
             'Status From',
             'Status To',
             'Date',

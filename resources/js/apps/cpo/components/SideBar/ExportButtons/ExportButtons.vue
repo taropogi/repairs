@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     exportXls() {
-      window.location.href =
+      const url =
         this.linkXlsListByStatus +
         "/?status_id=" +
         this.selectedStatus.map((status) => status.id) +
@@ -63,6 +63,8 @@ export default {
         this.cpoChangedStatusTo +
         "&cpo_changed_current_only=" +
         this.cpoChangedStatusCurrent;
+      window.location.href = url;
+      // console.log(url);
     },
     exportPdf() {
       const url =
