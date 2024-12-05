@@ -116,10 +116,26 @@
     <td>
       <input
         type="text"
+        placeholder="Enter your commments here . . "
         class="form-control form-control-sm"
         :disabled="isDisabled"
-        v-model="lineDetails.comments"
+        v-model="lineDetails.user_comment"
       />
+
+      <div v-if="lineDetails.other_comments.length > 0">
+        <div
+          class="my-0"
+          v-for="comment in lineDetails.other_comments"
+          :key="comment.id"
+        >
+          <p class="m-0 p-0 text-sm" v-if="comment.comment.trim() !== ''">
+            <strong class="text-danger text-sm"
+              >{{ comment.commented_by }}:</strong
+            >
+            {{ comment.comment }}
+          </p>
+        </div>
+      </div>
     </td>
 
     <td v-if="canEditCpo">

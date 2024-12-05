@@ -159,24 +159,11 @@ export default {
         .get("api/cpo", {
           params: {
             ...this.searchCriteria,
-            // searchName: this.searchCriteria.searchName || "",
-            // searchAddress: this.searchCriteria.searchAddress || "",
-            // searchContact:
-            //     this.searchCriteria.searchContactNumber || "",
-            // searchRpo: this.searchCriteria.searchRpoNumber || "",
-            // searchPrepared:
-            //     this.searchCriteria.searchPreparedBy || "",
-            // searchAuthorized:
-            //     this.searchCriteria.searchAuthorizedBy || "",
           },
         })
         .then((response) => {
-          // console.log(response.data);
           this.cpoHeaderList = response.data.cpos;
           this.isSearching = false;
-          // console.log(this.cpoHeaderList);
-          // console.log(response.data.limit_per_page);
-          //console.log(response.data[0].updatedAtReadable);
         })
         .catch((error) => {
           this.error = error;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cpo;
 use App\Models\CpoLine;
 use Illuminate\Http\Request;
+use App\Models\CpoLineComment;
 
 class CpoLinesController extends Controller
 {
@@ -45,9 +46,21 @@ class CpoLinesController extends Controller
     {
 
         $cpo = Cpo::where('id', $request->id)->first();
-        $cpo->lines()->create([
-            'line_number' => $cpo->lines()->count() + 1,
-        ]);
+
+        $newLine = new CpoLine();
+        $newLine->line_number = $cpo->lines()->count() + 1;
+        $newLine->cpo_id = $cpo->id;
+        $newLine->save();
+
+        $cpoLineComment = new CpoLineComment();
+        $cpoLineComment->cpo_line_id = $newLine->id;
+        $cpoLineComment->user_id = auth()->user()->id;
+        $cpoLineComment->comment = '';
+        $cpoLineComment->commented_by = auth()->user()->name;
+        $cpoLineComment->save();
+
+
+
 
         $cpo->touch();
 
@@ -101,7 +114,20 @@ class CpoLinesController extends Controller
         $cpoLine->comments = $request->comments;
         $cpoLine->update();
 
+
+        // update comment
+        $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
+        $cpoLineComment->user_id = auth()->user()->id;
+        $cpoLineComment->comment = $request->user_comment ?? '';
+        $cpoLineComment->commented_by = auth()->user()->name;
+        $cpoLineComment->save();
+
+
+
+
         $cpo = Cpo::find($cpoLine->cpo_id);
+
+
 
 
         $cpo->touch();

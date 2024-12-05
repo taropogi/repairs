@@ -76,25 +76,29 @@ class CpoController extends Controller
 
         // insert lines to cpo
         foreach ($request->lines as $key => $item) {
-            $new_cpo->lines()->create([
-                'line_number' => $item['lineNumber'],
-                'description' => $item['description'] ?? null,
-                'price' => $item['price'] ?? null,
-                'hcopy' => $item['hcopy'] ?? null,
-                'qty_returned' => $item['qtyReturned'] ?? null,
-                'unit' => $item['unit'] ?? null,
-                'qty_inspect' => $item['qtyInspect'] ?? null,
-                'date' => $item['date'] ?? null,
-                'good_condition' => $item['goodCondition'] ?? null,
-                'minor_repair_clean' => $item['minorRepairClean'] ?? null,
-                'repair_parts_needed' => $item['repairPartsNeeded'] ?? null,
-                'damaged' => $item['damaged'] ?? null,
-                'comments' => $item['comments'] ?? null,
-                'order_number' => $item['orderNumber'] ?? null
-            ]);
+
+            $line = new CpoLine();
+            $line->line_number = $item['lineNumber'];
+            $line->description = $item['description'] ?? null;
+            $line->price = $item['price'] ?? null;
+            $line->hcopy = $item['hcopy'] ?? null;
+            $line->qty_returned = $item['qtyReturned'] ?? null;
+            $line->unit = $item['unit'] ?? null;
+            $line->qty_inspect = $item['qtyInspect'] ?? null;
+            $line->date = $item['date'] ?? null;
+            $line->good_condition = $item['goodCondition'] ?? null;
+            $line->minor_repair_clean = $item['minorRepairClean'] ?? null;
+            $line->repair_parts_needed = $item['repairPartsNeeded'] ?? null;
+            $line->damaged = $item['damaged'] ?? null;
+            $line->comments = $item['comments'] ?? null;
+            $line->order_number = $item['orderNumber'] ?? null;
+            $line->cpo_id = $new_cpo->id;
+            $line->save();
         }
 
-        // set delay time sleep for 2 seconds
+
+
+        // set delay time sleep for 1 second
         sleep(1);
         return $response;
     }
@@ -146,9 +150,20 @@ class CpoController extends Controller
             $cpoLine->damaged = $itemObj->damaged;
             $cpoLine->comments = $itemObj->comments;
             $cpoLine->order_number = $itemObj->order_number;
-
-
             $cpoLine->update();
+
+            // update comment in cpo_line_comments table
+            $cpoLineComment = $cpoLine->comments()->firstOrNew(
+                [
+                    'cpo_line_id' => $cpoLine->id,
+                    'user_id' => auth()->user()->id
+
+                ]
+            );
+            $cpoLineComment->user_id = auth()->user()->id;
+            $cpoLineComment->comment = $itemObj->user_comment ?? '';
+            $cpoLineComment->commented_by = auth()->user()->name;
+            $cpoLineComment->save();
         }
 
         // set delay time sleep for 0.5 second
@@ -158,13 +173,32 @@ class CpoController extends Controller
         return $request;
     }
 
-
+    private function ensureCommentExists($cpo_id)
+    {
+        $cpo = Cpo::find($cpo_id);
+        $cpo_lines = $cpo->lines;
+        foreach ($cpo_lines as $line) {
+            $comment = $line->comments()->firstOrNew(
+                [
+                    'cpo_line_id' => $line->id,
+                    'user_id' => auth()->user()->id
+                ]
+            );
+            if (!$comment->exists) {
+                $comment->comment = '';
+                $comment->commented_by = auth()->user()->name;
+                $comment->save();
+            }
+        }
+    }
 
     public function getCpoLines(Cpo $cpo)
     {
         $this->sortLineNumbers($cpo->id);
 
         $selected_cpo = Cpo::find($cpo->id);
+        // $this->ensureCommentExists($cpo->id);
+
 
         $response['lines'] = $selected_cpo->lines;
 

@@ -76,4 +76,9 @@ class User extends Authenticatable
         $permissions = $this->permissions ?? [];
         return in_array($permission, $permissions);
     }
+
+    public function cpo_line_comments()
+    {
+        return $this->hasMany(CpoLineComment::class);
+    }
 }
