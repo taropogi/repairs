@@ -6,55 +6,55 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-    * {
-        font-family: Verdana, Arial, sans-serif;
-    }
+        * {
+            font-family: Verdana, Arial, sans-serif;
+        }
 
-    table {
-        font-size: x-small;
-    }
+        table {
+            font-size: x-small;
+        }
 
-    tfoot tr td {
-        font-weight: bold;
-        font-size: x-small;
-    }
+        tfoot tr td {
+            font-weight: bold;
+            font-size: x-small;
+        }
 
-    thead th {
-        font-size: 10px;
-    }
-
-
-    .gray {
-        background-color: lightgray
-    }
-
-    td.text-center {
-        text-align: center;
-        vertical-align: middle;
-    }
+        thead th {
+            font-size: 10px;
+        }
 
 
+        .gray {
+            background-color: lightgray
+        }
 
-    .to-border,
-    .to-border td,
-    .to-border th {
-        border: 1px solid;
-    }
+        td.text-center {
+            text-align: center;
+            vertical-align: middle;
+        }
 
-    .to-border {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    .table-inside,
-    .table-inside td {
-        font-size: 10px;
-        border: none;
-    }
 
-    .page-break {
-        page-break-after: always;
-    }
+        .to-border,
+        .to-border td,
+        .to-border th {
+            border: 1px solid;
+        }
+
+        .to-border {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-inside,
+        .table-inside td {
+            font-size: 10px;
+            border: none;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
 
 </head>
@@ -66,7 +66,7 @@
     @if(isset($cpos))
     <table width="100%">
         <tr>
-            <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td valign="top"><img src="{{ $image_src }}" alt="" width="150" /></td>
             <td align="right">
                 {{ $date }}
             </td>
@@ -122,7 +122,7 @@
 
     <table width="100%">
         <tr>
-            <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td valign="top"><img src="{{ $image_src }}" alt="" width="150" /></td>
             <td align="right">
                 {{ $date }}
             </td>
@@ -173,7 +173,7 @@
     </div>
     <table width="100%">
         <tr>
-            <td valign="top"><img src="{{asset('images/times-trans.png')}}" alt="" width="150" /></td>
+            <td valign="top"><img src="{{ $image_src }}" alt="" width="150" /></td>
             <td align="right">
                 {{ $date }}
             </td>

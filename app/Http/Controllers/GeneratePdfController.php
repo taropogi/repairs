@@ -196,6 +196,10 @@ class GeneratePdfController extends Controller
                 $data['changed_status_to'] =  $request->cpo_changed_date_to;
             }
 
+            $imagePath = public_path('images/times-trans.png');
+            $imageData = base64_encode(file_get_contents($imagePath));
+            $data['image_src'] = 'data:image/png;base64,' . $imageData;
+
             $pdf = PDF::loadView('pdf.cpoListByStatus', $data);
 
             return  $pdf->download('CPO List.pdf');

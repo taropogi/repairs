@@ -16,7 +16,7 @@ trait GeneratePdf
         $this->sortLineNumbers($cpo_id);
         $cpo = Cpo::where('id', $cpo_id)->get();
 
-        $data['title'] = 'RPO#' . $cpo[0]->formatted_id;
+        $data['title'] = 'RPO#' . $cpo[0]->id;
         $data['cpos'] = $cpo;
         $data['date'] = date('m/d/Y');
 
