@@ -6,55 +6,55 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-        * {
-            font-family: Verdana, Arial, sans-serif;
-        }
+    * {
+        font-family: Verdana, Arial, sans-serif;
+    }
 
-        table {
-            font-size: x-small;
-        }
+    table {
+        font-size: x-small;
+    }
 
-        tfoot tr td {
-            font-weight: bold;
-            font-size: x-small;
-        }
+    tfoot tr td {
+        font-weight: bold;
+        font-size: x-small;
+    }
 
-        thead th {
-            font-size: 10px;
-        }
-
-
-        .gray {
-            background-color: lightgray
-        }
-
-        td.text-center {
-            text-align: center;
-            vertical-align: middle;
-        }
+    thead th {
+        font-size: 10px;
+    }
 
 
+    .gray {
+        background-color: lightgray
+    }
 
-        .to-border,
-        .to-border td,
-        .to-border th {
-            border: 1px solid;
-        }
+    td.text-center {
+        text-align: center;
+        vertical-align: middle;
+    }
 
-        .to-border {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        .table-inside,
-        .table-inside td {
-            font-size: 10px;
-            border: none;
-        }
 
-        .page-break {
-            page-break-after: always;
-        }
+    .to-border,
+    .to-border td,
+    .to-border th {
+        border: 1px solid;
+    }
+
+    .to-border {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-inside,
+    .table-inside td {
+        font-size: 10px;
+        border: none;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
     </style>
 
 </head>
@@ -84,12 +84,11 @@
         <thead style="background-color: lightgray;">
             <tr>
 
-                <th>RPO#</th>
-                <th>Ref#</th>
-                <th>CUSTOMER</th>
+                <th width="40px">RPO#</th>
+                <th width="80px">Ref#</th>
+                <th width="200px">CUSTOMER</th>
                 <th>ADDRESS</th>
-                <th>STATUS</th>
-
+                <th width="100px">STATUS</th>
             </tr>
         </thead>
         <tbody>
@@ -137,12 +136,12 @@
     <table width="100%" style="border: 1px solid;" class="to-border">
         <thead style="background-color: lightgray;">
             <tr>
-
-                <th>RPO#</th>
-                <th>Ref#</th>
-                <th>CUSTOMER</th>
+                <th width="40px">RPO#</th>
+                <th width="80px">Ref#</th>
+                <th width="200px">CUSTOMER</th>
                 <th>ADDRESS</th>
-                <th>Modified date</th>
+                <th width="100px">Modified date</th>
+
 
             </tr>
         </thead>
