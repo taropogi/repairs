@@ -210,24 +210,50 @@ class CpoController extends Controller
         $response = [];
         if ($request->date_from && $request->date_to && $request->status_to) {
 
-            $query = DB::table('header_status_histories as history')
-                ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
+            $query = Cpo::join('header_status_histories as history', 'cpos.id', '=', 'history.cpo_id')
                 ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
                 ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
                 ->select('cpos.id', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
                 ->selectRaw('date(history.updated_at) as changed_date')
-                ->whereRaw("Date(history.updated_at) >= '" . $request->date_from . "'")
-                ->whereRaw("Date(history.updated_at) <= '" . $request->date_to . "'")
-                ->whereRaw("history.old_status_id is not null")
-                ->where("history.header_status_id", $request->status_to)
-                ->whereNull("cpos.deleted_at");
-
+                ->whereDate('history.updated_at', '>=', $request->date_from)
+                ->whereDate('history.updated_at', '<=', $request->date_to)
+                ->whereNotNull('history.old_status_id')
+                ->where('history.header_status_id', $request->status_to)
+                ->whereNull('cpos.deleted_at');
 
             if ($request->only_current_status) {
-                $query->where("cpos.status_id", $request->status_to);
+                $query->where('cpos.status_id', $request->status_to);
             }
-
             $response['cpos'] = $query->get();
+            // $cpos = $query->get();
+            // Map the results to include the formatted_id accessor
+            // $response['cpos'] = $cpos->map(function ($cpo) {
+            //     $cpo->formatted_id = str_pad($cpo->id, 5, '0', STR_PAD_LEFT);
+            //     return $cpo;
+            // });
+
+
+
+
+
+            // $query = DB::table('header_status_histories as history')
+            //     ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
+            //     ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
+            //     ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
+            //     ->select('cpos.id', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
+            //     ->selectRaw('date(history.updated_at) as changed_date')
+            //     ->whereRaw("Date(history.updated_at) >= '" . $request->date_from . "'")
+            //     ->whereRaw("Date(history.updated_at) <= '" . $request->date_to . "'")
+            //     ->whereRaw("history.old_status_id is not null")
+            //     ->where("history.header_status_id", $request->status_to)
+            //     ->whereNull("cpos.deleted_at");
+
+
+            // if ($request->only_current_status) {
+            //     $query->where("cpos.status_id", $request->status_to);
+            // }
+
+            // $response['cpos'] = $query->get();
         }
 
 

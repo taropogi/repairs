@@ -19,7 +19,7 @@
                 },
               }"
             >
-              {{ cpo.id }}
+              {{ cpo.formatted_id }}
             </router-link>
           </th>
           <td>{{ cpo.status.status }}</td>
