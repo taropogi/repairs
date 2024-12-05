@@ -154,10 +154,10 @@
                         <table width="100%" class="table-inside" style="border:none;">
                             <tr>
                                 <td><strong>DATE:</strong> {{ $date }}</td>
-                                <td><strong>DOC#:</strong> 1245784</td>
+                                <td><strong>DOC#:</strong> {{ $line->order_number }}</td>
                             </tr>
                             <tr>
-                                <td><strong>PRICE:</strong> 45.33</td>
+                                <td><strong>PRICE:</strong> {{ $line->price }}</td>
                                 <td><strong>HC:</strong> {{ $line->hcopy }}</td>
                             </tr>
 
