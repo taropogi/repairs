@@ -29,6 +29,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
             ->whereRaw(DB::raw("Date(cpos.updated_at) <= '" . $this->request->cpo_modified_to . "'"))
             ->whereRaw(DB::raw("Date(cpos.updated_at) >= '" . $this->request->cpo_modified_from . "'"))
             ->whereRaw(DB::raw('cpos.updated_at <> cpos.created_at'))
+            ->where('deleted_at', null)
             ->get();
         $cpos->transform(function ($item) {
             $item->id =  str_pad($item->id, 6, '0', STR_PAD_LEFT);

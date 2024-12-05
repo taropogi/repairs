@@ -29,6 +29,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
             ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
             ->select('cpos.id', 'customer_reference_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
             ->whereIn('status_id', explode(',', $this->request->status_id))
+            ->where('deleted_at', null)
             ->get();
 
         $cpos = $cpos->map(function ($item) {

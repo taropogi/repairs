@@ -43,7 +43,8 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
             ->whereRaw("Date(history.updated_at) >= '" . $this->request->cpo_changed_date_from . "'")
             ->whereRaw("Date(history.updated_at) <= '" . $this->request->cpo_changed_date_to . "'")
             ->whereRaw("history.old_status_id is not null")
-            ->where("history.header_status_id", $this->request->cpo_changed_status_to);
+            ->where("history.header_status_id", $this->request->cpo_changed_status_to)
+            ->where('cpos.deleted_at', null);
 
         if ($this->request->cpo_changed_current_only && ($this->request->cpo_changed_current_only === 'true')) {
             $query->where("cpos.status_id", $this->request->cpo_changed_status_to);
