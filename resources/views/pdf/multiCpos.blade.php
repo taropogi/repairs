@@ -179,7 +179,7 @@
                     </td>
 
                     <td>
-                        <small sy>BY:</small>
+                        <small>BY:</small>
                     </td>
                     <td>
                         <small>BY:</small>
