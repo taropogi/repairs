@@ -35,7 +35,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="lineDetails.qty_returned"
         :disabled="isDisabled"
@@ -67,7 +67,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="lineDetails.qty_inspect"
         :disabled="isDisabled"
@@ -83,7 +83,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.good_condition"
@@ -91,7 +91,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.minor_repair_clean"
@@ -99,7 +99,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.repair_parts_needed"
@@ -107,7 +107,7 @@
     </td>
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.damaged"

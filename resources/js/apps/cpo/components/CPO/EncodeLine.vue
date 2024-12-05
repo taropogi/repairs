@@ -35,7 +35,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.qtyReturned"
       />
@@ -58,7 +58,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.qtyInspect"
       />
@@ -74,7 +74,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.goodCondition"
       />
@@ -82,7 +82,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.minorRepairClean"
       />
@@ -90,7 +90,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.repairPartsNeeded"
       />
@@ -98,7 +98,7 @@
 
     <td>
       <input
-        type="text"
+        type="number"
         class="form-control form-control-sm"
         v-model="line.damaged"
       />
