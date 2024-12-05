@@ -90,6 +90,7 @@
                 <td rowspan="2" style="max-width: 200px;"><small><strong>ADDRESS:</strong>
                         {{ $cpo['customer_address'] }}</small></td>
                 <td><small><strong>CONTACT:</strong> {{ $cpo['contact_number'] }}</small></td>
+                <td><small><strong>Customer Ref#:</strong> {{ $cpo['customer_reference_number'] }}</small></td>
 
             </tr>
             <tr>
@@ -97,6 +98,7 @@
 
                 <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
                 <td><small><strong>PREPARED BY:</strong> {{ $cpo['prepared_by'] }} </small></td>
+
 
             </tr>
 

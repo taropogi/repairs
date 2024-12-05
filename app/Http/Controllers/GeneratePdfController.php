@@ -70,7 +70,7 @@ class GeneratePdfController extends Controller
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
-        return $pdf->download('RPO#' . $cpo[0]->id . '.pdf');
+        return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
     }
 
 
@@ -154,22 +154,37 @@ class GeneratePdfController extends Controller
             };
 
             if ($request->cpo_changed_date_from && $request->cpo_changed_date_to) {
-                $query = DB::table('header_status_histories as history')
-                    ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
+                $query = Cpo::join('header_status_histories as history', 'cpos.id', '=', 'history.cpo_id')
                     ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
                     ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
                     ->select('cpos.id', 'cpos.customer_name', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
                     ->selectRaw('date(history.updated_at) as changed_date')
-                    ->whereRaw("Date(history.updated_at) >= '" . $request->cpo_changed_date_from . "'")
-                    ->whereRaw("Date(history.updated_at) <= '" . $request->cpo_changed_date_to . "'")
-                    ->whereRaw("history.old_status_id is not null")
-                    ->where("history.header_status_id", $request->cpo_changed_status_to);
+                    ->whereDate('history.updated_at', '>=', $request->cpo_changed_date_from)
+                    ->whereDate('history.updated_at', '<=', $request->cpo_changed_date_to)
+                    ->whereNotNull('history.old_status_id')
+                    ->where('history.header_status_id', $request->cpo_changed_status_to);
 
                 if ($request->cpo_changed_current_only && ($request->cpo_changed_current_only === 'true')) {
-                    $query->where("cpos.status_id", $request->cpo_changed_status_to);
+                    $query->where('cpos.status_id', $request->cpo_changed_status_to);
                 }
 
                 $cpos_changed_status = $query->get();
+                // $query = DB::table('header_status_histories as history')
+                //     ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
+                //     ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
+                //     ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
+                //     ->select('cpos.id', 'cpos.customer_name', 'cpos.rpo_number', 'status_to.status as status_new', 'status_from.status as status_old')
+                //     ->selectRaw('date(history.updated_at) as changed_date')
+                //     ->whereRaw("Date(history.updated_at) >= '" . $request->cpo_changed_date_from . "'")
+                //     ->whereRaw("Date(history.updated_at) <= '" . $request->cpo_changed_date_to . "'")
+                //     ->whereRaw("history.old_status_id is not null")
+                //     ->where("history.header_status_id", $request->cpo_changed_status_to);
+
+                // if ($request->cpo_changed_current_only && ($request->cpo_changed_current_only === 'true')) {
+                //     $query->where("cpos.status_id", $request->cpo_changed_status_to);
+                // }
+
+                // $cpos_changed_status = $query->get();
 
 
 

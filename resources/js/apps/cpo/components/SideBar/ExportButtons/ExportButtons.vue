@@ -65,7 +65,7 @@ export default {
         this.cpoChangedStatusCurrent;
     },
     exportPdf() {
-      window.location.href =
+      const url =
         this.linkPdfListByStatus +
         "/?status_id=" +
         this.selectedStatus.map((status) => status.id) +
@@ -81,6 +81,8 @@ export default {
         this.cpoChangedStatusTo +
         "&cpo_changed_current_only=" +
         this.cpoChangedStatusCurrent;
+      window.location.href = url;
+      // console.log(url);
     },
   },
 };

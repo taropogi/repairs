@@ -84,6 +84,8 @@ export default {
       // this.$emit("show-pdf-history", { id: this.localHeaderItem.id });
       window.location.href =
         this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
+
+      // console.log(this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id);
     },
     editCpoHeader() {
       this.$router.push({
