@@ -116,7 +116,6 @@
     <td>
       <input
         type="text"
-        placeholder="Enter your commments here . . "
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.user_comment"
