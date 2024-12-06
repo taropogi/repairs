@@ -36,14 +36,14 @@
                         </div> -->
             </th>
 
-            <th scope="col">Date Encoded</th>
-            <th scope="col">Name</th>
+            <th scope="col">DATE ENCODED</th>
+            <th scope="col">NAME</th>
             <!-- <th scope="col">Address</th> -->
-            <th scope="col">Contact#</th>
-            <th scope="col">Prepared By</th>
-            <th scope="col">Authorized By</th>
-            <th scope="col">Status</th>
-            <th scope="col">Actions</th>
+            <th scope="col">CONTACT#</th>
+            <th scope="col">PREPARED BY</th>
+            <th scope="col">AUTHORIZED BY</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">ACTIONS</th>
           </tr>
         </thead>
 
