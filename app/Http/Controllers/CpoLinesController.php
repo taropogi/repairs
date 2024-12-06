@@ -131,17 +131,20 @@ class CpoLinesController extends Controller
         }
         $cpoLine->date = $request->date;
         $cpoLine->order_number = $request->order_number;
-        $cpoLine->comments = $request->comments;
         $cpoLine->update();
 
 
         // update comment
 
         $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
-        $cpoLineComment->user_id = auth()->user()->id;
-        $cpoLineComment->comment = $request->user_comment ?? '';
-        $cpoLineComment->commented_by = auth()->user()->name;
-        $cpoLineComment->save();
+        if ($request->user_comment == '') {
+            $cpoLineComment->delete();
+        } else {
+            $cpoLineComment->comment = $request->user_comment;
+            $cpoLineComment->commented_by = auth()->user()->name;
+            $cpoLineComment->save();
+        }
+
 
 
 
