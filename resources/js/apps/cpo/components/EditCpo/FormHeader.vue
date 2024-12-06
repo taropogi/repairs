@@ -2,18 +2,51 @@
   <div>
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-1 p-2" @submit.prevent="submitCpoForm" v-else>
-      <div class="col-md-4 p-2">
+      <div
+        class="p-2"
+        :class="{
+          'col-md-2': headerRow.has_oracle_customer,
+          'col-md-8': !headerRow.has_oracle_customer,
+        }"
+      >
+        <label class="form-label">Customer Selection</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="customerSelection"
+            id="naCustomer"
+            :value="false"
+            v-model="headerRow.has_oracle_customer"
+          />
+          <label class="form-check-label" for="naCustomer"> N/A </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="customerSelection"
+            id="chooseOracleCustomer"
+            :value="true"
+            v-model="headerRow.has_oracle_customer"
+          />
+          <label class="form-check-label" for="chooseOracleCustomer">
+            Choose Oracle Customer
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4 p-2" v-if="headerRow.has_oracle_customer">
         <oracle-customer-input
           v-model="defaultOracleCustomer"
           :is-locked="!!(headerRow.locked || !canEditCpo)"
         />
       </div>
-      <div class="col-md-4 p-2">
+      <div class="col-md-4 p-2" v-if="headerRow.has_oracle_customer">
         <oracle-customer-details
           :selected-customer-id="defaultOracleCustomer?.id || 3234415"
         />
       </div>
-      <div class="col-md-4 d-flex justify-content-center align-items-center">
+      <div class="col-md-2 d-flex justify-content-center align-items-center">
         <h1>RPO#: {{ headerRow.formatted_id }}</h1>
       </div>
       <div class="col-md-3 p-2">
@@ -174,6 +207,9 @@ export default {
         this.headerStatus = res.data.cpo.status;
 
         this.headerRow = res.data.cpo;
+
+        this.headerRow.has_oracle_customer =
+          this.headerRow.has_oracle_customer === 1 ? true : false;
         this.$emit("searched-header-row", this.headerRow);
 
         if (this.headerRow.oracle_customer_id) {
@@ -191,13 +227,13 @@ export default {
       try {
         this.isSubmitSuccess = false;
         this.$emit("updating");
-
-        await axios.post("api/cpo/update", {
+        // console.log(this.headerRow);
+        const res = await axios.post("api/cpo/update", {
           ...this.headerRow,
           oracleId: this.defaultOracleCustomer.id,
           oracleShipto: this.defaultOracleCustomer.shipToAddress,
         });
-        // console.log("after await");
+        // console.log(res);
         this.isSubmitSuccess = true;
 
         this.getCpoHeaderRow();

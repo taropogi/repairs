@@ -9,13 +9,49 @@
     <div v-else>
       <form @submit.prevent="submitConfirm">
         <div class="row g-1 m-2 py-2" v-show="!isConfirming">
-          <div class="col-md-6 p-2">
+          <div
+            class="p-2"
+            :class="{
+              'col-md-2': formData.has_oracle_customer,
+              'col-md-12': !formData.has_oracle_customer,
+            }"
+          >
+            <label class="form-label">Customer Selection</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="customerSelection"
+                id="naCustomer"
+                :value="false"
+                :selected="!formData.has_oracle_customer"
+                v-model="formData.has_oracle_customer"
+              />
+              <label class="form-check-label" for="naCustomer"> N/A </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="customerSelection"
+                id="chooseOracleCustomer"
+                :value="true"
+                :selected="formData.has_oracle_customer"
+                v-model="formData.has_oracle_customer"
+              />
+              <label class="form-check-label" for="chooseOracleCustomer">
+                Choose Oracle Customer
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6 p-2" v-if="formData.has_oracle_customer">
             <oracle-customer-input
               v-model="selectedCustomer"
               :input-size="10"
             />
           </div>
-          <div class="col-md-6 p-2">
+          <div class="col-md-4 p-2" v-if="formData.has_oracle_customer">
             <oracle-customer-details
               :selected-customer-id="selectedCustomer?.id"
             />
@@ -28,6 +64,7 @@
               class="form-control shadow"
               id="customer-name"
               required
+              :disabled="formData.has_oracle_customer"
               v-model.trim="formData.customerName"
             />
           </div>
@@ -39,6 +76,7 @@
               class="form-control shadow"
               id="address"
               required
+              :disabled="formData.has_oracle_customer"
               v-model.trim="formData.customerAddress"
               placeholder="1234 Main St"
             />
@@ -159,11 +197,35 @@ export default {
         authorizedBy: "",
         customerReferenceNumber: "",
         lines: [],
+        has_oracle_customer: false, // if customer is from oracle
       },
       isSubmitSuccess: false,
       isEncoding: false,
       isConfirming: false,
     };
+  },
+  watch: {
+    "formData.has_oracle_customer": {
+      handler(newVal) {
+        if (!newVal) {
+          this.selectedCustomer = null;
+          this.formData.customerName = "";
+          this.formData.customerAddress = "";
+          this.formData.contactNumber = "";
+        }
+      },
+    },
+    selectedCustomer: {
+      handler(newVal, oldVal) {
+        if (newVal) {
+          // console.log(newVal);
+          this.formData.customerName = newVal.accountName;
+          this.formData.customerAddress = newVal.shipToAddress;
+          this.formData.contactNumber = newVal.contactNumber;
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     confirmForm() {
@@ -192,8 +254,8 @@ export default {
         this.isEncoding = true;
         const res = await axios.post("api/cpo", {
           ...this.formData,
-          oracleId: this.selectedCustomer.id,
-          oracleShipto: this.selectedCustomer.shipToAddress,
+          oracleId: this.selectedCustomer?.id,
+          oracleShipto: this.selectedCustomer?.shipToAddress,
         });
         // console.log(res.data);
         this.isSubmitSuccess = true;

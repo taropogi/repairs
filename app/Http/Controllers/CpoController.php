@@ -63,7 +63,8 @@ class CpoController extends Controller
             'status_id' => 1,
             'oracle_customer_id' => $request->oracleId,
             'oracle_customer_shipto' => $request->oracleShipto,
-            'customer_reference_number' => $request->customerReferenceNumber
+            'customer_reference_number' => $request->customerReferenceNumber,
+            'has_oracle_customer' => $request->has_oracle_customer ?? false
         ]);
 
         $new_cpo->status_history()->create([
@@ -101,13 +102,13 @@ class CpoController extends Controller
 
 
             // update comment
-            if ($item['comments'] && !empty($item['comments'])) {
-                $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
-                $cpoLineComment->user_id = auth()->user()->id;
-                $cpoLineComment->comment = $item['comments'];
-                $cpoLineComment->commented_by = auth()->user()->name;
-                $cpoLineComment->save();
-            }
+            // if ($item['comments'] && !empty($item['comments'])) {
+            //     $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
+            //     $cpoLineComment->user_id = auth()->user()->id;
+            //     $cpoLineComment->comment = $item['comments'];
+            //     $cpoLineComment->commented_by = auth()->user()->name;
+            //     $cpoLineComment->save();
+            // }
         }
 
 
@@ -465,6 +466,8 @@ class CpoController extends Controller
         $cpo->oracle_customer_id = $request->oracleId;
         $cpo->oracle_customer_shipto = $request->oracleShipto;
         $cpo->customer_reference_number = $request->customer_reference_number;
+        $cpo->has_oracle_customer = $request->has_oracle_customer;
+        // \Log::info('Has Oracle Customer: ' . ($request->has_oracle_customer ?? false));
 
 
         if ($cpo->status_id !== $request->status_id) {
@@ -487,7 +490,10 @@ class CpoController extends Controller
 
         // set delay time sleep for 0.5 second
         usleep(500000);
-        return $cpo;
+
+        $response['cpo'] = $cpo;
+        $response['request'] = $request->has_oracle_customer;
+        return $response;
     }
 
     private function checkIfCompletedStatus($cpo_id, $change_to_status_id)
