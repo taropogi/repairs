@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cpo;
+use App\Models\Item;
 use App\Models\User;
 use App\Models\CpoLine;
 use App\Traits\FormatLines;
+use App\Traits\GeneratePdf;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
+use App\Models\CpoLineComment;
 use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
-use App\Traits\GeneratePdf;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Item;
 
 class CpoController extends Controller
 {
@@ -97,6 +98,16 @@ class CpoController extends Controller
             $line->order_number = $item['orderNumber'] ?? null;
             $line->cpo_id = $new_cpo->id;
             $line->save();
+
+
+            // update comment
+            if ($item['comments'] && !empty($item['comments'])) {
+                $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
+                $cpoLineComment->user_id = auth()->user()->id;
+                $cpoLineComment->comment = $item['comments'];
+                $cpoLineComment->commented_by = auth()->user()->name;
+                $cpoLineComment->save();
+            }
         }
 
 

@@ -101,14 +101,34 @@ class CpoLinesController extends Controller
         $cpoLine = CpoLine::where('id', $request->id)->first();
 
         $cpoLine->description = $request->description;
-        $cpoLine->price = $request->price;
+
+
+        if (is_numeric($request->price)) {
+            $cpoLine->price = $request->price;
+        }
+
         $cpoLine->hcopy = $request->hcopy;
-        $cpoLine->qty_returned = $request->qty_returned;
+
+        if (is_numeric($request->qty_returned)) {
+            $cpoLine->qty_returned = $request->qty_returned;
+        }
         $cpoLine->unit = $request->unit;
-        $cpoLine->qty_inspect = $request->qty_inspect;
-        $cpoLine->good_condition = $request->good_condition;
-        $cpoLine->minor_repair_clean = $request->minor_repair_clean;
-        $cpoLine->repair_parts_needed = $request->repair_parts_needed;
+
+        if (is_numeric($request->qty_inspect)) {
+            $cpoLine->qty_inspect = $request->qty_inspect;
+        }
+
+        if (is_numeric($request->good_condition)) {
+            $cpoLine->good_condition = $request->good_condition;
+        }
+
+        if (is_numeric($request->minor_repair_clean)) {
+            $cpoLine->minor_repair_clean = $request->minor_repair_clean;
+        }
+
+        if (is_numeric($request->repair_parts_needed)) {
+            $cpoLine->repair_parts_needed = $request->repair_parts_needed;
+        }
         $cpoLine->date = $request->date;
         $cpoLine->order_number = $request->order_number;
         $cpoLine->comments = $request->comments;
@@ -116,11 +136,13 @@ class CpoLinesController extends Controller
 
 
         // update comment
+
         $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
         $cpoLineComment->user_id = auth()->user()->id;
         $cpoLineComment->comment = $request->user_comment ?? '';
         $cpoLineComment->commented_by = auth()->user()->name;
         $cpoLineComment->save();
+
 
 
 
