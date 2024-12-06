@@ -124,7 +124,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   emits: ["close-modal"],
-  inject: ["laravelData"],
+  inject: ["laravelData", "showNotification"],
   data() {
     return {
       selectedCpos: null,
@@ -164,7 +164,7 @@ export default {
       const res = await axios.post("api/cpo/destroy/multi", {
         selectedCpos: this.selectedPosId,
       });
-      // console.log("deleted");
+
       if (res.data) {
         this.deletedCpos = res.data.cpos_deleted;
         for (const cpo of this.deletedCpos) {
@@ -181,6 +181,10 @@ export default {
       }
 
       this.$emit("close-modal");
+      this.showNotification({
+        message: `${this.deletedCpos.length} CPOs has been deleted`,
+        type: "error",
+      });
     },
     confirmDelete() {
       this.showConfirmDelete = true;
