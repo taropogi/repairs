@@ -12,12 +12,13 @@
           <div
             class="p-2"
             :class="{
-              'col-md-2': formData.has_oracle_customer,
-              'col-md-12': !formData.has_oracle_customer,
+              'col-2': !formData.has_oracle_customer,
+              'col-4': formData.has_oracle_customer,
             }"
           >
             <label class="form-label">Customer Selection</label>
-            <div class="form-check">
+            <br />
+            <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
@@ -29,7 +30,7 @@
               />
               <label class="form-check-label" for="naCustomer"> N/A </label>
             </div>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
@@ -43,91 +44,112 @@
                 Choose Oracle Customer
               </label>
             </div>
+
+            <transition name="fade">
+              <oracle-customer-input
+                v-if="formData.has_oracle_customer"
+                v-model="selectedCustomer"
+                :input-size="5"
+              />
+            </transition>
           </div>
 
-          <div class="col-md-6 p-2" v-if="formData.has_oracle_customer">
-            <oracle-customer-input
-              v-model="selectedCustomer"
-              :input-size="10"
-            />
-          </div>
-          <div class="col-md-4 p-2" v-if="formData.has_oracle_customer">
+          <!-- <div class="col-5 p-2" v-if="false">
             <oracle-customer-details
               :selected-customer-id="selectedCustomer?.id"
             />
+          </div> -->
+
+          <div
+            class="p-2"
+            :class="{
+              'col-5': !formData.has_oracle_customer,
+              'col-4': formData.has_oracle_customer,
+            }"
+          >
+            <div class="p-2">
+              <label for="customer-name" class="form-label"
+                >Customer Name</label
+              >
+              <input
+                type="text"
+                class="form-control shadow"
+                id="customer-name"
+                required
+                :disabled="formData.has_oracle_customer"
+                v-model.trim="formData.customerName"
+              />
+            </div>
+            <div class="p-2">
+              <label for="address" class="form-label">Address</label>
+              <input
+                type="text"
+                class="form-control shadow"
+                id="address"
+                required
+                :disabled="formData.has_oracle_customer"
+                v-model.trim="formData.customerAddress"
+                placeholder="1234 Main St"
+              />
+            </div>
+            <div class="p-2">
+              <label for="contact-number" class="form-label"
+                >Contact Number</label
+              >
+              <input
+                type="text"
+                class="form-control shadow"
+                id="contact-number"
+                required
+                v-model="formData.contactNumber"
+              />
+            </div>
           </div>
 
-          <div class="col-md-4 p-2">
-            <label for="customer-name" class="form-label">Customer Name</label>
-            <input
-              type="text"
-              class="form-control shadow"
-              id="customer-name"
-              required
-              :disabled="formData.has_oracle_customer"
-              v-model.trim="formData.customerName"
-            />
+          <div
+            class="p-2"
+            :class="{
+              'col-5': !formData.has_oracle_customer,
+              'col-4': formData.has_oracle_customer,
+            }"
+          >
+            <div class="p-2">
+              <label for="prepared-by" class="form-label">Prepared By</label>
+              <input
+                type="text"
+                class="form-control shadow"
+                id="prepared-by"
+                required
+                v-model="formData.preparedBy"
+              />
+            </div>
+
+            <div class="p-2">
+              <label for="authorized-by" class="form-label"
+                >Authorized By</label
+              >
+              <input
+                type="text"
+                class="form-control shadow"
+                id="authorized-by"
+                required
+                v-model="formData.authorizedBy"
+              />
+            </div>
+            <div class="p-2">
+              <label for="customer-reference-number" class="form-label"
+                >Customer Reference Number</label
+              >
+              <input
+                type="text"
+                class="form-control shadow"
+                id="customer-reference-number"
+                required
+                v-model="formData.customerReferenceNumber"
+              />
+            </div>
           </div>
 
-          <div class="col-4 p-2">
-            <label for="address" class="form-label">Address</label>
-            <input
-              type="text"
-              class="form-control shadow"
-              id="address"
-              required
-              :disabled="formData.has_oracle_customer"
-              v-model.trim="formData.customerAddress"
-              placeholder="1234 Main St"
-            />
-          </div>
-
-          <div class="col-md-4 p-2">
-            <label for="contact-number" class="form-label"
-              >Contact Number</label
-            >
-            <input
-              type="text"
-              class="form-control shadow"
-              id="contact-number"
-              required
-              v-model="formData.contactNumber"
-            />
-          </div>
-
-          <div class="col-md-4 p-2">
-            <label for="prepared-by" class="form-label">Prepared By</label>
-            <input
-              type="text"
-              class="form-control shadow"
-              id="prepared-by"
-              required
-              v-model="formData.preparedBy"
-            />
-          </div>
-          <div class="col-md-4 p-2">
-            <label for="authorized-by" class="form-label">Authorized By</label>
-            <input
-              type="text"
-              class="form-control shadow"
-              id="authorized-by"
-              required
-              v-model="formData.authorizedBy"
-            />
-          </div>
-
-          <div class="col-md-4 p-2">
-            <label for="customer-reference-number" class="form-label"
-              >Customer Reference Number</label
-            >
-            <input
-              type="text"
-              class="form-control shadow"
-              id="customer-reference-number"
-              required
-              v-model="formData.customerReferenceNumber"
-            />
-          </div>
           <!-- <header-lines
           class="mt-2"
           :endode-type="'encode'"
@@ -345,5 +367,19 @@ export default {
 .btn-primary {
   padding: 10px 20px;
   font-size: 1.1rem;
+}
+
+/* Add any custom styles here */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

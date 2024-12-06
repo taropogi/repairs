@@ -1,17 +1,18 @@
 <template>
   <div class="pb-3">
-    <label for="oracle-customer-name" class="form-label">
-      CUSTOMER NAME (ORACLE)
-    </label>
     <div v-if="!isLocked">
       <!-- Add search input -->
-      <input
-        type="text"
-        class="form-control shadow mb-2 border border-primary border-2"
-        v-model="searchOracleCustomerStr"
-        @input="debouncedSearch"
-        placeholder="Search Oracle Customer"
-      />
+      <div class="input-group mb-3">
+        <input
+          id="searchOracleCustomer"
+          type="text"
+          class="form-control"
+          placeholder="Search Oracle Customer"
+          v-model="searchOracleCustomerStr"
+          @input="debouncedSearch"
+        />
+      </div>
+
       <!-- Put result text -->
       <p class="text-center m-1 bg-primary">
         <strong class="text-white"
@@ -32,6 +33,7 @@
           :value="customer.cust_account_id"
         >
           {{ customer.account_name }}
+          ({{ customer.salesrep_name }})
         </option>
       </select>
     </div>
