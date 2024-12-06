@@ -15,30 +15,32 @@
         </button>
       </div>
     </div>
+    <div v-if="localFormData.has_oracle_customer">
+      <h6 class="bg-success p-2 text-white">Customer Details (Oracle)</h6>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th style="width: 200px">Customer Name (Oracle)</th>
+            <td>
+              {{ selectedCustomer?.accountName }}
+            </td>
+          </tr>
+          <tr>
+            <th>Shipto Address</th>
+            <td>
+              {{ selectedCustomer?.shipToAddress }}
+            </td>
+          </tr>
+          <tr>
+            <th>Sales Representative</th>
+            <td>
+              {{ selectedCustomer?.srepName }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h6 class="bg-success p-2 text-white">Customer Details (Oracle)</h6>
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th style="width: 200px">Customer Name (Oracle)</th>
-          <td>
-            {{ selectedCustomer?.accountName }}
-          </td>
-        </tr>
-        <tr>
-          <th>Shipto Address</th>
-          <td>
-            {{ selectedCustomer?.shipToAddress }}
-          </td>
-        </tr>
-        <tr>
-          <th>Sales Representative</th>
-          <td>
-            {{ selectedCustomer?.srepName }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
     <h6 class="bg-success p-2 text-white">Customer Details</h6>
     <table class="table table-bordered">
       <tbody>

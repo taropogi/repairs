@@ -28,7 +28,9 @@
                 :selected="!formData.has_oracle_customer"
                 v-model="formData.has_oracle_customer"
               />
-              <label class="form-check-label" for="naCustomer"> N/A </label>
+              <label class="form-check-label" for="naCustomer">
+                N/A - Manual Encode Customer</label
+              >
             </div>
             <div class="form-check form-check-inline">
               <input
@@ -233,7 +235,6 @@ export default {
           this.selectedCustomer = null;
           this.formData.customerName = "";
           this.formData.customerAddress = "";
-          this.formData.contactNumber = "";
         }
       },
     },
