@@ -16,7 +16,7 @@
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <label class="form-label">Customer Selection</label>
+            <label class="form-label">CUSTOMER SELECTION</label>
             <br />
             <div class="form-check form-check-inline">
               <input
@@ -63,7 +63,6 @@
           </div> -->
 
           <div
-            class="p-2"
             :class="{
               'col-5': !formData.has_oracle_customer,
               'col-4': formData.has_oracle_customer,
@@ -71,7 +70,7 @@
           >
             <div class="p-2">
               <label for="customer-name" class="form-label"
-                >Customer Name</label
+                >CUSTOMER NAME</label
               >
               <input
                 type="text"
@@ -83,7 +82,7 @@
               />
             </div>
             <div class="p-2">
-              <label for="address" class="form-label">Address</label>
+              <label for="address" class="form-label">ADDRESS</label>
               <input
                 type="text"
                 class="form-control shadow"
@@ -96,7 +95,7 @@
             </div>
             <div class="p-2">
               <label for="contact-number" class="form-label"
-                >Contact Number</label
+                >CONTACT NUMBER</label
               >
               <input
                 type="text"
@@ -109,14 +108,13 @@
           </div>
 
           <div
-            class="p-2"
             :class="{
               'col-5': !formData.has_oracle_customer,
               'col-4': formData.has_oracle_customer,
             }"
           >
             <div class="p-2">
-              <label for="prepared-by" class="form-label">Prepared By</label>
+              <label for="prepared-by" class="form-label">PREPARED BY</label>
               <input
                 type="text"
                 class="form-control shadow"
@@ -128,7 +126,7 @@
 
             <div class="p-2">
               <label for="authorized-by" class="form-label"
-                >Authorized By</label
+                >AUTHORIZED BY</label
               >
               <input
                 type="text"
@@ -140,7 +138,7 @@
             </div>
             <div class="p-2">
               <label for="customer-reference-number" class="form-label"
-                >Customer Reference Number</label
+                >CUSTOMER REFERENCE #</label
               >
               <input
                 type="text"
@@ -244,7 +242,6 @@ export default {
           // console.log(newVal);
           this.formData.customerName = newVal.accountName;
           this.formData.customerAddress = newVal.shipToAddress;
-          this.formData.contactNumber = newVal.contactNumber;
         }
       },
       deep: true,
