@@ -152,36 +152,52 @@ class CpoController extends Controller
             $cpoLine = CpoLine::find($itemObj->id);
             $cpoLine->line_number = $key + 1;
             $cpoLine->description = $itemObj->description;
-            $cpoLine->price = $itemObj->price;
+            if (isset($itemObj->price) && is_numeric($itemObj->price)) {
+                $cpoLine->price = $itemObj->price;
+            }
+
             $cpoLine->hcopy = $itemObj->hcopy;
-            $cpoLine->qty_returned = $itemObj->qty_returned;
+
+            if (isset($itemObj->qty_returned) && is_numeric($itemObj->qty_returned)) {
+                $cpoLine->qty_returned = $itemObj->qty_returned;
+            }
             $cpoLine->unit = $itemObj->unit;
-            $cpoLine->qty_inspect = $itemObj->qty_inspect;
+            if (isset($itemObj->qty_inspect) && is_numeric($itemObj->qty_inspect)) {
+                $cpoLine->qty_inspect = $itemObj->qty_inspect;
+            }
+
             $cpoLine->date = $itemObj->date;
-            $cpoLine->good_condition = $itemObj->good_condition;
-            $cpoLine->minor_repair_clean = $itemObj->minor_repair_clean;
-            $cpoLine->repair_parts_needed = $itemObj->repair_parts_needed;
-            $cpoLine->damaged = $itemObj->damaged;
+            if (isset($itemObj->good_condition) && is_numeric($itemObj->good_condition)) {
+                $cpoLine->good_condition = $itemObj->good_condition;
+            }
+            if (isset($itemObj->minor_repair_clean) && is_numeric($itemObj->minor_repair_clean)) {
+                $cpoLine->minor_repair_clean = $itemObj->minor_repair_clean;
+            }
+            if (isset($itemObj->repair_parts_needed) && is_numeric($itemObj->repair_parts_needed)) {
+                $cpoLine->repair_parts_needed = $itemObj->repair_parts_needed;
+            }
+            if (isset($itemObj->damaged) && is_numeric($itemObj->damaged)) {
+                $cpoLine->damaged = $itemObj->damaged;
+            }
+
             $cpoLine->comments = $itemObj->comments;
             $cpoLine->order_number = $itemObj->order_number;
             $cpoLine->update();
 
             // update comment in cpo_line_comments table
-            $cpoLineComment = $cpoLine->comments()->firstOrNew(
-                [
-                    'cpo_line_id' => $cpoLine->id,
-                    'user_id' => auth()->user()->id
+            $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
 
-                ]
-            );
-            $cpoLineComment->user_id = auth()->user()->id;
-            $cpoLineComment->comment = $itemObj->user_comment ?? '';
-            $cpoLineComment->commented_by = auth()->user()->name;
-            $cpoLineComment->save();
+            if (($itemObj->user_comment == '')) {
+                $cpoLineComment->delete();
+            } else {
+                $cpoLineComment->user_id = auth()->user()->id;
+                $cpoLineComment->comment = $itemObj->user_comment ?? '';
+                $cpoLineComment->commented_by = auth()->user()->name;
+                $cpoLineComment->save();
+            }
         }
 
-        // set delay time sleep for 0.5 second
-        usleep(500000);
+
         $cpo->touch();
 
         return $request;
