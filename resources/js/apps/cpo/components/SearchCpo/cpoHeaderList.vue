@@ -107,7 +107,7 @@ export default {
     deletedCpos: {
       handler(newVal, oldVal) {
         for (const cpo of newVal) {
-          console.log("ok " + cpo.id);
+          // console.log("ok " + cpo);
           this.deleteCpoConfirm(cpo);
         }
       },

@@ -164,6 +164,7 @@ export default {
       const res = await axios.post("api/cpo/destroy/multi", {
         selectedCpos: this.selectedPosId,
       });
+      // console.log("deleted");
       if (res.data) {
         this.deletedCpos = res.data.cpos_deleted;
         for (const cpo of this.deletedCpos) {
@@ -174,6 +175,7 @@ export default {
 
           this.addDeletedCpos({
             id: cpo.id,
+            formatted_id: cpo.formatted_id,
           });
         }
       }
