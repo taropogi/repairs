@@ -105,8 +105,12 @@ export default {
         return modifiedPermission;
       });
       // console.log(mappedPermissions);
+      const filteredPermissions = mappedPermissions.filter(
+        (permission) => permission.name
+      );
+      this.$emit("update:modelValue", filteredPermissions);
 
-      this.$emit("update:modelValue", mappedPermissions);
+      // this.$emit("update:modelValue", mappedPermissions);
     },
   },
   watch: {

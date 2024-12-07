@@ -1,7 +1,7 @@
 <template>
   <div
     class="form-check mb-2"
-    v-for="lineField in lineFields"
+    v-for="(lineField, index) in lineFields"
     :key="lineField.dbField + 'encode-line-key'"
   >
     <input
@@ -9,7 +9,7 @@
       type="checkbox"
       :id="lineField.dbField + 'encode-line-input'"
       :value="lineField.dbField"
-      name="lineFieldsEncode"
+      :name="'lineFieldsEncode' + index"
       :checked="cpoEncodeLineFields.includes(lineField.dbField)"
       v-model="cpoEncodeLineFields"
     />

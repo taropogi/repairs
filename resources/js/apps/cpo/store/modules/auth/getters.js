@@ -9,7 +9,7 @@ export default {
     if (!state.user) return false;
     if (
       state.user.is_admin ||
-      state.user.permissions.find((p) => p.name == "cpo-delete")
+      state.user.permissions?.find((p) => p.name == "cpo-delete")
     )
       return true;
   },
@@ -17,7 +17,7 @@ export default {
     if (!state.user) return false;
     if (
       state.user.is_admin ||
-      state.user.permissions.find((p) => p.name == "cpo-encode")
+      state.user.permissions?.find((p) => p.name == "cpo-encode")
     )
       return true;
   },
@@ -25,7 +25,7 @@ export default {
     if (!state.user) return false;
     if (
       state.user.is_admin ||
-      state.user.permissions.find((p) => p.name == "cpo-edit")
+      state.user.permissions?.find((p) => p.name == "cpo-edit")
     )
       return true;
   },
@@ -33,7 +33,7 @@ export default {
     if (!state.user) return false;
     if (
       state.user.is_admin ||
-      state.user.permissions.find((p) => p.name == "cpo-download-pdf")
+      state.user.permissions?.find((p) => p.name == "cpo-download-pdf")
     )
       return true;
   },

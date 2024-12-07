@@ -1,7 +1,7 @@
 <template>
   <div
     class="form-check mb-2"
-    v-for="lineField in lineFields"
+    v-for="(lineField, index) in lineFields"
     :key="lineField.dbField + 'edit-line-key'"
   >
     <input
@@ -9,7 +9,7 @@
       type="checkbox"
       :id="lineField.dbField + 'edit-line-input'"
       :value="lineField.dbField"
-      name="lineFieldsEdit"
+      :name="'lineFieldsEdit' + index"
       :checked="cpoEditLineFields.includes(lineField.dbField)"
       v-model="cpoEditLineFields"
     />
