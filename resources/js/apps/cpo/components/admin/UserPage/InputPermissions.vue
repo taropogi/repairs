@@ -1,31 +1,56 @@
 <template>
   <div class="permissions-container p-3 border rounded bg-light">
     <h3 class="mb-3">Select Permissions</h3>
+    <div class="row">
+      <div class="col" v-for="permission in permissions" :key="permission.name">
+        <div class="form-check mb-2">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            :value="
+              selectedPermissions.find(
+                (selectedPermission) =>
+                  selectedPermission?.name === permission.name
+              ) || permission
+            "
+            :checked="!!isSelected(permission)"
+            v-model="selectedPermissions"
+          />
+          <label class="form-check-label ms-2">
+            <h4 class="p-3 bg-primary text-white rounded">
+              {{ permission.description }}
+            </h4>
 
-    <div
-      class="form-check mb-2"
-      v-for="permission in permissions"
-      :key="permission.name"
-    >
-      <input
-        class="form-check-input"
-        type="checkbox"
-        :id="permission.name"
-        :value="permission.name"
-        v-model="selectedPermissions"
-      />
-      <label class="form-check-label ms-2" :for="permission.name">
-        {{ permission.description }}
-      </label>
+            <div v-if="permission.name === 'cpo-encode'" class="ms-4">
+              <cpo-encode-lines
+                :lineFields="permission.lineFields"
+                v-model="cpoEncodeLineFields"
+              />
+            </div>
+            <div v-if="permission.name === 'cpo-edit'" class="ms-4">
+              <cpo-edit-lines
+                :lineFields="permission.lineFields"
+                v-model="cpoEditLineFields"
+              />
+            </div>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import CpoEncodeLines from "./CpoEncodeLines.vue";
+import CpoEditLines from "./CpoEditLines.vue";
 
 export default {
   emits: ["update:modelValue"],
+  components: {
+    CpoEncodeLines,
+    CpoEditLines,
+  },
   computed: {
     ...mapGetters("cpo", ["permissions"]),
   },
@@ -39,23 +64,94 @@ export default {
   data() {
     return {
       selectedPermissions: this.modelValue,
+
+      cpoEncodeLineFields:
+        this.modelValue?.find((permission) => permission.name === "cpo-encode")
+          ?.lineFields || [],
+      cpoEditLineFields:
+        this.modelValue?.find((permission) => permission.name === "cpo-edit")
+          ?.lineFields || [],
     };
+  },
+  methods: {
+    isSelected(permission) {
+      return this.selectedPermissions.find(
+        (selectedPermission) => selectedPermission.name === permission.name
+      );
+    },
+    remapSelectedPermissions() {
+      const mappedPermissions = this.selectedPermissions.map((permission) => {
+        let modifiedPermission = {};
+
+        modifiedPermission = {
+          ...modifiedPermission,
+          name: permission.name,
+          description: permission.description,
+        };
+
+        if (permission.name === "cpo-encode") {
+          modifiedPermission = {
+            ...modifiedPermission,
+            lineFields: this.cpoEncodeLineFields,
+          };
+        }
+        if (permission.name === "cpo-edit") {
+          modifiedPermission = {
+            ...modifiedPermission,
+            lineFields: this.cpoEditLineFields,
+          };
+        }
+
+        return modifiedPermission;
+      });
+      // console.log(mappedPermissions);
+
+      this.$emit("update:modelValue", mappedPermissions);
+    },
   },
   watch: {
     selectedPermissions(newVal) {
-      const mappedPermissions = this.selectedPermissions.map((permission) => {
-        return permission;
-        // return {
-        //   name: permission,
-        //   description: this.permissions.find((p) => p.name === permission)
-        //     .description,
-        // };
-      });
-      console.log(mappedPermissions);
-      this.$emit("update:modelValue", this.selectedPermissions);
+      // console.log("selectedPermissions changed");
+
+      this.remapSelectedPermissions();
     },
-    modelValue() {
-      this.selectedPermissions = this.modelValue;
+    cpoEncodeLineFields(newVal) {
+      // console.log("cpoEncodeLineFields changed");
+      if (newVal.length > 0) {
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-encode"
+        );
+        this.selectedPermissions.push({
+          name: "cpo-encode",
+          description: "CPO Encode",
+          lineFields: newVal,
+        });
+      } else {
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-encode"
+        );
+      }
+      this.remapSelectedPermissions();
+    },
+    cpoEditLineFields(newVal) {
+      // console.log("cpoEditLineFields changed");
+
+      if (newVal.length > 0) {
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-edit"
+        );
+        this.selectedPermissions.push({
+          name: "cpo-edit",
+          description: "CPO Edit",
+          lineFields: newVal,
+        });
+      } else {
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-edit"
+        );
+      }
+
+      this.remapSelectedPermissions();
     },
   },
 };
