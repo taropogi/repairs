@@ -16,11 +16,11 @@
       }"
       :disabled="!canEditCpo"
     >
-      Update Header
+      UPDATE HEADER
     </button>
 
     <span class="btn btn-warning" @click="showStatusHistory = true"
-      >Status History</span
+      >VIEW STATUS HISTORY</span
     >
 
     <a
@@ -32,11 +32,11 @@
         'btn-info': canDownloadCpoPdf,
         'btn-secondary': !canDownloadCpoPdf,
       }"
-      >Download PDF</a
+      >DOWNLOAD PDF</a
     >
 
     <router-link :to="{ name: searchCpoLink }" class="btn btn-danger">
-      <i class="bi bi-x-circle"></i> Close
+      <i class="bi bi-x-circle"></i> CLOSE
     </router-link>
   </div>
 </template>

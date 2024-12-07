@@ -1,6 +1,7 @@
 <template>
   <div class="permissions-container p-3 border rounded bg-light">
     <h3 class="mb-3">Select Permissions</h3>
+
     <div
       class="form-check mb-2"
       v-for="permission in permissions"
@@ -41,7 +42,16 @@ export default {
     };
   },
   watch: {
-    selectedPermissions() {
+    selectedPermissions(newVal) {
+      const mappedPermissions = this.selectedPermissions.map((permission) => {
+        return permission;
+        // return {
+        //   name: permission,
+        //   description: this.permissions.find((p) => p.name === permission)
+        //     .description,
+        // };
+      });
+      console.log(mappedPermissions);
       this.$emit("update:modelValue", this.selectedPermissions);
     },
     modelValue() {

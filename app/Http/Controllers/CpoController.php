@@ -136,7 +136,6 @@ class CpoController extends Controller
         //  $response['lines'] = $cpo->lines;
 
 
-
         return  $response;
     }
 
