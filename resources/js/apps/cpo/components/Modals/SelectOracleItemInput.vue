@@ -2,7 +2,7 @@
   <base-modal :modal-size="'xl'">
     <template #header>
       <h5 class="modal-title text-white">
-        <strong> Please select oracle item</strong>
+        <strong> PLEASE SELECT ORACLE ITEM</strong>
       </h5>
       <button
         type="button"

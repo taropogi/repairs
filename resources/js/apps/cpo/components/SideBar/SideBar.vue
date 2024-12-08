@@ -97,6 +97,22 @@
             You can put your own comments for each line. Other comments by other
             users will be visible below the input field.
           </p>
+          <strong>
+            <i class="bi bi-box-seam me-2"></i>
+            ITEM SELECTION</strong
+          >
+          <p class="my-2">
+            You can select a specific item from the oracle item list by clicking
+            the
+            <button class="btn btn-secondary btn-sm">
+              Or Choose Item from Oracle...
+            </button>
+            button.
+          </p>
+          <p>
+            This will automatically fill the description, price, and unit
+            fields.
+          </p>
         </div>
       </div>
     </transition>

@@ -164,6 +164,7 @@ export default {
     },
   },
   emits: ["update:modelValue"],
+  inject: ["showNotification"],
   computed: {
     ...mapGetters("auth", ["encodeLineFieldsPermission", "isAdmin"]),
   },
@@ -192,6 +193,10 @@ export default {
       ];
       this.localLines.sort((a, b) => a.lineNumber - b.lineNumber);
       this.$emit("update:modelValue", this.localLines);
+      this.showNotification({
+        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been selected. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
+        type: "success",
+      });
       this.isSelectingOracleItem = false;
     },
     closeModal() {

@@ -1,5 +1,10 @@
 <template>
   <div>
+    <select-oracle-item-input
+      @item-selected="itemSelected"
+      @close-modal="closeModal"
+      v-if="isSelectingOracleItem"
+    />
     <h5 class="bg-success p-2 text-white text-center" v-if="lines.length > 0">
       LINE DETAILS
     </h5>
@@ -36,6 +41,7 @@
           :header-is-locked="headerIsLocked"
           :items-uom="items_uom"
           @delete-line="getCpoLines"
+          @selectItemFor="selectOracleItem"
         ></header-line>
       </tbody>
     </table>
@@ -76,9 +82,11 @@
 <script>
 import headerLine from "./headerLine.vue";
 import { mapGetters } from "vuex";
+import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
 export default {
   components: {
     headerLine,
+    SelectOracleItemInput,
   },
   // props: ["headerId", "headerIsLocked"],
   inject: ["showNotification"],
@@ -101,10 +109,44 @@ export default {
       items_uom: [],
       isInsertingNewLine: false,
       isSavingAllLines: false,
+      isSelectingOracleItem: false,
+      selectItemForLineNumber: null,
     };
   },
 
   methods: {
+    itemSelected(item) {
+      const targetItem = this.lines.find(
+        (line) => line.line_number === this.selectItemForLineNumber
+      );
+      targetItem.description = item.description;
+      targetItem.price = item.list_price;
+      targetItem.unit = item.primary_uom_code;
+      // console.log(this.lines);
+
+      this.lines = [
+        ...this.lines.filter(
+          (line) => line.line_number !== targetItem.line_number
+        ),
+        targetItem,
+      ];
+      // console.log(this.lines);
+      this.lines.sort((a, b) => a.line_number - b.line_number);
+
+      this.showNotification({
+        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been updated. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
+        type: "success",
+      });
+      this.isSelectingOracleItem = false;
+    },
+    selectOracleItem(forLineNumber) {
+      // console.log(forLineNumber);
+      this.selectItemForLineNumber = forLineNumber;
+      this.isSelectingOracleItem = true;
+    },
+    closeModal() {
+      this.isSelectingOracleItem = false;
+    },
     async addNewLine() {
       this.isInsertingNewLine = true;
       try {

@@ -2,15 +2,25 @@
   <tr :class="{ blink: isUpdated, 'blink-deleted': isDeleted }">
     <th scope="row">{{ lineDetails.line_number }}</th>
     <td>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        :disabled="
-          isDisabled ||
-          !(editLineFieldsPermission.includes('description') || isAdmin)
-        "
-        v-model="lineDetails.description"
-      />
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          :disabled="
+            isDisabled ||
+            !(editLineFieldsPermission.includes('description') || isAdmin)
+          "
+          v-model="lineDetails.description"
+        />
+        <button
+          class="btn btn-secondary"
+          type="button"
+          @click="$emit('select-item-for', lineDetails.line_number)"
+        >
+          <i class="fas fa-box-open"></i>
+          Or Choose Item from Oracle...
+        </button>
+      </div>
     </td>
 
     <td>
@@ -216,6 +226,7 @@ export default {
     };
   },
   inject: ["showNotification"],
+  emits: ["deleteLine", "saveLine", "select-item-for"],
   computed: {
     ...mapGetters("auth", [
       "canEditCpo",
