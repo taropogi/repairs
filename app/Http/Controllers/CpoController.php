@@ -44,6 +44,16 @@ class CpoController extends Controller
     public function create(Request $request)
     {
 
+        $userPermissions = auth()->user()->permissions;
+        $userIsAdmin = auth()->user()->is_admin;
+        $lineFields = [];
+        foreach ($userPermissions as $permission) {
+            if ($permission['name'] === 'cpo-encode') {
+                $lineFields = $permission['lineFields'];
+                break;
+            }
+        }
+
         $request->validate([
             'customerName' => ['required'],
             'customerAddress' => ['required'],
@@ -102,11 +112,14 @@ class CpoController extends Controller
 
 
             // update comment
-            if ($item['comments'] && !empty($item['comments'])) {
-                $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
-                $cpoLineComment->comment = $item['comments'];
-                $cpoLineComment->commented_by = auth()->user()->name;
-                $cpoLineComment->save();
+
+            if ((in_array('comments', $lineFields) || $userIsAdmin) && isset($item['comments'])) {
+                if ($item['comments'] && !empty($item['comments'])) {
+                    $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
+                    $cpoLineComment->comment = $item['comments'] ?? '';
+                    $cpoLineComment->commented_by = auth()->user()->name;
+                    $cpoLineComment->save();
+                }
             }
         }
 

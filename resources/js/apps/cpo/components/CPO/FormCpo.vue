@@ -281,7 +281,7 @@ export default {
         this.isSubmitSuccess = true;
         // this.resetForm();
 
-        console.log(res.data.lines);
+        // console.log(res.data.lines);
         // this.gotoSearchPage();
         this.showNotification({
           message: `CPO successfully encoded / RPO# ${res.data.cpo.formatted_id} `,
