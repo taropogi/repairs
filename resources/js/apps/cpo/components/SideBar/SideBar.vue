@@ -293,7 +293,7 @@ export default {
   transform: translateY(0);
 }
 
-.general-transition-leave-from,
+/* .general-transition-leave-from,
 .note-encoding-leave-from {
   opacity: 1;
   transform: translateY(0);
@@ -307,7 +307,7 @@ export default {
 .note-encoding-leave-to {
   opacity: 0;
   transform: translateY(-30px);
-}
+} */
 
 .export-btns-enter-from {
   opacity: 0;
@@ -322,7 +322,7 @@ export default {
   transform: translateY(0);
 }
 
-.export-btns-leave-from {
+/* .export-btns-leave-from {
   opacity: 1;
   transform: translateY(0);
 }
@@ -333,5 +333,5 @@ export default {
 .export-btns-leave-to {
   opacity: 0;
   transform: translateY(-30px);
-}
+} */
 </style>
