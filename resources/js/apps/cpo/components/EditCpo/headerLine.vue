@@ -3,19 +3,28 @@
     <th scope="row">{{ lineDetails.line_number }}</th>
     <td>
       <input
+        v-if="editLineFieldsPermission.includes('description') || isAdmin"
         type="text"
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.description"
       />
+      <span v-else>
+        {{ lineDetails.description || "----" }}
+      </span>
     </td>
+
     <td>
       <input
+        v-if="editLineFieldsPermission.includes('price') || isAdmin"
         type="text"
         class="form-control form-control-sm"
         v-model="lineDetails.price"
         :disabled="isDisabled"
       />
+      <span v-else>
+        {{ lineDetails.price || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -23,7 +32,11 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.order_number"
+        v-if="editLineFieldsPermission.includes('order_number') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.order_number || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -31,7 +44,11 @@
         class="form-control form-control-sm"
         v-model="lineDetails.hcopy"
         :disabled="isDisabled"
+        v-if="editLineFieldsPermission.includes('hcopy') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.hcopy || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -39,17 +56,19 @@
         class="form-control form-control-sm"
         v-model="lineDetails.qty_returned"
         :disabled="isDisabled"
+        v-if="editLineFieldsPermission.includes('qty_returned') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.qty_returned || "----" }}
+      </span>
     </td>
     <td>
-      <div v-if="itemsUom.length > 0">
-        <!-- <input
-          type="text"
-          class="form-control form-control-sm"
-          v-model="lineDetails.unit"
-          :disabled="isDisabled"
-        /> -->
-        <!-- loop items_uom prop here as dropdown -->
+      <div
+        v-if="
+          (itemsUom.length > 0 && editLineFieldsPermission.includes('unit')) ||
+          isAdmin
+        "
+      >
         <select
           class="form-select form-select-sm"
           v-model="lineDetails.unit"
@@ -64,6 +83,9 @@
           </option>
         </select>
       </div>
+      <span v-else>
+        {{ lineDetails.unit || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -71,7 +93,11 @@
         class="form-control form-control-sm"
         v-model="lineDetails.qty_inspect"
         :disabled="isDisabled"
+        v-if="editLineFieldsPermission.includes('qty_inspect') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.qty_inspect || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -79,7 +105,11 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.date"
+        v-if="editLineFieldsPermission.includes('date') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.date || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -87,7 +117,11 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.good_condition"
+        v-if="editLineFieldsPermission.includes('good_condition') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.good_condition || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -95,7 +129,13 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.minor_repair_clean"
+        v-if="
+          editLineFieldsPermission.includes('minor_repair_clean') || isAdmin
+        "
       />
+      <span v-else>
+        {{ lineDetails.minor_repair_clean || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -103,7 +143,13 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.repair_parts_needed"
+        v-if="
+          editLineFieldsPermission.includes('repair_parts_needed') || isAdmin
+        "
       />
+      <span v-else>
+        {{ lineDetails.repair_parts_needed || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -111,7 +157,11 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.damaged"
+        v-if="editLineFieldsPermission.includes('damaged') || isAdmin"
       />
+      <span v-else>
+        {{ lineDetails.damaged || "----" }}
+      </span>
     </td>
     <td>
       <input
@@ -119,6 +169,7 @@
         class="form-control form-control-sm"
         :disabled="isDisabled"
         v-model="lineDetails.user_comment"
+        v-if="editLineFieldsPermission.includes('comments') || isAdmin"
       />
 
       <div v-if="lineDetails.other_comments.length > 0">
@@ -179,7 +230,11 @@ export default {
   },
   inject: ["showNotification"],
   computed: {
-    ...mapGetters("auth", ["canEditCpo"]),
+    ...mapGetters("auth", [
+      "canEditCpo",
+      "editLineFieldsPermission",
+      "isAdmin",
+    ]),
     isDisabled() {
       return (
         this.headerIsLocked ||

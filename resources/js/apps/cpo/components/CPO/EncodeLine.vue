@@ -1,7 +1,7 @@
 <template>
   <tr>
     <th scope="row">{{ line.lineNumber }}</th>
-    <td v-if="encodeLineFieldsPermission.includes('description')">
+    <td v-if="encodeLineFieldsPermission.includes('description') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -9,7 +9,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('price')">
+    <td v-if="encodeLineFieldsPermission.includes('price') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -17,7 +17,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('order_number')">
+    <td v-if="encodeLineFieldsPermission.includes('order_number') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -25,7 +25,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('hcopy')">
+    <td v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -33,7 +33,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('qty_returned')">
+    <td v-if="encodeLineFieldsPermission.includes('qty_returned') || isAdmin">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -41,7 +41,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('unit')">
+    <td v-if="encodeLineFieldsPermission.includes('unit') || isAdmin">
       <div v-if="itemsUom.length > 0">
         <select class="form-select form-select-sm" v-model="line.unit">
           <option
@@ -56,7 +56,7 @@
       </div>
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('qty_inspect')">
+    <td v-if="encodeLineFieldsPermission.includes('qty_inspect') || isAdmin">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -64,7 +64,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('date')">
+    <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -72,7 +72,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('good_condition')">
+    <td v-if="encodeLineFieldsPermission.includes('good_condition') || isAdmin">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -80,7 +80,11 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('minor_repair_clean')">
+    <td
+      v-if="
+        encodeLineFieldsPermission.includes('minor_repair_clean') || isAdmin
+      "
+    >
       <input
         type="number"
         class="form-control form-control-sm"
@@ -88,7 +92,11 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('repair_parts_needed')">
+    <td
+      v-if="
+        encodeLineFieldsPermission.includes('repair_parts_needed') || isAdmin
+      "
+    >
       <input
         type="number"
         class="form-control form-control-sm"
@@ -96,7 +104,7 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('damaged')">
+    <td v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -104,7 +112,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('comments') || isAdmin">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -149,7 +157,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("auth", ["encodeLineFieldsPermission"]),
+    ...mapGetters("auth", ["encodeLineFieldsPermission", "isAdmin"]),
   },
   methods: {
     deleteLine() {

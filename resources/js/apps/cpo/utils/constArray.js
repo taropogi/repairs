@@ -43,4 +43,8 @@ export const LINEFIELDS = [
     dbField: "date",
     description: "Date",
   },
+  {
+    dbField: "comments",
+    description: "Comments",
+  },
 ];

@@ -14,88 +14,109 @@
             <th scope="col">#</th>
             <th
               scope="col"
-              v-if="encodeLineFieldsPermission.includes('description')"
+              v-if="
+                encodeLineFieldsPermission.includes('description') || isAdmin
+              "
             >
               Description
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('price')"
+              v-if="encodeLineFieldsPermission.includes('price') || isAdmin"
             >
               Price
             </th>
             <th
               scope="col"
               style="width: 100px"
-              v-if="encodeLineFieldsPermission.includes('order_number')"
+              v-if="
+                encodeLineFieldsPermission.includes('order_number') || isAdmin
+              "
             >
               Doc #
             </th>
             <th
               scope="col"
               style="width: 100px"
-              v-if="encodeLineFieldsPermission.includes('hcopy')"
+              v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin"
             >
               HCopy
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('qty_returned')"
+              v-if="
+                encodeLineFieldsPermission.includes('qty_returned') || isAdmin
+              "
             >
               Qty Returned
             </th>
             <th
               scope="col"
               style="width: 100px"
-              v-if="encodeLineFieldsPermission.includes('unit')"
+              v-if="encodeLineFieldsPermission.includes('unit') || isAdmin"
             >
               Unit
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('qty_inspect')"
+              v-if="
+                encodeLineFieldsPermission.includes('qty_inspect') || isAdmin
+              "
             >
               Qty Inspect
             </th>
             <th
               scope="col"
               style="width: 100px"
-              v-if="encodeLineFieldsPermission.includes('date')"
+              v-if="encodeLineFieldsPermission.includes('date') || isAdmin"
             >
               Date
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('good_condition')"
+              v-if="
+                encodeLineFieldsPermission.includes('good_condition') || isAdmin
+              "
             >
               Good Condition
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('minor_repair_clean')"
+              v-if="
+                encodeLineFieldsPermission.includes('minor_repair_clean') ||
+                isAdmin
+              "
             >
               Minor Repair/Clean
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('repair_parts_needed')"
+              v-if="
+                encodeLineFieldsPermission.includes('repair_parts_needed') ||
+                isAdmin
+              "
             >
               Repair/Parts Needed
             </th>
             <th
               scope="col"
               style="width: 50px"
-              v-if="encodeLineFieldsPermission.includes('damaged')"
+              v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin"
             >
               Damaged
             </th>
-            <th scope="col">Comments</th>
+            <th
+              scope="col"
+              v-if="encodeLineFieldsPermission.includes('comments') || isAdmin"
+            >
+              Comments
+            </th>
 
             <th scope="col" style="width: 100px">Actions</th>
           </tr>
@@ -137,7 +158,7 @@ export default {
   },
   emits: ["update:modelValue"],
   computed: {
-    ...mapGetters("auth", ["encodeLineFieldsPermission"]),
+    ...mapGetters("auth", ["encodeLineFieldsPermission", "isAdmin"]),
   },
   data() {
     return {
