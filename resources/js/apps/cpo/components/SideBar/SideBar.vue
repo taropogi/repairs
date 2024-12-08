@@ -58,9 +58,34 @@
         <multi-options> </multi-options>
       </div>
     </transition>
-
+    <transition name="general-transition">
+      <div
+        v-if="isNavUpdateActive"
+        class="alert alert-info d-flex align-items-center my-2"
+        role="alert"
+      >
+        <div>
+          <strong
+            ><i class="bi bi-pencil-square me-2"></i> FOR UPDATING LINES</strong
+          >
+          <p class="my-2">
+            For updating line details, you can only access/update specified
+            fields. Fields you cannot access/update are grayed out.
+          </p>
+          <strong class="my-2"
+            ><i class="bi bi-chat-left-text me-2"></i> LINE COMMENTS</strong
+          >
+          <p class="my-2">
+            You can put your own comments for each line. Other comments by other
+            users will be visible below the input field.
+          </p>
+        </div>
+      </div>
+    </transition>
     <hr />
+
     <div class="mb-auto"></div>
+
     <user-options
       class="mb-0 p-5"
       :user="loggedUser"
@@ -177,6 +202,32 @@ export default {
 };
 </script>
 <style scoped>
+.general-transition-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.general-transition-enter-active {
+  transition: all 0.5s ease-out;
+}
+.general-transition-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.general-transition-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.general-transition-leave-active {
+  transition: all 0.5s ease-in;
+}
+.general-transition-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
 .export-btns-enter-from {
   opacity: 0;
   transform: translateY(-30px);

@@ -167,10 +167,17 @@ class CpoLinesController extends Controller
         }
 
         if (
-            (in_array('major_repair', $lineFields) || $userIsAdmin) &&
+            (in_array('repair_parts_needed', $lineFields) || $userIsAdmin) &&
             is_numeric($request->repair_parts_needed)
         ) {
             $cpoLine->repair_parts_needed = $request->repair_parts_needed;
+        }
+
+        if (
+            (in_array('damaged', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->damaged)
+        ) {
+            $cpoLine->damaged = $request->damaged;
         }
 
         if (

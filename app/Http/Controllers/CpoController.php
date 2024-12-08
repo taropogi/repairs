@@ -143,6 +143,17 @@ class CpoController extends Controller
     public function updateAllLines(Request $request)
     {
 
+        $userPermissions = auth()->user()->permissions;
+        $userIsAdmin = auth()->user()->is_admin;
+        $lineFields = [];
+        foreach ($userPermissions as $permission) {
+            if ($permission['name'] === 'cpo-edit') {
+                $lineFields = $permission['lineFields'];
+                break;
+            }
+        }
+
+
         $cpo = Cpo::find($request->cpoId);
 
         foreach ($request->cpoLines as $key => $item) {
@@ -151,49 +162,85 @@ class CpoController extends Controller
 
             $cpoLine = CpoLine::find($itemObj->id);
             $cpoLine->line_number = $key + 1;
-            $cpoLine->description = $itemObj->description;
-            if (isset($itemObj->price) && is_numeric($itemObj->price)) {
+
+            if (in_array('description', $lineFields) || $userIsAdmin) {
+                $cpoLine->description = $itemObj->description;
+            }
+
+
+            if ((in_array('price', $lineFields) || $userIsAdmin) && isset($itemObj->price) && is_numeric($itemObj->price)) {
                 $cpoLine->price = $itemObj->price;
             }
+            if (in_array('hcopy', $lineFields) || $userIsAdmin) {
+                $cpoLine->hcopy = $itemObj->hcopy;
+            }
 
-            $cpoLine->hcopy = $itemObj->hcopy;
 
-            if (isset($itemObj->qty_returned) && is_numeric($itemObj->qty_returned)) {
+            if ((in_array('qty_returned', $lineFields) || $userIsAdmin) && isset($itemObj->qty_returned) && is_numeric($itemObj->qty_returned)) {
                 $cpoLine->qty_returned = $itemObj->qty_returned;
             }
-            $cpoLine->unit = $itemObj->unit;
-            if (isset($itemObj->qty_inspect) && is_numeric($itemObj->qty_inspect)) {
+
+            if (
+                (in_array('unit', $lineFields) || $userIsAdmin)
+
+            ) {
+                $cpoLine->unit = $itemObj->unit;
+            }
+
+
+
+
+            if ((in_array('qty_inspect', $lineFields) || $userIsAdmin) && isset($itemObj->qty_inspect) && is_numeric($itemObj->qty_inspect)) {
                 $cpoLine->qty_inspect = $itemObj->qty_inspect;
             }
 
-            $cpoLine->date = $itemObj->date;
-            if (isset($itemObj->good_condition) && is_numeric($itemObj->good_condition)) {
+            if (
+                (in_array('date', $lineFields) || $userIsAdmin)
+            ) {
+                $cpoLine->date = $itemObj->date;
+            }
+
+
+
+
+            if ((in_array('good_condition', $lineFields) || $userIsAdmin) && isset($itemObj->good_condition) && is_numeric($itemObj->good_condition)) {
                 $cpoLine->good_condition = $itemObj->good_condition;
             }
-            if (isset($itemObj->minor_repair_clean) && is_numeric($itemObj->minor_repair_clean)) {
+
+
+            if ((in_array('minor_repair_clean', $lineFields) || $userIsAdmin) && isset($itemObj->minor_repair_clean) && is_numeric($itemObj->minor_repair_clean)) {
                 $cpoLine->minor_repair_clean = $itemObj->minor_repair_clean;
             }
-            if (isset($itemObj->repair_parts_needed) && is_numeric($itemObj->repair_parts_needed)) {
+            if ((in_array('repair_parts_needed', $lineFields) || $userIsAdmin) && isset($itemObj->repair_parts_needed) && is_numeric($itemObj->repair_parts_needed)) {
                 $cpoLine->repair_parts_needed = $itemObj->repair_parts_needed;
             }
-            if (isset($itemObj->damaged) && is_numeric($itemObj->damaged)) {
+
+            if ((in_array('damaged', $lineFields) || $userIsAdmin) && isset($itemObj->damaged) && is_numeric($itemObj->damaged)) {
                 $cpoLine->damaged = $itemObj->damaged;
             }
 
-            $cpoLine->comments = $itemObj->comments;
-            $cpoLine->order_number = $itemObj->order_number;
+            // $cpoLine->comments = $itemObj->comments;
+
+            if (
+                (in_array('order_number', $lineFields) || $userIsAdmin)
+            ) {
+                $cpoLine->order_number = $itemObj->order_number;
+            }
+
             $cpoLine->update();
 
             // update comment in cpo_line_comments table
-            $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
+            if (in_array('comments', $lineFields) || $userIsAdmin) {
+                $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
 
-            if (($itemObj->user_comment == '')) {
-                $cpoLineComment->delete();
-            } else {
-                $cpoLineComment->user_id = auth()->user()->id;
-                $cpoLineComment->comment = $itemObj->user_comment ?? '';
-                $cpoLineComment->commented_by = auth()->user()->name;
-                $cpoLineComment->save();
+                if (($itemObj->user_comment == '')) {
+                    $cpoLineComment->delete();
+                } else {
+                    $cpoLineComment->user_id = auth()->user()->id;
+                    $cpoLineComment->comment = $itemObj->user_comment ?? '';
+                    $cpoLineComment->commented_by = auth()->user()->name;
+                    $cpoLineComment->save();
+                }
             }
         }
 
