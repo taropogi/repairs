@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-group btn-group-sm g-3">
+  <div class="btn-group">
     <teleport to="body">
       <modal-status-history
         v-if="showStatusHistory"

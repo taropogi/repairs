@@ -45,36 +45,38 @@
         ></header-line>
       </tbody>
     </table>
+    <hr />
+    <div class="col-12 text-center">
+      <div class="btn-group" v-if="!headerIsLocked && canEditCpo">
+        <button
+          class="btn btn-primary"
+          type="button"
+          :disabled="isInsertingNewLine || isSavingAllLines"
+          @click="addNewLine"
+        >
+          <span> Add new line</span>
+          <span
+            v-if="isInsertingNewLine"
+            class="spinner-border spinner-border-sm"
+          ></span>
+        </button>
 
-    <div class="btn-group btn-group-sm" v-if="!headerIsLocked && canEditCpo">
-      <button
-        class="btn btn-primary"
-        type="button"
-        :disabled="isInsertingNewLine || isSavingAllLines"
-        @click="addNewLine"
-      >
-        <span> Add new line</span>
-        <span
-          v-if="isInsertingNewLine"
-          class="spinner-border spinner-border-sm"
-        ></span>
-      </button>
-
-      <button
-        class="btn btn-success"
-        type="button"
-        @click="saveAllLines"
-        :disabled="isSavingAllLines || isInsertingNewLine"
-        v-if="lines.length > 0"
-      >
-        <span> Save All lines </span>
-        <span
-          v-if="isSavingAllLines"
-          class="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true"
-        ></span>
-      </button>
+        <button
+          class="btn btn-success"
+          type="button"
+          @click="saveAllLines"
+          :disabled="isSavingAllLines || isInsertingNewLine"
+          v-if="lines.length > 0"
+        >
+          <span> Save All lines </span>
+          <span
+            v-if="isSavingAllLines"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
