@@ -184,6 +184,15 @@
           </p>
         </div>
       </div>
+      <p
+        class="text-muted"
+        v-if="
+          lineDetails.other_comments.length == 0 &&
+          !(editLineFieldsPermission.includes('comments') || isAdmin)
+        "
+      >
+        Others' comments will show here
+      </p>
     </td>
 
     <td v-if="canEditCpo">

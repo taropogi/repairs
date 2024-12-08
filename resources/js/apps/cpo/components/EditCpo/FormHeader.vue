@@ -174,7 +174,7 @@
           class="d-flex justify-content-center align-items-center"
           style="height: 100px"
         >
-          <h1>RPO#: {{ headerRow.formatted_id }}</h1>
+          <h1 class="fw-bold">RPO#: {{ headerRow.formatted_id }}</h1>
         </div>
       </div>
       <div cla></div>
