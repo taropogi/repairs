@@ -44,9 +44,7 @@
             <tbody>
               <tr v-for="item in items" :key="item.id">
                 <td>
-                  {{
-                    `${item.segment1}-${item.segment2}-${item.segment3}-${item.segment4}-${item.segment5}-${item.segment6}`
-                  }}
+                  {{ item.oracle_code }}
                 </td>
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>

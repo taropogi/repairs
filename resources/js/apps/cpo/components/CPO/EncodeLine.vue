@@ -3,58 +3,37 @@
     <th scope="row">{{ line.lineNumber }}</th>
     <td v-if="encodeLineFieldsPermission.includes('description') || isAdmin">
       <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Manually enter item description here . . "
-          v-model="line.description"
-        />
+        <input type="text" class="form-control" v-model="line.description" />
         <button
-          class="btn btn-secondary"
+          class="btn btn-secondary btn-sm py-0"
           type="button"
           @click="$emit('select-item-for', line.lineNumber)"
         >
           <i class="fas fa-box-open"></i>
-          Or Choose Item from Oracle...
+          ...
         </button>
       </div>
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('price') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.price"
-      />
+      <input type="text" class="form-control" v-model="line.price" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('order_number') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.orderNumber"
-      />
+      <input type="text" class="form-control" v-model="line.orderNumber" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.hcopy"
-      />
+      <input type="text" class="form-control" v-model="line.hcopy" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('qty_returned') || isAdmin">
-      <input
-        type="number"
-        class="form-control form-control-sm"
-        v-model="line.qtyReturned"
-      />
+      <input type="number" class="form-control" v-model="line.qtyReturned" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('unit') || isAdmin">
       <div v-if="itemsUom.length > 0">
-        <select class="form-select form-select-sm" v-model="line.unit">
+        <select class="form-select" v-model="line.unit">
           <option
             v-for="uom in itemsUom"
             :key="uom"
@@ -68,27 +47,15 @@
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('qty_inspect') || isAdmin">
-      <input
-        type="number"
-        class="form-control form-control-sm"
-        v-model="line.qtyInspect"
-      />
+      <input type="number" class="form-control" v-model="line.qtyInspect" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.date"
-      />
+      <input type="text" class="form-control" v-model="line.date" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('good_condition') || isAdmin">
-      <input
-        type="number"
-        class="form-control form-control-sm"
-        v-model="line.goodCondition"
-      />
+      <input type="number" class="form-control" v-model="line.goodCondition" />
     </td>
 
     <td
@@ -98,7 +65,7 @@
     >
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="line.minorRepairClean"
       />
     </td>
@@ -110,29 +77,21 @@
     >
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="line.repairPartsNeeded"
       />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin">
-      <input
-        type="number"
-        class="form-control form-control-sm"
-        v-model="line.damaged"
-      />
+      <input type="number" class="form-control" v-model="line.damaged" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('comments') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.comments"
-      />
+      <input type="text" class="form-control" v-model="line.comments" />
     </td>
 
     <td>
-      <div class="btn-group btn-group-sm">
+      <div class="btn-group">
         <button
           type="button"
           class="btn btn-danger py-0"

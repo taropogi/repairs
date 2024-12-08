@@ -10,18 +10,16 @@
       class="text-center"
     >
       <h3 class="bg-success p-2 text-white text-center">Line Details</h3>
-      <table
-        class="table table-bordered table-striped table-sm"
-        v-if="localLines.length > 0"
-      >
+      <table class="table table-striped table-sm" v-if="localLines.length > 0">
         <thead class="table-warning">
           <tr>
-            <th scope="col">#</th>
+            <th scope="col" style="width: 100px">#</th>
             <th
               scope="col"
               v-if="
                 encodeLineFieldsPermission.includes('description') || isAdmin
               "
+              style="width: 500px"
             >
               Description
             </th>

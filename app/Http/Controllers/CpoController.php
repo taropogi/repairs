@@ -102,13 +102,12 @@ class CpoController extends Controller
 
 
             // update comment
-            // if ($item['comments'] && !empty($item['comments'])) {
-            //     $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
-            //     $cpoLineComment->user_id = auth()->user()->id;
-            //     $cpoLineComment->comment = $item['comments'];
-            //     $cpoLineComment->commented_by = auth()->user()->name;
-            //     $cpoLineComment->save();
-            // }
+            if ($item['comments'] && !empty($item['comments'])) {
+                $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
+                $cpoLineComment->comment = $item['comments'];
+                $cpoLineComment->commented_by = auth()->user()->name;
+                $cpoLineComment->save();
+            }
         }
 
 

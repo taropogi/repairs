@@ -104,9 +104,7 @@
           <p class="my-2">
             You can select a specific item from the oracle item list by clicking
             the
-            <button class="btn btn-secondary btn-sm">
-              Or Choose Item from Oracle...
-            </button>
+            <button class="btn btn-secondary btn-sm">...</button>
             button.
           </p>
           <p>
@@ -149,9 +147,7 @@
           <p class="my-2">
             You can select a specific item from the oracle item list by clicking
             the
-            <button class="btn btn-secondary btn-sm">
-              Or Choose Item from Oracle...
-            </button>
+            <button class="btn btn-secondary btn-sm">...</button>
             button.
           </p>
           <p>

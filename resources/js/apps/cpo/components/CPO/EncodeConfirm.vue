@@ -84,73 +84,176 @@
       <thead class="table-warning">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Doc #</th>
-          <th scope="col">HCopy</th>
-          <th scope="col">Qty Returned</th>
-          <th scope="col">Unit</th>
-          <th scope="col">Qty Inspect</th>
-          <th scope="col">Date</th>
-          <th scope="col">Good Condition</th>
-          <th scope="col">Minor Repair/Clean</th>
-          <th scope="col">Repair/Parts Needed</th>
-          <th scope="col">Damaged</th>
-          <th scope="col">Comments</th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('description') || isAdmin"
+          >
+            Description
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('price') || isAdmin"
+          >
+            Price
+          </th>
+          <th
+            scope="col"
+            v-if="
+              encodeLineFieldsPermission.includes('order_number') || isAdmin
+            "
+          >
+            Doc #
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin"
+          >
+            HCopy
+          </th>
+          <th
+            scope="col"
+            v-if="
+              encodeLineFieldsPermission.includes('qty_returned') || isAdmin
+            "
+          >
+            Qty Returned
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('unit') || isAdmin"
+          >
+            Unit
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('qty_inspect') || isAdmin"
+          >
+            Qty Inspect
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('date') || isAdmin"
+          >
+            Date
+          </th>
+          <th
+            scope="col"
+            v-if="
+              encodeLineFieldsPermission.includes('good_condition') || isAdmin
+            "
+          >
+            Good Condition
+          </th>
+          <th
+            scope="col"
+            v-if="
+              encodeLineFieldsPermission.includes('minor_repair_clean') ||
+              isAdmin
+            "
+          >
+            Minor Repair/Clean
+          </th>
+          <th
+            scope="col"
+            v-if="
+              encodeLineFieldsPermission.includes('repair_parts_needed') ||
+              isAdmin
+            "
+          >
+            Repair/Parts Needed
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin"
+          >
+            Damaged
+          </th>
+          <th
+            scope="col"
+            v-if="encodeLineFieldsPermission.includes('comments') || isAdmin"
+          >
+            Comments
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="line in localFormData.lines" :key="line.id">
           <th scope="row">{{ line.lineNumber }}</th>
-          <td>
+          <td
+            v-if="encodeLineFieldsPermission.includes('description') || isAdmin"
+          >
             {{ line.description }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('price') || isAdmin">
             {{ line.price }}
           </td>
 
-          <td>
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('order_number') || isAdmin
+            "
+          >
             {{ line.orderNumber }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin">
             {{ line.hcopy }}
           </td>
 
-          <td>
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('qty_returned') || isAdmin
+            "
+          >
             {{ line.qtyReturned }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('unit') || isAdmin">
             {{ line.unit }}
           </td>
 
-          <td>
+          <td
+            v-if="encodeLineFieldsPermission.includes('qty_inspect') || isAdmin"
+          >
             {{ line.qtyInspect }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
             {{ line.date }}
           </td>
 
-          <td>
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('good_condition') || isAdmin
+            "
+          >
             {{ line.goodCondition }}
           </td>
 
-          <td>
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('minor_repair_clean') ||
+              isAdmin
+            "
+          >
             {{ line.minorRepairClean }}
           </td>
 
-          <td>
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('repair_parts_needed') ||
+              isAdmin
+            "
+          >
             {{ line.repairPartsNeeded }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin">
             {{ line.damaged }}
           </td>
 
-          <td>
+          <td v-if="encodeLineFieldsPermission.includes('comments') || isAdmin">
             {{ line.comments }}
           </td>
         </tr>
@@ -160,9 +263,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: ["formData", "selectedCustomer"],
   emits: ["confirm", "cancel"],
+  computed: {
+    ...mapGetters("auth", ["encodeLineFieldsPermission", "isAdmin"]),
+  },
   data() {
     return {
       localFormData: this.formData,

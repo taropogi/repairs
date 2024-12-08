@@ -5,7 +5,7 @@
       <div class="input-group">
         <input
           type="text"
-          class="form-control form-control-sm"
+          class="form-control"
           :disabled="
             isDisabled ||
             !(editLineFieldsPermission.includes('description') || isAdmin)
@@ -14,12 +14,12 @@
         />
         <button
           v-if="!isDisabled"
-          class="btn btn-secondary"
+          class="btn btn-secondary btn-sm py-0"
           type="button"
           @click="$emit('select-item-for', lineDetails.line_number)"
         >
           <i class="fas fa-box-open"></i>
-          Or Choose Item from Oracle...
+          ...
         </button>
       </div>
     </td>
@@ -27,7 +27,7 @@
     <td>
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="lineDetails.price"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('price') || isAdmin)
@@ -37,7 +37,7 @@
     <td>
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('order_number') || isAdmin)
@@ -48,7 +48,7 @@
     <td>
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="lineDetails.hcopy"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('hcopy') || isAdmin)
@@ -58,7 +58,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="lineDetails.qty_returned"
         :disabled="
           isDisabled ||
@@ -74,7 +74,7 @@
         "
       >
         <select
-          class="form-select form-select-sm"
+          class="form-select"
           v-model="lineDetails.unit"
           :disabled="isDisabled"
         >
@@ -90,7 +90,7 @@
       <span v-else>
         <input
           type="text"
-          class="form-control form-control-sm"
+          class="form-control"
           :disabled="true"
           v-model="lineDetails.unit"
         />
@@ -99,7 +99,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         v-model="lineDetails.qty_inspect"
         :disabled="
           isDisabled ||
@@ -110,7 +110,7 @@
     <td>
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('date') || isAdmin)
         "
@@ -120,7 +120,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('good_condition') || isAdmin)
@@ -131,7 +131,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('minor_repair_clean') || isAdmin)
@@ -142,7 +142,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('repair_parts_needed') || isAdmin)
@@ -153,7 +153,7 @@
     <td>
       <input
         type="number"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('damaged') || isAdmin)
@@ -164,7 +164,7 @@
     <td>
       <input
         type="text"
-        class="form-control form-control-sm"
+        class="form-control"
         :disabled="isDisabled"
         v-model="lineDetails.user_comment"
         v-if="editLineFieldsPermission.includes('comments') || isAdmin"
