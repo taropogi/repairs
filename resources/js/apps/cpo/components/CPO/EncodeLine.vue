@@ -2,11 +2,22 @@
   <tr>
     <th scope="row">{{ line.lineNumber }}</th>
     <td v-if="encodeLineFieldsPermission.includes('description') || isAdmin">
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        v-model="line.description"
-      />
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Manually enter item description here . . "
+          v-model="line.description"
+        />
+        <button
+          class="btn btn-secondary"
+          type="button"
+          @click="$emit('select-item-for', line.lineNumber)"
+        >
+          <i class="fas fa-box-open"></i>
+          Or Choose Item from Oracle...
+        </button>
+      </div>
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('price') || isAdmin">
@@ -140,6 +151,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  emits: ["delete-line", "select-item-for"],
   props: {
     line: {
       type: Object,

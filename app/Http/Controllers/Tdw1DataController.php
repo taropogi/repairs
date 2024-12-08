@@ -14,4 +14,17 @@ class Tdw1DataController extends Controller
 
         return $response;
     }
+    public function getItemsAll()
+    {
+        $query = Item::query();
+
+        if (request()->has('search')) {
+            $search = request()->input('search');
+            $query->where('description', 'LIKE', "%{$search}%")
+                ->orWhere('oracle_code', 'LIKE', "%{$search}%");
+        }
+        $response['items'] = $query->limit(200)->get();
+
+        return $response;
+    }
 }

@@ -60,11 +60,29 @@
     </transition>
     <transition name="general-transition">
       <div
-        v-if="isNavUpdateActive"
-        class="alert alert-info d-flex align-items-center my-2"
+        v-if="isNavUpdateActive && !userIsAdmin"
+        class="alert alert-success d-flex align-items-center my-2"
         role="alert"
       >
         <div>
+          <h4 class="fw-bold">
+            <i class="bi bi-info-circle me-2"></i>
+            NOTES
+          </h4>
+          <hr />
+          <strong>
+            <i class="bi bi-person-check me-2"></i>
+            CUSTOMER SELECTION</strong
+          >
+          <p class="my-2">
+            You can select oracle customer by selecting the "Choose oracle
+            customer" option. This will automatically fill the customer name and
+            address fields.
+          </p>
+          <p class="my-2">
+            If you select N/A, you can manually input the customer name and
+            address.
+          </p>
           <strong
             ><i class="bi bi-pencil-square me-2"></i> FOR UPDATING LINES</strong
           >
@@ -78,6 +96,51 @@
           <p class="my-2">
             You can put your own comments for each line. Other comments by other
             users will be visible below the input field.
+          </p>
+        </div>
+      </div>
+    </transition>
+    <transition name="note-encoding">
+      <div
+        v-if="isNavEncodeActive && !userIsAdmin"
+        class="alert alert-info d-flex align-items-center my-2"
+        role="alert"
+      >
+        <div>
+          <h4 class="fw-bold">
+            <i class="bi bi-info-circle me-2"></i>
+            NOTES
+          </h4>
+          <hr />
+          <strong>
+            <i class="bi bi-person-check me-2"></i>
+            CUSTOMER SELECTION</strong
+          >
+          <p class="my-2">
+            You can select oracle customer by selecting the "Choose oracle
+            customer" option. This will automatically fill the customer name and
+            address fields.
+          </p>
+          <p class="my-2">
+            If you select N/A, you can manually input the customer name and
+            address.
+          </p>
+
+          <strong>
+            <i class="bi bi-box-seam me-2"></i>
+            ITEM SELECTION</strong
+          >
+          <p class="my-2">
+            You can select a specific item from the oracle item list by clicking
+            the
+            <button class="btn btn-secondary btn-sm">
+              Or Choose Item from Oracle...
+            </button>
+            button.
+          </p>
+          <p>
+            This will automatically fill the description, price, and unit
+            fields.
           </p>
         </div>
       </div>
@@ -202,28 +265,34 @@ export default {
 };
 </script>
 <style scoped>
-.general-transition-enter-from {
+.general-transition-enter-from,
+.note-encoding-enter-from {
   opacity: 0;
   transform: translateY(-30px);
 }
 
-.general-transition-enter-active {
+.general-transition-enter-active,
+.note-encoding-enter-active {
   transition: all 0.5s ease-out;
 }
-.general-transition-enter-to {
+.general-transition-enter-to,
+.note-encoding-enter-to {
   opacity: 1;
   transform: translateY(0);
 }
 
-.general-transition-leave-from {
+.general-transition-leave-from,
+.note-encoding-leave-from {
   opacity: 1;
   transform: translateY(0);
 }
 
-.general-transition-leave-active {
+.general-transition-leave-active,
+.note-encoding-leave-active {
   transition: all 0.5s ease-in;
 }
-.general-transition-leave-to {
+.general-transition-leave-to,
+.note-encoding-leave-to {
   opacity: 0;
   transform: translateY(-30px);
 }

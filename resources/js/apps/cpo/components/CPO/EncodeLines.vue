@@ -1,5 +1,10 @@
 <template>
   <div>
+    <select-oracle-item-input
+      v-if="isSelectingOracleItem"
+      @closeModal="closeModal"
+      @itemSelected="itemSelected"
+    />
     <div
       v-if="itemsUom.length > 0 && localLines.length > 0"
       class="text-center"
@@ -128,6 +133,7 @@
             :line="line"
             :items-uom="itemsUom"
             @delete-line="deleteLine"
+            @selectItemFor="selectOracleItem"
           />
         </tbody>
       </table>
@@ -143,10 +149,11 @@
 import { mapGetters } from "vuex";
 import axios from "axios";
 import EncodeLine from "./EncodeLine.vue";
-
+import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
 export default {
   components: {
     EncodeLine,
+    SelectOracleItemInput,
   },
 
   props: {
@@ -165,9 +172,35 @@ export default {
       localLines: this.modelValue,
       itemsUom: [],
       isDeleting: false,
+      isSelectingOracleItem: false,
+      selectItemForLineNumber: null,
     };
   },
   methods: {
+    itemSelected(item) {
+      const targetItem = this.localLines.find(
+        (line) => line.lineNumber === this.selectItemForLineNumber
+      );
+      targetItem.description = item.description;
+      targetItem.price = item.list_price;
+      targetItem.unit = item.primary_uom_code;
+      this.localLines = [
+        ...this.localLines.filter(
+          (line) => line.lineNumber !== targetItem.lineNumber
+        ),
+        targetItem,
+      ];
+      this.localLines.sort((a, b) => a.lineNumber - b.lineNumber);
+      this.$emit("update:modelValue", this.localLines);
+      this.isSelectingOracleItem = false;
+    },
+    closeModal() {
+      this.isSelectingOracleItem = false;
+    },
+    selectOracleItem(forLineNumber) {
+      this.selectItemForLineNumber = forLineNumber;
+      this.isSelectingOracleItem = true;
+    },
     resetLineNumber() {
       this.localLines.forEach((line, index) => {
         line.lineNumber = index + 1;
