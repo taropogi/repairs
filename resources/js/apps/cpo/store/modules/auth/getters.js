@@ -43,4 +43,8 @@ export default {
   isAdmin(state) {
     return state.user.is_admin;
   },
+  encodeLineFieldsPermission(state) {
+    return state.user.permissions.find((p) => p.name == "cpo-encode")
+      ?.lineFields;
+  },
 };

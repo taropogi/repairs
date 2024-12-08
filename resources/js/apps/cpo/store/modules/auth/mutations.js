@@ -6,14 +6,19 @@ export default {
     }
   },
   async setUser(state, user) {
-    state.user = user;
-    const freshUser = await axios.get("api/user");
+    try {
+      state.user = user;
+      const freshUser = await axios.get("api/user");
 
-    const toUseUser = freshUser.data || user;
+      const toUseUser = freshUser.data || user;
 
-    state.user = toUseUser;
-    if (toUseUser) {
-      localStorage.setItem("loggedUser", JSON.stringify(toUseUser));
+      state.user = toUseUser;
+      if (toUseUser) {
+        localStorage.setItem("loggedUser", JSON.stringify(toUseUser));
+      }
+    } catch (e) {
+      console.log("Error in setUser mutation");
+      console.error(e);
     }
   },
 };

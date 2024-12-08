@@ -1,7 +1,7 @@
 <template>
   <tr>
     <th scope="row">{{ line.lineNumber }}</th>
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('description')">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -9,7 +9,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('price')">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -17,7 +17,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('order_number')">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -25,7 +25,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('hcopy')">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -33,7 +33,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('qty_returned')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -41,7 +41,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('unit')">
       <div v-if="itemsUom.length > 0">
         <select class="form-select form-select-sm" v-model="line.unit">
           <option
@@ -56,7 +56,7 @@
       </div>
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('qty_inspect')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -64,7 +64,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('date')">
       <input
         type="text"
         class="form-control form-control-sm"
@@ -72,7 +72,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('good_condition')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -80,7 +80,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('minor_repair_clean')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -88,7 +88,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('repair_parts_needed')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -96,7 +96,7 @@
       />
     </td>
 
-    <td>
+    <td v-if="encodeLineFieldsPermission.includes('damaged')">
       <input
         type="number"
         class="form-control form-control-sm"
@@ -129,6 +129,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     line: {
@@ -145,6 +147,9 @@ export default {
     return {
       isDeleting: false,
     };
+  },
+  computed: {
+    ...mapGetters("auth", ["encodeLineFieldsPermission"]),
   },
   methods: {
     deleteLine() {

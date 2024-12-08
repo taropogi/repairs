@@ -12,18 +12,89 @@
         <thead class="table-warning">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Description</th>
-            <th scope="col" style="width: 50px">Price</th>
-            <th scope="col" style="width: 100px">Doc #</th>
-            <th scope="col" style="width: 100px">HCopy</th>
-            <th scope="col" style="width: 50px">Qty Returned</th>
-            <th scope="col" style="width: 100px">Unit</th>
-            <th scope="col" style="width: 50px">Qty Inspect</th>
-            <th scope="col" style="width: 100px">Date</th>
-            <th scope="col" style="width: 50px">Good Condition</th>
-            <th scope="col" style="width: 50px">Minor Repair/Clean</th>
-            <th scope="col" style="width: 50px">Repair/Parts Needed</th>
-            <th scope="col" style="width: 50px">Damaged</th>
+            <th
+              scope="col"
+              v-if="encodeLineFieldsPermission.includes('description')"
+            >
+              Description
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('price')"
+            >
+              Price
+            </th>
+            <th
+              scope="col"
+              style="width: 100px"
+              v-if="encodeLineFieldsPermission.includes('order_number')"
+            >
+              Doc #
+            </th>
+            <th
+              scope="col"
+              style="width: 100px"
+              v-if="encodeLineFieldsPermission.includes('hcopy')"
+            >
+              HCopy
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('qty_returned')"
+            >
+              Qty Returned
+            </th>
+            <th
+              scope="col"
+              style="width: 100px"
+              v-if="encodeLineFieldsPermission.includes('unit')"
+            >
+              Unit
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('qty_inspect')"
+            >
+              Qty Inspect
+            </th>
+            <th
+              scope="col"
+              style="width: 100px"
+              v-if="encodeLineFieldsPermission.includes('date')"
+            >
+              Date
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('good_condition')"
+            >
+              Good Condition
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('minor_repair_clean')"
+            >
+              Minor Repair/Clean
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('repair_parts_needed')"
+            >
+              Repair/Parts Needed
+            </th>
+            <th
+              scope="col"
+              style="width: 50px"
+              v-if="encodeLineFieldsPermission.includes('damaged')"
+            >
+              Damaged
+            </th>
             <th scope="col">Comments</th>
 
             <th scope="col" style="width: 100px">Actions</th>
@@ -48,6 +119,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import axios from "axios";
 import EncodeLine from "./EncodeLine.vue";
 
@@ -55,6 +127,7 @@ export default {
   components: {
     EncodeLine,
   },
+
   props: {
     modelValue: {
       type: Array,
@@ -63,6 +136,9 @@ export default {
     },
   },
   emits: ["update:modelValue"],
+  computed: {
+    ...mapGetters("auth", ["encodeLineFieldsPermission"]),
+  },
   data() {
     return {
       localLines: this.modelValue,
