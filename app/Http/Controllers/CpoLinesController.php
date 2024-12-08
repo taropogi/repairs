@@ -98,54 +98,108 @@ class CpoLinesController extends Controller
      */
     public function update(Request $request)
     {
+
+        $userPermissions = auth()->user()->permissions;
+        $userIsAdmin = auth()->user()->is_admin;
+        $lineFields = [];
+        foreach ($userPermissions as $permission) {
+            if ($permission['name'] === 'cpo-edit') {
+                $lineFields = $permission['lineFields'];
+                break;
+            }
+        }
+
         $cpoLine = CpoLine::where('id', $request->id)->first();
 
-        $cpoLine->description = $request->description;
+
+        if (in_array('description', $lineFields) || $userIsAdmin) {
+            $cpoLine->description = $request->description;
+        }
 
 
-        if (is_numeric($request->price)) {
+
+        if (
+            (in_array('price', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->price)
+        ) {
             $cpoLine->price = $request->price;
         }
 
-        $cpoLine->hcopy = $request->hcopy;
+        if (in_array('hcopy', $lineFields) || $userIsAdmin) {
+            $cpoLine->hcopy = $request->hcopy;
+        }
 
-        if (is_numeric($request->qty_returned)) {
+
+        if (
+            (in_array('qty_returned', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->qty_returned)
+        ) {
             $cpoLine->qty_returned = $request->qty_returned;
         }
-        $cpoLine->unit = $request->unit;
 
-        if (is_numeric($request->qty_inspect)) {
+        if (
+            (in_array('unit', $lineFields) || $userIsAdmin)
+
+        ) {
+            $cpoLine->unit = $request->unit;
+        }
+
+
+        if (
+            (in_array('qty_inspect', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->qty_inspect)
+        ) {
             $cpoLine->qty_inspect = $request->qty_inspect;
         }
 
-        if (is_numeric($request->good_condition)) {
+        if (
+            (in_array('good_condition', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->good_condition)
+        ) {
             $cpoLine->good_condition = $request->good_condition;
         }
 
-        if (is_numeric($request->minor_repair_clean)) {
+        if (
+            (in_array('minor_repair_clean', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->minor_repair_clean)
+        ) {
             $cpoLine->minor_repair_clean = $request->minor_repair_clean;
         }
 
-        if (is_numeric($request->repair_parts_needed)) {
+        if (
+            (in_array('major_repair', $lineFields) || $userIsAdmin) &&
+            is_numeric($request->repair_parts_needed)
+        ) {
             $cpoLine->repair_parts_needed = $request->repair_parts_needed;
         }
-        $cpoLine->date = $request->date;
-        $cpoLine->order_number = $request->order_number;
+
+        if (
+            (in_array('date', $lineFields) || $userIsAdmin)
+        ) {
+            $cpoLine->date = $request->date;
+        }
+
+        if (
+            (in_array('order_number', $lineFields) || $userIsAdmin)
+        ) {
+            $cpoLine->order_number = $request->order_number;
+        }
+
         $cpoLine->update();
 
 
         // update comment
 
-        $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
-        if ($request->user_comment == '') {
-            $cpoLineComment->delete();
-        } else {
-            $cpoLineComment->comment = $request->user_comment;
-            $cpoLineComment->commented_by = auth()->user()->name;
-            $cpoLineComment->save();
+        if (in_array('comments', $lineFields) || $userIsAdmin) {
+            $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $cpoLine->id, 'user_id' => auth()->user()->id]);
+            if ($request->user_comment == '') {
+                $cpoLineComment->delete();
+            } else {
+                $cpoLineComment->comment = $request->user_comment;
+                $cpoLineComment->commented_by = auth()->user()->name;
+                $cpoLineComment->save();
+            }
         }
-
-
 
 
 
