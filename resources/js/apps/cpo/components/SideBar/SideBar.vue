@@ -67,7 +67,7 @@
         <div>
           <h4 class="fw-bold">
             <i class="bi bi-info-circle me-2"></i>
-            NOTES
+            NOTES FOR UPDATING
           </h4>
           <hr />
           <strong>
@@ -125,7 +125,7 @@
         <div>
           <h4 class="fw-bold">
             <i class="bi bi-info-circle me-2"></i>
-            NOTES
+            NOTES FOR ENCODING
           </h4>
           <hr />
           <strong>

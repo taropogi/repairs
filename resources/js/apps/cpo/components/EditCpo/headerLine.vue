@@ -13,6 +13,7 @@
           v-model="lineDetails.description"
         />
         <button
+          v-if="!isDisabled"
           class="btn btn-secondary"
           type="button"
           @click="$emit('select-item-for', lineDetails.line_number)"
