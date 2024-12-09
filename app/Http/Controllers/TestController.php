@@ -55,21 +55,21 @@ class TestController extends Controller
                 } else {
                     $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
                 }
-
+                array_push($itemImageUrls, $src);
                 // echo $src . " : <br>";
 
-                echo "<img src='$src' alt=''>";
-                $headers = @get_headers($src);
+                // echo "<img src='$src' alt=''>";
+                // $headers = @get_headers($src);
 
-                if ($headers && strpos($headers[0], '200') !== false) {
-                    echo 'has image';
-                    array_push($itemImageUrls, $src);
-                }
+                // if ($headers && strpos($headers[0], '200') !== false) {
+                //     echo 'has image';
+                //     array_push($itemImageUrls, $src);
+                // }
 
-                if ($this->remoteFileExists($src)) {
-                    echo 'has image';
-                    array_push($itemImageUrls, $src);
-                }
+                // if ($this->remoteFileExists($src)) {
+                //     echo 'has image';
+                //     array_push($itemImageUrls, $src);
+                // }
             }
 
             $item->image_urls = $itemImageUrls;

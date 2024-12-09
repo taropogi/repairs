@@ -38,6 +38,7 @@
                 <th scope="col">DESCRIPTION</th>
                 <th scope="col">UNIT</th>
                 <th scope="col">PRICE</th>
+                <th v-if="isAdmin">Images</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -49,7 +50,8 @@
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
-                <td>
+                <td>images here</td>
+                <td v-if="isAdmin">
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -80,6 +82,7 @@
 <script>
 import debounce from "lodash/debounce";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
+import { mapGetters } from "vuex";
 export default {
   components: { SpinnerLoading },
   data() {
@@ -88,6 +91,9 @@ export default {
       searchOracleItemStr: "",
       isSearching: false,
     };
+  },
+  computed: {
+    ...mapGetters("auth", ["isAdmin"]),
   },
 
   methods: {

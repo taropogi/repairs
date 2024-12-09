@@ -27,7 +27,7 @@ class Tdw1DataController extends Controller
         }
         $response['items'] = $query->limit(30)->get();
 
-        $response['items']->map(function ($item) {
+        $response['items'] = $response['items']->map(function ($item) {
 
             $itemImageUrls = [];
             $remoteServer = env('YP_URL_PIC_DIR', 'http://113.1.1.190/phase7/pictures/');
@@ -44,7 +44,7 @@ class Tdw1DataController extends Controller
                 // if ($headers && strpos($headers[0], '200') !== false) {
                 //     array_push($itemImageUrls, $src);
                 // }
-
+                // array_push($itemImageUrls, $src);
                 if ($this->remoteFileExists($src)) {
                     array_push($itemImageUrls, $src);
                 }
