@@ -51,9 +51,9 @@
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
                 <td v-if="isAdmin">
-                  <div v-if="item.filtered_image_urls.length > 0">
+                  <div v-if="filterImageUrls(item).length > 0">
                     <img
-                      v-for="(url, index) in item.filtered_image_urls"
+                      v-for="(url, index) in filterImageUrls(item)"
                       :key="index"
                       :src="url"
                       alt="item image"
@@ -115,7 +115,7 @@ export default {
           filteredUrls.push(url);
         }
       }
-      this.$set(item, "filtered_image_urls", filteredUrls);
+      return filteredUrls;
     },
     async checkImageExists(url) {
       try {
