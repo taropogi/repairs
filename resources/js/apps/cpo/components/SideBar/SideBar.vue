@@ -87,7 +87,7 @@
             ><i class="bi bi-pencil-square me-2"></i> FOR UPDATING LINES</strong
           >
           <p class="my-2">
-            For updating line details, you can only access/update specified
+            For updating line details, you can only access/update specific
             fields. Fields you cannot access/update are grayed out.
           </p>
           <strong class="my-2"
