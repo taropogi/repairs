@@ -58,7 +58,7 @@ class TestController extends Controller
 
                 echo $src . " : <br>";
 
-
+                echo "<img src='$src' alt=''>";
                 $headers = @get_headers($src);
 
                 if ($headers && strpos($headers[0], '200') !== false) {
