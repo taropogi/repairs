@@ -56,7 +56,7 @@ class TestController extends Controller
                     $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
                 }
 
-                echo $src . " : <br>";
+                // echo $src . " : <br>";
 
                 echo "<img src='$src' alt=''>";
                 $headers = @get_headers($src);
