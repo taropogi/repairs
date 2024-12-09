@@ -6,11 +6,19 @@
     >
       <h3>Are you sure with the details?</h3>
       <br />
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-danger" @click="cancel">
+      <div>
+        <button
+          type="button"
+          class="btn btn-danger mx-1 btn-lg"
+          @click="cancel"
+        >
           No, Cancel
         </button>
-        <button type="button" class="btn btn-primary" @click="confirm">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg mx-1"
+          @click="confirm"
+        >
           Yes, Confirm
         </button>
       </div>

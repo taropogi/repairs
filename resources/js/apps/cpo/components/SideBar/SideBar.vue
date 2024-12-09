@@ -61,7 +61,7 @@
     <transition name="general-transition">
       <div
         v-if="isNavUpdateActive && !userIsAdmin"
-        class="alert alert-success d-flex align-items-center my-2"
+        class="alert alert-info d-flex align-items-center my-2"
         role="alert"
       >
         <div>

@@ -54,10 +54,13 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary mx-1"
                     @click="selectAndClose(item)"
                   >
                     SELECT
+                  </button>
+                  <button type="button" class="btn btn-warning mx-1">
+                    VIEW IN YP
                   </button>
                 </td>
               </tr>

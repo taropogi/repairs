@@ -204,7 +204,10 @@
           @click="saveLine"
           :disabled="lineUpdating || isDeleting"
         >
-          <span v-if="!lineUpdating"> Save</span>
+          <span v-if="!lineUpdating" class="nowrap">
+            <i class="bi bi-save"></i>
+            Save</span
+          >
           <span v-else class="spinner-border spinner-border-sm"> </span>
         </button>
 
@@ -214,7 +217,10 @@
           @click="deleteLine"
           :disabled="lineUpdating || isDeleting"
         >
-          <span v-if="!isDeleting"> Delete</span>
+          <span v-if="!isDeleting" class="nowrap">
+            <i class="bi bi-trash"></i>
+            Delete</span
+          >
           <span class="spinner-border spinner-border-sm" v-else></span>
         </button>
       </div>

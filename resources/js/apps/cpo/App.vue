@@ -121,4 +121,8 @@ label {
 .table-hover tbody tr:hover {
   background-color: #d4edda;
 }
+
+.bg-light {
+  background-color: #e9ecef !important;
+}
 </style>

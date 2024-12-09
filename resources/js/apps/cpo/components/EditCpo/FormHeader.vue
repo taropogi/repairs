@@ -302,11 +302,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.bg-light {
-  /* background-color: #90ee90 !important; */
-  /* background-color: #98fb98 !important; */
-  background-color: #e9ecef !important; /* Lighter version of #90ee90 */
-}
-</style>

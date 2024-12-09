@@ -162,16 +162,21 @@
           <hr />
           <encode-lines v-model="formData.lines" />
 
-          <div class="col-12 text-center" v-if="!isEncoding">
-            <div class="btn-group mt-3" role="group">
-              <button type="button" class="btn btn-warning" @click="addLine">
+          <div class="text-center" v-if="!isEncoding">
+            <div class="mt-3">
+              <button
+                type="button"
+                class="btn btn-warning mx-1"
+                @click="addLine"
+              >
                 <i class="bi bi-plus"></i>
                 Add New Line
               </button>
+
               <button
                 v-if="formData.lines.length > 0"
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-primary mx-1"
                 :disabled="formData.lines.length === 0"
               >
                 <i class="bi bi-check-circle"></i>
@@ -366,11 +371,6 @@ export default {
   border-radius: 5px;
 }
 
-.btn-primary {
-  padding: 10px 20px;
-  font-size: 1.1rem;
-}
-
 /* Add any custom styles here */
 .fade-enter-active,
 .fade-leave-active {
@@ -383,8 +383,5 @@ export default {
 .fade-enter-active {
   opacity: 1;
   transform: translateY(0);
-}
-.bg-light {
-  background-color: #e9ecef !important;
 }
 </style>
