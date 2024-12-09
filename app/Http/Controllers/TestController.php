@@ -58,7 +58,7 @@ class TestController extends Controller
 
                 echo $src . " : <br>";
 
-                echo "<img src='$src' alt=''>";
+                // echo "<img src='$src' alt=''>";
                 // $headers = @get_headers($src);
 
                 // if ($headers && strpos($headers[0], '200') !== false) {
@@ -96,13 +96,27 @@ class TestController extends Controller
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
 
         // Execute curl request
-        curl_exec($ch);
+        $response = curl_exec($ch);
+
+        // Check for curl errors
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            curl_close($ch);
+            throw new \Exception("Curl error: $error_msg");
+        }
 
         // Check HTTP response code
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         // Close curl session
         curl_close($ch);
+
+        // Debugging information
+        echo '<pre>';
+        echo 'URL: ' . $url . "\n";
+        echo 'HTTP Code: ' . $httpCode . "\n";
+        echo 'Response: ' . $response . "\n";
+        echo '</pre>';
 
         // Return true if the HTTP response code is 200 (OK)
         return $httpCode === 200;
