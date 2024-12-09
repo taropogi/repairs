@@ -4,7 +4,7 @@
     <div v-else>
       <form class="row g-1 p-2 mt-0" @submit.prevent="submitCpoForm">
         <div
-          class="p-2 bg-info rounded"
+          class="p-2 rounded"
           :class="{
             'col-2': !headerRow.has_oracle_customer,
             'col-4': headerRow.has_oracle_customer,

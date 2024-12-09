@@ -1,3 +1,4 @@
+h5
 <template>
   <div>
     <select-oracle-item-input
@@ -5,12 +6,12 @@
       @closeModal="closeModal"
       @itemSelected="itemSelected"
     />
-    <div
-      v-if="itemsUom.length > 0 && localLines.length > 0"
-      class="text-center"
-    >
-      <h3 class="bg-success p-2 text-white text-center">Line Details</h3>
-      <table class="table table-striped table-sm" v-if="localLines.length > 0">
+    <div v-if="itemsUom.length > 0 && localLines.length > 0">
+      <h5 class="bg-secondary p-2 text-white m-0">LINE DETAILS</h5>
+      <table
+        class="table table-striped table-sm mt-0"
+        v-if="localLines.length > 0"
+      >
         <thead class="table-warning">
           <tr>
             <th scope="col" style="width: 100px">#</th>
