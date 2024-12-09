@@ -18,13 +18,16 @@
       @click="$emit('update-header')"
       :disabled="!canEditCpo"
     >
-      <span class="nowrap">
+      <span class="nowrap fw-bold">
         <i class="bi bi-pencil-square"></i>
         UPDATE HEADER
       </span>
     </button>
 
-    <span class="btn btn-warning mx-1 nowrap" @click="showStatusHistory = true">
+    <span
+      class="btn btn-warning mx-1 nowrap fw-bold"
+      @click="showStatusHistory = true"
+    >
       <i class="bi bi-clock-history"></i>
       VIEW STATUS HISTORY</span
     >
@@ -39,12 +42,15 @@
         'btn-secondary': !canDownloadCpoPdf,
       }"
     >
-      <span class="nowrap">
+      <span class="nowrap fw-bold">
         <i class="bi bi-file-earmark-pdf"></i>
         DOWNLOAD PDF
       </span>
     </a>
-    <router-link :to="{ name: searchCpoLink }" class="btn btn-danger mx-1">
+    <router-link
+      :to="{ name: searchCpoLink }"
+      class="btn btn-danger mx-1 fw-bold"
+    >
       <i class="bi bi-x-circle"></i> CLOSE
     </router-link>
   </div>

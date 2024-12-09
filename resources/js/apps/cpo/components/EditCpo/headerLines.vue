@@ -54,9 +54,9 @@
           :disabled="isInsertingNewLine || isSavingAllLines"
           @click="addNewLine"
         >
-          <span class="nowrap">
+          <span class="nowrap fw-bold">
             <i class="bi bi-plus-circle"></i>
-            Add new line</span
+            ADD NEW LINE</span
           >
           <span
             v-if="isInsertingNewLine"
@@ -71,9 +71,9 @@
           :disabled="isSavingAllLines || isInsertingNewLine"
           v-if="lines.length > 0"
         >
-          <span class="nowrap">
+          <span class="nowrap fw-bold">
             <i class="bi bi-save"></i>
-            Save All lines
+            SAVE ALL LINES
           </span>
           <span
             v-if="isSavingAllLines"
