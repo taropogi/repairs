@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-group">
+  <div class="text-center">
     <teleport to="body">
       <modal-status-history
         v-if="showStatusHistory"
@@ -7,9 +7,10 @@
         :header-id="cpoId"
       />
     </teleport>
+
     <button
       type="submit"
-      class="btn"
+      class="btn mx-1"
       :class="{
         'btn-success': canEditCpo,
         'btn-secondary': !canEditCpo,
@@ -19,13 +20,13 @@
       UPDATE HEADER
     </button>
 
-    <span class="btn btn-warning" @click="showStatusHistory = true"
+    <span class="btn btn-warning mx-1" @click="showStatusHistory = true"
       >VIEW STATUS HISTORY</span
     >
 
     <a
       href="#"
-      class="btn"
+      class="btn mx-1"
       @click="printCPOPdf"
       :class="{
         disabled: !canDownloadCpoPdf,
@@ -35,7 +36,7 @@
       >DOWNLOAD PDF</a
     >
 
-    <router-link :to="{ name: searchCpoLink }" class="btn btn-danger">
+    <router-link :to="{ name: searchCpoLink }" class="btn btn-danger mx-1">
       <i class="bi bi-x-circle"></i> CLOSE
     </router-link>
   </div>
