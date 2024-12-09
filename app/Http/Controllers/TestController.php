@@ -20,7 +20,7 @@ class TestController extends Controller
     }
     public function test()
     {
-        $customers = OracleCustomer::all();
+        // $customers = OracleCustomer::all();
 
         $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
         $headers = @get_headers($url);
