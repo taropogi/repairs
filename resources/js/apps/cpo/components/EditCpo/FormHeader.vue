@@ -2,7 +2,7 @@
   <div>
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <div v-else>
-      <form class="row g-1 p-2" @submit.prevent="submitCpoForm">
+      <form class="row g-1 p-2 mt-0" @submit.prevent="submitCpoForm">
         <div
           class="p-2 bg-info rounded"
           :class="{
@@ -185,7 +185,7 @@
           </div>
         </div>
       </form>
-      <action-buttons :cpo-id="headerRow.id" />
+      <action-buttons :cpo-id="headerRow.id" @updateHeader="submitCpoForm" />
     </div>
   </div>
 </template>

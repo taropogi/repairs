@@ -5,11 +5,11 @@
       @close-modal="closeModal"
       v-if="isSelectingOracleItem"
     />
-    <h5 class="bg-success p-2 text-white text-center" v-if="lines.length > 0">
+    <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
       LINE DETAILS
     </h5>
     <table
-      class="table table-sm table-hover table-borderless"
+      class="table table-sm table-hover table-borderless mt-0"
       v-if="lines.length > 0"
     >
       <thead class="table-warning">

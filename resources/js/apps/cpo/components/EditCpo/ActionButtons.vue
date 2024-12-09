@@ -15,6 +15,7 @@
         'btn-success': canEditCpo,
         'btn-secondary': !canEditCpo,
       }"
+      @click="$emit('update-header')"
       :disabled="!canEditCpo"
     >
       UPDATE HEADER
@@ -48,6 +49,7 @@ import ModalStatusHistory from "./ModalStatusHistory.vue";
 
 export default {
   inject: ["laravelData"],
+  emits: ["update-header"],
   props: {
     cpoId: {
       type: Number,
