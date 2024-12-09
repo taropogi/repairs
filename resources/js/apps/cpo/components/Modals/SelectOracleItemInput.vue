@@ -54,13 +54,19 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary mx-1"
+                    class="btn btn-info mx-1"
                     @click="selectAndClose(item)"
                   >
-                    SELECT
+                    <span class="nowrap">
+                      <i class="bi bi-hand-index-thumb"></i>
+                      SELECT
+                    </span>
                   </button>
                   <button type="button" class="btn btn-warning mx-1">
-                    VIEW IN YP
+                    <span class="nowrap">
+                      VIEW IN YP
+                      <i class="bi bi-arrow-right"></i>
+                    </span>
                   </button>
                 </td>
               </tr>
