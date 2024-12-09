@@ -41,10 +41,10 @@ class Tdw1DataController extends Controller
 
                 $headers = @get_headers($src);
 
-                if ($headers && strpos($headers[0], '200') !== false) {
-                    array_push($itemImageUrls, $src);
-                }
-                // array_push($itemImageUrls, $src);
+                // if ($headers && strpos($headers[0], '200') !== false) {
+                //     array_push($itemImageUrls, $src);
+                // }
+                array_push($itemImageUrls, $src);
                 // if ($this->remoteFileExists($src)) {
                 //     array_push($itemImageUrls, $src);
                 // }
