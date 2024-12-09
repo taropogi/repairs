@@ -141,7 +141,7 @@ export default {
       this.lines.sort((a, b) => a.line_number - b.line_number);
 
       this.showNotification({
-        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been updated. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
+        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been selected. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
         type: "success",
       });
       this.isSelectingOracleItem = false;

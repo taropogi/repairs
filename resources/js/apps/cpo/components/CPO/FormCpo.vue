@@ -169,8 +169,10 @@
                 class="btn btn-warning mx-1"
                 @click="addLine"
               >
-                <i class="bi bi-plus"></i>
-                Add New Line
+                <span class="nowrap fw-bold">
+                  <i class="bi bi-plus"></i>
+                  ADD NEW LINE
+                </span>
               </button>
 
               <button
@@ -179,8 +181,10 @@
                 class="btn btn-primary mx-1"
                 :disabled="formData.lines.length === 0"
               >
-                <i class="bi bi-check-circle"></i>
-                Submit
+                <span class="nowrap fw-bold">
+                  <i class="bi bi-check-circle"></i>
+                  SUBMIT
+                </span>
               </button>
             </div>
           </div>

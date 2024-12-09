@@ -12,35 +12,41 @@
           class="btn btn-danger mx-1 btn-lg"
           @click="cancel"
         >
-          No, Cancel
+          <span class="nowrap fw-bold">
+            <i class="bi bi-x-circle"></i>
+            NO, CANCEL
+          </span>
         </button>
         <button
           type="button"
           class="btn btn-primary btn-lg mx-1"
           @click="confirm"
         >
-          Yes, Confirm
+          <span class="nowrap fw-bold">
+            <i class="bi bi-check-circle"></i>
+            YES, CONFIRM
+          </span>
         </button>
       </div>
     </div>
     <div v-if="localFormData.has_oracle_customer">
-      <h6 class="bg-success p-2 text-white">Customer Details (Oracle)</h6>
-      <table class="table table-bordered">
+      <h5 class="bg-light p-2 my-0 fw-bold">CUSTOMER DETAILS (ORACLE)</h5>
+      <table class="table mt-0">
         <tbody>
           <tr>
-            <th style="width: 200px">Customer Name (Oracle)</th>
+            <th style="width: 200px" class="text-danger">CUSTOMER NAME</th>
             <td>
               {{ selectedCustomer?.accountName }}
             </td>
           </tr>
           <tr>
-            <th>Shipto Address</th>
+            <th class="text-danger">SHIPTO ADDRESS</th>
             <td>
               {{ selectedCustomer?.shipToAddress }}
             </td>
           </tr>
           <tr>
-            <th>Sales Representative</th>
+            <th class="text-danger">SALES REPRESENTATIVE</th>
             <td>
               {{ selectedCustomer?.srepName }}
             </td>
@@ -49,46 +55,46 @@
       </table>
     </div>
 
-    <h6 class="bg-success p-2 text-white">Customer Details</h6>
-    <table class="table table-bordered">
+    <h5 class="bg-light p-2 my-0 fw-bold">CUSTOMER DETAILS</h5>
+    <table class="table table-bordered mt-0">
       <tbody>
         <tr>
-          <th style="width: 200px">Cutomer Name</th>
+          <th style="width: 200px" class="text-danger">CUSTOMER NAME</th>
           <td>
             {{ localFormData?.customerName }}
           </td>
 
-          <th style="width: 200px">Address</th>
+          <th style="width: 200px" class="text-danger">ADDRESS</th>
           <td>
             {{ localFormData?.customerAddress }}
           </td>
         </tr>
         <tr>
-          <th>Contact Number</th>
+          <th class="text-danger">CONTACT NUMBER</th>
           <td>
             {{ localFormData?.contactNumber }}
           </td>
 
-          <th>Prepared By</th>
+          <th class="text-danger">PREPARED BY</th>
           <td>
             {{ localFormData?.preparedBy }}
           </td>
         </tr>
         <tr>
-          <th>Authorized By</th>
+          <th class="text-danger">AUTHORIZED BY</th>
           <td>
             {{ localFormData?.authorizedBy }}
           </td>
 
-          <th>Customer Reference Number</th>
+          <th class="text-danger">CUSTOMER REFERENCE #</th>
           <td>
             {{ localFormData?.customerReferenceNumber }}
           </td>
         </tr>
       </tbody>
     </table>
-    <h6 class="bg-success p-2 text-white">Line Details</h6>
-    <table class="table table-bordered">
+    <h5 class="bg-light p-2 my-0 fw-bold">LINE DETAILS</h5>
+    <table class="table table-bordered mt-0">
       <thead class="table-warning">
         <tr>
           <th scope="col">#</th>
