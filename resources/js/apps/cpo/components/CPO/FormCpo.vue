@@ -16,7 +16,7 @@
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <label class="form-label">CUSTOMER SELECTION</label>
+            <label class="form-label mb-0">CUSTOMER SELECTION</label>
             <br />
             <div class="form-check form-check-inline">
               <input
@@ -69,7 +69,7 @@
             }"
           >
             <div class="p-2">
-              <label for="customer-name" class="form-label"
+              <label for="customer-name" class="form-label mb-0"
                 >CUSTOMER NAME</label
               >
               <input
@@ -82,7 +82,7 @@
               />
             </div>
             <div class="p-2">
-              <label for="address" class="form-label">ADDRESS</label>
+              <label for="address" class="form-label mb-0">ADDRESS</label>
               <input
                 type="text"
                 class="form-control shadow"
@@ -94,7 +94,7 @@
               />
             </div>
             <div class="p-2">
-              <label for="contact-number" class="form-label"
+              <label for="contact-number" class="form-label mb-0"
                 >CONTACT NUMBER</label
               >
               <input
@@ -114,7 +114,9 @@
             }"
           >
             <div class="p-2">
-              <label for="prepared-by" class="form-label">PREPARED BY</label>
+              <label for="prepared-by" class="form-label mb-0"
+                >PREPARED BY</label
+              >
               <input
                 type="text"
                 class="form-control shadow"
@@ -125,7 +127,7 @@
             </div>
 
             <div class="p-2">
-              <label for="authorized-by" class="form-label"
+              <label for="authorized-by" class="form-label mb-0"
                 >AUTHORIZED BY</label
               >
               <input
@@ -137,7 +139,7 @@
               />
             </div>
             <div class="p-2">
-              <label for="customer-reference-number" class="form-label"
+              <label for="customer-reference-number" class="form-label mb-0"
                 >CUSTOMER REFERENCE #</label
               >
               <input
