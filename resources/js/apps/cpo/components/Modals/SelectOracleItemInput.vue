@@ -38,7 +38,7 @@
                 <th scope="col">DESCRIPTION</th>
                 <th scope="col">UNIT</th>
                 <th scope="col">PRICE</th>
-                <th v-if="isAdmin">Images</th>
+
                 <th>Action</th>
               </tr>
             </thead>
@@ -50,7 +50,7 @@
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
-                <td v-if="isAdmin"></td>
+
                 <td>
                   <button
                     type="button"

@@ -197,10 +197,10 @@
 
     <td v-if="canEditCpo">
       <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
-      <div class="btn-group btn-group-sm" role="group" v-else>
+      <div class="btn-group" role="group" v-else>
         <button
           type="button"
-          class="btn btn-primary py-0"
+          class="btn btn-primary py-1"
           @click="saveLine"
           :disabled="lineUpdating || isDeleting"
         >
@@ -210,7 +210,7 @@
 
         <button
           type="button"
-          class="btn btn-danger py-0"
+          class="btn btn-danger py-1"
           @click="deleteLine"
           :disabled="lineUpdating || isDeleting"
         >

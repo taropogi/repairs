@@ -124,7 +124,6 @@ export default {
       targetItem.description = item.description;
       targetItem.price = item.list_price;
       targetItem.unit = item.primary_uom_code;
-      // console.log(this.lines);
 
       this.lines = [
         ...this.lines.filter(
