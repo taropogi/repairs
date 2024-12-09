@@ -104,6 +104,7 @@ export default {
           },
         });
         this.items = res.data.items;
+        console.log(this.items);
       } catch (error) {
         console.error(error);
       } finally {
