@@ -4,7 +4,7 @@
     <div v-else>
       <form class="row g-1 p-2 mt-0" @submit.prevent="submitCpoForm">
         <div
-          class="p-2 rounded"
+          class="p-2 rounded bg-light"
           :class="{
             'col-2': !headerRow.has_oracle_customer,
             'col-4': headerRow.has_oracle_customer,
@@ -302,3 +302,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bg-light {
+  /* background-color: #90ee90 !important; */
+  /* background-color: #98fb98 !important; */
+  background-color: #e9ecef !important; /* Lighter version of #90ee90 */
+}
+</style>

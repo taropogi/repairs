@@ -10,7 +10,7 @@
       <form @submit.prevent="submitConfirm">
         <div class="row g-1 m-2 py-2" v-show="!isConfirming">
           <div
-            class="p-2"
+            class="p-2 bg-light"
             :class="{
               'col-2': !formData.has_oracle_customer,
               'col-4': formData.has_oracle_customer,
@@ -384,7 +384,7 @@ export default {
   opacity: 1;
   transform: translateY(0);
 }
-.bg-light-gray {
-  background-color: #f9f9f9;
+.bg-light {
+  background-color: #e9ecef !important;
 }
 </style>
