@@ -63,7 +63,7 @@ class CpoLinesController extends Controller
 
 
         $cpo->touch();
-
+        usleep(500000);
         return $cpo;
     }
 
