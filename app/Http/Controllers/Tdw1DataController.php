@@ -39,15 +39,15 @@ class Tdw1DataController extends Controller
                     $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
                 }
 
-                // $headers = @get_headers($src);
+                $headers = @get_headers($src);
 
-                // if ($headers && strpos($headers[0], '200') !== false) {
-                //     array_push($itemImageUrls, $src);
-                // }
-                // array_push($itemImageUrls, $src);
-                if ($this->remoteFileExists($src)) {
+                if ($headers && strpos($headers[0], '200') !== false) {
                     array_push($itemImageUrls, $src);
                 }
+                // array_push($itemImageUrls, $src);
+                // if ($this->remoteFileExists($src)) {
+                //     array_push($itemImageUrls, $src);
+                // }
             }
 
             $item->image_urls = $itemImageUrls;
