@@ -55,7 +55,7 @@
                     class="btn btn-primary"
                     @click="selectAndClose(item)"
                   >
-                    SELECT AND CLOSE
+                    SELECT
                   </button>
                 </td>
               </tr>
