@@ -24,16 +24,16 @@ class TestController extends Controller
 
         $this->getItemsAll();
 
-        $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
+        // $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
 
-        echo "<img src='$url' alt=''>";
-        $headers = @get_headers($url);
-        echo $headers;
-        if ($headers && strpos($headers[0], '200') !== false) {
-            echo '<h1>has image</h1>';
-        } else {
-            echo '<h1>No image</h1>';
-        }
+        // echo "<img src='$url' alt=''>";
+        // $headers = @get_headers($url);
+        // echo $headers;
+        // if ($headers && strpos($headers[0], '200') !== false) {
+        //     echo '<h1>has image</h1>';
+        // } else {
+        //     echo '<h1>No image</h1>';
+        // }
     }
 
     public function getItemsAll()
@@ -55,8 +55,8 @@ class TestController extends Controller
                 } else {
                     $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
                 }
-                array_push($itemImageUrls, $src);
-                // echo $src . " : <br>";
+
+                echo $src . " : <br>";
 
                 // echo "<img src='$src' alt=''>";
                 // $headers = @get_headers($src);
