@@ -47,11 +47,12 @@ class TestController extends Controller
 
                 echo $src . " : <br>";
 
-                // $headers = @get_headers($src);
+                $headers = @get_headers($src);
 
-                // if ($headers && strpos($headers[0], '200') !== false) {
-                //     array_push($itemImageUrls, $src);
-                // }
+                if ($headers && strpos($headers[0], '200') !== false) {
+                    echo 'has image';
+                    array_push($itemImageUrls, $src);
+                }
 
                 if ($this->remoteFileExists($src)) {
                     echo 'has image';
