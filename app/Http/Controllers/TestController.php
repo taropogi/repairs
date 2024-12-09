@@ -58,7 +58,7 @@ class TestController extends Controller
 
                 echo $src . " : <br>";
 
-                echo '<img src="$src" alt="">';
+                echo "<img src='$src' alt=''>";
                 // $headers = @get_headers($src);
 
                 // if ($headers && strpos($headers[0], '200') !== false) {
@@ -66,10 +66,15 @@ class TestController extends Controller
                 //     array_push($itemImageUrls, $src);
                 // }
 
-                // if ($this->remoteFileExists($src)) {
-                //     echo 'has image';
-                //     array_push($itemImageUrls, $src);
-                // }
+                try {
+                    if ($this->remoteFileExists($src)) {
+                        echo '<h1>has image</h1>';
+                    } else {
+                        echo '<h1>No image</h1>';
+                    }
+                } catch (\Exception $e) {
+                    echo '<h1>Error: ' . $e->getMessage() . '</h1>';
+                }
             }
 
             $item->image_urls = $itemImageUrls;
