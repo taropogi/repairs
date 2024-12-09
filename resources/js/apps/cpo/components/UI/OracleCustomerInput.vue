@@ -14,7 +14,7 @@
       </div>
 
       <!-- Put result text -->
-      <p class="text-center m-1 bg-primary">
+      <p class="text-center m-1 bg-secondary">
         <strong class="text-white"
           >Result: {{ filteredOracleCustomers.length }}</strong
         >

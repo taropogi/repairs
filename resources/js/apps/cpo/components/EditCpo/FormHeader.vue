@@ -3,13 +3,13 @@
     <spinner-loading v-if="!(headerRow && oracleCustomers)"></spinner-loading>
     <form class="row g-1 p-2" @submit.prevent="submitCpoForm" v-else>
       <div
-        class="p-2"
+        class="p-2 bg-info rounded"
         :class="{
           'col-2': !headerRow.has_oracle_customer,
           'col-4': headerRow.has_oracle_customer,
         }"
       >
-        <label class="form-label">CUSTOMER SELECTION</label>
+        <label class="form-label p-2 d-block">CUSTOMER SELECTION</label>
         <div class="form-check">
           <input
             class="form-check-input"

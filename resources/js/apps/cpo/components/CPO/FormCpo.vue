@@ -10,13 +10,15 @@
       <form @submit.prevent="submitConfirm">
         <div class="row g-1 m-2 py-2" v-show="!isConfirming">
           <div
-            class="p-2"
+            class="p-2 bg-info rounded"
             :class="{
               'col-2': !formData.has_oracle_customer,
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <label class="form-label mb-0">CUSTOMER SELECTION</label>
+            <label class="form-label mb-0 p-2 d-block"
+              >CUSTOMER SELECTION</label
+            >
             <br />
             <div class="form-check form-check-inline">
               <input
@@ -221,7 +223,7 @@ export default {
         authorizedBy: "",
         customerReferenceNumber: "",
         lines: [],
-        has_oracle_customer: false, // if customer is from oracle
+        has_oracle_customer: true, // if customer is from oracle
       },
       isSubmitSuccess: false,
       isEncoding: false,
