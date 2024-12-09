@@ -170,6 +170,8 @@ class CpoController extends Controller
 
         foreach ($request->cpoLines as $key => $item) {
 
+
+
             $itemObj = (object)$item;
 
             $cpoLine = CpoLine::find($itemObj->id);
@@ -193,7 +195,7 @@ class CpoController extends Controller
             }
 
             if (
-                (in_array('unit', $lineFields) || $userIsAdmin)
+                (in_array('unit', $lineFields) || $userIsAdmin) && isset($itemObj->unit)
 
             ) {
                 $cpoLine->unit = $itemObj->unit;
