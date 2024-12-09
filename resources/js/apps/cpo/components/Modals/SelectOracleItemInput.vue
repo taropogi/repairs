@@ -50,8 +50,8 @@
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
-                <td>images here</td>
-                <td v-if="isAdmin">
+                <td v-if="isAdmin"></td>
+                <td>
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -110,7 +110,7 @@ export default {
           },
         });
         this.items = res.data.items;
-        console.log(this.items);
+        // console.log(this.items);
       } catch (error) {
         console.error(error);
       } finally {
