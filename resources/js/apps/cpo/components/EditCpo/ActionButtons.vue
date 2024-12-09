@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div>
     <teleport to="body">
       <modal-status-history
         v-if="showStatusHistory"
@@ -18,11 +18,15 @@
       @click="$emit('update-header')"
       :disabled="!canEditCpo"
     >
-      UPDATE HEADER
+      <span class="nowrap">
+        <i class="bi bi-pencil-square"></i>
+        UPDATE HEADER
+      </span>
     </button>
 
-    <span class="btn btn-warning mx-1" @click="showStatusHistory = true"
-      >VIEW STATUS HISTORY</span
+    <span class="btn btn-warning mx-1 nowrap" @click="showStatusHistory = true">
+      <i class="bi bi-clock-history"></i>
+      VIEW STATUS HISTORY</span
     >
 
     <a
@@ -34,9 +38,12 @@
         'btn-info': canDownloadCpoPdf,
         'btn-secondary': !canDownloadCpoPdf,
       }"
-      >DOWNLOAD PDF</a
     >
-
+      <span class="nowrap">
+        <i class="bi bi-file-earmark-pdf"></i>
+        DOWNLOAD PDF
+      </span>
+    </a>
     <router-link :to="{ name: searchCpoLink }" class="btn btn-danger mx-1">
       <i class="bi bi-x-circle"></i> CLOSE
     </router-link>

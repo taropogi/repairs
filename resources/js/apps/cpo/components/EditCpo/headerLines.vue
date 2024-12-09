@@ -46,15 +46,18 @@
       </tbody>
     </table>
     <hr />
-    <div class="col-12 text-center">
-      <div class="btn-group" v-if="!headerIsLocked && canEditCpo">
+    <div>
+      <div v-if="!headerIsLocked && canEditCpo">
         <button
-          class="btn btn-primary"
+          class="btn btn-primary mx-1"
           type="button"
           :disabled="isInsertingNewLine || isSavingAllLines"
           @click="addNewLine"
         >
-          <span> Add new line</span>
+          <span class="nowrap">
+            <i class="bi bi-plus-circle"></i>
+            Add new line</span
+          >
           <span
             v-if="isInsertingNewLine"
             class="spinner-border spinner-border-sm"
@@ -62,13 +65,16 @@
         </button>
 
         <button
-          class="btn btn-success"
+          class="btn btn-success mx-1"
           type="button"
           @click="saveAllLines"
           :disabled="isSavingAllLines || isInsertingNewLine"
           v-if="lines.length > 0"
         >
-          <span> Save All lines </span>
+          <span class="nowrap">
+            <i class="bi bi-save"></i>
+            Save All lines
+          </span>
           <span
             v-if="isSavingAllLines"
             class="spinner-border spinner-border-sm"
