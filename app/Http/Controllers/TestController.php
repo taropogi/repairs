@@ -44,7 +44,7 @@ class TestController extends Controller
         $query->where('inventory_item_id', 4441);
         $response['items'] = $query->limit(30)->get();
 
-        $response['items']->map(function ($item) {
+        $response['items'] = $response['items']->map(function ($item) {
 
             $itemImageUrls = [];
             $remoteServer = env('YP_URL_PIC_DIR', 'http://113.1.1.190/phase7/pictures/');
