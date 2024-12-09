@@ -51,9 +51,9 @@
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
                 <td v-if="isAdmin">
-                  <div v-if="item.image_urls.length > 0">
+                  <div v-if="item.filtered_image_urls.length > 0">
                     <img
-                      v-for="(url, index) in item.image_urls"
+                      v-for="(url, index) in item.filtered_image_urls"
                       :key="index"
                       :src="url"
                       alt="item image"
@@ -107,6 +107,25 @@ export default {
   },
 
   methods: {
+    async filterImageUrls(item) {
+      const filteredUrls = [];
+      for (const url of item.image_urls) {
+        const exists = await this.checkImageExists(url);
+        if (exists) {
+          filteredUrls.push(url);
+        }
+      }
+      this.$set(item, "filtered_image_urls", filteredUrls);
+    },
+    async checkImageExists(url) {
+      try {
+        const response = await fetch(url, { method: "HEAD" });
+        return response.ok;
+      } catch (error) {
+        console.error("Error checking image:", error);
+        return false;
+      }
+    },
     selectAndClose(item) {
       this.$emit("item-selected", item);
     },
