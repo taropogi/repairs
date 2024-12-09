@@ -22,6 +22,15 @@ class TestController extends Controller
     {
         $customers = OracleCustomer::all();
 
+        $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
+        $headers = @get_headers($url);
+
+        if ($headers && strpos($headers[0], '200') !== false) {
+            echo '<h1>has image</h1>';
+        } else {
+            echo '<h1>No image</h1>';
+        }
+
         $this->getItemsAll();
 
         // $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
