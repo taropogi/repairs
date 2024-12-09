@@ -31,7 +31,7 @@ class TestController extends Controller
             echo '<h1>No image</h1>';
         }
 
-        // $this->getItemsAll();
+        $this->getItemsAll();
 
         // $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
 
@@ -82,7 +82,7 @@ class TestController extends Controller
                         echo '<h1>No image</h1>';
                     }
                 } catch (\Exception $e) {
-                    echo '<h1>Error: ' . $e->getMessage() . '</h1>';
+                    echo '<h1>Error: ' . $e . '</h1>';
                 }
             }
 
