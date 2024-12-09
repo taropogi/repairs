@@ -23,7 +23,7 @@ class Tdw1DataController extends Controller
             $query->where('description', 'LIKE', "%{$search}%")
                 ->orWhere('oracle_code', 'LIKE', "%{$search}%");
 
-            $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6');
+            $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6', 'list_price', 'primary_unit_of_measure');
         }
         $response['items'] = $query->limit(30)->get();
 
