@@ -29,13 +29,8 @@ class TestController extends Controller
     {
         $query = Item::query();
 
-        if (request()->has('search')) {
-            $search = request()->input('search');
-            $query->where('description', 'LIKE', "%{$search}%")
-                ->orWhere('oracle_code', 'LIKE', "%{$search}%");
 
-            $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6');
-        }
+        $query->where('inventory_item_id', 4441);
         $response['items'] = $query->limit(30)->get();
 
         $response['items']->map(function ($item) {
