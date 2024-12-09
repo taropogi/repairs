@@ -23,18 +23,12 @@
       </teleport>
 
       <table class="table table-sm table-bordered table-striped table-hover">
-        <thead class="table-success">
+        <thead
+          class="table-success"
+          style="position: sticky; top: 0; z-index: 1"
+        >
           <tr>
-            <th class="col tex-center">
-              RPO# [{{ selectedPosCount }}]
-              <!-- <div class="form-check">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value=""
-                            />
-                        </div> -->
-            </th>
+            <th class="col tex-center">RPO#x [{{ selectedPosCount }}]</th>
 
             <th scope="col">DATE ENCODED</th>
             <th scope="col">NAME</th>
@@ -70,7 +64,6 @@ import HeaderListItem from "./HeaderListItem.vue";
 import ModalPdfHistory from "../Modals/PdfHistory.vue";
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
 import { mapGetters } from "vuex";
-import { map } from "lodash";
 
 export default {
   components: {
@@ -197,5 +190,12 @@ export default {
 
 .cpo-list-move {
   transition: transform 0.8s ease;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white; /* Ensure the background color matches the table */
 }
 </style>
