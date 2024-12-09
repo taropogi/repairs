@@ -50,7 +50,17 @@
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>
                 <td>{{ item.list_price }}</td>
-                <td v-if="isAdmin"></td>
+                <td v-if="isAdmin">
+                  <div v-if="item.image_urls.length > 0">
+                    <img
+                      v-for="(url, index) in item.image_urls"
+                      :key="index"
+                      :src="url"
+                      alt="item image"
+                      style="width: 50px; height: 50px; margin-right: 5px"
+                    />
+                  </div>
+                </td>
                 <td>
                   <button
                     type="button"
