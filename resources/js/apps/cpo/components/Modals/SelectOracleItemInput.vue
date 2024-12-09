@@ -26,7 +26,7 @@
         <div style="max-height: 500px; overflow-y: auto">
           <spinner-loading v-if="isSearching" />
           <table
-            class="table table-sm table-hover"
+            class="table table-sm table-hover table-striped"
             v-if="!isSearching && items.length > 0"
           >
             <thead
