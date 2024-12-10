@@ -1,5 +1,6 @@
 <template>
   <tr
+    class="align-middle"
     :class="trClasses"
     :title="
       localHeaderItem.is_completed
