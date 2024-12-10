@@ -65,7 +65,7 @@
                   <button
                     type="button"
                     class="btn btn-warning mx-1"
-                    @click="gotoYP"
+                    @click="gotoYP(item)"
                   >
                     <span class="nowrap">
                       VIEW IN YP
@@ -110,8 +110,8 @@ export default {
   },
 
   methods: {
-    gotoYP() {
-      const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=40N-COLOP-RED.BLACK-XX-XX-012848&inventory_item_id=13088`;
+    gotoYP(item) {
+      const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=${item.oracle_code}&inventory_item_id=${item.inventory_item_id}`;
       window.open(url, "_blank");
     },
     selectAndClose(item) {
