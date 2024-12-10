@@ -52,7 +52,7 @@
                 }"
               >
                 <td>
-                  {{ item.oracle_code }}
+                  <span class="fw-bold">{{ item.oracle_code }}</span>
                 </td>
                 <td>{{ item.description }}</td>
                 <td>{{ item.primary_unit_of_measure }}</td>
@@ -61,20 +61,20 @@
                 <td>
                   <button
                     type="button"
-                    class="btn btn-info mx-1"
+                    class="btn btn-info mx-1 btn-sm"
                     @click="selectAndClose(item)"
                   >
-                    <span class="nowrap">
+                    <span class="nowrap fw-bold">
                       <i class="bi bi-hand-index-thumb"></i>
                       SELECT
                     </span>
                   </button>
                   <button
                     type="button"
-                    class="btn btn-warning mx-1"
+                    class="btn btn-warning mx-1 btn-sm"
                     @click="gotoYP(item)"
                   >
-                    <span class="nowrap">
+                    <span class="nowrap fw-bold">
                       VIEW IN YP
                       <i class="bi bi-arrow-right"></i>
                     </span>
