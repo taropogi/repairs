@@ -13,7 +13,10 @@
           :to="searchCpoLink"
           class="nav-link text-white"
           :class="{ active: isNavSearchActive || isNavUpdateActive }"
-          ><i class="bi bi-search me-2"></i> Search CPO
+        >
+          <span class="nowrap fw-bold">
+            <i class="bi bi-search me-2"></i> SEARCH CPO
+          </span>
           <span class="badge bg-success" v-if="isNavUpdateActive"
             >UPDATE PAGE <span v-if="!canEditCpo">(VIEW)</span></span
           >
@@ -24,16 +27,22 @@
           :to="encodeCpoPageLink"
           class="nav-link text-white"
           :class="{ active: isNavEncodeActive }"
-          ><i class="bi bi-pencil-square me-2"></i> Encode CPO</router-link
         >
+          <span class="nowrap fw-bold">
+            <i class="bi bi-pencil-square me-2"></i> ENCODE CPO
+          </span>
+        </router-link>
       </li>
       <li>
         <router-link
           :to="linkExportCpo"
           class="nav-link text-white"
           :class="{ active: isNavExportActive }"
-          ><i class="bi bi-box-arrow-up me-2"></i> Export CPO list</router-link
         >
+          <span class="nowrap fw-bold">
+            <i class="bi bi-box-arrow-up me-2"></i> EXPORT CPO LIST
+          </span>
+        </router-link>
       </li>
     </ul>
 
