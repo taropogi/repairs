@@ -28,7 +28,14 @@
           style="position: sticky; top: 0; z-index: 1"
         >
           <tr>
-            <th class="col tex-center">RPO#x [{{ selectedPosCount }}]</th>
+            <th class="col tex-center">
+              <span class="nowrap"
+                >RPO#
+                <span v-if="selectedPosCount > 0"
+                  >[{{ selectedPosCount }}]</span
+                ></span
+              >
+            </th>
 
             <th scope="col">DATE ENCODED</th>
             <th scope="col">NAME</th>

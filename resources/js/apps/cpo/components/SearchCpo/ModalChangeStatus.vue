@@ -33,15 +33,13 @@
         <table class="table table-sm mt-2 table-striped" v-if="selectedCpos">
           <thead>
             <tr class="table-primary">
-              <th scope="col">CPO#</th>
               <th scope="col">RPO #</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="cpo in selectedCpos" :key="cpo.id">
-              <th scope="row">{{ cpo.id }}</th>
-              <td>{{ cpo.rpo_number }}</td>
+              <th scope="row">{{ cpo.formatted_id }}</th>
               <td>
                 {{
                   headerStatuses.find((status) => status.id === cpo.status_id)
