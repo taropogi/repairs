@@ -3,7 +3,12 @@
     <th scope="row">{{ line.lineNumber }}</th>
     <td v-if="encodeLineFieldsPermission.includes('description') || isAdmin">
       <div class="input-group">
-        <input type="text" class="form-control" v-model="line.description" />
+        <input
+          @input="debouncedSearchItemSegment6"
+          type="text"
+          class="form-control"
+          v-model="line.description"
+        />
         <button
           class="btn btn-secondary btn-sm py-0"
           type="button"
@@ -107,6 +112,7 @@
 </template>
 
 <script>
+import debounce from "lodash/debounce";
 import { mapGetters } from "vuex";
 
 export default {
@@ -125,6 +131,7 @@ export default {
   data() {
     return {
       isDeleting: false,
+      isSearchingSegment6: false,
     };
   },
   computed: {
@@ -135,6 +142,33 @@ export default {
       this.isDeleting = true;
       this.$emit("delete-line", this.line);
     },
+    async searchOracleItemSegment6() {
+      if (this.isSearchingSegment6) return;
+      try {
+        this.isSearchingSegment6 = true;
+        const res = await axios.get("api/items/segment6/single", {
+          params: {
+            search: this.line.description,
+          },
+        });
+        this.line.description =
+          res.data.item?.description || this.line.description;
+        this.line.price = res.data.item?.list_price || this.line.price;
+        this.line.unit = res.data.item?.primary_uom_code || this.line.unit;
+        // this.items = res.data.items;
+        // console.log(this.items);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.isSearchingSegment6 = false;
+      }
+    },
+  },
+  created() {
+    this.debouncedSearchItemSegment6 = debounce(
+      this.searchOracleItemSegment6,
+      500
+    );
   },
 };
 </script>
