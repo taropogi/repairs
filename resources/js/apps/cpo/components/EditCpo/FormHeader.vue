@@ -55,6 +55,9 @@
               >CUSTOMER NAME
             </label>
             <input
+              @input="
+                headerRow.customer_name = headerRow.customer_name.toUpperCase()
+              "
               type="text"
               class="form-control"
               id="customer-name"
@@ -71,6 +74,10 @@
               >ADDRESS
             </label>
             <input
+              @input="
+                headerRow.customer_address =
+                  headerRow.customer_address.toUpperCase()
+              "
               :disabled="
                 headerRow.locked || !canEditCpo || headerRow.has_oracle_customer
               "
@@ -88,6 +95,10 @@
               >CONTACT #</label
             >
             <input
+              @input="
+                headerRow.contact_number =
+                  headerRow.contact_number.toUpperCase()
+              "
               type="text"
               class="form-control"
               id="contact-number"
@@ -100,6 +111,9 @@
           <div class="pt-2">
             <label for="prepared-by" class="form-label mb-0">PREPARED BY</label>
             <input
+              @input="
+                headerRow.prepared_by = headerRow.prepared_by.toUpperCase()
+              "
               type="text"
               class="form-control"
               id="prepared-by"
@@ -113,6 +127,9 @@
               >AUTHORIZED BY</label
             >
             <input
+              @input="
+                headerRow.authorized_by = headerRow.authorized_by.toUpperCase()
+              "
               type="text"
               class="form-control"
               id="authorized-by"
@@ -134,6 +151,10 @@
               >CUSTOMER REFERENCE #</label
             >
             <input
+              @input="
+                headerRow.customer_reference_number =
+                  headerRow.customer_reference_number.toUpperCase()
+              "
               type="text"
               class="form-control"
               id="customer-reference-number"
