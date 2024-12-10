@@ -12,17 +12,16 @@
     </template>
     <template #body>
       <div style="min-height: 500px">
-        <form>
-          <div class="mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search Oracle Code or Description"
-              v-model="searchOracleItemStr"
-              @input="debouncedSearch"
-            />
-          </div>
-        </form>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Oracle Code or Description"
+            v-model="searchOracleItemStr"
+            @input="debouncedSearch"
+          />
+        </div>
+
         <div style="max-height: 500px; overflow-y: auto">
           <spinner-loading v-if="isSearching" />
           <table
