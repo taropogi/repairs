@@ -118,7 +118,8 @@ label {
 }
 
 /* Custom hover color for table rows */
-.table-hover tbody tr:hover {
+.table-hover tbody tr:hover,
+.bg-light-green {
   background-color: #d4edda;
 }
 

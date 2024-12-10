@@ -43,7 +43,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in items" :key="item.id">
+              <tr
+                v-for="item in items"
+                :key="item.id"
+                :class="{
+                  'table-warning':
+                    currentlyViewingItem?.inventory_item_id ==
+                    item.inventory_item_id,
+                }"
+              >
                 <td>
                   {{ item.oracle_code }}
                 </td>
@@ -103,6 +111,7 @@ export default {
       items: [],
       searchOracleItemStr: "",
       isSearching: false,
+      currentlyViewingItem: null,
     };
   },
   computed: {
@@ -111,6 +120,7 @@ export default {
 
   methods: {
     gotoYP(item) {
+      this.currentlyViewingItem = item;
       const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=${item.oracle_code}&inventory_item_id=${item.inventory_item_id}`;
       window.open(url, "_blank");
     },
