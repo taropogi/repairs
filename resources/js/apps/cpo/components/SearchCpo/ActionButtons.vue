@@ -10,7 +10,7 @@
       @click="deleteCpo"
       :disabled="!canDeleteCpo || localHeaderItem.locked"
     >
-      <span class="nowrap"> <i class="bi bi-trash"></i> Delete </span>
+      <span class="nowrap fw-bold"> <i class="bi bi-trash"></i> DELETE </span>
     </button>
 
     <button
@@ -18,11 +18,11 @@
       class="btn btn-success tooltip-wrapper mx-1"
       @click="editCpoHeader"
     >
-      <span v-if="!canEditCpo" class="nowrap">
-        <i class="bi bi-eye me-1"></i> View
+      <span v-if="!canEditCpo" class="nowrap fw-bold">
+        <i class="bi bi-eye me-1"></i> VIEW
       </span>
-      <span v-else class="nowrap">
-        <i class="bi bi-pencil-square me-1"></i> Edit
+      <span v-else class="nowrap fw-bold">
+        <i class="bi bi-pencil-square me-1"></i> EDIT
       </span>
     </button>
     <button
@@ -35,7 +35,7 @@
       @click="printCPOPdf"
       :disabled="!canDownloadCpoPdf || localHeaderItem.locked"
     >
-      <span class="nowrap">
+      <span class="nowrap fw-bold">
         <i class="bi bi-file-earmark-pdf text-sm"></i> PDF
       </span>
     </button>
