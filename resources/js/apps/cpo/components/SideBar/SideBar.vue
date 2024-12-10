@@ -107,6 +107,7 @@
             <button class="btn btn-secondary btn-sm">...</button>
             button.
           </p>
+          <p>You can also put the item's segment6 in th field.</p>
           <p>
             This will automatically fill the description, price, and unit
             fields.
@@ -150,6 +151,7 @@
             <button class="btn btn-secondary btn-sm">...</button>
             button.
           </p>
+          <p>You can also put the item's segment6 in th field.</p>
           <p>
             This will automatically fill the description, price, and unit
             fields.
