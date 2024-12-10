@@ -24,7 +24,6 @@
         </button>
       </div>
     </td>
-
     <td>
       <input
         type="text"

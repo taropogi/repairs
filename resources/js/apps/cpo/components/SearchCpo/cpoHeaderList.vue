@@ -154,22 +154,23 @@ export default {
     closeModalDeleteCpo() {
       this.deleteCpo = null;
     },
-    getCpoHeaders() {
+    async getCpoHeaders() {
       this.isSearching = true;
       this.error = null;
-      axios
-        .get("api/cpo", {
+
+      try {
+        const response = await axios.get("api/cpo", {
           params: {
             ...this.searchCriteria,
           },
-        })
-        .then((response) => {
-          this.cpoHeaderList = response.data.cpos;
-          this.isSearching = false;
-        })
-        .catch((error) => {
-          this.error = error;
         });
+
+        this.cpoHeaderList = response.data.cpos;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.isSearching = false;
+      }
     },
   },
   mounted() {

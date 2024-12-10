@@ -5,6 +5,7 @@
       @close-modal="closeModal"
       v-if="isSelectingOracleItem"
     />
+
     <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
       LINE DETAILS
     </h5>
@@ -28,7 +29,6 @@
           <th scope="col" style="width: 50px">Repair/Parts Needed</th>
           <th scope="col" style="width: 50px">Damaged</th>
           <th scope="col">Comments</th>
-
           <th scope="col" v-if="canEditCpo" style="width: 100px">Actions</th>
         </tr>
       </thead>
@@ -92,12 +92,14 @@
 import headerLine from "./headerLine.vue";
 import { mapGetters } from "vuex";
 import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
+
 export default {
   components: {
     headerLine,
     SelectOracleItemInput,
   },
   // props: ["headerId", "headerIsLocked"],
+
   inject: ["showNotification"],
   props: {
     headerId: {
@@ -156,6 +158,7 @@ export default {
       });
       this.isSelectingOracleItem = false;
     },
+
     selectOracleItem(forLineNumber) {
       // console.log(forLineNumber);
       this.selectItemForLineNumber = forLineNumber;
@@ -164,6 +167,7 @@ export default {
     closeModal() {
       this.isSelectingOracleItem = false;
     },
+
     async addNewLine() {
       this.isInsertingNewLine = true;
       try {

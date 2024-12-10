@@ -423,8 +423,7 @@ class CpoController extends Controller
         $response['limit_per_page'] = 0;
 
 
-        // set delay time sleep for 0.5 second
-        usleep(500000);
+
 
         return $response;
     }
