@@ -80,6 +80,9 @@
                 id="customer-name"
                 required
                 :disabled="formData.has_oracle_customer"
+                @input="
+                  formData.customerName = formData.customerName.toUpperCase()
+                "
                 v-model.trim="formData.customerName"
               />
             </div>
@@ -92,6 +95,10 @@
                 required
                 :disabled="formData.has_oracle_customer"
                 v-model.trim="formData.customerAddress"
+                @input="
+                  formData.customerAddress =
+                    formData.customerAddress.toUpperCase()
+                "
                 placeholder="1234 Main St"
               />
             </div>
@@ -105,6 +112,9 @@
                 id="contact-number"
                 required
                 v-model="formData.contactNumber"
+                @input="
+                  formData.contactNumber = formData.contactNumber.toUpperCase()
+                "
               />
             </div>
           </div>
@@ -125,6 +135,7 @@
                 id="prepared-by"
                 required
                 v-model="formData.preparedBy"
+                @input="formData.preparedBy = formData.preparedBy.toUpperCase()"
               />
             </div>
 
@@ -138,6 +149,9 @@
                 id="authorized-by"
                 required
                 v-model="formData.authorizedBy"
+                @input="
+                  formData.authorizedBy = formData.authorizedBy.toUpperCase()
+                "
               />
             </div>
             <div class="p-2">
@@ -150,6 +164,10 @@
                 id="customer-reference-number"
                 required
                 v-model="formData.customerReferenceNumber"
+                @input="
+                  formData.customerReferenceNumber =
+                    formData.customerReferenceNumber.toUpperCase()
+                "
               />
             </div>
           </div>
