@@ -6,55 +6,55 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-    * {
-        font-family: Verdana, Arial, sans-serif;
-    }
+        * {
+            font-family: Verdana, Arial, sans-serif;
+        }
 
-    table {
-        font-size: x-small;
-    }
+        table {
+            font-size: x-small;
+        }
 
-    tfoot tr td {
-        font-weight: bold;
-        font-size: x-small;
-    }
+        tfoot tr td {
+            font-weight: bold;
+            font-size: x-small;
+        }
 
-    thead th {
-        font-size: 10px;
-    }
-
-
-    .gray {
-        background-color: lightgray
-    }
-
-    td.text-center {
-        text-align: center;
-        vertical-align: middle;
-    }
+        thead th {
+            font-size: 10px;
+        }
 
 
+        .gray {
+            background-color: lightgray
+        }
 
-    .to-border,
-    .to-border td,
-    .to-border th {
-        border: 1px solid;
-    }
+        td.text-center {
+            text-align: center;
+            vertical-align: middle;
+        }
 
-    .to-border {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    .table-inside,
-    .table-inside td {
-        font-size: 10px;
-        border: none;
-    }
 
-    .page-break {
-        page-break-after: always;
-    }
+        .to-border,
+        .to-border td,
+        .to-border th {
+            border: 1px solid;
+        }
+
+        .to-border {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-inside,
+        .table-inside td {
+            font-size: 10px;
+            border: none;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
 
 </head>
@@ -96,7 +96,7 @@
             <tr>
 
 
-                <td><small><strong>SALESMAN:</strong> LET / JIA</small></td>
+                <td><small><strong>SALESMAN:</strong> -</small></td>
                 <td><small><strong>PREPARED BY:</strong> {{ $cpo['prepared_by'] }} </small></td>
 
 
