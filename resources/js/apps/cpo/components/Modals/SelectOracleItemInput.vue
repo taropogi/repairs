@@ -62,7 +62,11 @@
                       SELECT
                     </span>
                   </button>
-                  <button type="button" class="btn btn-warning mx-1">
+                  <button
+                    type="button"
+                    class="btn btn-warning mx-1"
+                    @click="gotoYP"
+                  >
                     <span class="nowrap">
                       VIEW IN YP
                       <i class="bi bi-arrow-right"></i>
@@ -106,6 +110,10 @@ export default {
   },
 
   methods: {
+    gotoYP() {
+      const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=40N-COLOP-RED.BLACK-XX-XX-012848&inventory_item_id=13088`;
+      window.open(url, "_blank");
+    },
     selectAndClose(item) {
       this.$emit("item-selected", item);
     },
