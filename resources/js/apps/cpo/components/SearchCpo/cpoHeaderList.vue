@@ -37,7 +37,7 @@
             <th scope="col">PREPARED BY</th>
             <th scope="col">AUTHORIZED BY</th>
             <th scope="col">STATUS</th>
-            <th scope="col">ACTIONS</th>
+            <th scope="col" style="width: 200px">ACTIONS</th>
           </tr>
         </thead>
 
