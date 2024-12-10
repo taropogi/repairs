@@ -16,7 +16,9 @@
         <div class="modal-body">
           <slot name="body"></slot>
         </div>
-        <div class="modal-footer">
+        <div
+          class="modal-footer d-flex justify-content-between align-items-center"
+        >
           <slot></slot>
         </div>
       </div>

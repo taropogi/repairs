@@ -89,6 +89,12 @@
       </div>
     </template>
     <template #default>
+      <p class="text-muted">
+        <i class="bi bi-arrow-right"></i>
+        <strong>VIEW IN YP</strong>: Please make sure to login to YellowPage
+        first to view the item. Otherwise, you will be redirected to the login
+        page.
+      </p>
       <button
         type="button"
         class="btn btn-danger"
