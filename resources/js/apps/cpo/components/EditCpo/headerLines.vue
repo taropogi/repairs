@@ -16,10 +16,10 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Description</th>
-          <th scope="col" style="width: 50px">Price</th>
+          <th scope="col" style="width: 70px">Price</th>
           <th scope="col" style="width: 100px">Doc #</th>
           <th scope="col" style="width: 100px">HCopy</th>
-          <th scope="col" style="width: 50px">Qty Returned</th>
+          <th scope="col" style="width: 70px">Qty Returned</th>
           <th scope="col" style="width: 100px">Unit</th>
           <th scope="col" style="width: 50px">Qty Inspect</th>
           <th scope="col" style="width: 100px">Date</th>
