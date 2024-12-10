@@ -14,6 +14,12 @@ class Tdw1DataController extends Controller
 
         return $response;
     }
+
+    public function getItemBySegment6()
+    {
+        $response['item'] = Item::where('segment6', request()->search)->first();
+        return $response;
+    }
     public function getItemsAll()
     {
         $query = Item::query();

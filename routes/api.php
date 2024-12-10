@@ -81,6 +81,7 @@ Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
 //tdw1 items
 Route::get('items/uom_distinct', [Tdw1DataController::class, 'items_uom']);
 Route::get('items/all', [Tdw1DataController::class, 'getItemsAll']);
+Route::get('items/segment6/single', [Tdw1DataController::class, 'getItemBySegment6']);
 
 //pdf history
 // Route::get('oracle/customers', [OracleCustomerController::class, 'index']);
