@@ -42,6 +42,7 @@
           :items-uom="items_uom"
           @delete-line="getCpoLines"
           @selectItemFor="selectOracleItem"
+          @saveLine="saveLine"
         ></header-line>
       </tbody>
     </table>
@@ -123,6 +124,15 @@ export default {
   },
 
   methods: {
+    saveLine(line) {
+      const targetLine = this.lines.find(
+        (l) => l.line_number === line.line_number
+      );
+
+      targetLine.description = line.description;
+      targetLine.price = line.price;
+      targetLine.unit = line.unit;
+    },
     itemSelected(item) {
       const targetItem = this.lines.find(
         (line) => line.line_number === this.selectItemForLineNumber

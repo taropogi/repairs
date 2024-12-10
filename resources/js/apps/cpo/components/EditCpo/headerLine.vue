@@ -295,6 +295,8 @@ export default {
           res.data.item?.list_price || this.localLineDetails.price;
         this.localLineDetails.unit =
           res.data.item?.primary_uom_code || this.localLineDetails.unit;
+
+        this.$emit("saveLine", this.localLineDetails);
         // this.items = res.data.items;
         // console.log(this.items);
       } catch (error) {
