@@ -197,10 +197,10 @@
 
     <td v-if="canEditCpo">
       <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
-      <div class="btn-group" role="group" v-else>
+      <div class="nowrap" v-else>
         <button
           type="button"
-          class="btn btn-primary py-1"
+          class="btn btn-primary py-1 mx-1"
           @click="saveLine"
           :disabled="lineUpdating || isDeleting"
         >
