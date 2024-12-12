@@ -280,12 +280,13 @@ export default {
   },
   methods: {
     async searchOracleItemSegment6() {
+      const segment6 = this.localLineDetails.description;
       if (this.isSearchingSegment6) return;
       try {
         this.isSearchingSegment6 = true;
         const res = await axios.get("api/items/segment6/single", {
           params: {
-            search: this.localLineDetails.description,
+            search: segment6,
           },
         });
         this.localLineDetails.description =
@@ -294,6 +295,13 @@ export default {
           res.data.item?.list_price || this.localLineDetails.price;
         this.localLineDetails.unit =
           res.data.item?.primary_uom_code || this.localLineDetails.unit;
+
+        if (res.data.item) {
+          this.showNotification({
+            message: `Item found for segment6: ${segment6}`,
+            type: "success",
+          });
+        }
 
         this.$emit("saveLine", this.localLineDetails);
         // this.items = res.data.items;

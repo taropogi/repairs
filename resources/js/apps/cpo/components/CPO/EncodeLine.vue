@@ -128,6 +128,7 @@ export default {
       default: [],
     },
   },
+  inject: ["showNotification"],
   data() {
     return {
       isDeleting: false,
@@ -143,18 +144,27 @@ export default {
       this.$emit("delete-line", this.line);
     },
     async searchOracleItemSegment6() {
+      const segment6 = this.line.description;
       if (this.isSearchingSegment6) return;
       try {
         this.isSearchingSegment6 = true;
         const res = await axios.get("api/items/segment6/single", {
           params: {
-            search: this.line.description,
+            search: segment6,
           },
         });
         this.line.description =
           res.data.item?.description || this.line.description;
         this.line.price = res.data.item?.list_price || this.line.price;
         this.line.unit = res.data.item?.primary_uom_code || this.line.unit;
+
+        if (res.data.item) {
+          this.showNotification({
+            message: `Item found for segment6: ${segment6}`,
+            type: "success",
+          });
+        }
+
         // this.items = res.data.items;
         // console.log(this.items);
       } catch (error) {

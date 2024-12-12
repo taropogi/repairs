@@ -45,13 +45,14 @@ export default {
   },
   encodeLineFieldsPermission(state) {
     return (
-      state.user.permissions.find((p) => p.name == "cpo-encode")?.lineFields ||
+      state.user.permissions?.find((p) => p.name == "cpo-encode")?.lineFields ||
       []
     );
   },
   editLineFieldsPermission(state) {
     return (
-      state.user.permissions.find((p) => p.name == "cpo-edit")?.lineFields || []
+      state.user.permissions?.find((p) => p.name == "cpo-edit")?.lineFields ||
+      []
     );
   },
 };
