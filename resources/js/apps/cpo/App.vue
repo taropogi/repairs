@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>test</h1>
     <spinner-loading v-if="!oracleCustomers"></spinner-loading>
     <main class="container-fluid" v-else>
       <div :class="{ backdrop: showBackDrop }"></div>
