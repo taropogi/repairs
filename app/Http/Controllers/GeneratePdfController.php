@@ -71,10 +71,10 @@ class GeneratePdfController extends Controller
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
-        return $pdf->stream('RPO#' . $cpo[0]->formatted_id . '.pdf');
+        // return $pdf->stream('RPO#' . $cpo[0]->formatted_id . '.pdf');
 
 
-        // return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
+        return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
     }
 
 
