@@ -52,6 +52,7 @@ class GeneratePdfController extends Controller
 
     public function generatePdf(Request $request)
     {
+
         // $this->sortLineNumbers($request->id);
         $this->generateCpoPdf($request->id);
         $cpo = Cpo::where('id', $request->id)->get();
@@ -70,7 +71,10 @@ class GeneratePdfController extends Controller
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
 
-        return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
+        return $pdf->stream('RPO#' . $cpo[0]->formatted_id . '.pdf');
+
+
+        // return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
     }
 
 

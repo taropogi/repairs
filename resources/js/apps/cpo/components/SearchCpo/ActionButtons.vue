@@ -82,8 +82,12 @@ export default {
     printCPOPdf() {
       // console.log(this.localHeaderItem.id);
       // this.$emit("show-pdf-history", { id: this.localHeaderItem.id });
-      window.location.href =
+
+      const pdfWindow = window.open("", "_blank");
+      pdfWindow.location.href =
         this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
+      // window.location.href =
+      //   this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
 
       // console.log(this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id);
     },

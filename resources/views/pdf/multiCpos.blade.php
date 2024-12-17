@@ -6,109 +6,75 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-        * {
-            font-family: Verdana, Arial, sans-serif;
-        }
+    * {
+        font-family: Verdana, Arial, sans-serif;
+    }
 
-        table {
-            font-size: x-small;
-        }
+    table {
+        font-size: x-small;
+    }
 
-        tfoot tr td {
-            font-weight: bold;
-            font-size: x-small;
-        }
+    tfoot tr td {
+        font-weight: bold;
+        font-size: x-small;
+    }
 
-        thead th {
-            font-size: 10px;
-        }
-
-
-        .gray {
-            background-color: lightgray
-        }
-
-        td.text-center {
-            text-align: center;
-            vertical-align: middle;
-        }
+    thead th {
+        font-size: 10px;
+    }
 
 
+    .gray {
+        background-color: lightgray
+    }
 
-        .to-border,
-        .to-border td,
-        .to-border th {
-            border: 1px solid;
-        }
+    td.text-center {
+        text-align: center;
+        vertical-align: middle;
+    }
 
-        .to-border {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        .table-inside,
-        .table-inside td {
-            font-size: 10px;
-            border: none;
-        }
 
-        .page-break {
-            page-break-after: always;
-        }
+    .to-border,
+    .to-border td,
+    .to-border th {
+        border: 1px solid;
+    }
+
+    .to-border {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-inside,
+    .table-inside td {
+        font-size: 10px;
+        border: none;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
     </style>
 
 </head>
 
 <body>
-    @foreach($cpos as $cpo)
+
+
+
 
     <div>
-        <table width="100%">
-            <tr>
-                <td valign="top" style="width: 20%;">
-                    <img src="{{ $image_src }}" alt="" width="100%" />
-                </td>
-                <td valign="middle" style="width: 40%; text-align: center;">
-                    <strong>PULL OUT FORM</strong>
-                </td>
-                <td align="right" style="width: 30%;">
-                    <h1 style="margin-top: 0;">RPO# <span
-                            style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['formatted_id'] }}</span>
-                    </h1>
-                </td>
-            </tr>
-        </table>
-        <br>
 
-        <table width="100%">
-            <tr>
-                <td><small><strong>NAME:</strong> {{ $cpo['customer_name'] }}</small></td>
-                <td><small><strong>AUTHORIZED BY:</strong> {{ $cpo['authorized_by'] }} </small></td>
-                <td><small><strong>DATE:</strong> {{ $date }}</small></td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="max-width: 200px;"><small><strong>ADDRESS:</strong>
-                        {{ $cpo['customer_address'] }}</small></td>
-                <td><small><strong>CONTACT:</strong> {{ $cpo['contact_number'] }}</small></td>
-                <td><small><strong>Customer Ref#:</strong> {{ $cpo['customer_reference_number'] }}</small></td>
+        @foreach($cpos as $cpo)
 
-            </tr>
-            <tr>
+        @php
+        $chunks = array_chunk($cpo['lines']->toArray(), 14);
 
+        @endphp
 
-                <td><small><strong>SALESMAN:</strong> -</small></td>
-                <td><small><strong>PREPARED BY:</strong> {{ $cpo['prepared_by'] }} </small></td>
-
-
-            </tr>
-
-
-        </table>
-
-
-        <p style="font-size: x-small;">
-            THIS DOCUMENT IS TO ACKNOWLEDGE PULL OUT OF THE ITEMS: (TO BE FILLED IN BY TIMES STAFF)
-        </p>
+        @foreach($chunks as $chunk)
+        @include('pdf.segments.pdfHeader')
 
         <table width="100%" style="border: 1px solid;" class="to-border">
             <thead style="background-color: lightgray;">
@@ -126,105 +92,21 @@
                 </tr>
             </thead>
             <tbody>
-
-                @foreach($cpo['lines'] as $line)
-                <tr>
-                    <th scope="row" rowspan="2">{{ $line->line_number }}</th>
-                    <td class="text-center"><small>{{ $line->description }}</small></td>
-                    <td class="text-center" align="right"><small>{{ $line->qty_returned }}</small></td>
-                    <td class="text-center" align="right"><small>{{ $line->unit }}</small></td>
-                    <td class="text-center" align="right"><small>{{ $line->qty_inspect }}</small></td>
-                    <td class="text-center" align="right"><small>{{ $line->good_condition }}</small></td>
-                    <td class="text-center">
-                        <small>{{ $line->minor_repair_clean }}</small>
-                    </td>
-                    <td class="text-center">
-                        <small>{{ $line->repair_parts_needed }}</small>
-                    </td>
-                    <td class="text-center">
-                        <small>{{ $line->damaged }}</small>
-                    </td>
-                    <td rowspan="2">
-                        <small>{{ $line->comments }}</small>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>
-                        <table width="100%" class="table-inside" style="border:none;">
-                            <tr>
-                                <td><strong>DATE:</strong> {{ $date }}</td>
-                                <td><strong>DOC#:</strong> {{ $line->order_number }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>PRICE:</strong> {{ $line->price }}</td>
-                                <td><strong>HC:</strong> {{ $line->hcopy }}</td>
-                            </tr>
-
-                        </table>
-                    </td>
-                    <td colspan="2">
-                        <table width="100%" class="table-inside" style="border:none;">
-                            <tr>
-                                <td><strong>REP</strong></td>
-                                <td><strong>EXC</strong></td>
-                                <td><strong>RET/</strong></td>
-                            </tr>
-                            <tr>
-                                <td>____</td>
-                                <td>____</td>
-                                <td>____</td>
-                            </tr>
-                        </table>
-                    </td>
-
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-                        <small>BY:</small>
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
+                @foreach($chunk as $line)
+                @include('pdf.segments.trLine', ['line' => (object) $line])
                 @endforeach
-
             </tbody>
 
 
         </table>
 
-        <table width="100%">
-            <tr>
-                <td class="text-center"><small><strong>RETURNED BY</strong></small></td>
-                <td class="text-center"><small><strong>RECEIVED BY WHSE</strong></small></td>
-                <td class="text-center"><small><strong>INSPECTED BY</strong></small></td>
-                <td class="text-center"><small><strong>RM#</strong></small></td>
-                <td class="text-center"><small><strong>RECOVERED BY</strong></small></td>
-                <td class="text-center"><small><strong>DATE</strong></small></td>
-            </tr>
-            <tr>
-                <td class="text-center">__________</td>
-                <td class="text-center">__________</td>
-                <td class="text-center">__________</td>
-                <td class="text-center">__________</td>
-                <td class="text-center">__________</td>
-                <td class="text-center">__________</td>
-            </tr>
+        @if(!$loop->last)
+        <div class="page-break"></div>
+        @endif
 
+        @endforeach
 
-        </table>
-        <p style="font-size: x-small;">
-            NOTE: PLEASE REFER TO RMA FOR COMPLETE DETAILS RE: RESOLUTION OF THIS TRANSACTION
-        </p>
-
+        @include('pdf.segments.pdfFooter')
     </div>
     @if(!$loop->last)
     <div class="page-break"></div>
