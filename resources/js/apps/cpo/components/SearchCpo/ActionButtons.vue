@@ -33,10 +33,16 @@
         'btn-secondary': !canDownloadCpoPdf || localHeaderItem.locked,
       }"
       @click="printCPOPdf"
-      :disabled="!canDownloadCpoPdf || localHeaderItem.locked"
+      :disabled="
+        !canDownloadCpoPdf || localHeaderItem.locked || isDownloadingPdf
+      "
     >
       <span class="nowrap fw-bold">
-        <i class="bi bi-file-earmark-pdf text-sm"></i> PDF
+        <i
+          v-if="isDownloadingPdf"
+          class="spinner-border spinner-border-sm me-1"
+        ></i>
+        <i v-else class="bi bi-file-earmark-pdf text-sm"></i> PDF
       </span>
     </button>
   </div>
@@ -52,7 +58,11 @@ export default {
       required: true,
     },
   },
-
+  data() {
+    return {
+      isDownloadingPdf: false,
+    };
+  },
   computed: {
     ...mapGetters("auth", ["canDeleteCpo", "canEditCpo", "canDownloadCpoPdf"]),
     // hasPermissions() {
@@ -80,6 +90,7 @@ export default {
       this.$emit("delete-cpo", { id: this.localHeaderItem.id });
     },
     printCPOPdf() {
+      this.isDownloadingPdf = true;
       // console.log(this.localHeaderItem.id);
       // this.$emit("show-pdf-history", { id: this.localHeaderItem.id });
 
@@ -88,6 +99,10 @@ export default {
       //   this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
       window.location.href =
         this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id;
+
+      setTimeout(() => {
+        this.isDownloadingPdf = false;
+      }, 2000);
 
       // console.log(this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id);
     },
