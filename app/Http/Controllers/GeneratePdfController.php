@@ -73,7 +73,6 @@ class GeneratePdfController extends Controller
 
         // return $pdf->stream('RPO#' . $cpo[0]->formatted_id . '.pdf');
 
-
         return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
     }
 
