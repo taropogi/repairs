@@ -6,55 +6,73 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-    * {
-        font-family: Verdana, Arial, sans-serif;
-    }
+        * {
+            font-family: Verdana, Arial, sans-serif;
+        }
 
-    table {
-        font-size: x-small;
-    }
+        @page {
+            margin: 50px;
+        }
 
-    tfoot tr td {
-        font-weight: bold;
-        font-size: x-small;
-    }
+        table {
+            font-size: x-small;
+        }
 
-    thead th {
-        font-size: 10px;
-    }
+        tfoot tr td {
+            font-weight: bold;
+            font-size: x-small;
+        }
 
-
-    .gray {
-        background-color: lightgray
-    }
-
-    td.text-center {
-        text-align: center;
-        vertical-align: middle;
-    }
+        thead th {
+            font-size: 10px;
+        }
 
 
+        .gray {
+            background-color: lightgray
+        }
 
-    .to-border,
-    .to-border td,
-    .to-border th {
-        border: 1px solid;
-    }
+        td.text-center {
+            text-align: center;
+            vertical-align: middle;
+        }
 
-    .to-border {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    .table-inside,
-    .table-inside td {
-        font-size: 10px;
-        border: none;
-    }
 
-    .page-break {
-        page-break-after: always;
-    }
+        .to-border,
+        .to-border td,
+        .to-border th {
+            border: 1px solid;
+        }
+
+        .to-border {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-inside,
+        .table-inside td {
+            font-size: 10px;
+            border: none;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .page-number:after {
+            content: counter(page);
+        }
     </style>
 
 </head>
@@ -75,7 +93,9 @@
 
         @foreach($chunks as $chunk)
         @include('pdf.segments.pdfHeader')
-
+        <footer class="footer">
+            Page <span class="page-number"></span>
+        </footer>
         <table width="100%" style="border: 1px solid;" class="to-border">
             <thead style="background-color: lightgray;">
                 <tr>
@@ -101,6 +121,7 @@
         </table>
 
         @if(!$loop->last)
+
         <div class="page-break"></div>
         @endif
 
