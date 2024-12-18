@@ -9,18 +9,20 @@
       <span class="fw-bold"
         >{{ item.oracle_code }}
 
-        <span v-if="item?.image_urls.length > 0">
+       
+      </span>
+
+      <div v-if="item?.image_urls.length > 0">
           <span v-for="(url, index) in item.image_urls" :key="index">
             <item-image :url="url" />
           </span>
-        </span>
-      </span>
+        </div>
     </td>
     <td>{{ item.description }}</td>
     <td>{{ item.primary_unit_of_measure }}</td>
     <td>{{ item.list_price }}</td>
 
-    <td>
+    <td class="nowrap">
       <button
         type="button"
         class="btn btn-info mx-1 btn-sm"
