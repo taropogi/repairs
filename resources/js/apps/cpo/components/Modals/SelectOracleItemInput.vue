@@ -48,6 +48,7 @@
                 :item="item"
                 @goto-yp="(item) => (currentlyViewingItem = item)"
                 :currently-viewing-item="currentlyViewingItem"
+                @select-item="selectAndClose"
               />
             </tbody>
           </table>

@@ -3,7 +3,7 @@
     <img
       :src="url"
       alt="Item Image"
-      class="item-image img-fluid"
+      class="item-image img-fluid mx-2"
       style="max-height: 50px;"
       @error="handleImageError"
     />

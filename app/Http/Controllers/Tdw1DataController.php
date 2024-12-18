@@ -61,7 +61,7 @@ class Tdw1DataController extends Controller
             return $item;
         });
 
-        usleep(200000);
+        // usleep(200000);
 
         return $response;
     }

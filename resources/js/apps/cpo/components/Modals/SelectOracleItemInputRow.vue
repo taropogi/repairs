@@ -26,7 +26,7 @@
       <button
         type="button"
         class="btn btn-info mx-1 btn-sm"
-        @click="selectAndClose(item)"
+        @click="$emit('select-item', item)"
       >
         <span class="nowrap fw-bold">
           <i class="bi bi-hand-index-thumb"></i>
