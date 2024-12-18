@@ -4,7 +4,7 @@
       :src="url"
       alt="Item Image"
       class="item-image"
-      @load="handleImageLoaded"
+      @error="handleImageError"
     />
   </span>
 </template>
@@ -19,12 +19,12 @@ export default {
   },
   data() {
     return {
-      error: true,
+      error: false,
     };
   },
   methods: {
-    handleImageLoaded() {
-      this.error = false;
+    handleImageError() {
+      this.error = true;
     },
   },
 };
