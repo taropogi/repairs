@@ -33,33 +33,33 @@ class Tdw1DataController extends Controller
         }
         $response['items'] = $query->limit(30)->get();
 
-        // $response['items'] = $response['items']->map(function ($item) {
+        $response['items'] = $response['items']->map(function ($item) {
 
-        //     $itemImageUrls = [];
-        //     $remoteServer = env('YP_URL_PIC_DIR', 'http://113.1.1.190/phase7/pictures/');
-        //     for ($x = 0; $x <= 5; $x++) {
-        //         $src = "";
-        //         if ($x == 0) {
-        //             $src = $remoteServer . $item->segment6 . '.jpg';
-        //         } else {
-        //             $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
-        //         }
+            $itemImageUrls = [];
+            $remoteServer = env('YP_URL_PIC_DIR', 'http://113.1.1.190/phase7/pictures/');
+            for ($x = 0; $x <= 5; $x++) {
+                $src = "";
+                if ($x == 0) {
+                    $src = $remoteServer . $item->segment6 . '.jpg';
+                } else {
+                    $src = $remoteServer . $item->segment6 . '-0' . $x . '.jpg';
+                }
 
-        //         $headers = @get_headers($src);
+                // $headers = @get_headers($src);
 
-        //         // if ($headers && strpos($headers[0], '200') !== false) {
-        //         //     array_push($itemImageUrls, $src);
-        //         // }
-        //         array_push($itemImageUrls, $src);
-        //         // if ($this->remoteFileExists($src)) {
-        //         //     array_push($itemImageUrls, $src);
-        //         // }
-        //     }
+                // if ($headers && strpos($headers[0], '200') !== false) {
+                //     array_push($itemImageUrls, $src);
+                // }
+                array_push($itemImageUrls, $src);
+                // if ($this->remoteFileExists($src)) {
+                //     array_push($itemImageUrls, $src);
+                // }
+            }
 
-        //     $item->image_urls = $itemImageUrls;
+            $item->image_urls = $itemImageUrls;
 
-        //     return $item;
-        // });
+            return $item;
+        });
 
         usleep(200000);
 

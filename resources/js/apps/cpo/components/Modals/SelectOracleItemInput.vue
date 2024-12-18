@@ -42,45 +42,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr
+              <select-oracle-item-input-row
                 v-for="item in items"
                 :key="item.id"
-                :class="{
-                  'table-warning':
-                    currentlyViewingItem?.inventory_item_id ==
-                    item.inventory_item_id,
-                }"
-              >
-                <td>
-                  <span class="fw-bold">{{ item.oracle_code }}</span>
-                </td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.primary_unit_of_measure }}</td>
-                <td>{{ item.list_price }}</td>
-
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-info mx-1 btn-sm"
-                    @click="selectAndClose(item)"
-                  >
-                    <span class="nowrap fw-bold">
-                      <i class="bi bi-hand-index-thumb"></i>
-                      SELECT
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-warning mx-1 btn-sm"
-                    @click="gotoYP(item)"
-                  >
-                    <span class="nowrap fw-bold">
-                      VIEW IN YP
-                      <i class="bi bi-arrow-right"></i>
-                    </span>
-                  </button>
-                </td>
-              </tr>
+                :item="item"
+                @goto-yp="(item) => (currentlyViewingItem = item)"
+                :currently-viewing-item="currentlyViewingItem"
+              />
             </tbody>
           </table>
           <h1 v-if="!isSearching && items.length == 0">NO ITEMS FOUND</h1>
@@ -108,9 +76,10 @@
 <script>
 import debounce from "lodash/debounce";
 import SpinnerLoading from "../UI/SpinnerLoading.vue";
+import SelectOracleItemInputRow from "./SelectOracleItemInputRow.vue";
 import { mapGetters } from "vuex";
 export default {
-  components: { SpinnerLoading },
+  components: { SpinnerLoading, SelectOracleItemInputRow },
   data() {
     return {
       items: [],
@@ -124,11 +93,10 @@ export default {
   },
 
   methods: {
-    gotoYP(item) {
-      this.currentlyViewingItem = item;
-      const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=${item.oracle_code}&inventory_item_id=${item.inventory_item_id}`;
-      window.open(url, "_blank");
+    handleImageError(event) {
+      console.log("error");
     },
+
     selectAndClose(item) {
       this.$emit("item-selected", item);
     },
