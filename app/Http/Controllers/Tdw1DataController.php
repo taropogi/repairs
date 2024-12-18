@@ -31,7 +31,10 @@ class Tdw1DataController extends Controller
 
             $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6', 'list_price', 'primary_unit_of_measure', 'primary_uom_code');
         }
+
+        $query->inRandomOrder();
         $response['items'] = $query->limit(30)->get();
+
 
         $response['items'] = $response['items']->map(function ($item) {
 
