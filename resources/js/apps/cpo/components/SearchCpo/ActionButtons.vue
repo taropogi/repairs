@@ -1,6 +1,7 @@
 <template>
   <div class="nowrap">
     <button
+    v-if="!(!canDeleteCpo || localHeaderItem.locked)"
       type="button"
       class="btn tooltip-wrapper mx-1"
       :class="{
@@ -25,7 +26,7 @@
         <i class="bi bi-pencil-square me-1"></i> EDIT
       </span>
     </button>
-    <button
+    <button v-if="!(!canDownloadCpoPdf || localHeaderItem.locked || isDownloadingPdf)"
       type="button"
       class="btn tooltip-wrapper mx-1"
       :class="{
