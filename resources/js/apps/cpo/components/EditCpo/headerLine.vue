@@ -304,12 +304,12 @@ export default {
       try {
         this.isDeleting = true;
         await axios.post("api/cpoline/destroy/", {
-          id: this.localLineDetails.id,
+          id: this.lineDetails.id,
         });
 
         this.blinkTr(true);
         this.showNotification({
-          message: `Line# ${this.localLineDetails.line_number} has been deleted`,
+          message: `Line# ${this.lineDetails.line_number} has been deleted`,
           type: "error",
         });
       } catch (error) {
