@@ -2,27 +2,22 @@
   <tr :class="{ blink: isUpdated, 'blink-deleted': isDeleted }">
     <th scope="row">{{ localLineDetails.line_number }}</th>
     <td>
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          :disabled="
-            isDisabled ||
-            !(editLineFieldsPermission.includes('description') || isAdmin)
-          "
-          v-model="localLineDetails.description"
-          @input="debouncedSearchItemSegment6"
-        />
-        <button
-          v-if="!isDisabled"
-          class="btn btn-secondary btn-sm py-0"
-          type="button"
-          @click="$emit('select-item-for', localLineDetails.line_number)"
-        >
-          <i class="fas fa-box-open"></i>
-          ...
-        </button>
-      </div>
+      <item-input-description
+        v-model="localLineDetails.description"
+        :is-disabled="
+          isDisabled ||
+          !(editLineFieldsPermission.includes('description') || isAdmin)
+        "
+        @select-item-for="
+          $emit('select-item-for', localLineDetails.line_number)
+        "
+        @item-searched="
+          (item) => {
+            localLineDetails.unit =
+              item?.primary_uom_code ?? localLineDetails.unit;
+          }
+        "
+      />
     </td>
     <td>
       <input
@@ -230,9 +225,11 @@
 
 <script>
 import debounce from "lodash/debounce";
+import ItemInputDescription from "../UI/ItemInputDescription.vue";
 import { mapGetters } from "vuex";
 export default {
   props: ["lineDetails", "headerIsLocked", "itemsUom"],
+  components: { ItemInputDescription },
   watch: {
     lineDetails: {
       handler() {
@@ -291,8 +288,8 @@ export default {
         });
         this.localLineDetails.description =
           res.data.item?.description || this.localLineDetails.description;
-        this.localLineDetails.price =
-          res.data.item?.list_price || this.localLineDetails.price;
+        // this.localLineDetails.price =
+        //   res.data.item?.list_price || this.localLineDetails.price;
         this.localLineDetails.unit =
           res.data.item?.primary_uom_code || this.localLineDetails.unit;
 

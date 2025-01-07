@@ -140,7 +140,7 @@ export default {
         (line) => line.line_number === this.selectItemForLineNumber
       );
       targetItem.description = item.description;
-      targetItem.price = item.list_price;
+      // targetItem.price = item.list_price;
       targetItem.unit = item.primary_uom_code;
 
       this.lines = [
