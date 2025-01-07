@@ -33,6 +33,7 @@
     >
 
     <a
+      v-if="canDownloadCpoPdf"
       href="#"
       class="btn mx-1"
       @click="printCPOPdf"

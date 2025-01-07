@@ -1,11 +1,12 @@
 <template>
   <div>
-    <select-oracle-item-input
-      @item-selected="itemSelected"
-      @close-modal="closeModal"
-      v-if="isSelectingOracleItem"
-    />
-
+    <teleport to="body">
+      <select-oracle-item-input
+        @item-selected="itemSelected"
+        @close-modal="closeModal"
+        v-if="isSelectingOracleItem"
+      />
+    </teleport>
     <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
       LINE DETAILS
     </h5>
@@ -90,8 +91,8 @@
 
 <script>
 import headerLine from "./headerLine.vue";
-import { mapGetters } from "vuex";
 import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -126,6 +127,36 @@ export default {
   },
 
   methods: {
+    selectOracleItem(forLineNumber) {
+      // console.log(forLineNumber);
+      this.selectItemForLineNumber = forLineNumber;
+      this.isSelectingOracleItem = true;
+    },
+    itemSelected(item) {
+      const targetItem = this.lines.find(
+        (line) => line.line_number === this.selectItemForLineNumber
+      );
+
+      targetItem.description = item.description;
+      // targetItem.price = item.list_price;
+      targetItem.unit = item.primary_uom_code;
+
+      this.lines = [
+        ...this.lines.filter(
+          (line) => line.line_number !== targetItem.line_number
+        ),
+        targetItem,
+      ].sort((a, b) => a.line_number - b.line_number);
+
+      this.showNotification({
+        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been selected. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
+        type: "success",
+      });
+      this.isSelectingOracleItem = false;
+    },
+    closeModal() {
+      this.isSelectingOracleItem = false;
+    },
     saveLine(line) {
       // console.log(line);
 
@@ -160,15 +191,6 @@ export default {
         message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been selected. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
         type: "success",
       });
-      this.isSelectingOracleItem = false;
-    },
-
-    selectOracleItem(forLineNumber) {
-      // console.log(forLineNumber);
-      this.selectItemForLineNumber = forLineNumber;
-      this.isSelectingOracleItem = true;
-    },
-    closeModal() {
       this.isSelectingOracleItem = false;
     },
 

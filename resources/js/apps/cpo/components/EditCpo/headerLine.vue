@@ -1,20 +1,17 @@
 <template>
   <tr :class="{ blink: isUpdated, 'blink-deleted': isDeleted }">
-    <th scope="row">{{ localLineDetails.line_number }}</th>
+    <th scope="row">{{ lineDetails.line_number }}</th>
     <td>
       <item-input-description
-        v-model="localLineDetails.description"
+        v-model="lineDetails.description"
         :is-disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('description') || isAdmin)
         "
-        @select-item-for="
-          $emit('select-item-for', localLineDetails.line_number)
-        "
+        @select-item-for="$emit('select-item-for', lineDetails.line_number)"
         @item-searched="
           (item) => {
-            localLineDetails.unit =
-              item?.primary_uom_code ?? localLineDetails.unit;
+            lineDetails.unit = item?.primary_uom_code ?? lineDetails.unit;
           }
         "
       />
@@ -23,7 +20,7 @@
       <input
         type="text"
         class="form-control"
-        v-model="localLineDetails.price"
+        v-model="lineDetails.price"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('price') || isAdmin)
         "
@@ -37,14 +34,14 @@
           isDisabled ||
           !(editLineFieldsPermission.includes('order_number') || isAdmin)
         "
-        v-model="localLineDetails.order_number"
+        v-model="lineDetails.order_number"
       />
     </td>
     <td>
       <input
         type="text"
         class="form-control"
-        v-model="localLineDetails.hcopy"
+        v-model="lineDetails.hcopy"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('hcopy') || isAdmin)
         "
@@ -54,7 +51,7 @@
       <input
         type="number"
         class="form-control"
-        v-model="localLineDetails.qty_returned"
+        v-model="lineDetails.qty_returned"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('qty_returned') || isAdmin)
@@ -70,7 +67,7 @@
       >
         <select
           class="form-select"
-          v-model="localLineDetails.unit"
+          v-model="lineDetails.unit"
           :disabled="isDisabled"
         >
           <option
@@ -87,7 +84,7 @@
           type="text"
           class="form-control"
           :disabled="true"
-          v-model="localLineDetails.unit"
+          v-model="lineDetails.unit"
         />
       </span>
     </td>
@@ -95,7 +92,7 @@
       <input
         type="number"
         class="form-control"
-        v-model="localLineDetails.qty_inspect"
+        v-model="lineDetails.qty_inspect"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('qty_inspect') || isAdmin)
@@ -109,7 +106,7 @@
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('date') || isAdmin)
         "
-        v-model="localLineDetails.date"
+        v-model="lineDetails.date"
       />
     </td>
     <td>
@@ -120,7 +117,7 @@
           isDisabled ||
           !(editLineFieldsPermission.includes('good_condition') || isAdmin)
         "
-        v-model="localLineDetails.good_condition"
+        v-model="lineDetails.good_condition"
       />
     </td>
     <td>
@@ -131,7 +128,7 @@
           isDisabled ||
           !(editLineFieldsPermission.includes('minor_repair_clean') || isAdmin)
         "
-        v-model="localLineDetails.minor_repair_clean"
+        v-model="lineDetails.minor_repair_clean"
       />
     </td>
     <td>
@@ -142,7 +139,7 @@
           isDisabled ||
           !(editLineFieldsPermission.includes('repair_parts_needed') || isAdmin)
         "
-        v-model="localLineDetails.repair_parts_needed"
+        v-model="lineDetails.repair_parts_needed"
       />
     </td>
     <td>
@@ -153,7 +150,7 @@
           isDisabled ||
           !(editLineFieldsPermission.includes('damaged') || isAdmin)
         "
-        v-model="localLineDetails.damaged"
+        v-model="lineDetails.damaged"
       />
     </td>
     <td>
@@ -161,14 +158,14 @@
         type="text"
         class="form-control"
         :disabled="isDisabled"
-        v-model="localLineDetails.user_comment"
+        v-model="lineDetails.user_comment"
         v-if="editLineFieldsPermission.includes('comments') || isAdmin"
       />
 
-      <div v-if="localLineDetails.other_comments.length > 0">
+      <div v-if="lineDetails.other_comments.length > 0">
         <div
           class="my-0"
-          v-for="comment in localLineDetails.other_comments"
+          v-for="comment in lineDetails.other_comments"
           :key="comment.id"
         >
           <p class="m-0 p-0 text-sm" v-if="comment.comment.trim() !== ''">
@@ -230,36 +227,9 @@ import { mapGetters } from "vuex";
 export default {
   props: ["lineDetails", "headerIsLocked", "itemsUom"],
   components: { ItemInputDescription },
-  watch: {
-    lineDetails: {
-      handler(updatedLine) {
-        this.localLineDetails = { ...updatedLine };
-        console.log("lineDetails changed");
-      },
-      deep: true,
-    },
-    localLineDetails: {
-      handler(updatedLine, oldLine) {
-        console.log("oldLine", oldLine);
-        console.log("updatedLine", updatedLine);
-        this.$emit("saveLine", updatedLine);
-        // this.localLineDetails = { ...this.lineDetails };
-        console.log("localLineDetails changed");
-      },
-      deep: true,
-    },
-    // localLineDetails: {
-    //   handler(updatedLine) {
-    //     this.$emit("saveLine", updatedLine);
-    //     console.log(updatedLine);
-    //   },
-    //   deep: true,
-    // },
-  },
 
   data() {
     return {
-      localLineDetails: { ...this.lineDetails },
       lineUpdating: false,
       isDeleted: false,
       isDeleting: false,
@@ -287,46 +257,8 @@ export default {
       return !this.lineUpdating;
     },
   },
-  created() {
-    this.debouncedSearchItemSegment6 = debounce(
-      this.searchOracleItemSegment6,
-      500
-    );
-  },
+
   methods: {
-    async searchOracleItemSegment6() {
-      const segment6 = this.localLineDetails.description;
-      if (this.isSearchingSegment6) return;
-      try {
-        this.isSearchingSegment6 = true;
-        const res = await axios.get("api/items/segment6/single", {
-          params: {
-            search: segment6,
-          },
-        });
-        this.localLineDetails.description =
-          res.data.item?.description || this.localLineDetails.description;
-        // this.localLineDetails.price =
-        //   res.data.item?.list_price || this.localLineDetails.price;
-        this.localLineDetails.unit =
-          res.data.item?.primary_uom_code || this.localLineDetails.unit;
-
-        if (res.data.item) {
-          this.showNotification({
-            message: `Item found for segment6: ${segment6}`,
-            type: "success",
-          });
-        }
-
-        this.$emit("saveLine", this.localLineDetails);
-        // this.items = res.data.items;
-        // console.log(this.items);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.isSearchingSegment6 = false;
-      }
-    },
     blinkTr(isDelete = false) {
       if (isDelete) {
         this.isDeleted = true;
@@ -343,7 +275,7 @@ export default {
           }
 
           if (isDelete) {
-            this.$emit("deleteLine", this.localLineDetails.id);
+            this.$emit("deleteLine", this.lineDetails.id);
           }
         },
         isDelete ? 500 : 2000
@@ -352,12 +284,8 @@ export default {
     async saveLine() {
       //locally save
       this.lineUpdating = true;
-      // console.log(this.lineDetails);
       try {
-        const res = await axios.post(
-          "api/cpoline/update/",
-          this.localLineDetails
-        );
+        const res = await axios.post("api/cpoline/update/", this.lineDetails);
         this.blinkTr();
         this.showNotification({
           message: `Line# ${this.lineDetails.line_number} has been updated`,
