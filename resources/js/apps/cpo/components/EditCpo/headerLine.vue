@@ -231,11 +231,20 @@ export default {
   props: ["lineDetails", "headerIsLocked", "itemsUom"],
   components: { ItemInputDescription },
   watch: {
-    localLineDetails: {
+    lineDetails: {
       handler(updatedLine) {
+        this.localLineDetails = { ...updatedLine };
+        console.log("lineDetails changed");
+      },
+      deep: true,
+    },
+    localLineDetails: {
+      handler(updatedLine, oldLine) {
+        console.log("oldLine", oldLine);
+        console.log("updatedLine", updatedLine);
         this.$emit("saveLine", updatedLine);
         // this.localLineDetails = { ...this.lineDetails };
-        // console.log("lineDetails changed");
+        console.log("localLineDetails changed");
       },
       deep: true,
     },
