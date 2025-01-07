@@ -127,13 +127,18 @@ export default {
 
   methods: {
     saveLine(line) {
-      const targetLine = this.lines.find(
-        (l) => l.line_number === line.line_number
-      );
+      // console.log(line);
 
-      targetLine.description = line.description;
-      targetLine.price = line.price;
-      targetLine.unit = line.unit;
+      this.lines = [
+        ...this.lines.filter((l) => l.line_number !== line.line_number),
+        line,
+      ].sort((a, b) => a.line_number - b.line_number);
+
+      // this.lines = [...this.lines, line];
+
+      // targetLine.description = line.description;
+      // targetLine.price = line.price;
+      // targetLine.unit = line.unit;
     },
     itemSelected(item) {
       const targetItem = this.lines.find(
@@ -190,6 +195,7 @@ export default {
       try {
         this.isSavingAllLines = true;
         this.$emit("updatingLines");
+        // console.log(this.lines);
         await axios.post("api/cpo/lines/updateAllLines/", {
           cpoId: this.headerId,
           cpoLines: this.lines,
