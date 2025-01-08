@@ -9,6 +9,8 @@ class HeaderStatus extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function cpos()
     {
         return $this->hasMany(Cpo::class);

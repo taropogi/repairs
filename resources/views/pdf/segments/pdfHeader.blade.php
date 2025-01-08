@@ -7,7 +7,7 @@
             <strong>PULL OUT FORM</strong>
         </td>
         <td align="right" style="width: 30%;">
-            <h1 style="margin-top: 0;">RPO# <span
+            <h1 style="margin-top: 0;"># <span
                     style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['formatted_id'] }}</span>
             </h1>
         </td>

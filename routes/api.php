@@ -35,6 +35,10 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) { // 
 Route::get('statuses', [StatusController::class, 'index']);
 // update status
 Route::put('status/update', [StatusController::class, 'update']);
+// delete status
+Route::delete('status/delete/{status}', [StatusController::class, 'destroy']);
+// create status
+Route::post('status/create', [StatusController::class, 'store']);
 
 //cpo
 Route::post('cpo', [CpoController::class, 'create']);

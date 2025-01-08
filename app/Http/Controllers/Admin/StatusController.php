@@ -15,7 +15,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $response['statuses'] = HeaderStatus::all();
+        $response['statuses'] = HeaderStatus::orderBy('id', 'asc')->get();
 
         return $response;
     }
@@ -38,7 +38,12 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        HeaderStatus::create([
+            'status' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return response()->json(['status' => 'success', 'message' => 'Status created successfully!']);
     }
 
     /**
@@ -75,6 +80,7 @@ class StatusController extends Controller
 
         $status = HeaderStatus::find($request->id);
         $status->status = $request->status;
+        $status->description = $request->description;
         $status->save();
 
         return response()->json(['status' => 'success', 'message' => 'Status updated successfully!']);
@@ -88,6 +94,8 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        HeaderStatus::destroy($id);
+
+        return response()->json(['status' => 'success', 'message' => 'Status deleted successfully!']);
     }
 }

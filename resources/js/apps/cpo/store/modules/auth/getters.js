@@ -21,6 +21,14 @@ export default {
     )
       return true;
   },
+  canChangeCPOStatus(state) {
+    if (!state.user) return false;
+    if (
+      state.user.is_admin ||
+      state.user.permissions?.find((p) => p.name == "cpo-change-status")
+    )
+      return true;
+  },
   canEditCpo(state) {
     if (!state.user) return false;
     if (

@@ -2,7 +2,11 @@
   <div class="permissions-container p-3 border rounded bg-light">
     <h3 class="mb-3">Select Permissions</h3>
     <div class="row">
-      <div class="col" v-for="permission in permissions" :key="permission.name">
+      <div
+        class="col-4"
+        v-for="permission in permissions"
+        :key="permission.name"
+      >
         <div class="form-check mb-2">
           <input
             class="form-check-input"
@@ -17,7 +21,7 @@
             v-model="selectedPermissions"
           />
           <label class="form-check-label ms-2">
-            <h4 class="p-3 bg-primary text-white rounded">
+            <h4 class="p-3 bg-secondary text-white rounded">
               {{ permission.description }}
             </h4>
 

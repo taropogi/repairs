@@ -61,7 +61,7 @@ export default {
         // console.log(res.data.item?.description || this.modelValue);
         this.$emit(
           "update:modelValue",
-          res.data.item?.description || this.modelValue
+          `${res.data.item?.description} - ${segment6}` || this.modelValue
         );
 
         if (res.data.item) {

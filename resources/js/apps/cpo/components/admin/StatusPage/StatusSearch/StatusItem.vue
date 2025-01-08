@@ -1,7 +1,8 @@
 <template>
   <tr>
+    <td>{{ status.id }}</td>
     <td
-      style="width: 80%"
+      style="width: 40%"
       :class="{
         'bg-primary': isEditing,
       }"
@@ -18,25 +19,90 @@
         {{ status.status }}
       </span>
     </td>
+    <td
+      style="width: 40%"
+      :class="{
+        'bg-primary': isEditing,
+      }"
+    >
+      <div v-if="isEditing">
+        <input
+          type="text"
+          class="form-control"
+          v-model="localStatus.description"
+        />
+      </div>
+      <span v-else>
+        {{ status.description }}
+      </span>
+    </td>
     <td>
-      <div class="btn-group btn-group-sm" v-if="!isEditing">
+      <div class="nowrap" v-if="!isEditing && !deleteConfirming">
         <button
           type="button"
-          class="btn btn-outline-primary"
+          class="btn btn-outline-primary mx-1"
           @click="editStatus"
         >
-          Edit
+          <span class="nowrap">
+            <i class="bi bi-pencil"></i>
+            EDIT</span
+          >
         </button>
-        <button type="button" class="btn btn-outline-danger">Delete</button>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          @click="deleteConfirm"
+        >
+          <span class="nowrap">
+            <i class="bi bi-trash"></i>
+            DELETE
+          </span>
+        </button>
       </div>
-
-      <div class="btn-group btn-group-sm" v-else>
-        <button type="button" class="btn btn-primary" @click="saveStatus">
-          Save
-        </button>
-        <button type="button" class="btn btn-danger" @click="$emit('edit', 0)">
-          Cancel
-        </button>
+      <div class="nowrap" v-else>
+        <div v-if="deleteConfirming">
+          <button type="button" class="btn btn-warning" @click="deleteStatus">
+            <span class="nowrap">
+              <i class="bi bi-exclamation-triangle"></i>
+              CONFIRM DELETE
+            </span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger mx-1"
+            @click="
+              () => {
+                deleteConfirming = false;
+              }
+            "
+          >
+            <span>
+              <i class="bi bi-x-circle"></i>
+              CANCEL
+            </span>
+          </button>
+        </div>
+        <div class="nowrap" v-if="isEditing">
+          <button
+            type="button"
+            class="btn btn-primary"
+            :disabled="isSaving"
+            @click="saveStatus"
+          >
+            <span class="nowrap">
+              <i class="bi bi-save"></i>
+              SAVE
+            </span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            :disabled="isSaving"
+            @click="$emit('edit', 0)"
+          >
+            CANCEL
+          </button>
+        </div>
       </div>
     </td>
   </tr>
@@ -46,7 +112,7 @@
 import { nextTick } from "vue";
 
 export default {
-  emits: ["edit", "status-updated"],
+  emits: ["edit", "status-updated", "status-deleted"],
   props: {
     status: {
       type: Object,
@@ -61,6 +127,8 @@ export default {
     return {
       localStatus: { ...this.status },
       isSaving: false,
+      isDeleting: false,
+      deleteConfirming: false,
     };
   },
   computed: {
@@ -69,6 +137,20 @@ export default {
     },
   },
   methods: {
+    deleteConfirm() {
+      this.deleteConfirming = true;
+    },
+    async deleteStatus() {
+      try {
+        this.isDeleting = true;
+        await axios.delete(`/api/status/delete/${this.status.id}`);
+        this.$emit("status-deleted", this.status.id);
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        this.isDeleting = false;
+      }
+    },
     editStatus() {
       this.$emit("edit", this.status.id);
       nextTick(() => {

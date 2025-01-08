@@ -32,6 +32,7 @@
           :key="customer"
           :value="customer.cust_account_id"
         >
+          {{ customer.account_number }} |
           {{ customer.account_name }}
           ({{ customer.salesrep_name }})
         </option>
@@ -50,6 +51,7 @@
 <script>
 import { mapGetters } from "vuex";
 import debounce from "lodash/debounce";
+import { id } from "date-fns/locale";
 
 export default {
   // props modelValue Number type with default
@@ -76,6 +78,7 @@ export default {
   },
   // emit updateModel
   emits: ["update:modelValue"],
+  inject: ["showNotification"],
   data() {
     return {
       searchOracleCustomerStr: "",
@@ -87,28 +90,66 @@ export default {
         accountName: "",
       },
       filteredOracleCustomers: [],
+      originalCustomerId: this.modelValue?.id || 3234415,
     };
   },
   computed: {
     ...mapGetters(["oracleCustomers"]),
   },
 
+  watch: {
+    filteredOracleCustomers(customers) {
+      if (!this.searchOracleCustomerStr) {
+        this.defaultOracleCustomer.id = this.originalCustomerId;
+      } else {
+        const id = customers.find(
+          (el) =>
+            el.account_number.toString().toLowerCase() ===
+            this.searchOracleCustomerStr.toLowerCase()
+        )?.cust_account_id;
+
+        if (id) {
+          this.showNotification({
+            message: `Customer found for account number: ${this.searchOracleCustomerStr}`,
+            type: "success",
+          });
+        }
+
+        this.defaultOracleCustomer.id = id ?? this.defaultOracleCustomer.id;
+      }
+
+      this.setDefaultShipToAddress();
+    },
+  },
+
   methods: {
     searchOracleCustomer() {
-      this.filteredOracleCustomers = this.oracleCustomers.filter((customer) =>
-        customer.account_name
-          .toLowerCase()
-          .includes(this.searchOracleCustomerStr.toLowerCase())
+      this.filteredOracleCustomers = this.oracleCustomers.filter(
+        (customer) =>
+          customer.account_name
+            .toLowerCase()
+            .includes(this.searchOracleCustomerStr.toLowerCase()) ||
+          customer.account_number
+            .toString()
+            .toLowerCase()
+            .includes(this.searchOracleCustomerStr.toLowerCase())
       );
 
       this.searchedOracleCustomerId =
         this.defaultOracleCustomer.id ??
-        this.filteredOracleCustomers.find((el) =>
-          el.account_name
-            .toLowerCase()
-            .includes(this.searchOracleCustomerStr.toLowerCase())
+        this.filteredOracleCustomers.find(
+          (el) =>
+            el.account_name
+              .toLowerCase()
+              .includes(this.searchOracleCustomerStr.toLowerCase()) ||
+            el.account_number
+              .toString()
+              .toLowerCase()
+              .includes(this.searchOracleCustomerStr.toLowerCase())
         )?.cust_account_id;
       this.defaultOracleCustomer.id = this.searchedOracleCustomerId;
+
+      // console.log(this.defaultOracleCustomer.id);
     },
     setDefaultShipToAddress() {
       // console.log(typeof this.defaultOracleCustomer.id);

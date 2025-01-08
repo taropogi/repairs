@@ -25,6 +25,10 @@ const cpoModule = {
           lineFields: [...LINEFIELDS],
         },
         { description: "Delete CPO", name: "cpo-delete" },
+        {
+          description: "Can Change CPO Status",
+          name: "cpo-change-status",
+        },
         { description: "Download CPO PDF file", name: "cpo-download-pdf" },
       ],
     };

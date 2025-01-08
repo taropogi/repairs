@@ -1,10 +1,10 @@
 <template>
   <div class="row p-2">
     <div class="col-md-8">
-      <status-list />
+      <status-list :key="statusListIdKey" />
     </div>
     <div class="col-md-4">
-      <status-create />
+      <status-create @status-created="statusListIdKey++" />
     </div>
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
   components: {
     StatusList,
     StatusCreate,
+  },
+  data() {
+    return {
+      statusListIdKey: 0,
+    };
   },
 };
 </script>

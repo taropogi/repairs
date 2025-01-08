@@ -181,7 +181,7 @@ export default {
       const targetItem = this.localLines.find(
         (line) => line.lineNumber === this.selectItemForLineNumber
       );
-      targetItem.description = item.description;
+      targetItem.description = `${item.description} - ${item.segment6}`;
       // targetItem.price = item.list_price;
       targetItem.unit = item.primary_uom_code;
       this.localLines = [

@@ -6,17 +6,13 @@
     }"
   >
     <td>
-      <span class="fw-bold"
-        >{{ item.oracle_code }}
-
-       
-      </span>
+      <span class="fw-bold">{{ item.oracle_code }} </span>
 
       <div v-if="item?.image_urls.length > 0">
-          <span v-for="(url, index) in item.image_urls" :key="index">
-            <item-image :url="url" />
-          </span>
-        </div>
+        <span v-for="(url, index) in item.image_urls" :key="index">
+          <item-image :url="url" />
+        </span>
+      </div>
     </td>
     <td>{{ item.description }}</td>
     <td>{{ item.primary_unit_of_measure }}</td>

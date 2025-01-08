@@ -6,7 +6,7 @@
         class="nav-link text-white"
         :class="{ active: isNavAdminStatusListActive }"
       >
-        <i class="bi bi-list-check me-2"></i> Status List
+        <i class="bi bi-list-check me-2"></i> STATUS LIST
       </router-link>
     </li>
     <!-- <li>

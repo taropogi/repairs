@@ -23,6 +23,7 @@ class OracleCustomerController extends Controller
             ->distinct()
             ->orderBy('account_name', 'ASC')
             ->get();
+            
 
         $response['oracle_customers'] = $oracle_customers;
 

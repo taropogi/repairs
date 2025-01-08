@@ -176,27 +176,35 @@
             />
           </div>
           <div class="pt-2">
-            <label for="cpo-statuses" class="form-label mb-0"
-              >STATUS
-              <span class="badge bg-success" v-if="headerRow.locked"
-                >COMPLETED
-              </span>
-            </label>
-            <select
-              class="form-select"
-              v-model="headerRow.status_id"
-              id="cpo-statuses"
-              :disabled="headerRow.locked || !canEditCpo"
-            >
-              <option
-                v-for="status in headerStatuses"
-                :key="status.id"
-                :value="status.id"
-                :selected="status.id === headerStatus.id"
+            <div v-if="canChangeCPOStatus">
+              <label for="cpo-statuses" class="form-label mb-0"
+                >STATUS
+                <span class="badge bg-success" v-if="headerRow.locked"
+                  >COMPLETED
+                </span>
+              </label>
+              <select
+                class="form-select"
+                v-model="headerRow.status_id"
+                id="cpo-statuses"
+                :disabled="headerRow.locked || !canEditCpo"
               >
-                {{ status.status }}
-              </option>
-            </select>
+                <option
+                  v-for="status in headerStatuses"
+                  :key="status.id"
+                  :value="status.id"
+                  :selected="status.id === headerStatus.id"
+                >
+                  {{ status.status }}
+                </option>
+              </select>
+            </div>
+            <div class="text-center pt-4" v-else>
+              <strong>Status</strong>
+              <h3 class="text-primary fw-bold border-top pt-2">
+                {{ headerStatus.status }}
+              </h3>
+            </div>
           </div>
           <div
             class="d-flex justify-content-center align-items-center"
@@ -260,7 +268,12 @@ export default {
   },
   computed: {
     ...mapGetters(["oracleCustomers"]),
-    ...mapGetters("auth", ["loggedUser", "canEditCpo", "canDownloadCpoPdf"]),
+    ...mapGetters("auth", [
+      "loggedUser",
+      "canEditCpo",
+      "canDownloadCpoPdf",
+      "canChangeCPOStatus",
+    ]),
     formattedDate() {
       return formatDate(this.headerRow.created_at);
     },

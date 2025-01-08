@@ -183,7 +183,7 @@
           !(editLineFieldsPermission.includes('comments') || isAdmin)
         "
       >
-        Others' comments will show here
+        --
       </p>
     </td>
 

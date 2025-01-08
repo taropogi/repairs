@@ -79,7 +79,7 @@ class GeneratePdfController extends Controller
             'description' => 'Downloaded RPO#' . $cpo[0]->formatted_id . ' PDF'
         ]);
 
-        return $pdf->download('RPO#' . $cpo[0]->formatted_id . '.pdf');
+        return $pdf->download('PULL-OUT-FORM#' . $cpo[0]->formatted_id . '.pdf');
     }
 
 

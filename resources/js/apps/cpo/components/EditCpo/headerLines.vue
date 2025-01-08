@@ -137,7 +137,7 @@ export default {
         (line) => line.line_number === this.selectItemForLineNumber
       );
 
-      targetItem.description = item.description;
+      targetItem.description = `${item.description} - ${item.segment6}`;
       // targetItem.price = item.list_price;
       targetItem.unit = item.primary_uom_code;
 
@@ -170,28 +170,6 @@ export default {
       // targetLine.description = line.description;
       // targetLine.price = line.price;
       // targetLine.unit = line.unit;
-    },
-    itemSelected(item) {
-      const targetItem = this.lines.find(
-        (line) => line.line_number === this.selectItemForLineNumber
-      );
-
-      targetItem.description = item.description;
-      // targetItem.price = item.list_price;
-      targetItem.unit = item.primary_uom_code;
-
-      this.lines = [
-        ...this.lines.filter(
-          (line) => line.line_number !== targetItem.line_number
-        ),
-        targetItem,
-      ].sort((a, b) => a.line_number - b.line_number);
-
-      this.showNotification({
-        message: `Line# ${this.selectItemForLineNumber} - ${item.description} has been selected. Price: ${item.list_price}, Unit: ${item.primary_uom_code}`,
-        type: "success",
-      });
-      this.isSelectingOracleItem = false;
     },
 
     async addNewLine() {

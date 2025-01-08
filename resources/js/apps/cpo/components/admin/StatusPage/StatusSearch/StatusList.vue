@@ -1,11 +1,13 @@
 <template>
   <div class="p-2">
-    <h1>Status List</h1>
+    <h1 class="text-center bg-info p-2">STATUS LIST</h1>
     <table class="table table-sm table-hover table-striped">
       <thead>
         <tr class="table-primary">
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
+          <th scope="col">ID/SEQUENCE</th>
+          <th scope="col">STATUS</th>
+          <th scope="col">DESCRIPTION</th>
+          <th scope="col">ACTIONS</th>
         </tr>
       </thead>
       <tbody v-if="statuses">
@@ -14,6 +16,11 @@
           :key="status.id"
           :status="status"
           :is-editing-id="isEditingId"
+          @status-deleted="
+            () => {
+              this.statuses = this.statuses.filter((s) => s.id !== status.id);
+            }
+          "
           @edit="
             (id) => {
               isEditingId = id;
