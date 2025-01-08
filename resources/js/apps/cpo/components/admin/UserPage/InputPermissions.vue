@@ -176,10 +176,11 @@ export default {
           canEditHeader: this.canEditHeader,
         });
       } else {
-        if (this.canEditHeader) return;
-        this.selectedPermissions = this.selectedPermissions.filter(
-          (permission) => permission.name !== "cpo-edit"
-        );
+        if (!this.canEditHeader) {
+          this.selectedPermissions = this.selectedPermissions.filter(
+            (permission) => permission.name !== "cpo-edit"
+          );
+        }
       }
 
       this.remapSelectedPermissions();
@@ -197,10 +198,11 @@ export default {
         });
       } else {
         // console.log(this.cpoEditLineFields.length);
-        if (this.cpoEditLineFields.length > 0) return;
-        this.selectedPermissions = this.selectedPermissions.filter(
-          (permission) => permission.name !== "cpo-edit"
-        );
+        if (!this.cpoEditLineFields.length > 0) {
+          this.selectedPermissions = this.selectedPermissions.filter(
+            (permission) => permission.name !== "cpo-edit"
+          );
+        }
       }
 
       this.remapSelectedPermissions();
