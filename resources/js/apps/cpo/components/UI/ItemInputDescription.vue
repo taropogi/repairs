@@ -42,6 +42,11 @@ export default {
     };
   },
   emits: ["update:modelValue", "item-searched", "select-item-for"],
+  watch: {
+    modelValue() {
+      this.$emit("update:modelValue", this.modelValue);
+    },
+  },
   methods: {
     async searchOracleItemSegment6() {
       const segment6 = this.modelValue;
@@ -53,15 +58,12 @@ export default {
             search: segment6,
           },
         });
-        // console.log(res.data.item?.description);
+        // console.log(res.data.item?.description || this.modelValue);
         this.$emit(
           "update:modelValue",
           res.data.item?.description || this.modelValue
         );
-        // this.line.description =
-        //   res.data.item?.description || this.line.description;
-        // // this.line.price = res.data.item?.list_price || this.line.price;
-        // this.line.unit = res.data.item?.primary_uom_code || this.line.unit;
+
         if (res.data.item) {
           this.itemSearched = res.data.item;
           this.$emit("item-searched", this.itemSearched);
