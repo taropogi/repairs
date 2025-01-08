@@ -37,6 +37,16 @@ export default {
     )
       return true;
   },
+
+  canEditCpoHeader(state) {
+    if (!state.user) return false;
+    if (
+      state.user.is_admin ||
+      state.user.permissions?.find((p) => p.name == "cpo-edit" && p?.canEditHeader)
+    )
+      return true;
+  },
+
   canDownloadCpoPdf(state) {
     if (!state.user) return false;
     if (
@@ -47,6 +57,9 @@ export default {
   },
   userHasPermission(state) {
     return state.user.permissions || state.user.is_admin ? true : false;
+  },
+  userPermissions(state) {
+    return state.user?.permissions;
   },
   isAdmin(state) {
     return state.user.is_admin;

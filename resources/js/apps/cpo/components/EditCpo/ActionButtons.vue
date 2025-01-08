@@ -9,6 +9,7 @@
     </teleport>
 
     <button
+      v-if="canEditCpoHeader"
       type="submit"
       class="btn mx-1"
       :class="{
@@ -79,7 +80,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("auth", ["canEditCpo", "canDownloadCpoPdf", "loggedUser"]),
+    ...mapGetters("auth", [
+      "canEditCpo",
+      "canDownloadCpoPdf",
+      "loggedUser",
+      "canEditCpoHeader",
+    ]),
     searchCpoLink() {
       if (this.loggedUser && this.loggedUser.is_admin) {
         return "admin-search-cpo";

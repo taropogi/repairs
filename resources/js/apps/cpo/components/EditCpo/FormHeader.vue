@@ -273,6 +273,7 @@ export default {
       "canEditCpo",
       "canDownloadCpoPdf",
       "canChangeCPOStatus",
+      "canEditCpoHeader",
     ]),
     formattedDate() {
       return formatDate(this.headerRow.created_at);

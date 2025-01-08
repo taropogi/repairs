@@ -26,16 +26,31 @@
             </h4>
 
             <div v-if="permission.name === 'cpo-encode'" class="ms-4">
+              <strong>Line Access</strong>
               <cpo-encode-lines
                 :lineFields="permission.lineFields"
                 v-model="cpoEncodeLineFields"
               />
             </div>
             <div v-if="permission.name === 'cpo-edit'" class="ms-4">
+              <strong>Line Access</strong>
               <cpo-edit-lines
                 :lineFields="permission.lineFields"
                 v-model="cpoEditLineFields"
               />
+              <hr />
+              <strong>Header</strong>
+              <div class="form-check mt-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="canEditHeader"
+                  id="canEditHeader"
+                />
+                <label class="form-check-label ms-2" for="canEditHeader'">
+                  Can Edit Header
+                </label>
+              </div>
             </div>
           </label>
         </div>
@@ -68,7 +83,9 @@ export default {
   data() {
     return {
       selectedPermissions: this.modelValue,
-
+      canEditHeader:
+        this.modelValue?.find((permission) => permission.name === "cpo-edit")
+          ?.canEditHeader || false,
       cpoEncodeLineFields:
         this.modelValue?.find((permission) => permission.name === "cpo-encode")
           ?.lineFields || [],
@@ -100,9 +117,11 @@ export default {
           };
         }
         if (permission.name === "cpo-edit") {
+          console.log(this.cpoEditLineFields);
           modifiedPermission = {
             ...modifiedPermission,
             lineFields: this.cpoEditLineFields,
+            canEditHeader: this.canEditHeader,
           };
         }
 
@@ -112,6 +131,7 @@ export default {
       const filteredPermissions = mappedPermissions.filter(
         (permission) => permission.name
       );
+      // console.log(this.canEditHeader);
       this.$emit("update:modelValue", filteredPermissions);
 
       // this.$emit("update:modelValue", mappedPermissions);
@@ -143,8 +163,9 @@ export default {
     },
     cpoEditLineFields(newVal) {
       // console.log("cpoEditLineFields changed");
-
+      // console.log(newVal.length);
       if (newVal.length > 0) {
+        // check if there are selected line fields
         this.selectedPermissions = this.selectedPermissions.filter(
           (permission) => permission.name !== "cpo-edit"
         );
@@ -152,8 +173,31 @@ export default {
           name: "cpo-edit",
           description: "CPO Edit",
           lineFields: newVal,
+          canEditHeader: this.canEditHeader,
         });
       } else {
+        if (this.canEditHeader) return;
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-edit"
+        );
+      }
+
+      this.remapSelectedPermissions();
+    },
+    canEditHeader(newValue) {
+      if (newValue) {
+        this.selectedPermissions = this.selectedPermissions.filter(
+          (permission) => permission.name !== "cpo-edit"
+        );
+        this.selectedPermissions.push({
+          name: "cpo-edit",
+          description: "CPO Edit",
+          lineFields: this.cpoEditLineFields,
+          canEditHeader: newValue,
+        });
+      } else {
+        // console.log(this.cpoEditLineFields.length);
+        if (this.cpoEditLineFields.length > 0) return;
         this.selectedPermissions = this.selectedPermissions.filter(
           (permission) => permission.name !== "cpo-edit"
         );
@@ -162,6 +206,11 @@ export default {
       this.remapSelectedPermissions();
     },
   },
+  // mounted() {
+  //   console.log(this.modelValue);
+  //   console.log(this.modelValue?.canEditHeader);
+
+  // },
 };
 </script>
 

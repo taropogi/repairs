@@ -23,6 +23,7 @@ const cpoModule = {
           description: "Edit CPO",
           name: "cpo-edit",
           lineFields: [...LINEFIELDS],
+          canEditHeader: true
         },
         { description: "Delete CPO", name: "cpo-delete" },
         {
