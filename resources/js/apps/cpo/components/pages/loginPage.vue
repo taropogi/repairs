@@ -16,6 +16,7 @@
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input
+                @input="toupperCase"
                 id="username"
                 type="text"
                 class="form-control"
@@ -79,7 +80,6 @@
 </template>
 
 <script>
-import { ca } from "date-fns/locale";
 import { mapActions } from "vuex";
 export default {
   inject: ["laravelData"],
@@ -96,8 +96,14 @@ export default {
 
   methods: {
     ...mapActions("auth", ["setIsLoggedIn", "setUser"]),
+    toupperCase() {
+      this.loginFormData.username = this.loginFormData.username.toUpperCase();
+    },
     async submitLoginForm() {
       this.isValidating = true;
+
+      this.loginFormData.username = this.loginFormData.username.toLowerCase();
+      this.loginFormData.password = this.loginFormData.password.toLowerCase();
 
       try {
         await axios.get("sanctum/csrf-cookie");
