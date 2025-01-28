@@ -92,7 +92,7 @@
           type="button"
         >
           <span class="nowrap fw-bold">
-            <i class="bi bi-save"></i>
+            <i class="bi bi-gear"></i>
             GENERATE RMA#
           </span>
 

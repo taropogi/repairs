@@ -11,7 +11,7 @@
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
-        <td class="text-center">__________</td>
+        <td class="text-center underline-spacing">{{ $cpo->formatted_rma_number }}</td>
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
     </tr>
