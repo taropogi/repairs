@@ -11,6 +11,15 @@ class Activity extends Model
 
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($activity) {
+            $activity->action_by = auth()->user()->name;
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
