@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Activity extends Model
 {
@@ -16,7 +17,7 @@ class Activity extends Model
         parent::boot();
 
         static::creating(function ($activity) {
-            $activity->action_by = auth()->user()->name;
+            $activity->action_by = Auth::check() ? Auth::user()->name : null;
         });
     }
 
