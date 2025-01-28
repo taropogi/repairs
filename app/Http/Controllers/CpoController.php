@@ -131,6 +131,11 @@ class CpoController extends Controller
             }
         }
 
+        auth()->user()->activities()->create([
+            'action' => 'Create CPO',
+            'description' => 'Created CPO with ID:' . $new_cpo->id
+        ]);
+
 
 
         // set delay time sleep for 1 second
