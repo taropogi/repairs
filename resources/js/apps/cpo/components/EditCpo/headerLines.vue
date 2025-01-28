@@ -85,6 +85,7 @@
           ></span>
         </button>
         <button
+          v-if="!headerRow.rma_number"
           @click="generateRmaNumber"
           :disabled="isGeneratingRma"
           class="btn btn-secondary mx-1"
@@ -94,7 +95,7 @@
             <i class="bi bi-save"></i>
             GENERATE RMA#
           </span>
-          {{ headerRow.rma_number }}
+
           <span
             v-if="isGeneratingRma"
             class="spinner-border spinner-border-sm"

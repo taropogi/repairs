@@ -14,7 +14,7 @@ class Cpo extends Model
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
 
-    protected $appends = ['formatted_id', 'is_completed'];
+    protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number'];
 
 
     // protected static function boot()
@@ -54,6 +54,12 @@ class Cpo extends Model
     public function getFormattedIdAttribute()
     {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);
+    }
+
+    // Accessor for formatted RMA Number
+    public function getFormattedRmaNumberAttribute()
+    {
+        return $this->rma_number ?  str_pad($this->rma_number, 5, '0', STR_PAD_LEFT) : 'N/A';
     }
 
     // Accessor for checking if the Cpo is completed

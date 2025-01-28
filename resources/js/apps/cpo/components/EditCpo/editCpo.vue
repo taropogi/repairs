@@ -9,6 +9,7 @@
       <form-header
         @searched-header-row="setHeaderRow"
         :id="id"
+        :key="formHeaderKey"
         @updating="isUpdating = true"
         @updated="isUpdating = false"
       ></form-header>
@@ -46,12 +47,14 @@ export default {
       headerRow: null,
       isUpdating: false,
       isUpdatedAllLinesSuccess: false,
+      formHeaderKey: 0,
     };
   },
   methods: {
     ...mapActions(["setActiveNav"]),
     updatedRma(updatedHeaderRow) {
       this.headerRow = updatedHeaderRow;
+      this.formHeaderKey++;
     },
     setHeaderRow(headerRow) {
       this.headerRow = headerRow;

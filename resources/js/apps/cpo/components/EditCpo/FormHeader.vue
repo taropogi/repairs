@@ -207,10 +207,13 @@
             </div>
           </div>
           <div
-            class="d-flex justify-content-center align-items-center"
+            class="d-flex justify-content-center align-items-center flex-column"
             style="height: 100px"
           >
             <h1 class="fw-bold">PULLOUT#: {{ headerRow.formatted_id }}</h1>
+            <h1 class="fw-bold" v-if="headerRow.rma_number">
+              RMA#: {{ headerRow.formatted_rma_number }}
+            </h1>
           </div>
         </div>
       </form>
