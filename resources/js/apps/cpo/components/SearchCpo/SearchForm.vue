@@ -31,7 +31,7 @@
     </div>
     <div class="row">
       <div class="col p-2">
-        <label>RPO #</label>
+        <label>PULLOUT#</label>
         <input
           type="text"
           class="form-control shadow"

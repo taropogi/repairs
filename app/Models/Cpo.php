@@ -17,6 +17,17 @@ class Cpo extends Model
     protected $appends = ['formatted_id', 'is_completed'];
 
 
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($cpo) {
+    //         if(is_null($cpo->rma_number)){
+    //             $maxRmaNumber = Cpo::where('rma_number', 'like', 'RMA-%')->max('rma_number');
+    //         }
+    //     });
+    // }
+
 
     public function lines()
     {

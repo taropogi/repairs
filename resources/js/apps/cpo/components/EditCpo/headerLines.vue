@@ -84,6 +84,24 @@
             aria-hidden="true"
           ></span>
         </button>
+        <button
+          @click="generateRmaNumber"
+          :disabled="isGeneratingRma"
+          class="btn btn-secondary mx-1"
+          type="button"
+        >
+          <span class="nowrap fw-bold">
+            <i class="bi bi-save"></i>
+            GENERATE RMA#
+          </span>
+          {{ headerRow.rma_number }}
+          <span
+            v-if="isGeneratingRma"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+        </button>
       </div>
     </div>
   </div>
@@ -111,6 +129,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    headerRow: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
@@ -123,6 +145,7 @@ export default {
       isSavingAllLines: false,
       isSelectingOracleItem: false,
       selectItemForLineNumber: null,
+      isGeneratingRma: false,
     };
   },
 
@@ -188,6 +211,23 @@ export default {
         console.log(err);
       } finally {
         this.isInsertingNewLine = false;
+      }
+    },
+    async generateRmaNumber() {
+      try {
+        this.isGeneratingRma = true;
+        const res = await axios.post("api/cpo/generateRma", {
+          cpoId: this.headerId,
+        });
+        this.showNotification({
+          message: "RMA# was generated",
+          type: "success",
+        });
+        this.$emit("updatedRma", res.data);
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        this.isGeneratingRma = false;
       }
     },
     async saveAllLines() {

@@ -16,10 +16,12 @@
       <header-lines
         class="mt-2"
         :header-id="+id"
+        :header-row="headerRow"
         v-if="headerRow"
         :header-is-locked="!!headerRow.locked"
         @updating-lines="isUpdating = true"
         @updated-lines="isUpdating = false"
+        @updated-rma="updatedRma"
       ></header-lines>
     </div>
   </div>
@@ -48,6 +50,9 @@ export default {
   },
   methods: {
     ...mapActions(["setActiveNav"]),
+    updatedRma(updatedHeaderRow) {
+      this.headerRow = updatedHeaderRow;
+    },
     setHeaderRow(headerRow) {
       this.headerRow = headerRow;
     },

@@ -41,6 +41,14 @@ class CpoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function generateRma(Request $request)
+    {
+        $cpo = Cpo::find($request->cpoId);
+        $cpo->rma_number =  Cpo::max('rma_number') + 1;
+        $cpo->update();
+        return $cpo;
+    }
     public function create(Request $request)
     {
 

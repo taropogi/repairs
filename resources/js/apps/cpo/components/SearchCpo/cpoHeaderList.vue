@@ -30,7 +30,7 @@
           <tr>
             <th class="col tex-center">
               <span class="nowrap"
-                >RPO#
+                >PULLOUT#
                 <span v-if="selectedPosCount > 0"
                   >[{{ selectedPosCount }}]</span
                 ></span

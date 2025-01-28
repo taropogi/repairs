@@ -55,6 +55,7 @@ Route::post('cpo/destroy/multi', [CpoController::class, 'destroyMulti']);
 Route::post('cpo/selected', [CpoController::class, 'selectedCpos']);
 Route::post('cpo/selected/update/status', [CpoController::class, 'changeStatusSelectedCpos']);
 Route::get('cpo/pdf/history/{cpo}', [CpoController::class, 'getPdfHistory']);
+Route::post('cpo/generateRma', [CpoController::class, 'generateRma']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
