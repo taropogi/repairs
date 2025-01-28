@@ -210,10 +210,10 @@
             class="d-flex justify-content-center align-items-center flex-column"
             style="height: 100px"
           >
-            <h1 class="fw-bold">PULLOUT#: {{ headerRow.formatted_id }}</h1>
-            <h1 class="fw-bold" v-if="headerRow.rma_number">
+            <h3 class="fw-bold">PULLOUT#: {{ headerRow.formatted_id }}</h3>
+            <h3 class="fw-bold" v-if="headerRow.rma_number">
               RMA#: {{ headerRow.formatted_rma_number }}
-            </h1>
+            </h3>
           </div>
         </div>
       </form>
