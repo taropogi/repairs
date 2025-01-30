@@ -45,7 +45,12 @@ class CpoController extends Controller
     public function generateRma(Request $request)
     {
         $cpo = Cpo::find($request->cpoId);
-        $rmaNumber = Cpo::max('rma_number') + 1;
+        $rmaNumber = null;
+        if (!$cpo->rma_number) {
+            $rmaNumber = Cpo::max('rma_number') + 1;
+        }
+
+
         $cpo->rma_number =  $rmaNumber;
         $cpo->update();
 
@@ -275,6 +280,11 @@ class CpoController extends Controller
                     $cpoLineComment->save();
                 }
             }
+        }
+
+        if ($cpo->rma_number && !$cpo->is_rma_final) {
+            $cpo->is_rma_final = true;
+            $cpo->update();
         }
 
 

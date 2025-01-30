@@ -21,7 +21,7 @@
         v-if="headerRow"
         :header-is-locked="!!headerRow.locked"
         @updating-lines="isUpdating = true"
-        @updated-lines="isUpdating = false"
+        @updated-lines="updatedLines"
         @updated-rma="updatedRma"
       ></header-lines>
     </div>
@@ -52,6 +52,12 @@ export default {
   },
   methods: {
     ...mapActions(["setActiveNav"]),
+    updatedLines(rmaNumber) {
+      if (rmaNumber) {
+        this.formHeaderKey++;
+      }
+      this.isUpdating = false;
+    },
     updatedRma(updatedHeaderRow) {
       this.headerRow = updatedHeaderRow;
       this.formHeaderKey++;

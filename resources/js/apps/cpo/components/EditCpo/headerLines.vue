@@ -85,15 +85,20 @@
           ></span>
         </button>
         <button
-          v-if="!headerRow.rma_number"
+          v-if="!headerRow.is_rma_final"
           @click="generateRmaNumber"
           :disabled="isGeneratingRma"
-          class="btn btn-secondary mx-1"
+          class="btn mx-1"
           type="button"
+          :class="{
+            'btn-danger': headerRow.rma_number,
+            'btn-secondary': !headerRow.rma_number,
+          }"
         >
           <span class="nowrap fw-bold">
             <i class="bi bi-gear"></i>
-            GENERATE RMA#
+            <span v-if="!headerRow.rma_number"> GENERATE RMA# </span>
+            <span v-else> REMOVE RMA# </span>
           </span>
 
           <span
@@ -103,6 +108,14 @@
             aria-hidden="true"
           ></span>
         </button>
+      </div>
+      <div class="mt-4" v-if="headerRow.rma_number && !headerRow.is_rma_final">
+        <p class="text-danger">
+          <strong>
+            Note: Clicking the "SAVE ALL LINES" button will finalize the
+            generated RMA# .
+          </strong>
+        </p>
       </div>
     </div>
   </div>
@@ -240,6 +253,8 @@ export default {
           cpoId: this.headerId,
           cpoLines: this.lines,
         });
+
+        this.$emit("updatedLines", this.headerRow.rma_number);
         this.showNotification({
           message: "All lines were saved",
           type: "success",
@@ -248,7 +263,6 @@ export default {
         console.log(error.message);
       } finally {
         this.isSavingAllLines = false;
-        this.$emit("updatedLines");
       }
     },
     async getCpoLines() {
