@@ -55,13 +55,22 @@ class CpoController extends Controller
         if (!$cpo->is_rma_final) {
             $cpo->rma_number =  $rmaNumber;
             $cpo->update();
+
+            if ($rmaNumber) {
+                auth()->user()->activities()->create([
+                    'action' => 'Generate RMA',
+                    'description' => 'Generated RMA for CPO with ID:' . $cpo->id . ' and RMA Number: ' . $rmaNumber
+                ]);
+            } else {
+                auth()->user()->activities()->create([
+                    'action' => 'Removed RMA',
+                    'description' => 'Removed RMA for CPO with ID:' . $cpo->id
+                ]);
+            }
         }
 
 
-        auth()->user()->activities()->create([
-            'action' => 'Generate RMA',
-            'description' => 'Generated RMA for CPO with ID:' . $cpo->id . ' and RMA Number: ' . $rmaNumber
-        ]);
+
         return $cpo;
     }
     public function create(Request $request)
