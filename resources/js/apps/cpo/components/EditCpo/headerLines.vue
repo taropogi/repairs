@@ -113,7 +113,7 @@
         <p class="text-danger">
           <strong>
             Note: Clicking the "SAVE ALL LINES" button will finalize the
-            generated RMA# .
+            generated RMA#, which can no longer be changed.
           </strong>
         </p>
       </div>
