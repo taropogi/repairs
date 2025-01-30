@@ -17,7 +17,20 @@
         <small>{{ $line->damaged }}</small>
     </td>
     <td rowspan="2">
-        <small>{{ $line->comments }}</small>
+        <table width="100%" class="table-inside" style="border:none;">
+            @foreach($line->all_comments as $comment)
+            <tr>
+                <td>
+                    <strong>{{ $comment['commented_by'] }}:</strong>
+                    <br>
+                    <small>{{ $comment['comment'] }}</small>
+                </td>
+            </tr>
+            @endforeach
+
+
+        </table>
+
     </td>
 </tr>
 <tr>

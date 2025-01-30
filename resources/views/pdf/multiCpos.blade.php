@@ -6,81 +6,81 @@
     <title>{{ $title }}</title>
 
     <style type="text/css">
-    * {
-        font-family: Verdana, Arial, sans-serif;
-    }
+        * {
+            font-family: Verdana, Arial, sans-serif;
+        }
 
-    @page {
-        margin: 50px;
-    }
+        @page {
+            margin: 50px;
+        }
 
-    table {
-        font-size: x-small;
-    }
+        table {
+            font-size: x-small;
+        }
 
-    tfoot tr td {
-        font-weight: bold;
-        font-size: x-small;
-    }
+        tfoot tr td {
+            font-weight: bold;
+            font-size: x-small;
+        }
 
-    thead th {
-        font-size: 10px;
-    }
-
-
-    .gray {
-        background-color: lightgray
-    }
-
-    td.text-center {
-        text-align: center;
-        vertical-align: middle;
-    }
+        thead th {
+            font-size: 10px;
+        }
 
 
+        .gray {
+            background-color: lightgray
+        }
 
-    .to-border,
-    .to-border td,
-    .to-border th {
-        border: 1px solid;
-    }
+        td.text-center {
+            text-align: center;
+            vertical-align: middle;
+        }
 
-    .to-border {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    .table-inside,
-    .table-inside td {
-        font-size: 10px;
-        border: none;
-    }
 
-    .page-break {
-        page-break-after: always;
-    }
+        .to-border,
+        .to-border td,
+        .to-border th {
+            border: 1px solid;
+        }
 
-    .footer {
-        position: fixed;
-        bottom: -30px;
-        left: 0;
-        right: 0;
-        height: 20px;
-        text-align: center;
-        font-size: 12px;
-    }
+        .to-border {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .page-number:after {
-        content: counter(page);
-    }
+        .table-inside,
+        .table-inside td {
+            font-size: 10px;
+            border: none;
+        }
 
-    .underline-spacing {
-        text-decoration: underline;
-        text-decoration-color: black;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 5px;
-        /* Adjust the spacing as needed */
-    }
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .page-number:after {
+            content: counter(page);
+        }
+
+        .underline-spacing {
+            text-decoration: underline;
+            text-decoration-color: black;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 5px;
+            /* Adjust the spacing as needed */
+        }
     </style>
 
 </head>
@@ -95,6 +95,7 @@
         @foreach($cpos as $cpo)
 
         @php
+
         $chunks = array_chunk($cpo['lines']->toArray(), 14);
 
         @endphp
@@ -120,7 +121,9 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach($chunk as $line)
+
                 @include('pdf.segments.trLine', ['line' => (object) $line])
                 @endforeach
             </tbody>
