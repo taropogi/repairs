@@ -81,4 +81,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CpoLineComment::class);
     }
+
+    public function cpos()
+    {
+        return $this->hasMany(Cpo::class, 'created_by');
+    }
 }

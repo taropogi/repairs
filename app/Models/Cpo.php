@@ -28,10 +28,28 @@ class Cpo extends Model
     //     });
     // }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($cpo) {
+            if (auth()->check()) {
+                $cpo->created_by = auth()->id();
+            } else {
+                throw new \Exception('User not authenticated');
+            }
+        });
+    }
+
 
     public function lines()
     {
         return $this->hasMany(CpoLine::class)->orderBy('line_number', 'ASC');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function pdf_history()
