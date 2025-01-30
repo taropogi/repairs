@@ -117,6 +117,7 @@
           </strong>
         </p>
       </div>
+      <!-- {{ headerRow.rma_number }} - {{ headerRow.is_rma_final }} -->
     </div>
   </div>
 </template>
@@ -254,7 +255,8 @@ export default {
           cpoLines: this.lines,
         });
 
-        this.$emit("updatedLines", this.headerRow.rma_number);
+        this.$emit("updatedLines", this.headerRow);
+
         this.showNotification({
           message: "All lines were saved",
           type: "success",

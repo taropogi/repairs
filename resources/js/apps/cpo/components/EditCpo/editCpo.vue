@@ -52,8 +52,9 @@ export default {
   },
   methods: {
     ...mapActions(["setActiveNav"]),
-    updatedLines(rmaNumber) {
-      if (rmaNumber) {
+    updatedLines(headerRow) {
+      if (headerRow.rma_number && !headerRow.is_rma_final) {
+        // console.log("RMA Number: ", headerRow.rma_number);
         this.formHeaderKey++;
       }
       this.isUpdating = false;
@@ -63,6 +64,7 @@ export default {
       this.formHeaderKey++;
     },
     setHeaderRow(headerRow) {
+      // console.log("headerRow", headerRow);
       this.headerRow = headerRow;
     },
   },

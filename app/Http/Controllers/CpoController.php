@@ -51,8 +51,12 @@ class CpoController extends Controller
         }
 
 
-        $cpo->rma_number =  $rmaNumber;
-        $cpo->update();
+
+        if (!$cpo->is_rma_final) {
+            $cpo->rma_number =  $rmaNumber;
+            $cpo->update();
+        }
+
 
         auth()->user()->activities()->create([
             'action' => 'Generate RMA',
@@ -170,6 +174,7 @@ class CpoController extends Controller
         $response['header_statuses'] = HeaderStatus::all();
         $response['users'] = User::select('id', 'name')->get();
         //  $response['lines'] = $cpo->lines;
+
 
 
         return  $response;
