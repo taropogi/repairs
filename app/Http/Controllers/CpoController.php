@@ -456,6 +456,10 @@ class CpoController extends Controller
             $cpos = $cpos->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
         }
 
+        if (!auth()->user()->canAccessOtherCpos()) {
+            $cpos = $cpos->where('created_by', auth()->user()->id);
+        }
+
 
 
         $cpos = $cpos->take(50)->get();

@@ -65,7 +65,20 @@ class User extends Authenticatable
         if ($this->is_admin) {
             return true;
         }
-        return $this->permissions->contains('name', $permission);
+
+        foreach ($this->permissions as $perm) {
+
+
+            if ($perm['name'] === $permission) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function canAccessOtherCpos()
+    {
+        return $this->hasPermissionTo('access-other-cpo');
     }
 
     public function hasPermission($permission)
