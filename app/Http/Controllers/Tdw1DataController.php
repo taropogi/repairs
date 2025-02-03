@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,13 @@ class Tdw1DataController extends Controller
     public function getItemBySegment6()
     {
         $response['item'] = Item::where('segment6', request()->search)->first();
+        if ($response['item']) {
+            Activity::create([
+                'action' => 'Searched Item / Input',
+                'description' => 'Searched item by segment6 ' . request()->search,
+                'user_id' => auth()->user()->id
+            ]);
+        }
         return $response;
     }
     public function getItemsAll()
