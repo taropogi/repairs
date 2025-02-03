@@ -26,7 +26,12 @@
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('qty_returned') || isAdmin">
-      <input type="number" class="form-control" v-model="line.qtyReturned" />
+      <input
+        type="number"
+        class="form-control"
+        v-model="line.qtyReturned"
+        @input="validateQty('qtyReturned')"
+      />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('unit') || isAdmin">
@@ -45,7 +50,12 @@
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('qty_inspect') || isAdmin">
-      <input type="number" class="form-control" v-model="line.qtyInspect" />
+      <input
+        type="number"
+        class="form-control"
+        v-model="line.qtyInspect"
+        @input="validateQty('qtyInspect')"
+      />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
@@ -53,7 +63,12 @@
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('good_condition') || isAdmin">
-      <input type="number" class="form-control" v-model="line.goodCondition" />
+      <input
+        type="number"
+        class="form-control"
+        v-model="line.goodCondition"
+        @input="validateQty('goodCondition')"
+      />
     </td>
 
     <td
@@ -65,6 +80,7 @@
         type="number"
         class="form-control"
         v-model="line.minorRepairClean"
+        @input="validateQty('minorRepairClean')"
       />
     </td>
 
@@ -77,11 +93,17 @@
         type="number"
         class="form-control"
         v-model="line.repairPartsNeeded"
+        @input="validateQty('repairPartsNeeded')"
       />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('damaged') || isAdmin">
-      <input type="number" class="form-control" v-model="line.damaged" />
+      <input
+        type="number"
+        class="form-control"
+        v-model="line.damaged"
+        @input="validateQty('damaged')"
+      />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('comments') || isAdmin">
@@ -132,6 +154,11 @@ export default {
     ...mapGetters("auth", ["encodeLineFieldsPermission", "isAdmin"]),
   },
   methods: {
+    validateQty(field) {
+      if (this.line[field] < 0) {
+        this.line[field] = 0;
+      }
+    },
     deleteLine() {
       this.isDeleting = true;
       this.$emit("delete-line", this.line);
