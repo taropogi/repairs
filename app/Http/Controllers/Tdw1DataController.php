@@ -25,6 +25,14 @@ class Tdw1DataController extends Controller
                 'description' => 'Searched item by segment6 ' . request()->search,
                 'user_id' => auth()->user()->id
             ]);
+        } else {
+            if (!is_null(request()->search) && request()->search !== '') {
+                Activity::create([
+                    'action' => 'No Item Searched / Input',
+                    'description' => 'No item found for:  ' . request()->search,
+                    'user_id' => auth()->user()->id
+                ]);
+            }
         }
         return $response;
     }
