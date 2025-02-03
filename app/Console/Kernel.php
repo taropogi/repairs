@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
                 'description' => 'Deleted ' . $affected . '  activities older than 5 days',
                 'user_id' => $user->id,
             ]);
-        })->everyTwoHours();
+        })->everyMinute();
     }
 
     /**
