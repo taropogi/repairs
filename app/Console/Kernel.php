@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
 
 
 
-        $schedule->job(new DeleteOldActivities)->everyFiveMinutes();
+        $schedule->job(new DeleteOldActivities)->everyFiveMinutes()->between('9:00', '18:00');
 
         // $schedule->call(function () {
         //     $user = User::where('username', 'like', '%admin%')->first();
