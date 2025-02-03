@@ -52,6 +52,7 @@
         type="number"
         class="form-control"
         v-model="lineDetails.qty_returned"
+        @input="validateQty('qty_returned')"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('qty_returned') || isAdmin)
@@ -93,6 +94,7 @@
         type="number"
         class="form-control"
         v-model="lineDetails.qty_inspect"
+        @input="validateQty('qty_inspect')"
         :disabled="
           isDisabled ||
           !(editLineFieldsPermission.includes('qty_inspect') || isAdmin)
@@ -118,6 +120,7 @@
           !(editLineFieldsPermission.includes('good_condition') || isAdmin)
         "
         v-model="lineDetails.good_condition"
+        @input="validateQty('good_condition')"
       />
     </td>
     <td>
@@ -129,6 +132,7 @@
           !(editLineFieldsPermission.includes('minor_repair_clean') || isAdmin)
         "
         v-model="lineDetails.minor_repair_clean"
+        @input="validateQty('minor_repair_clean')"
       />
     </td>
     <td>
@@ -140,6 +144,7 @@
           !(editLineFieldsPermission.includes('repair_parts_needed') || isAdmin)
         "
         v-model="lineDetails.repair_parts_needed"
+        @input="validateQty('repair_parts_needed')"
       />
     </td>
     <td>
@@ -151,6 +156,7 @@
           !(editLineFieldsPermission.includes('damaged') || isAdmin)
         "
         v-model="lineDetails.damaged"
+        @input="validateQty('damaged')"
       />
     </td>
     <td>
@@ -259,6 +265,11 @@ export default {
   },
 
   methods: {
+    validateQty(field) {
+      if (this.lineDetails[field] < 0) {
+        this.lineDetails[field] = 0;
+      }
+    },
     blinkTr(isDelete = false) {
       if (isDelete) {
         this.isDeleted = true;
