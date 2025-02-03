@@ -67,13 +67,13 @@
         <multi-options> </multi-options>
       </div>
     </transition>
-    <transition
-      v-if="isNavSearchActive"
+    <!-- <transition
+      v-show="isNavSearchActive"
       name="general-transition"
       class="mt-auto"
     >
       <random-qoute></random-qoute>
-    </transition>
+    </transition> -->
     <transition name="general-transition">
       <div
         v-if="isNavUpdateActive && !userIsAdmin"
