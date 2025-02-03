@@ -234,10 +234,19 @@ export default {
         const res = await axios.post("api/cpo/generateRma", {
           cpoId: this.headerId,
         });
-        this.showNotification({
-          message: "RMA# was generated",
-          type: "success",
-        });
+        const cpo = res.data;
+        if (cpo.rma_number) {
+          this.showNotification({
+            message: "RMA# was generated",
+            type: "success",
+          });
+        } else {
+          this.showNotification({
+            message: "RMA# was removed",
+            type: "error",
+          });
+        }
+
         this.$emit("updatedRma", res.data);
       } catch (error) {
         alert(error.message);
