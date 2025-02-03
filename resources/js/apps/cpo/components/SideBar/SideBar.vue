@@ -194,7 +194,7 @@ import MultiOptions from "./MultiOptions.vue";
 import AdminLinksUser from "./AdminLinks/User.vue";
 import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
 import AdminLinksPermissions from "./AdminLinks/Permissions.vue";
-import RandomQoute from "./RandomQoute.vue";
+// import RandomQoute from "./RandomQoute.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   inject: ["laravelData"],
@@ -205,7 +205,7 @@ export default {
     AdminLinksUser,
     AdminLinksStatus,
     AdminLinksPermissions,
-    RandomQoute,
+    // RandomQoute,
   },
   data() {
     return {};
