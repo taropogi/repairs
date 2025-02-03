@@ -91,4 +91,13 @@ class ActivityController extends Controller
             'user_id' => auth()->user()->id
         ]);
     }
+
+    public function logSelectItem(Request $request)
+    {
+        Activity::create([
+            'action' => 'Select Item',
+            'description' => 'User selected item: ' . $request->item['description'],
+            'user_id' => auth()->user()->id
+        ]);
+    }
 }

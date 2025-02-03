@@ -22,18 +22,14 @@
       <button
         type="button"
         class="btn btn-info mx-1 btn-sm"
-        @click="$emit('select-item', item)"
+        @click="selectItem"
       >
         <span class="nowrap fw-bold">
           <i class="bi bi-hand-index-thumb"></i>
           SELECT
         </span>
       </button>
-      <button
-        type="button"
-        class="btn btn-warning mx-1 btn-sm"
-        @click="gotoYP(item)"
-      >
+      <button type="button" class="btn btn-warning mx-1 btn-sm" @click="gotoYP">
         <span class="nowrap fw-bold">
           VIEW IN YP
           <i class="bi bi-arrow-right"></i>
@@ -59,11 +55,27 @@ export default {
   components: { ItemImage },
 
   methods: {
-    gotoYP(item) {
+    selectItem() {
+      this.logSelectItem();
+      this.$emit("select-item", this.item);
+    },
+    gotoYP() {
+      const item = this.item;
       this.$emit("goto-yp", item);
       this.logClickedGoto();
       const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=${item.oracle_code}&inventory_item_id=${item.inventory_item_id}`;
       window.open(url, "_blank");
+    },
+    async logSelectItem() {
+      // console.log(this.item);
+      try {
+        await axios.post("/api/log/selectItem", {
+          action: "selectItem",
+          item: this.item,
+        });
+      } catch (error) {
+        console.error("Error logging action:", error);
+      }
     },
     async logClickedGoto() {
       try {
