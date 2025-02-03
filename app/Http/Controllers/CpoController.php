@@ -14,6 +14,7 @@ use App\Models\CpoLineComment;
 use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Activity;
 
 class CpoController extends Controller
 {
@@ -484,6 +485,15 @@ class CpoController extends Controller
         $response['allHeadersCount'] = $qry2->count();
         $response['isLastPage'] = $response['allHeadersCount'] <= $request->input('perPage') * $request->input('page');
 
+        if (
+            $request->page > 1
+        ) {
+            Activity::create([
+                'action' => 'Clicked Pagination Button',
+                'description' => 'Page: ' . $request->input('page'),
+                'user_id' => auth()->user()->id
+            ]);
+        }
 
 
 
