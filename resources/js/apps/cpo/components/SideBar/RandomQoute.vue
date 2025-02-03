@@ -45,6 +45,8 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import { QUOTES } from "../../utils/constArray.js";
+
 export default {
   data() {
     return {
@@ -60,14 +62,10 @@ export default {
   },
   methods: {
     async fetchQuote() {
-      try {
-        const response = await axios.get("/api/quote/random");
-        const data = response.data;
-        this.quote = data.quote;
-        this.author = data.author;
-      } catch (error) {
-        console.error(error);
-      }
+      const randomIndex = Math.floor(Math.random() * QUOTES.length);
+      const randomQuote = QUOTES[randomIndex];
+      this.quote = randomQuote.text;
+      this.author = randomQuote.author;
     },
   },
   mounted() {
