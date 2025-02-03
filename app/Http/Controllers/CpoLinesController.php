@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Cpo;
 use App\Models\CpoLine;
 use Illuminate\Http\Request;
@@ -212,6 +213,13 @@ class CpoLinesController extends Controller
 
 
         $cpo = Cpo::find($cpoLine->cpo_id);
+
+        // Log activity
+        Activity::create([
+            'action' => 'Update CPO Line',
+            'description' => 'Updated CPO: Line ' . $cpoLine->line_number . ' in CPO #' . $cpo->formatted_id,
+            'user_id' => auth()->user()->id,
+        ]);
 
 
 
