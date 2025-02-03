@@ -37,6 +37,9 @@ class HeaderStatusSeeder extends Seeder
         ];
 
         foreach ($statuses as $status) {
+            if (HeaderStatus::where('status', $status['status'])->exists()) {
+                continue;
+            }
             HeaderStatus::create($status);
         }
     }

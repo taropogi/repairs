@@ -14,10 +14,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call(QuoteSeeder::class);
         $this->call(HeaderStatusSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(CpoSeeder::class);
-        $this->call(HeaderStatusHistorySeeder::class);
-        $this->call(CpoLineSeeder::class);
+
+        //for testing
+        // $this->call(CpoSeeder::class);
+        // $this->call(HeaderStatusHistorySeeder::class);
+        // $this->call(CpoLineSeeder::class);
+
     }
 }

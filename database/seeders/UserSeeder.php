@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        User::factory()->times(100)->create();
+        // User::factory()->times(100)->create();
 
         $users = [
             [
@@ -51,6 +51,10 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
+            $existingUser = User::where('username', $user['username'])->first();
+            if ($existingUser) {
+                continue;
+            }
             User::create($user);
         }
     }

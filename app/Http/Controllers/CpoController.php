@@ -6,6 +6,7 @@ use App\Models\Cpo;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\CpoLine;
+use App\Models\Activity;
 use App\Traits\FormatLines;
 use App\Traits\GeneratePdf;
 use App\Models\HeaderStatus;
@@ -13,8 +14,8 @@ use Illuminate\Http\Request;
 use App\Models\CpoLineComment;
 use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Activity;
 
 class CpoController extends Controller
 {
@@ -35,6 +36,21 @@ class CpoController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getRandomQuote()
+    {
+
+        $quote = Inspiring::quote();
+        $quoteParts = explode(' - ', $quote);
+
+        $quoteText = $quoteParts[0];
+        $quoteAuthor = isset($quoteParts[1]) ? $quoteParts[1] : 'Unknown';
+
+        return response()->json([
+            'quote' => $quoteText,
+            'author' => $quoteAuthor
+        ]);
     }
 
     /**

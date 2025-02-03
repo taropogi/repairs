@@ -67,26 +67,12 @@
         <multi-options> </multi-options>
       </div>
     </transition>
-    <transition name="general-transition">
-      <div
-        v-if="false"
-        class="alert alert-info d-flex align-items-center my-2"
-        role="alert"
-      >
-        <div>
-          <h4 class="quote-title">
-            <i class="bi bi-info-circle me-2"></i>
-            RANDOM QUOTE
-          </h4>
-          <hr />
-          <blockquote class="blockquote quote-block">
-            <p class="mb-0 quote-text">
-              "The only way to do great work is to love what you do." - Steve
-              Jobs
-            </p>
-          </blockquote>
-        </div>
-      </div>
+    <transition
+      v-if="isNavSearchActive"
+      name="general-transition"
+      style="margin-top: 100px"
+    >
+      <random-qoute></random-qoute>
     </transition>
     <transition name="general-transition">
       <div
@@ -208,6 +194,7 @@ import MultiOptions from "./MultiOptions.vue";
 import AdminLinksUser from "./AdminLinks/User.vue";
 import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
 import AdminLinksPermissions from "./AdminLinks/Permissions.vue";
+import RandomQoute from "./RandomQoute.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   inject: ["laravelData"],
@@ -218,6 +205,7 @@ export default {
     AdminLinksUser,
     AdminLinksStatus,
     AdminLinksPermissions,
+    RandomQoute,
   },
   data() {
     return {};
@@ -352,27 +340,6 @@ export default {
 .export-btns-enter-to {
   opacity: 1;
   transform: translateY(0);
-}
-
-.quote-title {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  color: #007bff;
-}
-
-.quote-block {
-  border-left: 5px solid #007bff;
-  padding-left: 15px;
-  margin: 20px 0;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-}
-
-.quote-text {
-  font-style: italic;
-  color: #343a40;
-  font-size: 1.1em;
 }
 
 /* .export-btns-leave-from {
