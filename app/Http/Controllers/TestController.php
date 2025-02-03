@@ -21,30 +21,20 @@ class TestController extends Controller
     }
     public function test()
     {
-        // $customers = OracleCustomer::all();
+        // send test email here
 
-        dd(Auth::user()->name);
+        // Send a test email using PHP's mail function
+        // $to = 'itstaff2@times.com';
+        // $subject = 'Test Email';
+        // $message = 'This is a test email.';
+        // $headers = 'From: itstaff2@times.com' . "\r\n" .
+        //     'Reply-To: itstaff2@times.com' . "\r\n" .
+        //     'X-Mailer: PHP/' . phpversion();
 
-        $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
-        $headers = @get_headers($url);
-        echo $headers;
-        if ($headers && strpos($headers[0], '200') !== false) {
-            echo '<h1>has image</h1>';
-        } else {
-            echo '<h1>No image</h1>';
-        }
-
-        // $this->getItemsAll();
-
-        // $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
-
-        // echo "<img src='$url' alt=''>";
-        // $headers = @get_headers($url);
-        // echo $headers;
-        // if ($headers && strpos($headers[0], '200') !== false) {
-        //     echo '<h1>has image</h1>';
+        // if (mail($to, $subject, $message, $headers)) {
+        //     return 'Test email sent successfully!';
         // } else {
-        //     echo '<h1>No image</h1>';
+        //     return 'Failed to send test email.';
         // }
     }
 
