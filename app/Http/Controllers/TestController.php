@@ -9,6 +9,7 @@ use App\Traits\FormatLines;
 use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Models\OracleCustomer;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,10 @@ class TestController extends Controller
     }
     public function test()
     {
+
+
+        $qoute = Inspiring::quote();
+        dd($qoute);
         // send test email here
 
         // Send a test email using PHP's mail function

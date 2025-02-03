@@ -69,6 +69,27 @@
     </transition>
     <transition name="general-transition">
       <div
+        v-if="false"
+        class="alert alert-info d-flex align-items-center my-2"
+        role="alert"
+      >
+        <div>
+          <h4 class="quote-title">
+            <i class="bi bi-info-circle me-2"></i>
+            RANDOM QUOTE
+          </h4>
+          <hr />
+          <blockquote class="blockquote quote-block">
+            <p class="mb-0 quote-text">
+              "The only way to do great work is to love what you do." - Steve
+              Jobs
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </transition>
+    <transition name="general-transition">
+      <div
         v-if="isNavUpdateActive && !userIsAdmin"
         class="alert alert-info d-flex align-items-center my-2"
         role="alert"
@@ -331,6 +352,27 @@ export default {
 .export-btns-enter-to {
   opacity: 1;
   transform: translateY(0);
+}
+
+.quote-title {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #007bff;
+}
+
+.quote-block {
+  border-left: 5px solid #007bff;
+  padding-left: 15px;
+  margin: 20px 0;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.quote-text {
+  font-style: italic;
+  color: #343a40;
+  font-size: 1.1em;
 }
 
 /* .export-btns-leave-from {
