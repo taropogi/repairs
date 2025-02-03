@@ -5,7 +5,7 @@
     </div>
     <div class="card-body text-center p-5">
       <blockquote class="blockquote mb-4">
-        <p class="fs-4 fst-italic text-primary">"{{ quote }}"</p>
+        <p class="fs-4 fst-italic text-primary fw-bold">"{{ quote }}"</p>
       </blockquote>
       <footer class="blockquote-footer text-muted">{{ author }}</footer>
     </div>

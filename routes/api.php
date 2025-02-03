@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OracleCustomerController;
-use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\Tdw1DataController;
 
 // use App\Http\Controllers\RegisterController;
@@ -100,6 +99,3 @@ Route::get('items/segment6/single', [Tdw1DataController::class, 'getItemBySegmen
 
 //export
 Route::get('export/criteria/data', [ExportListController::class, 'getCriteriaData']);
-
-// qoute
-Route::get('/quote/random', [QuoteController::class, 'getRandomQuote']);
