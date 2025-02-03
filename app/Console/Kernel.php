@@ -19,7 +19,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->job(new DeleteOldActivities)->everyMinute();
+        DeleteOldActivities::dispatch();
+
+        // $schedule->job(new DeleteOldActivities)->everyMinute();
 
         // $schedule->call(function () {
         //     $user = User::where('username', 'like', '%admin%')->first();
