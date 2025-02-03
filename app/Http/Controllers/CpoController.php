@@ -303,6 +303,13 @@ class CpoController extends Controller
 
 
         $cpo->touch();
+
+        auth()->user()->activities()->create([
+            'action' => 'Update All Lines',
+            'description' => 'Updated all lines for CPO with ID:' . $cpo->id
+        ]);
+
+
         // set delay time sleep for 0.5 second
         usleep(500000);
         return $request;
