@@ -8,44 +8,14 @@
         <p class="fs-5 fst-italic text-primary fw-bold">"{{ quote }}"</p>
       </blockquote>
       <footer class="blockquote-footer text-muted mt-2">{{ author }}</footer>
-      <button class="refresh-button" @click="refreshQuote">
-        <i class="fas fa-sync-alt"></i>
+      <button class="refresh-button" @click="fetchQuote">
+        <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
   </div>
-  <!-- <div
-    v-if="isNavSearchActive"
-    class="alert alert-info d-flex align-items-center mt-8"
-    role="alert"
-  >
-    <div class="card shadow-lg border-0">
-      <div class="card-body text-center p-5">
-        <blockquote class="blockquote mb-4">
-          <p class="fs-4 fst-italic text-primary">
-            "Success is not final, failure is not fatal: it is the courage to
-            continue that counts."
-          </p>
-        </blockquote>
-        <footer class="blockquote-footer text-muted">Winston Churchill</footer>
-      </div>
-    </div>
-    <div>
-      <h4 class="quote-title">
-        <i class="bi bi-info-circle me-2"></i>
-        RANDOM QUOTE
-      </h4>
-      <hr />
-      <blockquote class="blockquote quote-block">
-        <p class="mb-0 quote-text my-2">
-          "The only way to do great work is to love what you do." - Steve Jobs
-        </p>
-      </blockquote>
-    </div>
-  </div> -->
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 import { QUOTES } from "../../utils/constArray.js";
 
@@ -89,42 +59,20 @@ export default {
 .fs-5 {
   font-size: 1.25rem; /* Smaller font size */
 }
-/* .sidebar {
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 5px;
-}
-button {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+
+.refresh-button {
+  /* position: absolute; */
+  /* bottom: 10px; */
+  /* left: 10px; */
+  background: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #0056b3;
-} */
-
-/* .quote-title {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
   color: #007bff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0;
 }
 
-.quote-block {
-  border-left: 5px solid #007bff;
-  padding-left: 15px;
-  margin: 10px 0;
-  background-color: #f8f9fa;
-  border-radius: 5px;
+.refresh-button:hover {
+  color: green;
 }
-
-.quote-text {
-  font-style: italic;
-  color: #343a40;
-  font-size: 1.1em;
-} */
 </style>
