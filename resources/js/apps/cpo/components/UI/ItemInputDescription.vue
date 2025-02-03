@@ -61,10 +61,15 @@ export default {
         // console.log(res.data.item?.description || this.modelValue);
         this.$emit(
           "update:modelValue",
-          `${res.data.item?.description} - ${segment6}` || this.modelValue
+          res.data.item
+            ? `${res.data.item?.description} - ${segment6}` || this.modelValue
+            : this.modelValue
         );
 
+        // console.log("searched");
+
         if (res.data.item) {
+          // console.log("found item");
           this.itemSearched = res.data.item;
           this.$emit("item-searched", this.itemSearched);
 
