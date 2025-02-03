@@ -10,6 +10,7 @@ use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Models\OracleCustomer;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -21,6 +22,8 @@ class TestController extends Controller
     public function test()
     {
         // $customers = OracleCustomer::all();
+
+        dd(Auth::user()->name);
 
         $url = "http://113.1.1.190/phase7/pictures/003438.jpg";
         $headers = @get_headers($url);

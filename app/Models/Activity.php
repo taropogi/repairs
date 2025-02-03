@@ -17,7 +17,7 @@ class Activity extends Model
         parent::boot();
 
         static::creating(function ($activity) {
-            $activity->action_by = Auth::check() ? Auth::user()->name : null;
+            $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
         });
     }
 
