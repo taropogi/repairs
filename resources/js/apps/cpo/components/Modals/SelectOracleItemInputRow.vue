@@ -61,8 +61,19 @@ export default {
   methods: {
     gotoYP(item) {
       this.$emit("goto-yp", item);
+      this.logClickedGoto();
       const url = `http://113.1.1.190/phase7/stockstatus.php?itemcode=&itemcode2=&oc=${item.oracle_code}&inventory_item_id=${item.inventory_item_id}`;
       window.open(url, "_blank");
+    },
+    async logClickedGoto() {
+      try {
+        await axios.post("/api/log/gotoYp", {
+          action: "gotoYP",
+          item: this.item,
+        });
+      } catch (error) {
+        console.error("Error logging action:", error);
+      }
     },
   },
   mounted() {

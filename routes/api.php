@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CpoController;
@@ -56,6 +57,9 @@ Route::post('cpo/selected', [CpoController::class, 'selectedCpos']);
 Route::post('cpo/selected/update/status', [CpoController::class, 'changeStatusSelectedCpos']);
 Route::get('cpo/pdf/history/{cpo}', [CpoController::class, 'getPdfHistory']);
 Route::post('cpo/generateRma', [CpoController::class, 'generateRma']);
+
+// log activity
+Route::post('/log/gotoYp', [ActivityController::class, 'logGotoYp']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
