@@ -3,14 +3,16 @@
     <div class="card-header text-center">
       <h5 class="mb-0">Random Inspirational Quote</h5>
     </div>
-    <div class="card-body text-center p-5">
-      <blockquote class="blockquote mb-4">
-        <p class="fs-4 fst-italic text-primary fw-bold">"{{ quote }}"</p>
+    <div class="card-body text-center p-3">
+      <blockquote class="blockquote mb-2">
+        <p class="fs-5 fst-italic text-primary fw-bold">"{{ quote }}"</p>
       </blockquote>
-      <footer class="blockquote-footer text-muted">{{ author }}</footer>
+      <footer class="blockquote-footer text-muted mt-2">{{ author }}</footer>
+      <button class="refresh-button" @click="refreshQuote">
+        <i class="fas fa-sync-alt"></i>
+      </button>
     </div>
   </div>
-
   <!-- <div
     v-if="isNavSearchActive"
     class="alert alert-info d-flex align-items-center mt-8"
@@ -75,6 +77,18 @@ export default {
 </script>
 
 <style scoped>
+.card-body {
+  position: relative;
+  padding: 1rem; /* Reduced padding */
+}
+
+.blockquote {
+  margin-bottom: 0.5rem; /* Reduced margin */
+}
+
+.fs-5 {
+  font-size: 1.25rem; /* Smaller font size */
+}
 /* .sidebar {
   padding: 20px;
   background-color: #f4f4f4;

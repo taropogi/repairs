@@ -70,7 +70,7 @@
     <transition
       v-if="isNavSearchActive"
       name="general-transition"
-      style="margin-top: 100px"
+      class="mt-auto"
     >
       <random-qoute></random-qoute>
     </transition>
