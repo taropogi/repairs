@@ -441,40 +441,48 @@ class CpoController extends Controller
 
 
 
-        $cpos = Cpo::orderBy('updated_at', 'desc');
+        $qry = Cpo::orderBy('updated_at', 'desc');
         if ($request->searchName) {
-            $cpos = $cpos->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
+            $qry = $qry->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
         }
         if ($request->searchAddress) {
-            $cpos = $cpos->where('customer_address', 'LIKE', '%' . $request->searchAddress . '%');
+            $qry = $qry->where('customer_address', 'LIKE', '%' . $request->searchAddress . '%');
         }
         if ($request->searchContact) {
-            $cpos = $cpos->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
+            $qry = $qry->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
         }
 
         if ($request->searchPrepared) {
-            $cpos = $cpos->where('prepared_by', 'LIKE', '%' . $request->searchPrepared . '%');
+            $qry = $qry->where('prepared_by', 'LIKE', '%' . $request->searchPrepared . '%');
         }
         if ($request->searchAuthorized) {
-            $cpos = $cpos->where('authorized_by', 'LIKE', '%' . $request->searchAuthorized . '%');
+            $qry = $qry->where('authorized_by', 'LIKE', '%' . $request->searchAuthorized . '%');
         }
 
         if ($request->searchRpoNumber) {
-            $cpos = $cpos->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
+            $qry = $qry->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
         }
 
         if (!auth()->user()->canAccessOtherCpos()) {
-            $cpos = $cpos->where('created_by', auth()->user()->id);
+            $qry = $qry->where('created_by', auth()->user()->id);
         }
 
 
+        $qry = $qry->skip(
+            $request->input('perPage') * ($request->input('page') - 1)
+        );
+        $qry2 =  $qry;
+        $cpos = $qry->take($request->input('perPage'))->get();
 
-        $cpos = $cpos->take(50)->get();
+
+        // $cpos = $cpos->paginate(10);
 
 
         // $response['req'] = $request->header('X-XSRF-TOKEN');
         $response['cpos'] = $cpos;
         $response['limit_per_page'] = 0;
+        $response['allHeadersCount'] = $qry2->count();
+        $response['isLastPage'] = $response['allHeadersCount'] <= $request->input('perPage') * $request->input('page');
 
 
 

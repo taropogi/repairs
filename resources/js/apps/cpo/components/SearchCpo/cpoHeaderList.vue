@@ -62,6 +62,24 @@
           ></header-list-item>
         </transition-group>
       </table>
+      <!-- Pagination Controls -->
+      <div class="pagination">
+        <button
+          :disabled="currentPage === 1"
+          @click="prevPage"
+          class="pagination-button"
+        >
+          Previous
+        </button>
+        <span class="pagination-info">Page {{ currentPage }}</span>
+        <button
+          :disabled="isLastPage"
+          @click="nextPage"
+          class="pagination-button"
+        >
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +104,10 @@ export default {
       showPdfHistoryId: null,
       deleteCpo: null,
       error: null,
+      initialPage: 1,
+      currentPage: 1,
+      perPage: 15,
+      allHeadersCount: 0,
     };
   },
 
@@ -93,9 +115,13 @@ export default {
   inject: ["showNotification"],
   computed: {
     ...mapGetters("cpo", ["deletedCpos"]),
+    isLastPage() {
+      return this.cpoListCount < this.perPage;
+    },
     cpoListCount() {
       return this.cpoHeaderList.length;
     },
+
     selectedPosCount() {
       return this.selectedPos.length;
     },
@@ -112,6 +138,13 @@ export default {
         }
       },
       deep: true,
+    },
+    "$route.query.page": {
+      handler(newPage) {
+        this.currentPage = parseInt(newPage) || 1;
+        this.getCpoHeaders();
+      },
+      immediate: true,
     },
     cpoListCount(value) {
       if (value <= 40) {
@@ -134,6 +167,21 @@ export default {
   },
 
   methods: {
+    updateQuery() {
+      this.$router.push({
+        query: { ...this.$route.query, page: this.currentPage },
+      });
+    },
+    nextPage() {
+      this.currentPage++;
+      this.updateQuery();
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.updateQuery();
+      }
+    },
     openDeleteCpo(cpoId) {
       this.deleteCpo = cpoId;
     },
@@ -162,10 +210,13 @@ export default {
         const response = await axios.get("api/cpo", {
           params: {
             ...this.searchCriteria,
+            page: this.currentPage,
+            perPage: this.perPage,
           },
         });
 
         this.cpoHeaderList = response.data.cpos;
+        this.allHeadersCount = response.data.allHeadersCount;
       } catch (error) {
         this.error = error;
       } finally {
@@ -205,5 +256,37 @@ export default {
   top: 0;
   z-index: 1;
   background-color: white; /* Ensure the background color matches the table */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-button:not(:disabled):hover {
+  background-color: #0056b3;
+}
+
+.pagination-info {
+  margin: 0 10px;
+  font-size: 16px;
 }
 </style>
