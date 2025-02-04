@@ -25,12 +25,19 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     public function collection()
     {
 
-        $cpos = DB::table('cpos')
+        $qry = DB::table('cpos')
             ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
             ->select('cpos.id', 'customer_reference_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
             ->whereIn('status_id', explode(',', $this->request->status_id))
-            ->where('deleted_at', null)
-            ->get();
+            ->where('deleted_at', null);
+
+        if (!auth()->user()->canAccessOtherCpos()) {
+            $qry = $qry->where('created_by', auth()->user()->id);
+        }
+
+        $cpos = $qry->get();
+
+
 
         $cpos = $cpos->map(function ($item) {
             $item->id =  str_pad($item->id, 5, '0', STR_PAD_LEFT);

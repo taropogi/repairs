@@ -50,6 +50,11 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
             $query->where("cpos.status_id", $this->request->cpo_changed_status_to);
         }
 
+        if (!auth()->user()->canAccessOtherCpos()) {
+            $query = $query->where('created_by', auth()->user()->id);
+        }
+
+
         $cpos = $query->get();
 
         $cpos = $cpos->map(function ($item) {
