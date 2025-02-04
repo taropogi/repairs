@@ -20,11 +20,12 @@
           <th scope="col">Description</th>
           <th scope="col" style="width: 70px">Price</th>
           <th scope="col" style="width: 100px">Doc #</th>
+          <th scope="col" style="width: 100px">Doc. Date</th>
           <th scope="col" style="width: 100px">HCopy</th>
           <th scope="col" style="width: 70px">Qty Returned</th>
           <th scope="col" style="width: 100px">Unit</th>
           <th scope="col" style="width: 50px">Qty Inspect</th>
-          <th scope="col" style="width: 100px">Date</th>
+          <th scope="col" style="width: 100px">Date Inspected</th>
           <th scope="col" style="width: 50px">Good Condition</th>
           <th scope="col" style="width: 50px">Minor Repair/Clean</th>
           <th scope="col" style="width: 50px">Repair/Parts Needed</th>

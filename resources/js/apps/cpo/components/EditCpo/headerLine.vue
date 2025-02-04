@@ -41,6 +41,17 @@
       <input
         type="text"
         class="form-control"
+        :disabled="
+          isDisabled ||
+          !(editLineFieldsPermission.includes('doc_date') || isAdmin)
+        "
+        v-model="lineDetails.doc_date"
+      />
+    </td>
+    <td>
+      <input
+        type="text"
+        class="form-control"
         v-model="lineDetails.hcopy"
         :disabled="
           isDisabled || !(editLineFieldsPermission.includes('hcopy') || isAdmin)
@@ -106,9 +117,10 @@
         type="text"
         class="form-control"
         :disabled="
-          isDisabled || !(editLineFieldsPermission.includes('date') || isAdmin)
+          isDisabled ||
+          !(editLineFieldsPermission.includes('date_inspected') || isAdmin)
         "
-        v-model="lineDetails.date"
+        v-model="lineDetails.date_inspected"
       />
     </td>
     <td>

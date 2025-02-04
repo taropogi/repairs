@@ -6,7 +6,7 @@
     <td>
       <strong>{{ formTotal }}</strong>
     </td>
-    <td colspan="2" class="text-right">
+    <td colspan="3" class="text-right">
       <strong class="text-danger fw-bold">TOTAL QTY RETURNED: </strong>
     </td>
     <td>
