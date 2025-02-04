@@ -375,8 +375,13 @@ class CpoController extends Controller
         $response = [];
 
         if ($request->status_ids && count($request->status_ids) > 0) {
+            $qry =  Cpo::whereIn('status_id', $request->status_ids);
 
-            $response['cpos'] = Cpo::whereIn('status_id', $request->status_ids)->get();
+            if (!auth()->user()->canAccessOtherCpos()) {
+                $qry = $qry->where('created_by', auth()->user()->id);
+            }
+
+            $response['cpos'] = $qry->get();
         }
 
         return $response;
@@ -388,11 +393,15 @@ class CpoController extends Controller
         $response = [];
 
         if ($request->date_from && $request->date_to) {
-
-            $response['cpos'] = Cpo::whereRaw(DB::raw("Date(updated_at) >= '" . $request->date_from . "'"))
+            $qry = Cpo::whereRaw(DB::raw("Date(updated_at) >= '" . $request->date_from . "'"))
                 ->whereRaw(DB::raw("Date(updated_at) <= '" . $request->date_to . "'"))->orderBy('updated_at', 'DESC')
-                ->whereRaw(DB::raw('updated_at <> created_at'))
-                ->get();
+                ->whereRaw(DB::raw('updated_at <> created_at'));
+
+            if (!auth()->user()->canAccessOtherCpos()) {
+                $qry = $qry->where('created_by', auth()->user()->id);
+            }
+
+            $response['cpos'] = $qry->get();
         }
 
         return $response;
@@ -413,6 +422,10 @@ class CpoController extends Controller
                 ->whereNotNull('history.old_status_id')
                 ->where('history.header_status_id', $request->status_to)
                 ->whereNull('cpos.deleted_at');
+
+            if (!auth()->user()->canAccessOtherCpos()) {
+                $query = $query->where('created_by', auth()->user()->id);
+            }
 
             if ($request->only_current_status) {
                 $query->where('cpos.status_id', $request->status_to);
