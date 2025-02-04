@@ -10,6 +10,7 @@ use App\Models\HeaderStatus;
 use Illuminate\Http\Request;
 use App\Exports\ExportCpoLists;
 use App\Exports\ExportCpoByStatus;
+use App\Models\Activity;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -227,6 +228,13 @@ class GeneratePdfController extends Controller
             return  $pdf->download('CPO List.pdf');
         }
 
+        Activity::create([
+            'user_id' => auth()->user()->id,
+            'action' => 'Downloaded PDF',
+            'description' => 'Downloaded CPO List PDF',
+            'user_id' => auth()->user()->id
+        ]);
+
 
         $pdf = PDF::loadView('pdf.no-result');
         return  $pdf->download('NO-RESULT.pdf');
@@ -236,6 +244,13 @@ class GeneratePdfController extends Controller
     {
 
         // return Excel::download(new ExportCpoByStatus($request), 'CpoListByStatus.xlsx');
+
+        Activity::create([
+            'user_id' => auth()->user()->id,
+            'action' => 'Downloaded Excel',
+            'description' => 'Downloaded CPO List Excel',
+            'user_id' => auth()->user()->id
+        ]);
 
         return (new ExportCpoLists($request))->download('CPO List.xlsx');
     }
