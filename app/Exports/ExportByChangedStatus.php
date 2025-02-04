@@ -38,7 +38,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
             ->join('cpos', 'cpos.id', '=', 'history.cpo_id')
             ->join('header_statuses as status_to', 'status_to.id', '=', 'history.header_status_id')
             ->join('header_statuses as status_from', 'status_from.id', '=', 'history.old_status_id')
-            ->select('cpos.id', 'cpos.customer_reference_number', 'status_to.status as status_new', 'status_from.status as status_old')
+            ->select('cpos.id', 'rma_number', 'cpos.customer_reference_number', 'status_to.status as status_new', 'status_from.status as status_old')
             ->selectRaw('date(history.updated_at) as changed_date')
             ->whereRaw("Date(history.updated_at) >= '" . $this->request->cpo_changed_date_from . "'")
             ->whereRaw("Date(history.updated_at) <= '" . $this->request->cpo_changed_date_to . "'")
@@ -59,6 +59,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
 
         $cpos = $cpos->map(function ($item) {
             $item->id = str_pad($item->id, 5, '0', STR_PAD_LEFT);
+            $item->rma_number = $item->rma_number ? str_pad($item->rma_number, 5, '0', STR_PAD_LEFT) : 'N/A';
             return $item;
         });
 
@@ -72,10 +73,11 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
         return [
 
             'RPO#',
+            'RMA#',
             'REF#',
-            'Status From',
-            'Status To',
-            'Date',
+            'STATUS FROM',
+            'STATUS TO',
+            'DATE',
 
         ];
     }
@@ -89,7 +91,7 @@ class ExportByChangedStatus implements FromCollection, WithHeadings, ShouldAutoS
     {
         return [
             AfterSheet::class    => function (AfterSheet $event) {
-                $header_range = 'A1:E1';
+                $header_range = 'A1:F1';
                 $event->sheet->getDelegate()->getStyle($header_range)
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)

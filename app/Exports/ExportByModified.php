@@ -25,7 +25,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
     {
         $qry =  DB::table('cpos')
             // ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
-            ->select('cpos.id', 'customer_reference_number', 'customer_name', 'customer_address', 'updated_at')
+            ->select('cpos.id', 'rma_number', 'customer_reference_number', 'customer_name', 'customer_address', 'updated_at')
             ->whereRaw(DB::raw("Date(cpos.updated_at) <= '" . $this->request->cpo_modified_to . "'"))
             ->whereRaw(DB::raw("Date(cpos.updated_at) >= '" . $this->request->cpo_modified_from . "'"))
             ->whereRaw(DB::raw('cpos.updated_at <> cpos.created_at'))
@@ -40,6 +40,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
 
         $cpos->transform(function ($item) {
             $item->id =  str_pad($item->id, 6, '0', STR_PAD_LEFT);
+            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, 6, '0', STR_PAD_LEFT)   : 'N/A';
             return $item;
         });
 
@@ -56,10 +57,11 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
         return [
 
             'RPO#',
+            'RMA#',
             'REF#',
-            'Customer Name',
-            'Address',
-            'Modified at',
+            'CUSTOMER NAME',
+            'ADDRESS',
+            'MODIFIED AT',
 
         ];
     }
@@ -74,7 +76,7 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
     {
         return [
             AfterSheet::class    => function (AfterSheet $event) {
-                $header_range = 'A1:E1';
+                $header_range = 'A1:F1';
                 $event->sheet->getDelegate()->getStyle($header_range)
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)

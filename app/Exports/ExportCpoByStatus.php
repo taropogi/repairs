@@ -27,7 +27,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
 
         $qry = DB::table('cpos')
             ->join('header_statuses as statuses', 'cpos.status_id', '=', 'statuses.id')
-            ->select('cpos.id', 'customer_reference_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
+            ->select('cpos.id', 'rma_number', 'customer_reference_number', 'customer_name', 'customer_address', 'contact_number', 'prepared_by', 'authorized_by', 'status')
             ->whereIn('status_id', explode(',', $this->request->status_id))
             ->where('deleted_at', null);
 
@@ -41,6 +41,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
 
         $cpos = $cpos->map(function ($item) {
             $item->id =  str_pad($item->id, 5, '0', STR_PAD_LEFT);
+            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, 5, '0', STR_PAD_LEFT)  : 'N/A';
             return $item;
         });
 
@@ -58,14 +59,15 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     {
         return [
 
-            'RPO#',
+            'CPO#',
+            'RMA#',
             'REF#',
-            'Customer Name',
-            'Address',
-            'Contact #',
-            'Prepared By',
-            'Authorized By',
-            'Status',
+            'CUSTOMER NAME',
+            'ADDRESS',
+            'CONTACT #',
+            'PREPARED BY',
+            'AUTHORIZED BY',
+            'STATUS',
         ];
     }
 
@@ -73,7 +75,7 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
     {
         return [
             AfterSheet::class    => function (AfterSheet $event) {
-                $header_range = 'A1:H1';
+                $header_range = 'A1:I1';
                 $event->sheet->getDelegate()->getStyle($header_range)
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
