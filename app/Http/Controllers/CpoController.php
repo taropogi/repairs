@@ -277,9 +277,6 @@ class CpoController extends Controller
                 $cpoLine->date = $itemObj->date;
             }
 
-
-
-
             if ((in_array('good_condition', $lineFields) || $userIsAdmin) && isset($itemObj->good_condition) && is_numeric($itemObj->good_condition)) {
                 $cpoLine->good_condition = $itemObj->good_condition;
             }
