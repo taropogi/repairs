@@ -141,7 +141,11 @@ class GeneratePdfController extends Controller
 
 
             if ($request->status_id) {
-                $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id))->get();
+                $cpos = Cpo::whereIn('status_id', explode(',', $request->status_id));
+                if (!auth()->user()->canAccessOtherCpos()) {
+                    $cpos = $cpos->where('created_by', auth()->user()->id);
+                }
+                $cpos = $cpos->get();
                 if (count($cpos) > 0) {
 
                     $data['cpos'] =  $cpos;
@@ -152,8 +156,13 @@ class GeneratePdfController extends Controller
                 // dd($request->cpo_modified_from . ' ' . $request->cpo_modified_to);
                 $cpos_modified = Cpo::whereRaw(DB::raw("Date(updated_at) >= '" . $request->cpo_modified_from . "'"))
                     ->whereRaw(DB::raw("Date(updated_at) <= '" . $request->cpo_modified_to . "'"))
-                    ->whereRaw(DB::raw('updated_at <> created_at'))
-                    ->get();
+                    ->whereRaw(DB::raw('updated_at <> created_at'));
+
+                if (!auth()->user()->canAccessOtherCpos()) {
+                    $cpos_modified = $cpos_modified->where('created_by', auth()->user()->id);
+                }
+
+                $cpos_modified = $cpos_modified->get();
 
                 // dd($cpos_modified);
 
@@ -175,6 +184,10 @@ class GeneratePdfController extends Controller
 
                 if ($request->cpo_changed_current_only && ($request->cpo_changed_current_only === 'true')) {
                     $query->where('cpos.status_id', $request->cpo_changed_status_to);
+                }
+
+                if (!auth()->user()->canAccessOtherCpos()) {
+                    $query = $query->where('cpos.created_by', auth()->user()->id);
                 }
 
                 $cpos_changed_status = $query->get();
