@@ -483,15 +483,15 @@ class CpoController extends Controller
         if ($request->searchAddress) {
             $qry = $qry->where('customer_address', 'LIKE', '%' . $request->searchAddress . '%');
         }
-        if ($request->searchContact) {
-            $qry = $qry->where('contact_number', 'LIKE', '%' . $request->searchContact . '%');
+        if ($request->searchContactNumber) {
+            $qry = $qry->where('contact_number', 'LIKE', '%' . $request->searchContactNumber . '%');
         }
 
-        if ($request->searchPrepared) {
-            $qry = $qry->where('prepared_by', 'LIKE', '%' . $request->searchPrepared . '%');
+        if ($request->searchPreparedBy) {
+            $qry = $qry->where('prepared_by', 'LIKE', '%' . $request->searchPreparedBy . '%');
         }
-        if ($request->searchAuthorized) {
-            $qry = $qry->where('authorized_by', 'LIKE', '%' . $request->searchAuthorized . '%');
+        if ($request->searchAuthorizedBy) {
+            $qry = $qry->where('authorized_by', 'LIKE', '%' . $request->searchAuthorizedBy . '%');
         }
 
         if ($request->searchRpoNumber) {
@@ -540,9 +540,33 @@ class CpoController extends Controller
         //     ]);
         // }
 
-
+        $this->checkIfSearched($request);
 
         return $response;
+    }
+
+    private function checkIfSearched($request)
+    {
+        $searched = $request->searchName || $request->searchAddress || $request->searchContactNumber || $request->searchPreparedBy || $request->searchAuthorizedBy || $request->searchRpoNumber || $request->searchRmaNumber || $request->searchCustomerReferenceNumber;
+
+        if ($searched) {
+            $description = $request->searchName ? 'Name: ' . $request->searchName : '';
+            $description .= $request->searchAddress ? ', Address: ' . $request->searchAddress : '';
+            $description .= $request->searchContactNumber ? ', Contact#: ' . $request->searchContactNumber : '';
+            $description .= $request->searchPreparedBy ? ', Prepared By: ' . $request->searchPreparedBy : '';
+            $description .= $request->searchAuthorizedBy ? ', Authorized By: ' . $request->searchAuthorizedBy : '';
+            $description .= $request->searchRpoNumber ? ', RPO#: ' . $request->searchRpoNumber : '';
+            $description .= $request->searchRmaNumber ? ', RMA#: ' . $request->searchRmaNumber : '';
+            $description .= $request->searchCustomerReferenceNumber ? ', Ref#: ' . $request->searchCustomerReferenceNumber : '';
+
+            Activity::create(
+                [
+                    'action' => 'Searched CPO',
+                    'description' => 'Searched CPO with: ' . $description,
+                    'user_id' => auth()->user()->id
+                ]
+            );
+        }
     }
 
     /**
