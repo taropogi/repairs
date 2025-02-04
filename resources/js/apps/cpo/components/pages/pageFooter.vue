@@ -14,6 +14,7 @@
 
 <script>
 import { QUOTES } from "../../utils/constArray.js";
+
 export default {
   data() {
     return {
@@ -21,6 +22,7 @@ export default {
       author: "",
     };
   },
+
   methods: {
     async fetchQuote() {
       const randomIndex = Math.floor(Math.random() * QUOTES.length);
