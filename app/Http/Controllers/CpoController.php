@@ -495,8 +495,19 @@ class CpoController extends Controller
         }
 
         if ($request->searchRpoNumber) {
-            $qry = $qry->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
+            // $qry = $qry->where('id', 'LIKE', '%' . ltrim($request->searchRpoNumber, '0') . '%');
+            $qry = $qry->orWhere(DB::raw("LPAD(id, 5, '0')"), 'LIKE', '%' . $request->searchRpoNumber . '%');
         }
+
+        if ($request->searchRmaNumber) {
+            $qry = $qry->orWhere(DB::raw("LPAD(rma_number, 5, '0')"), 'LIKE', '%' . $request->searchRmaNumber . '%');
+        }
+
+        if ($request->searchCustomerReferenceNumber) {
+            $qry = $qry->where('customer_reference_number', 'LIKE', '%' . $request->searchCustomerReferenceNumber . '%');
+        }
+
+
 
         if (!auth()->user()->canAccessOtherCpos()) {
             $qry = $qry->where('created_by', auth()->user()->id);

@@ -34,6 +34,11 @@
     </th>
     <td>
       <label class="form-check-label" :for="id">
+        {{ localHeaderItem.formatted_rma_number }}
+      </label>
+    </td>
+    <td>
+      <label class="form-check-label" :for="id">
         <span v-if="!isToday">
           {{ formattedDate }}
         </span>

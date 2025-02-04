@@ -36,10 +36,10 @@
                 ></span
               >
             </th>
+            <th class="col tex-center">RMA#</th>
 
             <th scope="col">DATE ENCODED</th>
             <th scope="col">NAME</th>
-            <!-- <th scope="col">Address</th> -->
             <th scope="col">CONTACT#</th>
             <th scope="col">PREPARED BY</th>
             <th scope="col">AUTHORIZED BY</th>
@@ -159,7 +159,7 @@ export default {
     searchCriteria: {
       handler(newValue, oldValue) {
         // console.log(newValue, oldValue);
-
+        // console.log("changed");
         this.getCpoHeaders();
 
         // Note: `newValue` will be equal to `oldValue` here
