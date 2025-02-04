@@ -63,7 +63,7 @@
         </transition-group>
       </table>
       <!-- Pagination Controls -->
-      <div class="pagination">
+      <div class="pagination" v-if="showPaginationButtons">
         <button
           :disabled="currentPage === 1"
           @click="prevPage"
@@ -115,6 +115,10 @@ export default {
   inject: ["showNotification"],
   computed: {
     ...mapGetters("cpo", ["deletedCpos"]),
+    showPaginationButtons() {
+      if (this.currentPage > 1) return true;
+      return this.currentPage == 1 && this.cpoListCount >= this.perPage;
+    },
     isLastPage() {
       return this.cpoListCount < this.perPage;
     },
