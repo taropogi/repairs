@@ -93,7 +93,7 @@ class CpoController extends Controller
     public function create(Request $request)
     {
 
-        $userPermissions = auth()->user()->permissions;
+        $userPermissions = auth()->user()->permissions ?? [];
         $userIsAdmin = auth()->user()->is_admin;
         $lineFields = [];
         foreach ($userPermissions as $permission) {
