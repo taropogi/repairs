@@ -40,6 +40,7 @@ export default {
     headerLines,
     LoadingOverlay,
   },
+  inject: ["logPageVisit"],
   props: ["id"],
 
   data() {
@@ -78,6 +79,9 @@ export default {
     this.setActiveNav({
       nav: "edit-cpo",
     });
+  },
+  updated() {
+    this.logPageVisit("Edit CPO: " + this.headerRow?.id);
   },
 };
 </script>

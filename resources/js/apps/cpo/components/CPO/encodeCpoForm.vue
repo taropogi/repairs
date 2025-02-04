@@ -14,6 +14,7 @@ export default {
     FormCpo,
     NoEncodePermission,
   },
+  inject: ["logPageVisit"],
   computed: {
     ...mapGetters("auth", ["canEncodeCpo"]),
   },
@@ -22,6 +23,9 @@ export default {
     this.$store.commit("setActiveNav", {
       nav: "encode-cpo",
     });
+  },
+  mounted() {
+    this.logPageVisit("Encode CPO");
   },
 };
 </script>

@@ -100,4 +100,13 @@ class ActivityController extends Controller
             'user_id' => auth()->user()->id
         ]);
     }
+
+    public function logPageVisit()
+    {
+        Activity::create([
+            'action' => 'Page Visit',
+            'description' => 'User visited the page: ' . request()->page,
+            'user_id' => auth()->user()->id
+        ]);
+    }
 }

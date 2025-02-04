@@ -22,6 +22,7 @@ export default {
     cpoHeaderList,
     SearchForm,
   },
+  inject: ["logPageVisit"],
 
   data() {
     return {
@@ -56,6 +57,9 @@ export default {
     this.$store.commit("setActiveNav", {
       nav: "search-cpo",
     });
+  },
+  mounted() {
+    this.logPageVisit("Search CPO");
   },
 };
 </script>

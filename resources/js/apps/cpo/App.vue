@@ -42,6 +42,15 @@ export default {
         if (type === "warning") toast.warning(message);
         if (type === "error") toast.error(message);
       },
+      async logPageVisit(pageName) {
+        try {
+          await axios.post("/api/log/page-visit", {
+            page: pageName,
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
+      },
     };
   },
   created() {
