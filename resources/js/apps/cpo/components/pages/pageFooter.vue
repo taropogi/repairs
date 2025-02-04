@@ -1,7 +1,7 @@
 <template>
   <footer
     class="py-0 bg-dark text-white mt-auto footer"
-    style="position: fixed; bottom: 0; width: 100%"
+    style="position: fixed; bottom: 0; width: 100%; z-index: 1000"
   >
     <blockquote class="blockquote p-0 mb-0 mx-4 d-flex align-items-center">
       <p class="mb-0 d-inline quote-text">"{{ quote }}"</p>
