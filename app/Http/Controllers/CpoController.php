@@ -244,6 +244,10 @@ class CpoController extends Controller
                 $cpoLine->hcopy = $itemObj->hcopy;
             }
 
+            if (in_array('doc_date', $lineFields) || $userIsAdmin) {
+                $cpoLine->doc_date = $itemObj->doc_date;
+            }
+
 
             if ((in_array('qty_returned', $lineFields) || $userIsAdmin) && isset($itemObj->qty_returned) && is_numeric($itemObj->qty_returned)) {
                 $cpoLine->qty_returned = $itemObj->qty_returned;
@@ -261,6 +265,10 @@ class CpoController extends Controller
 
             if ((in_array('qty_inspect', $lineFields) || $userIsAdmin) && isset($itemObj->qty_inspect) && is_numeric($itemObj->qty_inspect)) {
                 $cpoLine->qty_inspect = $itemObj->qty_inspect;
+            }
+
+            if (in_array('date_inspected', $lineFields) || $userIsAdmin) {
+                $cpoLine->date_inspected = $itemObj->date_inspected;
             }
 
             if (

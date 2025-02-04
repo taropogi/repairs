@@ -130,6 +130,10 @@ class CpoLinesController extends Controller
             $cpoLine->hcopy = $request->hcopy;
         }
 
+        if (in_array('doc_date', $lineFields) || $userIsAdmin) {
+            $cpoLine->doc_date = $request->doc_date;
+        }
+
 
         if (
             (in_array('qty_returned', $lineFields) || $userIsAdmin) &&
@@ -137,6 +141,8 @@ class CpoLinesController extends Controller
         ) {
             $cpoLine->qty_returned = $request->qty_returned;
         }
+
+
 
         if (
             (in_array('unit', $lineFields) || $userIsAdmin)
@@ -151,6 +157,12 @@ class CpoLinesController extends Controller
             is_numeric($request->qty_inspect)
         ) {
             $cpoLine->qty_inspect = $request->qty_inspect;
+        }
+
+        if (
+            (in_array('date_inspected', $lineFields) || $userIsAdmin)
+        ) {
+            $cpoLine->date_inspected = $request->date_inspected;
         }
 
         if (
