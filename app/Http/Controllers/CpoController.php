@@ -144,9 +144,9 @@ class CpoController extends Controller
 
             $line->price = isset($item['price']) && is_numeric($item['price']) ? $item['price'] : null;
             $line->hcopy = $item['hcopy'] ?? null;
-
+            $line->doc_date = $item['doc_date'] ?? null;
             $line->qty_returned = isset($item['qtyReturned']) && is_numeric($item['qtyReturned']) ? $item['qtyReturned'] : null;
-
+            $line->date_inspected = $item['date_inspected'] ?? null;
             $line->unit = $item['unit'] ?? null;
             $line->qty_inspect = isset($item['qtyInspect']) && is_numeric($item['qtyInspect']) ? $item['qtyInspect'] : null;
             $line->date = $item['date'] ?? null;

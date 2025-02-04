@@ -20,6 +20,9 @@
     <td v-if="encodeLineFieldsPermission.includes('order_number') || isAdmin">
       <input type="text" class="form-control" v-model="line.orderNumber" />
     </td>
+    <td v-if="encodeLineFieldsPermission.includes('doc_date') || isAdmin">
+      <input type="text" class="form-control" v-model="line.doc_date" />
+    </td>
 
     <td v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin">
       <input type="text" class="form-control" v-model="line.hcopy" />
@@ -58,8 +61,8 @@
       />
     </td>
 
-    <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
-      <input type="text" class="form-control" v-model="line.date" />
+    <td v-if="encodeLineFieldsPermission.includes('date_inspected') || isAdmin">
+      <input class="form-control" v-model="line.date_inspected" />
     </td>
 
     <td v-if="encodeLineFieldsPermission.includes('good_condition') || isAdmin">

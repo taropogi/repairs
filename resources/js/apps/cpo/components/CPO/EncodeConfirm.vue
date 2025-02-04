@@ -120,6 +120,12 @@
           </th>
           <th
             scope="col"
+            v-if="encodeLineFieldsPermission.includes('doc_date') || isAdmin"
+          >
+            Doc. Date
+          </th>
+          <th
+            scope="col"
             v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin"
           >
             HCopy
@@ -146,10 +152,13 @@
           </th>
           <th
             scope="col"
-            v-if="encodeLineFieldsPermission.includes('date') || isAdmin"
+            v-if="
+              encodeLineFieldsPermission.includes('date_inspected') || isAdmin
+            "
           >
-            Date
+            Date Inspected
           </th>
+
           <th
             scope="col"
             v-if="
@@ -210,6 +219,9 @@
           >
             {{ line.orderNumber }}
           </td>
+          <td v-if="encodeLineFieldsPermission.includes('doc_date') || isAdmin">
+            {{ line.doc_date }}
+          </td>
 
           <td v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin">
             {{ line.hcopy }}
@@ -233,8 +245,12 @@
             {{ line.qtyInspect }}
           </td>
 
-          <td v-if="encodeLineFieldsPermission.includes('date') || isAdmin">
-            {{ line.date }}
+          <td
+            v-if="
+              encodeLineFieldsPermission.includes('date_inspected') || isAdmin
+            "
+          >
+            {{ line.date_inspected }}
           </td>
 
           <td
@@ -298,6 +314,9 @@ export default {
       this.$emit("cancel");
     },
   },
+  // mounted() {
+  //   console.log(this.localFormData.lines);
+  // },
 };
 </script>
 

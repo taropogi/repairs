@@ -43,10 +43,18 @@ h5
             <th
               scope="col"
               style="width: 100px"
+              v-if="encodeLineFieldsPermission.includes('doc_date') || isAdmin"
+            >
+              Doc. Date
+            </th>
+            <th
+              scope="col"
+              style="width: 100px"
               v-if="encodeLineFieldsPermission.includes('hcopy') || isAdmin"
             >
               HCopy
             </th>
+
             <th
               scope="col"
               style="width: 50px"
@@ -75,9 +83,12 @@ h5
             <th
               scope="col"
               style="width: 100px"
-              v-if="encodeLineFieldsPermission.includes('date') || isAdmin"
+              v-if="
+                encodeLineFieldsPermission.includes('date_inspected') || isAdmin
+              "
             >
-              Date
+              Date<br />
+              Inspected
             </th>
             <th
               scope="col"
