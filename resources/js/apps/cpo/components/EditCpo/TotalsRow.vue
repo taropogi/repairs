@@ -1,12 +1,14 @@
 <template>
   <tr class="bg-light">
-    <td colspan="2">
-      <strong>Total</strong>
+    <td colspan="2" class="text-right">
+      <strong class="text-danger fw-bold">TOTAL AMOUNT: </strong>
     </td>
     <td>
-      <strong>Php {{ formTotal }}</strong>
+      <strong>{{ formTotal }}</strong>
     </td>
-    <td colspan="2"></td>
+    <td colspan="2" class="text-right">
+      <strong class="text-danger fw-bold">TOTAL QTY RETURNED: </strong>
+    </td>
     <td>
       <strong>{{ totalQtyReturned }}</strong>
     </td>
@@ -24,7 +26,10 @@ export default {
   computed: {
     formTotal() {
       return this.lines
-        .reduce((acc, line) => acc + +line.price || 0, 0)
+        .reduce(
+          (acc, line) => acc + (+line.price || 0) * (+line.qty_returned || 0),
+          0
+        )
         .toFixed(2);
     },
     totalQtyReturned() {
@@ -34,5 +39,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.text-right {
+  text-align: right; /* Align text to the right */
+}
 </style>
