@@ -45,6 +45,7 @@
           @selectItemFor="selectOracleItem"
           @saveLine="saveLine"
         ></header-line>
+        <totals-row :lines="lines" />
       </tbody>
     </table>
     <hr />
@@ -126,11 +127,13 @@
 import headerLine from "./headerLine.vue";
 import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
 import { mapGetters } from "vuex";
+import TotalsRow from "./TotalsRow.vue";
 
 export default {
   components: {
     headerLine,
     SelectOracleItemInput,
+    TotalsRow,
   },
   // props: ["headerId", "headerIsLocked"],
 
