@@ -40,8 +40,8 @@ class ExportCpoByStatus implements FromCollection, WithHeadings, ShouldAutoSize,
 
 
         $cpos = $cpos->map(function ($item) {
-            $item->id =  str_pad($item->id, 5, '0', STR_PAD_LEFT);
-            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, 5, '0', STR_PAD_LEFT)  : 'N/A';
+            $item->id =  str_pad($item->id, config('global.cpoNumberPadZero'), '0', STR_PAD_LEFT);
+            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, config('global.rmaNumberPadZero'), '0', STR_PAD_LEFT)  : 'N/A';
             return $item;
         });
 

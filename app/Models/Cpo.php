@@ -16,6 +16,16 @@ class Cpo extends Model
 
     protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number'];
 
+    protected $cpoNumberPadZero;
+    protected $rmaNumberPadZero;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->cpoNumberPadZero = config('global.cpoNumberPadZero');
+        $this->rmaNumberPadZero = config('global.rmaNumberPadZero');
+    }
+
 
     // protected static function boot()
     // {
@@ -71,13 +81,13 @@ class Cpo extends Model
     // Accessor for formatted ID
     public function getFormattedIdAttribute()
     {
-        return str_pad($this->id, 5, '0', STR_PAD_LEFT);
+        return str_pad($this->id, $this->cpoNumberPadZero, '0', STR_PAD_LEFT);
     }
 
     // Accessor for formatted RMA Number
     public function getFormattedRmaNumberAttribute()
     {
-        return $this->rma_number ?  str_pad($this->rma_number, 5, '0', STR_PAD_LEFT) : '';
+        return $this->rma_number ?  str_pad($this->rma_number, $this->rmaNumberPadZero, '0', STR_PAD_LEFT) : '';
     }
 
     // Accessor for checking if the Cpo is completed

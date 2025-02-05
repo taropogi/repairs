@@ -39,8 +39,8 @@ class ExportByModified implements FromCollection, WithHeadings, ShouldAutoSize, 
         $cpos = $qry->get();
 
         $cpos->transform(function ($item) {
-            $item->id =  str_pad($item->id, 6, '0', STR_PAD_LEFT);
-            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, 6, '0', STR_PAD_LEFT)   : 'N/A';
+            $item->id =  str_pad($item->id, config('global.cpoNumberPadZero'), '0', STR_PAD_LEFT);
+            $item->rma_number =  $item->rma_number ? str_pad($item->rma_number, config('global.rmaNumberPadZero'), '0', STR_PAD_LEFT)   : 'N/A';
             return $item;
         });
 
