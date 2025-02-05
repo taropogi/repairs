@@ -38,7 +38,7 @@
     <td>
         <table width="100%" class="table-inside" style="border:none;">
             <tr>
-                <td><strong>DATE:</strong> {{ $date }}</td>
+                <td><strong>DATE:</strong> {{ $line->doc_date }}</td>
                 <td><strong>DOC#:</strong> {{ $line->order_number }}</td>
             </tr>
             <tr>
