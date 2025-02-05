@@ -1,4 +1,4 @@
-<table width="100%">
+<table width="100%" style="margin-top: 50px;">
     <tr>
         <td class="text-center"><small><strong>RETURNED BY</strong></small></td>
         <td class="text-center"><small><strong>RECEIVED BY WHSE</strong></small></td>
@@ -18,6 +18,6 @@
 
 
 </table>
-<p style="font-size: x-small;">
+<p>
     NOTE: PLEASE REFER TO RMA FOR COMPLETE DETAILS RE: RESOLUTION OF THIS TRANSACTION
 </p>

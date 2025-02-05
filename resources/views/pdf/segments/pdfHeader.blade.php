@@ -7,8 +7,8 @@
             <strong>PULL OUT FORM</strong>
         </td>
         <td align="right" style="width: 30%;">
-            <h1 style="margin-top: 0;"># <span
-                    style="border-bottom: 2px solid; padding-bottom: 20px;">{{ $cpo['formatted_id'] }}</span>
+            <h1 style="margin-top: 0; font-size: 36px;"># <span
+                    style="border-bottom: 2px solid; padding-bottom: 20px;font-size: 36px;">{{ $cpo['formatted_id'] }}</span>
             </h1>
         </td>
     </tr>
@@ -41,6 +41,6 @@
 </table>
 
 
-<p style="font-size: x-small;">
+<p>
     THIS DOCUMENT IS TO ACKNOWLEDGE PULL OUT OF THE ITEMS: (TO BE FILLED IN BY TIMES STAFF)
 </p>

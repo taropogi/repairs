@@ -70,7 +70,14 @@ class GeneratePdfController extends Controller
 
 
 
-        $pdf = PDF::loadView('pdf.multiCpos', $data);
+        $pdf = PDF::loadView('pdf.multiCpos', $data)
+            ->setPaper('letter', 'portrait')
+            ->setOptions([
+                'margin-top' => 0.5 * 72, // 0.5 inches in points (1 inch = 72 points)
+                'margin-right' => 0.5 * 72,
+                'margin-bottom' => 0.5 * 72,
+                'margin-left' => 0.5 * 72,
+            ]);
 
         // return $pdf->stream('RPO#' . $cpo[0]->formatted_id . '.pdf');
 

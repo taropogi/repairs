@@ -8,24 +8,21 @@
     <style type="text/css">
         * {
             font-family: Verdana, Arial, sans-serif;
+            font-size: 10px;
         }
 
         @page {
             margin: 50px;
         }
 
-        table {
-            font-size: x-small;
-        }
+
 
         tfoot tr td {
             font-weight: bold;
-            font-size: x-small;
+
         }
 
-        thead th {
-            font-size: 10px;
-        }
+
 
 
         .gray {
@@ -52,7 +49,7 @@
 
         .table-inside,
         .table-inside td {
-            font-size: 10px;
+
             border: none;
         }
 
@@ -67,7 +64,7 @@
             right: 0;
             height: 20px;
             text-align: center;
-            font-size: 12px;
+
         }
 
         .page-number:after {
