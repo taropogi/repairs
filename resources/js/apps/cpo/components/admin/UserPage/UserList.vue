@@ -6,7 +6,7 @@
       @close="deleteUser = null"
       @deleted-user="getUserList"
     ></modal-delete-user>
-    <table class="table table-striped table-sm" v-if="userList">
+    <table class="table table-striped table-sm table-hover" v-if="userList">
       <thead>
         <tr class="table-primary">
           <th scope="col">Username</th>
