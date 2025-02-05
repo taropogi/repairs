@@ -178,10 +178,9 @@
         :disabled="isDisabled"
         v-model="lineDetails.user_comment"
         v-if="editLineFieldsPermission.includes('comments') || isAdmin"
-        @focus="expandCell"
-        @blur="shrinkCell"
       />
-
+      <!-- @focus="expandCell"
+      @blur="shrinkCell" -->
       <div v-if="lineDetails.other_comments.length > 0 && !isCommentExpanded">
         <div
           class="my-0"
@@ -397,7 +396,7 @@ export default {
 .comment-cell.expanded {
   position: absolute;
   right: 150px;
-  width: 500px; /* Adjust the width as needed */
+  width: 300px; /* Adjust the width as needed */
   z-index: 10; /* Ensure it overlaps other cells */
   background-color: red; /* Optional: Add background color to distinguish */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
