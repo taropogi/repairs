@@ -11,7 +11,7 @@
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
-        <td class="text-center underline-spacing">{{ $cpo->formatted_rma_number }}</td>
+        <td class="text-center underline-spacing">{{ $cpo->rma_number ? $cpo->formatted_rma_number : 'N/A' }}</td>
         <td class="text-center">__________</td>
         <td class="text-center">__________</td>
     </tr>
