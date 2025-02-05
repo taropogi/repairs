@@ -82,7 +82,7 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  inject: ["laravelData"],
+  inject: ["laravelData", "logPageVisit"],
   data() {
     return {
       loginFormData: {
@@ -155,6 +155,7 @@ export default {
   },
   mounted() {
     console.log(this.laravelData.side_bar_image);
+    this.logPageVisit("login");
   },
 };
 </script>
