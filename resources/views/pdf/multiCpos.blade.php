@@ -96,7 +96,7 @@
 
         @php
 
-        $chunks = array_chunk($cpo['lines']->toArray(), 14);
+        $chunks = array_chunk($cpo['lines']->toArray(), 12);
 
         @endphp
 
