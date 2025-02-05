@@ -104,10 +104,10 @@ class ActivityController extends Controller
     public function logPageVisit()
     {
         $ipAddress = request()->ip();
-        logger()->info('User visited the page: ' . request()->page . ' from IP: ' . $ipAddress);
+        // logger()->info('User visited the page: ' . request()->page . ' from IP: ' . $ipAddress);
         Activity::create([
             'action' => 'Page Visit',
-            'description' => 'User visited the page: ' . request()->page,
+            'description' => 'User visited the page: ' . request()->page . ' from IP: ' . $ipAddress,
             'user_id' => auth()->user()->id
         ]);
     }
