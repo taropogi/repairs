@@ -60,9 +60,7 @@ export default {
       this.showSuggestions = true;
     },
     hideSuggestions() {
-      setTimeout(() => {
-        this.showSuggestions = false;
-      }, 200);
+      this.showSuggestions = false;
     },
     selectSuggestion(suggestion) {
       const firstName = suggestion.firstName;
@@ -106,7 +104,7 @@ export default {
 }
 
 .suggestions-list li {
-  padding: 4px;
+  padding: 1px;
   cursor: pointer;
 }
 
