@@ -38,9 +38,11 @@ class DeleteOldActivities implements ShouldQueue
         $affected = $query->count();
 
         $query->delete();
+
+        $remaining = DB::table('activities')->count();
         Activity::create([
             'action' => 'Job | Delete Activities',
-            'description' => 'Deleted ' . $affected . '  activities older than 5 days',
+            'description' => 'Deleted ' . $affected . '  activities older than 5 days. Remaining activities: ' . $remaining,
             'user_id' => $user->id,
         ]);
     }
