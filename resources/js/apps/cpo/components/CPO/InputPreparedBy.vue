@@ -21,8 +21,7 @@
           :key="suggestion.id"
           @mousedown.prevent="selectSuggestion(suggestion)"
         >
-          {{ suggestion.name }} |
-          <span class="badge bg-secondary">{{ suggestion.position }}</span>
+          {{ suggestion.name }}
         </li>
       </ul>
     </div>
