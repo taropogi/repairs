@@ -56,6 +56,11 @@
         {{ localHeaderItem.customer_name }}
       </label>
     </td>
+    <td>
+      <label class="form-check-label" :for="id">
+        {{ localHeaderItem.customer_reference_number }}
+      </label>
+    </td>
     <!-- <td>{{ localHeaderItem.customer_address }}</td> -->
     <td>
       <label class="form-check-label" :for="id">{{
