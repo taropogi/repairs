@@ -11,6 +11,7 @@
         @input="onInput"
         @focus="showSuggestions = true"
         @blur="hideSuggestions"
+        autocomplete="off"
       />
       <ul
         v-if="showSuggestions && filteredSuggestions.length"
