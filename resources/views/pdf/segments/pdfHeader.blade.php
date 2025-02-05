@@ -6,7 +6,7 @@
         <td valign="middle" style="width: 60%; text-align: center">
             <strong style="font-size: 24px;">PULL OUT FORM</strong>
         </td>
-        <td align="right" style="width: 20%">
+        <td align="right" style="width: 20%" valign="middle">
             <h1 style="margin-top: 0; font-size: 24px;"># <span
                     style="border-bottom: 2px solid; padding-bottom: 20px;font-size: 24px;">{{ $cpo['formatted_id'] }}</span>
             </h1>

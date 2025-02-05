@@ -1,6 +1,4 @@
 <tr>
-
-
     <th scope="row" rowspan="2">{{ $line->line_number }}</th>
     <td class="text-center"><small>{{ $line->description }}</small></td>
     <td class="text-center" align="right"><small>{{ $line->qty_returned }}</small></td>
