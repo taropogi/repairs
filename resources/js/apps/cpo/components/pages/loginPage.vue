@@ -9,7 +9,7 @@
       <div class="col-md-4">
         <div class="card login-container text-white">
           <div class="text-center p-5 pb-0">
-            <h1>LOGIN</h1>
+            <h1>LOGINx</h1>
           </div>
 
           <form @submit.prevent="submitLoginForm" class="p-5 pt-1 m-5 mt-0">
@@ -155,7 +155,7 @@ export default {
   },
   mounted() {
     console.log(this.laravelData.side_bar_image);
-    this.logPageVisit("login");
+    // this.logPageVisit("login");
   },
 };
 </script>
