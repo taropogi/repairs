@@ -217,9 +217,13 @@ export default {
     async addNewLine() {
       this.isInsertingNewLine = true;
       try {
-        await axios.post("api/cpoline/", { id: this.headerId });
+        const res = await axios.post("api/cpoline/", { id: this.headerId });
+        // console.log(res.data);
 
         this.getCpoLines();
+        // this.lines = [...this.lines, res.data.newLine].sort(
+        //   (a, b) => a.line_number - b.line_number
+        // );
 
         this.showNotification({
           message: `Line# ${this.lines.length + 1} - New empty line was added`,

@@ -64,8 +64,11 @@ class CpoLinesController extends Controller
 
 
         $cpo->touch();
-        usleep(500000);
-        return $cpo;
+
+        return response()->json([
+            'cpo' => $cpo,
+            'newLine' => $newLine
+        ]);
     }
 
     /**
