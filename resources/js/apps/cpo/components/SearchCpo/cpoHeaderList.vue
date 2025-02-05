@@ -145,6 +145,7 @@ export default {
     },
     "$route.query.page": {
       handler(newPage) {
+        // console.log("changed page");
         this.currentPage = parseInt(newPage) || 1;
         this.getCpoHeaders();
       },
@@ -158,10 +159,13 @@ export default {
     },
     searchCriteria: {
       handler(newValue, oldValue) {
+        // console.log("changed criteria");
         // console.log(newValue, oldValue);
         // console.log("changed");
-        this.getCpoHeaders();
 
+        this.currentPage = 1;
+        this.updateQuery();
+        this.getCpoHeaders();
         // Note: `newValue` will be equal to `oldValue` here
         // on nested mutations as long as the object itself
         // hasn't been replaced.
@@ -207,6 +211,7 @@ export default {
       this.deleteCpo = null;
     },
     async getCpoHeaders() {
+      if (this.isSearching) return;
       this.isSearching = true;
       this.error = null;
 
