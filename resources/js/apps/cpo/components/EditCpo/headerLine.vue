@@ -182,7 +182,7 @@
         @blur="shrinkCell"
       />
 
-      <div v-if="lineDetails.other_comments.length > 0">
+      <div v-if="lineDetails.other_comments.length > 0 && !isCommentExpanded">
         <div
           class="my-0"
           v-for="comment in lineDetails.other_comments"
@@ -255,6 +255,7 @@ export default {
       isDeleting: false,
       isUpdated: false,
       isSearchingSegment6: false,
+      isCommentExpanded: false,
     };
   },
   inject: ["showNotification"],
@@ -281,9 +282,11 @@ export default {
   methods: {
     expandCell(event) {
       event.target.closest("td").classList.add("expanded");
+      this.isCommentExpanded = true;
     },
     shrinkCell(event) {
       event.target.closest("td").classList.remove("expanded");
+      this.isCommentExpanded = false;
     },
     validateQty(field) {
       if (this.lineDetails[field] < 0) {
