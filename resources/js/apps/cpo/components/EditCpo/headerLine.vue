@@ -171,13 +171,15 @@
         @input="validateQty('damaged')"
       />
     </td>
-    <td>
+    <td class="comment-cell">
       <input
         type="text"
-        class="form-control"
+        class="form-control comment-input"
         :disabled="isDisabled"
         v-model="lineDetails.user_comment"
         v-if="editLineFieldsPermission.includes('comments') || isAdmin"
+        @focus="expandCell"
+        @blur="shrinkCell"
       />
 
       <div v-if="lineDetails.other_comments.length > 0">
@@ -277,6 +279,12 @@ export default {
   },
 
   methods: {
+    expandCell(event) {
+      event.target.closest("td").classList.add("expanded");
+    },
+    shrinkCell(event) {
+      event.target.closest("td").classList.remove("expanded");
+    },
     validateQty(field) {
       if (this.lineDetails[field] < 0) {
         this.lineDetails[field] = 0;
@@ -376,5 +384,27 @@ export default {
 
 .blink {
   animation: blink 2s ease-in-out;
+}
+
+.comment-cell {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.comment-cell.expanded {
+  position: absolute;
+  right: 150px;
+  width: 500px; /* Adjust the width as needed */
+  z-index: 10; /* Ensure it overlaps other cells */
+  background-color: red; /* Optional: Add background color to distinguish */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+.comment-input {
+  width: 100%;
+}
+
+.comment-cell.expanded .comment-input {
+  width: 100%;
 }
 </style>
