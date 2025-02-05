@@ -1,14 +1,14 @@
 <table width="100%">
     <tr>
-        <td valign="top" style="width: 20%;">
+        <td valign="top" style="width: 20%">
             <img src="{{ $image_src }}" alt="" width="100%" />
         </td>
-        <td valign="middle" style="width: 40%; text-align: center;">
-            <strong>PULL OUT FORM</strong>
+        <td valign="middle" style="width: 60%; text-align: center">
+            <strong style="font-size: 24px;">PULL OUT FORM</strong>
         </td>
-        <td align="right" style="width: 30%;">
-            <h1 style="margin-top: 0; font-size: 36px;"># <span
-                    style="border-bottom: 2px solid; padding-bottom: 20px;font-size: 36px;">{{ $cpo['formatted_id'] }}</span>
+        <td align="right" style="width: 20%">
+            <h1 style="margin-top: 0; font-size: 24px;"># <span
+                    style="border-bottom: 2px solid; padding-bottom: 20px;font-size: 24px;">{{ $cpo['formatted_id'] }}</span>
             </h1>
         </td>
     </tr>
