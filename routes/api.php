@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CpoController;
 use App\Http\Controllers\CpoLinesController;
 use App\Http\Controllers\ExportListController;
+use App\Http\Controllers\HrController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -100,3 +101,6 @@ Route::get('items/segment6/single', [Tdw1DataController::class, 'getItemBySegmen
 
 //export
 Route::get('export/criteria/data', [ExportListController::class, 'getCriteriaData']);
+
+// hr apis
+Route::get('prepared-by/suggestions', [HrController::class, 'getPreparedBySuggestions']);

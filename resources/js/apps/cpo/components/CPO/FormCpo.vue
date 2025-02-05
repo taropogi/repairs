@@ -125,7 +125,8 @@
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <div class="p-2">
+            <input-prepared-by v-model="formData.preparedBy" />
+            <!-- <div class="p-2">
               <label for="prepared-by" class="form-label mb-0"
                 >PREPARED BY</label
               >
@@ -135,9 +136,23 @@
                 id="prepared-by"
                 required
                 v-model="formData.preparedBy"
-                @input="formData.preparedBy = formData.preparedBy.toUpperCase()"
+                @input="onInput"
+                @focus="showSuggestions = true"
+                @blur="hideSuggestions"
               />
-            </div>
+              <ul
+                v-if="showSuggestions && filteredSuggestions.length"
+                class="suggestions-list"
+              >
+                <li
+                  v-for="(suggestion, index) in filteredSuggestions"
+                  :key="index"
+                  @mousedown.prevent="selectSuggestion(suggestion)"
+                >
+                  {{ suggestion }}
+                </li>
+              </ul>
+            </div> -->
 
             <div class="p-2">
               <label for="authorized-by" class="form-label mb-0"
@@ -227,6 +242,7 @@ import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
 import EncodeLines from "./EncodeLines.vue";
 import headerLines from "../EditCpo/headerLines.vue";
 import EncodeConfirm from "./EncodeConfirm.vue";
+import InputPreparedBy from "./InputPreparedBy.vue";
 export default {
   components: {
     LoadingOverlay,
@@ -235,6 +251,7 @@ export default {
     EncodeLines,
     headerLines,
     EncodeConfirm,
+    InputPreparedBy,
   },
   inject: ["showNotification"],
   data() {
