@@ -19,7 +19,9 @@ class HrController extends Controller
         );
 
         $qry->join('ohrm_job_title', 'ohrm_job_title.id', '=', 'hs_hr_employee.job_title_code');
-
+        $qry->where('ohrm_job_title.job_title', 'not like', '%promodiser%');
+        $qry->where('ohrm_job_title.job_title', 'not like', '%driver%');
+        $qry->where('ohrm_job_title.job_title', 'not like', '%helper%');
 
         $qry->whereNull('termination_id');
 

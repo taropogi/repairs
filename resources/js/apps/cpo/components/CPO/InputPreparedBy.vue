@@ -99,7 +99,7 @@ export default {
   margin: 0;
   padding: 0;
   position: absolute;
-  background-color: #f8f8f8;
+  background-color: #f5f5f5;
   width: 300px;
   z-index: 1000;
   max-height: 150px; /* Set maximum height for the suggestions list */
@@ -107,7 +107,7 @@ export default {
 }
 
 .suggestions-list li {
-  padding: 8px;
+  padding: 4px;
   cursor: pointer;
 }
 
