@@ -24,7 +24,7 @@ class Activity extends Model
 
         static::creating(function ($activity) {
             $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
-            $activity->ip_address = Request::ip();
+            $activity->ip_address = Request::ip() ?? 'SYSTEM';
         });
     }
 
