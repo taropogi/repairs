@@ -46,6 +46,8 @@ class CpoLinesController extends Controller
     public function store(Request $request)
     {
 
+
+
         $cpo = Cpo::where('id', $request->id)->first();
 
         $newLine = new CpoLine();
@@ -59,6 +61,12 @@ class CpoLinesController extends Controller
         $cpoLineComment->comment = '';
         $cpoLineComment->commented_by = auth()->user()->name;
         $cpoLineComment->save();
+
+        Activity::create([
+            'action' => 'Create CPO Line',
+            'description' => 'Created CPO: Line ' . $newLine->line_number . ' in CPO #' . $cpo->formatted_id,
+            'user_id' => auth()->user()->id,
+        ]);
 
 
 

@@ -216,6 +216,7 @@ export default {
 
     async addNewLine() {
       this.isInsertingNewLine = true;
+
       try {
         const res = await axios.post("api/cpoline/", { id: this.headerId });
         // console.log(res.data);
