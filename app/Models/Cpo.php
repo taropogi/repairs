@@ -77,7 +77,7 @@ class Cpo extends Model
     // Accessor for formatted RMA Number
     public function getFormattedRmaNumberAttribute()
     {
-        return $this->rma_number ?  str_pad($this->rma_number, 5, '0', STR_PAD_LEFT) : 'N/A';
+        return $this->rma_number ?  str_pad($this->rma_number, 5, '0', STR_PAD_LEFT) : '';
     }
 
     // Accessor for checking if the Cpo is completed
