@@ -102,12 +102,16 @@ export default {
     async submitLoginForm() {
       this.isValidating = true;
 
-      this.loginFormData.username = this.loginFormData.username.toLowerCase();
-      this.loginFormData.password = this.loginFormData.password.toLowerCase();
+      // this.loginFormData.username = this.loginFormData.username.toLowerCase();
+      // this.loginFormData.password = this.loginFormData.password.toLowerCase();
 
       try {
         await axios.get("sanctum/csrf-cookie");
-        const response = await axios.post("api/login", this.loginFormData);
+        const response = await axios.post("api/login", {
+          ...this.loginFormData,
+          username: this.loginFormData.username.toLowerCase(),
+          password: this.loginFormData.password.toLowerCase(),
+        });
 
         // console.log(response.data);
         this.setIsLoggedIn(true);
