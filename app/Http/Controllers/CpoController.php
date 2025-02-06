@@ -541,15 +541,15 @@ class CpoController extends Controller
         $response['allHeadersCount'] = $qry2->count();
         $response['isLastPage'] = $response['allHeadersCount'] <= $request->input('perPage') * $request->input('page');
 
-        // if (
-        //     $request->page > 1
-        // ) {
-        //     Activity::create([
-        //         'action' => 'Clicked Pagination Button',
-        //         'description' => 'Page: ' . $request->input('page'),
-        //         'user_id' => auth()->user()->id
-        //     ]);
-        // }
+        if (
+            $request->page > 1
+        ) {
+            Activity::create([
+                'action' => 'Clicked Pagination Button',
+                'description' => 'Page: ' . $request->input('page'),
+                'user_id' => auth()->user()->id
+            ]);
+        }
 
         $this->checkIfSearched($request);
 
