@@ -7,6 +7,7 @@
         v-if="isSelectingOracleItem"
       />
     </teleport>
+    <loading-overlay :text="loadingOverlayText" v-if="isGeneratingRma" />
     <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
       LINE DETAILS
     </h5>
@@ -87,7 +88,7 @@
           ></span>
         </button>
         <button
-          v-if="!headerRow.is_rma_final"
+          v-if="!headerRow.is_rma_final && !rmaIsFinal"
           @click="generateRmaNumber"
           :disabled="isGeneratingRma"
           class="btn mx-1"
@@ -111,7 +112,10 @@
           ></span>
         </button>
       </div>
-      <div class="mt-4" v-if="headerRow.rma_number && !headerRow.is_rma_final">
+      <div
+        class="mt-4"
+        v-if="headerRow.rma_number && !headerRow.is_rma_final && !rmaIsFinal"
+      >
         <p class="text-danger">
           <strong>
             Note: Clicking the "SAVE ALL LINES" button will finalize the
@@ -127,6 +131,7 @@
 <script>
 import headerLine from "./headerLine.vue";
 import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
+import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapGetters } from "vuex";
 import TotalsRow from "./TotalsRow.vue";
 
@@ -135,6 +140,7 @@ export default {
     headerLine,
     SelectOracleItemInput,
     TotalsRow,
+    LoadingOverlay,
   },
   // props: ["headerId", "headerIsLocked"],
 
@@ -155,6 +161,12 @@ export default {
   },
   computed: {
     ...mapGetters("auth", ["canEditCpo"]),
+    loadingOverlayText() {
+      if (this.headerRow.rma_number) {
+        return "Please wait. Removing RMA# . . . ";
+      }
+      return "Please wait. Generating RMA# . . . ";
+    },
   },
   data() {
     return {
@@ -165,6 +177,7 @@ export default {
       isSelectingOracleItem: false,
       selectItemForLineNumber: null,
       isGeneratingRma: false,
+      rmaIsFinal: false,
     };
   },
 
@@ -238,6 +251,7 @@ export default {
       }
     },
     async generateRmaNumber() {
+      // console.log("test");
       try {
         this.isGeneratingRma = true;
         const res = await axios.post("api/cpo/generateRma", {
@@ -268,12 +282,15 @@ export default {
         this.isSavingAllLines = true;
         this.$emit("updatingLines");
         // console.log(this.lines);
-        await axios.post("api/cpo/lines/updateAllLines/", {
+        const res = await axios.post("api/cpo/lines/updateAllLines/", {
           cpoId: this.headerId,
           cpoLines: this.lines,
         });
 
         this.$emit("updatedLines", this.headerRow);
+
+        this.rmaIsFinal = res.data.cpo.is_rma_final;
+        // console.log(this.rmaIsFinal);
 
         this.showNotification({
           message: "All lines were saved",
@@ -299,6 +316,7 @@ export default {
   },
   mounted() {
     this.getCpoLines();
+    this.$emit("updatedRma", this.headerRow);
     // console.log("headerId: " + this.headerId);
   },
 };

@@ -88,7 +88,7 @@ class CpoController extends Controller
         }
 
 
-
+        sleep(1);
         return $cpo;
     }
     public function create(Request $request)
@@ -346,7 +346,9 @@ class CpoController extends Controller
         // set delay time sleep for 0.5 second
         // usleep(500000);
         sleep(1);
-        return $request;
+        return response()->json([
+            'cpo' => $cpo
+        ]);
     }
 
     private function ensureCommentExists($cpo_id)

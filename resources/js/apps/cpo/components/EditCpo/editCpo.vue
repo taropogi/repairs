@@ -12,6 +12,7 @@
         :key="formHeaderKey"
         @updating="isUpdating = true"
         @updated="isUpdating = false"
+        :generated-rma="generatedRma"
       ></form-header>
 
       <header-lines
@@ -49,6 +50,7 @@ export default {
       isUpdating: false,
       isUpdatedAllLinesSuccess: false,
       formHeaderKey: 0,
+      generatedRma: "",
     };
   },
   methods: {
@@ -56,13 +58,14 @@ export default {
     updatedLines(headerRow) {
       if (headerRow.rma_number && !headerRow.is_rma_final) {
         // console.log("RMA Number: ", headerRow.rma_number);
-        this.formHeaderKey++;
+        // this.formHeaderKey++;
       }
       this.isUpdating = false;
     },
     updatedRma(updatedHeaderRow) {
       this.headerRow = updatedHeaderRow;
-      this.formHeaderKey++;
+      this.generatedRma = updatedHeaderRow.formatted_rma_number;
+      // this.formHeaderKey++;
     },
     setHeaderRow(headerRow) {
       // console.log("headerRow", headerRow);

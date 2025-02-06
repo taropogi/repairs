@@ -211,8 +211,11 @@
             style="height: 100px"
           >
             <h3 class="fw-bold">PULLOUT#: {{ headerRow.formatted_id }}</h3>
-            <h3 class="fw-bold" v-if="headerRow.rma_number">
+            <!-- <h3 class="fw-bold" v-if="headerRow.rma_number">
               RMA#: {{ headerRow.formatted_rma_number }}
+            </h3> -->
+            <h3 class="fw-bold" v-if="generatedRma">
+              RMA#: {{ generatedRma }}
             </h3>
           </div>
         </div>
@@ -237,7 +240,17 @@ export default {
     OracleCustomerInput,
   },
   emits: ["searched-header-row", "updating", "updated"],
-  props: ["id"],
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    generatedRma: {
+      type: String,
+      required: false,
+      default: "",
+    },
+  },
   inject: ["laravelData", "showNotification"],
   data() {
     return {
