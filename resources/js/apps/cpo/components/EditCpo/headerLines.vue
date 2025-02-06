@@ -112,19 +112,19 @@
           ></span> -->
         </button>
       </div>
-      <transition name="fade">
-        <div
-          class="mt-4"
-          v-if="headerRow.rma_number && !headerRow.is_rma_final && !rmaIsFinal"
-        >
-          <p class="text-danger">
-            <strong>
-              Note: Clicking the "SAVE ALL LINES" button will finalize the
-              generated RMA#, which can no longer be changed.
-            </strong>
-          </p>
-        </div>
-      </transition>
+
+      <div
+        class="mt-4"
+        v-if="headerRow.rma_number && !headerRow.is_rma_final && !rmaIsFinal"
+      >
+        <p class="text-danger">
+          <strong>
+            Note: Clicking the "SAVE ALL LINES" button will finalize the
+            generated RMA#, which can no longer be changed.
+          </strong>
+        </p>
+      </div>
+
       <!-- {{ headerRow.rma_number }} - {{ headerRow.is_rma_final }} -->
     </div>
   </div>
@@ -323,39 +323,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-    position: absolute;
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-    position: absolute;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-    position: absolute;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(30px);
-    position: absolute;
-  }
-}
-
-.fade-enter-active {
-  animation: fadeIn 1s ease-in-out;
-}
-
-.fade-leave-active {
-  animation: fadeOut 1s ease-in-out;
-}
-</style>

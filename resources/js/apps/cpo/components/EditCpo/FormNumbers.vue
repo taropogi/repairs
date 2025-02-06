@@ -39,22 +39,22 @@ h3 {
 @keyframes zoomIn {
   0% {
     opacity: 0;
-    transform: scale(3);
+    transform: scale(4) translateX(-50px) translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateX(0) translateY(0);
   }
 }
 
 @keyframes zoomOut {
   0% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: scale(3);
+    transform: translateY(100px);
   }
 }
 
