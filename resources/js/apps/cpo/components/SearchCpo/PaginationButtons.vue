@@ -1,6 +1,6 @@
 <template>
   <!-- Pagination Controls -->
-  <div class="pagination" v-if="showPaginationButtons">
+  <div class="pagination">
     <button
       :disabled="currentPage === 1"
       @click="prevPage"
@@ -17,56 +17,29 @@
 
 <script>
 export default {
+  emits: ["prevPage", "nextPage"],
   props: {
-    cpoHeaderList: {
-      type: Array,
-      required: true,
-    },
-    allHeadersCount: {
-      type: Number,
-      required: true,
-    },
     currentPage: {
       type: Number,
+      required: false,
+      default: 1,
+    },
+    lastPage: {
+      type: Number,
       required: true,
     },
   },
-  data() {
-    return {
-      perPage: 15,
-    };
-  },
   computed: {
-    lastPage() {
-      return Math.ceil(this.allHeadersCount / this.perPage);
-    },
-    showPaginationButtons() {
-      if (this.currentPage > 1) return true;
-      return this.currentPage == 1 && this.cpoListCount >= this.perPage;
-    },
     isLastPage() {
-      return this.cpoListCount < this.perPage;
-    },
-    cpoListCount() {
-      return this.cpoHeaderList.length;
+      return this.currentPage === this.lastPage;
     },
   },
   methods: {
-    updateQuery() {
-      this.$router.push({
-        query: { ...this.$route.query, page: this.currentPage },
-      });
+    prevPage() {
+      this.$emit("prevPage");
     },
     nextPage() {
-      this.currentPage++;
-      this.$emit("nextPage", this.currentPage + 1);
-      this.updateQuery();
-    },
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.updateQuery();
-      }
+      this.$emit("nextPage");
     },
   },
 };

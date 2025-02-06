@@ -63,32 +63,14 @@
           ></header-list-item>
         </transition-group>
       </table>
-      <!-- <pagination-buttons
-        :cpo-header-list="cpoHeaderList"
-        :all-headers-count="allHeadersCount"
-        @nextPage="nextPage"
+      <pagination-buttons
+        v-if="showPaginationButtons"
         :current-page="currentPage"
-      /> -->
-      <!-- Pagination Controls -->
-      <div class="pagination" v-if="showPaginationButtons">
-        <button
-          :disabled="currentPage === 1"
-          @click="prevPage"
-          class="pagination-button"
-        >
-          Previous
-        </button>
-        <span class="pagination-info"
-          >Page {{ currentPage }} / {{ lastPage }}</span
-        >
-        <button
-          :disabled="isLastPage"
-          @click="nextPage"
-          class="pagination-button"
-        >
-          Next
-        </button>
-      </div>
+        :last-page="lastPage"
+        @next-page="nextPage"
+        @prev-page="prevPage"
+      />
+      />
     </div>
   </div>
 </template>
@@ -115,7 +97,6 @@ export default {
       showPdfHistoryId: null,
       deleteCpo: null,
       error: null,
-      initialPage: 1,
       currentPage: 1,
       perPage: 15,
       allHeadersCount: 0,
@@ -132,9 +113,6 @@ export default {
     showPaginationButtons() {
       if (this.currentPage > 1) return true;
       return this.currentPage == 1 && this.cpoListCount >= this.perPage;
-    },
-    isLastPage() {
-      return this.cpoListCount < this.perPage;
     },
     cpoListCount() {
       return this.cpoHeaderList.length;
@@ -279,37 +257,5 @@ export default {
   top: 0;
   z-index: 1;
   background-color: white; /* Ensure the background color matches the table */
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.pagination-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.pagination-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.pagination-button:not(:disabled):hover {
-  background-color: #0056b3;
-}
-
-.pagination-info {
-  margin: 0 10px;
-  font-size: 16px;
 }
 </style>
