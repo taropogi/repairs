@@ -6,7 +6,7 @@
         class="nav-link text-white"
         :class="{ active: isNavAdminUserListActive }"
       >
-        <i class="bi bi-people me-2"></i> User List
+        <i class="bi bi-people me-2"></i> USER LIST
       </router-link>
     </li>
     <li>
@@ -16,7 +16,7 @@
         :class="{ active: isNavAdminUserCreateActive }"
       >
         <i class="bi bi-person-plus me-2"></i>
-        Create New User</router-link
+        CREATE NEW USER</router-link
       >
     </li>
   </ul>
