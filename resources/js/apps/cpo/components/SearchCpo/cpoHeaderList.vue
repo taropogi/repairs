@@ -70,7 +70,6 @@
         @next-page="nextPage"
         @prev-page="prevPage"
       />
-      />
     </div>
   </div>
 </template>
