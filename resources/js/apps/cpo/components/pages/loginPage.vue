@@ -9,7 +9,7 @@
       <div class="col-md-4">
         <div class="card login-container text-white">
           <div class="text-center p-5 pb-0">
-            <h1>LOGINx</h1>
+            <h1>LOGIN</h1>
           </div>
 
           <form @submit.prevent="submitLoginForm" class="p-5 pt-1 m-5 mt-0">
