@@ -553,6 +553,9 @@ class CpoController extends Controller
 
         $this->checkIfSearched($request);
 
+        // set delay time sleep for 0.5 second
+        // usleep(500000);
+
         return $response;
     }
 
