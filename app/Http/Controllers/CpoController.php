@@ -344,7 +344,8 @@ class CpoController extends Controller
 
 
         // set delay time sleep for 0.5 second
-        usleep(500000);
+        // usleep(500000);
+        sleep(1);
         return $request;
     }
 
