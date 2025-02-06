@@ -125,11 +125,11 @@
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <input-prepared-by
+            <!-- <input-prepared-by
               v-model="formData.preparedBy"
               key="prepared-by"
-            />
-            <!-- <div class="p-2">
+            /> -->
+            <div class="p-2">
               <label for="prepared-by" class="form-label mb-0"
                 >PREPARED BY</label
               >
@@ -139,29 +139,14 @@
                 id="prepared-by"
                 required
                 v-model="formData.preparedBy"
-                @input="onInput"
-                @focus="showSuggestions = true"
-                @blur="hideSuggestions"
               />
-              <ul
-                v-if="showSuggestions && filteredSuggestions.length"
-                class="suggestions-list"
-              >
-                <li
-                  v-for="(suggestion, index) in filteredSuggestions"
-                  :key="index"
-                  @mousedown.prevent="selectSuggestion(suggestion)"
-                >
-                  {{ suggestion }}
-                </li>
-              </ul>
-            </div> -->
-            <input-prepared-by
+            </div>
+            <!-- <input-prepared-by
               v-model="formData.authorizedBy"
               :label="'AUTHORIZED BY'"
               key="authorized-by"
-            />
-            <!-- <div class="p-2">
+            /> -->
+            <div class="p-2">
               <label for="authorized-by" class="form-label mb-0"
                 >AUTHORIZED BY</label
               >
@@ -175,7 +160,7 @@
                   formData.authorizedBy = formData.authorizedBy.toUpperCase()
                 "
               />
-            </div> -->
+            </div>
             <div class="p-2">
               <label for="customer-reference-number" class="form-label mb-0"
                 >CUSTOMER REFERENCE #</label
