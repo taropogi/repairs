@@ -80,12 +80,12 @@
             <i class="bi bi-save"></i>
             SAVE ALL LINES
           </span>
-          <span
+          <!-- <span
             v-if="isSavingAllLines"
             class="spinner-border spinner-border-sm"
             role="status"
             aria-hidden="true"
-          ></span>
+          ></span> -->
         </button>
         <button
           v-if="!headerRow.is_rma_final && !rmaIsFinal"
@@ -104,12 +104,12 @@
             <span v-else> REMOVE RMA# </span>
           </span>
 
-          <span
+          <!-- <span
             v-if="isGeneratingRma"
             class="spinner-border spinner-border-sm"
             role="status"
             aria-hidden="true"
-          ></span>
+          ></span> -->
         </button>
       </div>
       <div
