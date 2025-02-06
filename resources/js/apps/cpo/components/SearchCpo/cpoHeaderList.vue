@@ -67,8 +67,10 @@
         v-if="showPaginationButtons"
         :current-page="currentPage"
         :last-page="lastPage"
+        @first-page="firstPage"
         @next-page="nextPage"
         @prev-page="prevPage"
+        @last-page="goToLastPage"
       />
     </div>
   </div>
@@ -171,8 +173,16 @@ export default {
         query: { ...this.$route.query, page: this.currentPage },
       });
     },
+    firstPage() {
+      this.currentPage = 1;
+      this.updateQuery();
+    },
     nextPage() {
       this.currentPage++;
+      this.updateQuery();
+    },
+    goToLastPage() {
+      this.currentPage = this.lastPage;
       this.updateQuery();
     },
     prevPage() {

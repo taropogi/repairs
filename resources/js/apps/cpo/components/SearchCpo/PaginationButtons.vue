@@ -3,21 +3,43 @@
   <div class="pagination">
     <button
       :disabled="currentPage === 1"
+      @click="firstPage"
+      class="btn mx-2"
+      :class="{
+        'btn-secondary': currentPage === 1,
+        'btn-success': currentPage !== 1,
+      }"
+    >
+      &laquo; First
+    </button>
+    <button
+      :disabled="currentPage === 1"
       @click="prevPage"
-      class="pagination-button"
+      class="btn btn-primary"
     >
       Previous
     </button>
     <span class="pagination-info">Page {{ currentPage }} / {{ lastPage }}</span>
-    <button :disabled="isLastPage" @click="nextPage" class="pagination-button">
+    <button :disabled="isLastPage" @click="nextPage" class="btn btn-primary">
       Next
+    </button>
+    <button
+      :disabled="isLastPage"
+      @click="goToLastPage"
+      class="btn mx-2"
+      :class="{
+        'btn-secondary': isLastPage,
+        'btn-success': !isLastPage,
+      }"
+    >
+      Last &raquo;
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  emits: ["prevPage", "nextPage"],
+  emits: ["prevPage", "nextPage", "firstPage", "lastPage"],
   props: {
     currentPage: {
       type: Number,
@@ -35,11 +57,17 @@ export default {
     },
   },
   methods: {
+    firstPage() {
+      this.$emit("firstPage");
+    },
     prevPage() {
       this.$emit("prevPage");
     },
     nextPage() {
       this.$emit("nextPage");
+    },
+    goToLastPage() {
+      this.$emit("lastPage");
     },
   },
 };
