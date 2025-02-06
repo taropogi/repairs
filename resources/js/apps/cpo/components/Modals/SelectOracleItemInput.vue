@@ -57,12 +57,21 @@
       </div>
     </template>
     <template #default>
-      <p class="text-muted">
-        <i class="bi bi-arrow-right"></i>
-        <strong>VIEW IN YP</strong>: Please make sure to login to YellowPage
-        first to view the item. Otherwise, you will be redirected to the login
-        page.
-      </p>
+      <div>
+        <p class="text-dark">
+          <i class="bi bi-arrow-right"></i>
+          <strong class="mx-2 text-primary">VIEW IN YP</strong>: Please make
+          sure to login to YellowPage first to view the item. Otherwise, you
+          will be redirected to the login page.
+        </p>
+
+        <p class="text-dark">
+          <i class="bi bi-image"></i>
+          <strong class="mx-2 text-danger">VIEW IMAGE</strong>: Click the image
+          to view it larger.
+        </p>
+      </div>
+
       <button
         type="button"
         class="btn btn-danger"

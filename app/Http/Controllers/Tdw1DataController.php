@@ -46,6 +46,12 @@ class Tdw1DataController extends Controller
                 ->orWhere('oracle_code', 'LIKE', "%{$search}%");
 
             $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6', 'list_price', 'primary_unit_of_measure', 'primary_uom_code');
+
+            Activity::create([
+                'action' => 'Searched Item / Modal',
+                'description' => 'Searched: ' . request()->search,
+                'user_id' => auth()->user()->id
+            ]);
         }
 
         $query->inRandomOrder();
@@ -56,7 +62,7 @@ class Tdw1DataController extends Controller
 
             $itemImageUrls = [];
             $remoteServer = env('YP_URL_PIC_DIR', 'http://113.1.1.190/phase7/pictures/');
-            for ($x = 0; $x <= 5; $x++) {
+            for ($x = 0; $x <= 1; $x++) {
                 $src = "";
                 if ($x == 0) {
                     $src = $remoteServer . $item->segment6 . '.jpg';

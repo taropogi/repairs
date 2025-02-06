@@ -17,7 +17,7 @@
           <slot name="body"></slot>
         </div>
         <div
-          class="modal-footer d-flex justify-content-between align-items-center"
+          class="modal-footer d-flex justify-content-between align-items-center bg-light"
         >
           <slot></slot>
         </div>
