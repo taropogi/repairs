@@ -252,7 +252,7 @@ class CpoLinesController extends Controller
 
         event(new CpoUpdated($cpo));
         // set delay time sleep for 0.5 second
-        // usleep(500000);
+        usleep(500000);
 
         $response['cpoLine']    = $cpoLine;
         return $response;
