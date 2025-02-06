@@ -124,10 +124,7 @@
             button.
           </p>
           <p>You can also put the item's segment6 in th field.</p>
-          <p>
-            This will automatically fill the description, price, and unit
-            fields.
-          </p>
+          <p>This will automatically fill the description and unit fields.</p>
         </div>
       </div>
     </transition>
@@ -168,10 +165,7 @@
             button.
           </p>
           <p>You can also put the item's segment6 in th field.</p>
-          <p>
-            This will automatically fill the description, price, and unit
-            fields.
-          </p>
+          <p>This will automatically fill the description and unit fields.</p>
         </div>
       </div>
     </transition>
