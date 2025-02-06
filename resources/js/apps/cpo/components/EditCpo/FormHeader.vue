@@ -206,16 +206,10 @@
               </h3>
             </div>
           </div>
-          <div
-            class="header-container d-flex justify-content-center align-items-center flex-column p-4"
-          >
-            <h3 class="fw-bold text-primary mb-2">
-              PULLOUT#: {{ headerRow.formatted_id }}
-            </h3>
-            <h3 class="fw-bold text-success" v-if="generatedRma">
-              RMA#: {{ generatedRma }}
-            </h3>
-          </div>
+          <form-numbers
+            :pullout-number="headerRow.formatted_id"
+            :generated-rma="generatedRma"
+          />
         </div>
       </form>
       <action-buttons :cpo-id="headerRow.id" @updateHeader="submitCpoForm" />
@@ -228,6 +222,7 @@ import ModalStatusHistory from "./ModalStatusHistory.vue";
 import OracleCustomerDetails from "../UI/OracleCustomerDetails.vue";
 import ActionButtons from "./ActionButtons.vue";
 import OracleCustomerInput from "../UI/OracleCustomerInput.vue";
+import FormNumbers from "./FormNumbers.vue";
 import { mapGetters } from "vuex";
 import { formatDate } from "../../utils/dateUtils";
 export default {
@@ -236,6 +231,7 @@ export default {
     OracleCustomerDetails,
     ActionButtons,
     OracleCustomerInput,
+    FormNumbers,
   },
   emits: ["searched-header-row", "updating", "updated"],
   props: {
@@ -351,13 +347,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.header-container {
-  background-color: #f8f9fa; /* Light background */
-  border-radius: 10px; /* Rounded corners */
-}
-
-h3 {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
-}
-</style>
