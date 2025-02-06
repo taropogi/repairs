@@ -50,6 +50,7 @@ class UpdateCpoTotals implements ShouldQueue
         $cpo->save();
 
         $cposNullTotal = Cpo::whereNull('total_amount')->get();
+        $cposNullTotalCount = $cposNullTotal->count();
         foreach ($cposNullTotal as $cpoNull) {
             $cpoNull->total_amount = $cpoNull->lines->map(function ($line) {
                 return $line->price * $line->qty_returned;
@@ -60,7 +61,7 @@ class UpdateCpoTotals implements ShouldQueue
 
         Activity::create([
             'action' => 'Job | Updated CPO Totals',
-            'description' => 'CPO Totals updated',
+            'description' => 'CPO Totals updated for: ' . $cpo->formatted_id . ' | Updated Other CPOs: ' . $cposNullTotalCount,
             'user_id' => $user->id,
             'action_by' => $user->name,
             'ip_address' =>  $this->ip_address
