@@ -132,6 +132,8 @@ class CpoController extends Controller
             'changed_by' => auth()->user()->id
         ]);
 
+
+
         $response['cpo'] = $new_cpo;
 
         $response['lines'] = $request->lines;
@@ -172,6 +174,8 @@ class CpoController extends Controller
                 }
             }
         }
+
+        event(new CpoUpdated($new_cpo));
 
         auth()->user()->activities()->create([
             'action' => 'Create CPO',
