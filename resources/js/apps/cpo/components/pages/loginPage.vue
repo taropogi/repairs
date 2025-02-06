@@ -24,7 +24,7 @@
                 name="username"
                 v-model="loginFormData.username"
                 required
-                autocomplete="username"
+                autocomplete="off"
                 autofocus
               />
             </div>
