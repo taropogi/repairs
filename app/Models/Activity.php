@@ -23,8 +23,12 @@ class Activity extends Model
         // });
 
         static::creating(function ($activity) {
-            $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
-            $activity->ip_address = Request::ip() ?? 'SYSTEM';
+            if (empty($activity->action_by)) {
+                $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
+            }
+            if (empty($activity->ip_address)) {
+                $activity->ip_address = Request::ip() ?? 'SYSTEM';
+            }
         });
     }
 

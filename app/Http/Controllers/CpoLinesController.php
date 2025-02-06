@@ -7,6 +7,7 @@ use App\Models\Cpo;
 use App\Models\CpoLine;
 use Illuminate\Http\Request;
 use App\Models\CpoLineComment;
+use App\Events\CpoUpdated;
 
 class CpoLinesController extends Controller
 {
@@ -248,8 +249,10 @@ class CpoLinesController extends Controller
 
 
         $cpo->touch();
+
+        event(new CpoUpdated($cpo));
         // set delay time sleep for 0.5 second
-        usleep(500000);
+        // usleep(500000);
 
         $response['cpoLine']    = $cpoLine;
         return $response;

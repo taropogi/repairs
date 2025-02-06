@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CpoUpdated;
 use App\Models\Cpo;
 use App\Models\Item;
 use App\Models\User;
@@ -326,14 +327,20 @@ class CpoController extends Controller
 
         $cpo->touch();
 
+        event(new CpoUpdated($cpo));
+
+
+
         auth()->user()->activities()->create([
             'action' => 'Update All Lines',
             'description' => 'Updated all lines for CPO with ID:' . $cpo->id
         ]);
 
 
+
+
         // set delay time sleep for 0.5 second
-        usleep(500000);
+        // usleep(500000);
         return $request;
     }
 
