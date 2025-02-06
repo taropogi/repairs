@@ -47,11 +47,14 @@ class Tdw1DataController extends Controller
 
             $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6', 'list_price', 'primary_unit_of_measure', 'primary_uom_code');
 
-            Activity::create([
-                'action' => 'Searched Item / Modal',
-                'description' => 'Searched: ' . request()->search,
-                'user_id' => auth()->user()->id
-            ]);
+            // check if search is not empty
+            if (!is_null(request()->search) && request()->search !== '') {
+                Activity::create([
+                    'action' => 'Searched Item / Modal',
+                    'description' => 'Searched: ' . request()->search,
+                    'user_id' => auth()->user()->id
+                ]);
+            }
         }
 
         $query->inRandomOrder();
