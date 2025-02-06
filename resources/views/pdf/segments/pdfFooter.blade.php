@@ -1,4 +1,15 @@
-<table width="100%" style="margin-top: 50px;">
+<table width="100%" style="margin-top: 30px;">
+    <tr>
+        <td style="text-align: center;">
+            <strong>TOTAL AMOUNT : </strong> Php {{ $cpo->total_amount }}
+        </td>
+        <td style="text-align: center;">
+            <strong>TOTAL QTY RETURNED : </strong> {{ $cpo->total_qty_returned }}
+        </td>
+    </tr>
+</table>
+
+<table width="100%" style="margin-top: 20px;">
     <tr>
         <td class="text-center"><small><strong>RETURNED BY</strong></small></td>
         <td class="text-center"><small><strong>RECEIVED BY WHSE</strong></small></td>
