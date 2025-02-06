@@ -324,7 +324,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 @keyframes fadeIn {
   0% {
     opacity: 0;
