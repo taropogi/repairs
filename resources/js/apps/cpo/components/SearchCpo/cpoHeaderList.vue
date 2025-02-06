@@ -63,6 +63,12 @@
           ></header-list-item>
         </transition-group>
       </table>
+      <!-- <pagination-buttons
+        :cpo-header-list="cpoHeaderList"
+        :all-headers-count="allHeadersCount"
+        @nextPage="nextPage"
+        :current-page="currentPage"
+      /> -->
       <!-- Pagination Controls -->
       <div class="pagination" v-if="showPaginationButtons">
         <button
@@ -72,7 +78,9 @@
         >
           Previous
         </button>
-        <span class="pagination-info">Page {{ currentPage }}</span>
+        <span class="pagination-info"
+          >Page {{ currentPage }} / {{ lastPage }}</span
+        >
         <button
           :disabled="isLastPage"
           @click="nextPage"
@@ -89,6 +97,7 @@
 import HeaderListItem from "./HeaderListItem.vue";
 import ModalPdfHistory from "../Modals/PdfHistory.vue";
 import ModalDeleteCpo from "../DeleteCpo/ModalDeleteCpo.vue";
+import PaginationButtons from "./PaginationButtons.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -96,6 +105,7 @@ export default {
     HeaderListItem,
     ModalPdfHistory,
     ModalDeleteCpo,
+    PaginationButtons,
   },
   data() {
     return {
@@ -116,6 +126,9 @@ export default {
   inject: ["showNotification"],
   computed: {
     ...mapGetters("cpo", ["deletedCpos"]),
+    lastPage() {
+      return Math.ceil(this.allHeadersCount / this.perPage);
+    },
     showPaginationButtons() {
       if (this.currentPage > 1) return true;
       return this.currentPage == 1 && this.cpoListCount >= this.perPage;

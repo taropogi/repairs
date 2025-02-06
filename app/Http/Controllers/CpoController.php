@@ -524,11 +524,11 @@ class CpoController extends Controller
             $qry = $qry->where('created_by', auth()->user()->id);
         }
 
-
+        $qry2 = clone $qry;
         $qry = $qry->skip(
             $request->input('perPage') * ($request->input('page') - 1)
         );
-        $qry2 =  $qry;
+
         $cpos = $qry->take($request->input('perPage'))->get();
 
 
