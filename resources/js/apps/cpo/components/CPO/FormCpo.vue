@@ -125,7 +125,10 @@
               'col-4': formData.has_oracle_customer,
             }"
           >
-            <input-prepared-by v-model="formData.preparedBy" />
+            <input-prepared-by
+              v-model="formData.preparedBy"
+              key="prepared-by"
+            />
             <!-- <div class="p-2">
               <label for="prepared-by" class="form-label mb-0"
                 >PREPARED BY</label
@@ -153,8 +156,11 @@
                 </li>
               </ul>
             </div> -->
-
-            <div class="p-2">
+            <input-prepared-by
+              v-model="formData.authorizedBy"
+              key="authorized-by"
+            />
+            <!-- <div class="p-2">
               <label for="authorized-by" class="form-label mb-0"
                 >AUTHORIZED BY</label
               >
@@ -168,7 +174,7 @@
                   formData.authorizedBy = formData.authorizedBy.toUpperCase()
                 "
               />
-            </div>
+            </div> -->
             <div class="p-2">
               <label for="customer-reference-number" class="form-label mb-0"
                 >CUSTOMER REFERENCE #</label

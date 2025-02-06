@@ -11,6 +11,9 @@
         @input="onInput"
         @focus="showSuggestions = true"
         @blur="hideSuggestions"
+        @keydown.down.prevent="highlightNext"
+        @keydown.up.prevent="highlightPrevious"
+        @keydown.enter.prevent="selectHighlighted"
         autocomplete="off"
       />
       <ul
@@ -18,9 +21,11 @@
         class="suggestions-list"
       >
         <li
-          v-for="suggestion in filteredSuggestions"
+          v-for="(suggestion, index) in filteredSuggestions"
+          :class="{ highlighted: index === highlightedIndex }"
           :key="suggestion.id"
           @mousedown.prevent="selectSuggestion(suggestion)"
+          @mouseover="highlightIndex(index)"
         >
           {{ suggestion.name }}
         </li>
@@ -45,6 +50,7 @@ export default {
       },
       showSuggestions: false,
       suggestions: [],
+      highlightedIndex: -1,
     };
   },
   computed: {
@@ -55,10 +61,34 @@ export default {
     },
   },
   methods: {
+    highlightNext() {
+      // console.log("next");
+      if (this.highlightedIndex < this.filteredSuggestions.length - 1) {
+        this.highlightedIndex++;
+      }
+    },
+    highlightPrevious() {
+      // console.log("prev");
+      if (this.highlightedIndex > 0) {
+        this.highlightedIndex--;
+      }
+    },
+    selectHighlighted() {
+      if (
+        this.highlightedIndex >= 0 &&
+        this.highlightedIndex < this.filteredSuggestions.length
+      ) {
+        this.selectSuggestion(this.filteredSuggestions[this.highlightedIndex]);
+      }
+    },
+    highlightIndex(index) {
+      this.highlightedIndex = index;
+    },
     onInput() {
       //   console.log(this.modelValue);
       this.$emit("update:modelValue", this.modelValue.toUpperCase());
       this.showSuggestions = true;
+      this.highlightedIndex = -1;
     },
     hideSuggestions() {
       this.showSuggestions = false;
@@ -111,5 +141,10 @@ export default {
 
 .suggestions-list li:hover {
   background-color: #f0f0f0;
+}
+
+.suggestions-list li.highlighted {
+  background-color: #198754; /* Bootstrap success color */
+  color: white;
 }
 </style>
