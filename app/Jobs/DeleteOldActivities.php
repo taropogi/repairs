@@ -33,7 +33,7 @@ class DeleteOldActivities implements ShouldQueue
      */
     public function handle()
     {
-        $days = 3;
+        $days = 2;
         $user = User::where('username', 'like', '%admin%')->first();
         $query = DB::table('activities')->where('created_at', '<', now()->subDays($days));
         $affected = $query->count();
