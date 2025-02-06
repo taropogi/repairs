@@ -127,7 +127,7 @@ export default {
 
 <style scoped>
 .suggestions-list {
-  border: 1px solid #ccc;
+  border: 1px solid green;
   border-top: none;
   list-style: none;
   margin: 0;
@@ -136,8 +136,9 @@ export default {
   background-color: #f5f5f5;
   width: 300px;
   z-index: 1000;
-  max-height: 150px; /* Set maximum height for the suggestions list */
+  max-height: 100px; /* Set maximum height for the suggestions list */
   overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .suggestions-list li {
