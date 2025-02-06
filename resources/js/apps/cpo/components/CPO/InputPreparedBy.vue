@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="p-2">
-      <label for="prepared-by" class="form-label mb-0">PREPARED BY</label>
+      <label for="prepared-by" class="form-label mb-0">
+        {{ label }}
+      </label>
       <input
         type="text"
         class="form-control shadow"
@@ -40,6 +42,10 @@ export default {
     modelValue: {
       type: String,
       required: true,
+    },
+    label: {
+      type: String,
+      default: "PREPARED BY",
     },
   },
   emits: ["update:modelValue"],

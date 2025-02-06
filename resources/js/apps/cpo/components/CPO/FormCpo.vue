@@ -158,6 +158,7 @@
             </div> -->
             <input-prepared-by
               v-model="formData.authorizedBy"
+              :label="'AUTHORIZED BY'"
               key="authorized-by"
             />
             <!-- <div class="p-2">
