@@ -14,6 +14,7 @@ app.use(router);
 app.use(store);
 app.use(Toast, {
   position: POSITION.BOTTOM_RIGHT,
+  timeout: 1961,
 });
 
 app.component("side-bar", SideBar);
