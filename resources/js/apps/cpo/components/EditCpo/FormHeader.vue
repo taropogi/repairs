@@ -207,14 +207,12 @@
             </div>
           </div>
           <div
-            class="d-flex justify-content-center align-items-center flex-column"
-            style="height: 100px"
+            class="header-container d-flex justify-content-center align-items-center flex-column p-4"
           >
-            <h3 class="fw-bold">PULLOUT#: {{ headerRow.formatted_id }}</h3>
-            <!-- <h3 class="fw-bold" v-if="headerRow.rma_number">
-              RMA#: {{ headerRow.formatted_rma_number }}
-            </h3> -->
-            <h3 class="fw-bold" v-if="generatedRma">
+            <h3 class="fw-bold text-primary mb-2">
+              PULLOUT#: {{ headerRow.formatted_id }}
+            </h3>
+            <h3 class="fw-bold text-success" v-if="generatedRma">
               RMA#: {{ generatedRma }}
             </h3>
           </div>
@@ -353,3 +351,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.header-container {
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 10px; /* Rounded corners */
+}
+
+h3 {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+</style>
