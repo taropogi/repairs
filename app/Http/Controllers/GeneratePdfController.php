@@ -135,6 +135,12 @@ class GeneratePdfController extends Controller
 
     public function listByCpoStatusPdf(Request $request)
     {
+        Activity::create([
+            'action' => 'Downloaded PDF',
+            'description' => 'Downloaded CPO List PDF',
+            'user_id' => auth()->user()->id
+        ]);
+
         if ($request->status_id || ($request->cpo_modified_from && $request->cpo_modified_to)) {
             $data['title'] = 'export';
             $data['date'] = date('m/d/Y');
@@ -235,12 +241,7 @@ class GeneratePdfController extends Controller
             return  $pdf->download('CPO List.pdf');
         }
 
-        Activity::create([
-            'user_id' => auth()->user()->id,
-            'action' => 'Downloaded PDF',
-            'description' => 'Downloaded CPO List PDF',
-            'user_id' => auth()->user()->id
-        ]);
+
 
 
         $pdf = PDF::loadView('pdf.no-result');
