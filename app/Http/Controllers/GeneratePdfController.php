@@ -137,7 +137,7 @@ class GeneratePdfController extends Controller
     {
         Activity::create([
             'action' => 'Downloaded PDF',
-            'description' => 'Downloaded CPO List PDF',
+            'description' => 'Downloaded CPO List PDF. Status: ' . $this->statusNames(),
             'user_id' => auth()->user()->id
         ]);
 
@@ -252,15 +252,22 @@ class GeneratePdfController extends Controller
     {
 
         // return Excel::download(new ExportCpoByStatus($request), 'CpoListByStatus.xlsx');
-
         Activity::create([
             'user_id' => auth()->user()->id,
             'action' => 'Downloaded Excel',
-            'description' => 'Downloaded CPO List Excel',
+            'description' => 'Downloaded CPO List Excel: ' . $this->statusNames(),
             'user_id' => auth()->user()->id
         ]);
 
         return (new ExportCpoLists($request))->download('CPO List.xlsx');
+    }
+
+    private function statusNames()
+    {
+        $included_status_ids = request()->status_id;
+        $included_status_ids_array = explode(',', $included_status_ids);
+        $included_status_names = HeaderStatus::whereIn('id', $included_status_ids_array)->pluck('status')->toArray();
+        return implode(', ', $included_status_names);
     }
 
     public function testUser()
