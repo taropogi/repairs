@@ -85,6 +85,7 @@ export default {
   },
   updated() {
     if (this.headerRow) {
+      console.log("visited edit.");
       this.logPageVisit("Edit CPO: " + this.headerRow?.id);
     }
   },
