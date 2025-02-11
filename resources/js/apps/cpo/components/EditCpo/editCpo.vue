@@ -84,7 +84,9 @@ export default {
     });
   },
   updated() {
-    this.logPageVisit("Edit CPO: " + this.headerRow?.id);
+    if (this.headerRow) {
+      this.logPageVisit("Edit CPO: " + this.headerRow?.id);
+    }
   },
 };
 </script>

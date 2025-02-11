@@ -139,6 +139,7 @@
                 id="prepared-by"
                 required
                 v-model="formData.preparedBy"
+                @input="formData.preparedBy = formData.preparedBy.toUpperCase()"
               />
             </div>
             <!-- <input-prepared-by
