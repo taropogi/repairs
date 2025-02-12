@@ -55,7 +55,7 @@
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.customer_name }}
 
-        <div class="d-inline ml-2">
+        <div class="d-inline ml-2" v-if="false">
           <span
             class="badge bg-warning text-dark"
             v-if="localHeaderItem.lines_count === 0"

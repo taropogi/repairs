@@ -72,7 +72,7 @@
         <button
           class="btn btn-success mx-1"
           type="button"
-          @click="saveAllLines"
+          @click="saveAllLines(false)"
           :disabled="isSavingAllLines || isInsertingNewLine"
           v-if="lines.length > 0"
         >
@@ -230,6 +230,7 @@ export default {
     },
 
     async addNewLine() {
+      this.saveAllLines(true);
       this.isInsertingNewLine = true;
 
       try {
@@ -279,7 +280,7 @@ export default {
         this.isGeneratingRma = false;
       }
     },
-    async saveAllLines() {
+    async saveAllLines(byAddNewLine = false) {
       try {
         this.isSavingAllLines = true;
         this.$emit("updatingLines");
@@ -293,11 +294,13 @@ export default {
 
         this.rmaIsFinal = res.data.cpo.is_rma_final;
         // console.log(this.rmaIsFinal);
-
-        this.showNotification({
-          message: "All lines were saved",
-          type: "success",
-        });
+        // console.log(byAddNewLine);
+        if (!byAddNewLine) {
+          this.showNotification({
+            message: "All lines were saved",
+            type: "success",
+          });
+        }
       } catch (error) {
         console.log(error.message);
       } finally {
