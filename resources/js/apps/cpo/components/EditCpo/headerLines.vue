@@ -151,6 +151,7 @@ export default {
   // props: ["headerId", "headerIsLocked"],
 
   inject: ["showNotification"],
+  emits: ["addedNewLine", "updatingLines", "updatedLines", "updatedRma"],
   props: {
     headerId: {
       type: Number,
@@ -251,6 +252,7 @@ export default {
           message: `Line# ${this.lines.length + 1} - New empty line was added`,
           type: "info",
         });
+        this.$emit("addedNewLine");
         // console.log(this.lineDetails);
 
         window.scrollTo(0, document.body.scrollHeight);

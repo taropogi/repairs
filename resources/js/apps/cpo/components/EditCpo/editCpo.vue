@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading-overlay v-if="isUpdating" :text="'Updating, please wait . . '" />
+    <loading-overlay v-if="isUpdating" :text="loadingText" />
     <div class="sticky-top bg-white">
       <h4 class="text-center bg-success text-white p-2">UPDATE CPO</h4>
     </div>
@@ -21,9 +21,10 @@
         :header-row="headerRow"
         v-if="headerRow"
         :header-is-locked="!!headerRow.locked"
-        @updating-lines="isUpdating = true"
+        @updating-lines="updatingLines"
         @updated-lines="updatedLines"
         @updated-rma="updatedRma"
+        @added-new-line="loadingText = 'Adding new line..., please wait.'"
       ></header-lines>
     </div>
   </div>
@@ -51,10 +52,16 @@ export default {
       isUpdatedAllLinesSuccess: false,
       formHeaderKey: 0,
       generatedRma: "",
+      loadingText: "",
     };
   },
+
   methods: {
     ...mapActions(["setActiveNav"]),
+    updatingLines() {
+      this.isUpdating = true;
+      this.loadingText = "Updating lines..., please wait.";
+    },
     updatedLines(headerRow) {
       if (headerRow.rma_number && !headerRow.is_rma_final) {
         // console.log("RMA Number: ", headerRow.rma_number);
