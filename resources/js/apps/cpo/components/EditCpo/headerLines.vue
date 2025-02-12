@@ -8,48 +8,52 @@
       />
     </teleport>
     <loading-overlay :text="loadingOverlayText" v-if="isGeneratingRma" />
-    <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
-      LINE DETAILS
-    </h5>
-    <table
-      class="table table-sm table-hover table-borderless mt-0"
-      v-if="lines.length > 0"
-    >
-      <thead class="table-warning">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Description</th>
-          <th scope="col" style="width: 70px">Price</th>
-          <th scope="col" style="width: 100px">Doc #</th>
-          <th scope="col" style="width: 100px">Doc. Date</th>
-          <th scope="col" style="width: 100px">HCopy</th>
-          <th scope="col" style="width: 70px">Qty Returned</th>
-          <th scope="col" style="width: 100px">Unit</th>
-          <th scope="col" style="width: 50px">Qty Inspect</th>
-          <th scope="col" style="width: 100px">Date Inspected</th>
-          <th scope="col" style="width: 50px">Good Condition</th>
-          <th scope="col" style="width: 50px">Minor Repair/Clean</th>
-          <th scope="col" style="width: 50px">Repair/Parts Needed</th>
-          <th scope="col" style="width: 50px">Damaged</th>
-          <th scope="col">Comments</th>
-          <th scope="col" v-if="canEditCpo" style="width: 100px">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <header-line
-          v-for="(line, index) in lines"
-          :key="line.id"
-          :line-number="index + 1"
-          :line-details="line"
-          :header-is-locked="headerIsLocked"
-          :items-uom="items_uom"
-          @delete-line="getCpoLines"
-          @selectItemFor="selectOracleItem"
-          @saveLine="saveLine"
-        ></header-line>
-        <totals-row :lines="lines" />
-      </tbody>
-    </table>
+    <spinner-loading v-if="isGettingLines" />
+    <div v-else>
+      <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
+        LINE DETAILS
+      </h5>
+      <table
+        class="table table-sm table-hover table-borderless mt-0"
+        v-if="lines.length > 0"
+      >
+        <thead class="table-warning">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Description</th>
+            <th scope="col" style="width: 70px">Price</th>
+            <th scope="col" style="width: 100px">Doc #</th>
+            <th scope="col" style="width: 100px">Doc. Date</th>
+            <th scope="col" style="width: 100px">HCopy</th>
+            <th scope="col" style="width: 70px">Qty Returned</th>
+            <th scope="col" style="width: 100px">Unit</th>
+            <th scope="col" style="width: 50px">Qty Inspect</th>
+            <th scope="col" style="width: 100px">Date Inspected</th>
+            <th scope="col" style="width: 50px">Good Condition</th>
+            <th scope="col" style="width: 50px">Minor Repair/Clean</th>
+            <th scope="col" style="width: 50px">Repair/Parts Needed</th>
+            <th scope="col" style="width: 50px">Damaged</th>
+            <th scope="col">Comments</th>
+            <th scope="col" v-if="canEditCpo" style="width: 100px">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <header-line
+            v-for="(line, index) in lines"
+            :key="line.id"
+            :line-number="index + 1"
+            :line-details="line"
+            :header-is-locked="headerIsLocked"
+            :items-uom="items_uom"
+            @delete-line="getCpoLines"
+            @selectItemFor="selectOracleItem"
+            @saveLine="saveLine"
+          ></header-line>
+          <totals-row :lines="lines" />
+        </tbody>
+      </table>
+    </div>
+
     <hr />
     <div>
       <div v-if="!headerIsLocked && canEditCpo">
@@ -136,6 +140,7 @@ import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapGetters } from "vuex";
 import TotalsRow from "./TotalsRow.vue";
+import SpinnerLoading from "../UI/SpinnerLoading.vue";
 
 export default {
   components: {
@@ -143,6 +148,7 @@ export default {
     SelectOracleItemInput,
     TotalsRow,
     LoadingOverlay,
+    SpinnerLoading,
   },
   // props: ["headerId", "headerIsLocked"],
 
@@ -172,6 +178,7 @@ export default {
   },
   data() {
     return {
+      isGettingLines: false,
       lines: [],
       items_uom: [],
       isInsertingNewLine: false,
@@ -310,6 +317,7 @@ export default {
     },
     async getCpoLines() {
       try {
+        this.isGettingLines = true;
         const res = await axios.get("api/cpo/lines/" + this.headerId);
 
         this.lines = res.data.lines;
@@ -317,6 +325,8 @@ export default {
       } catch (error) {
         console.log(error.message);
         // alert(error.message);
+      } finally {
+        this.isGettingLines = false;
       }
     },
   },
