@@ -323,7 +323,7 @@ class CpoController extends Controller
             }
         }
 
-        if ($cpo->rma_number && !$cpo->is_rma_final) {
+        if ($cpo->rma_number && !$cpo->is_rma_final && !$request->byAddNewLine) {
             $cpo->is_rma_final = true;
             $cpo->update();
         }
@@ -694,6 +694,12 @@ class CpoController extends Controller
                 'header_status_id' => $request->status_id,
                 'old_status_id' =>  $old_status_id,
                 'changed_by' => auth()->user()->id
+            ]);
+
+            Activity::create([
+                'action' => 'CPO Changed Status for CPO# ' . $cpo->id,
+                'description' => 'Changed status from ' . HeaderStatus::find($old_status_id)->status . ' to ' . HeaderStatus::find($request->status_id)->status,
+                'user_id' => auth()->user()->id
             ]);
 
             $cpo->status_id = $request->status_id;

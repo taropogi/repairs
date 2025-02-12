@@ -288,6 +288,7 @@ export default {
         const res = await axios.post("api/cpo/lines/updateAllLines/", {
           cpoId: this.headerId,
           cpoLines: this.lines,
+          byAddNewLine,
         });
 
         this.$emit("updatedLines", this.headerRow);
