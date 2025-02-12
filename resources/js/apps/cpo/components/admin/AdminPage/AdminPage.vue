@@ -6,7 +6,7 @@
     <div
       class="col p-1"
       :class="{
-        'has-margin': !isNavSearchActive,
+        'has-margin': !isNavSearchActive || true,
       }"
     >
       <router-view v-slot="slotProps">

@@ -14,7 +14,7 @@ class Cpo extends Model
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
 
-    protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number', 'lines_count'];
+    protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number', 'lines_count', 'invalid_lines_count', 'valid_lines_count'];
 
     protected $cpoNumberPadZero;
     protected $rmaNumberPadZero;
@@ -60,6 +60,16 @@ class Cpo extends Model
     public function getLinesCountAttribute()
     {
         return $this->lines->count();
+    }
+
+    public function getInvalidLinesCountAttribute()
+    {
+        return $this->lines->whereNull('description')->count();
+    }
+
+    public function getValidLinesCountAttribute()
+    {
+        return $this->lines->whereNotNull('description')->count();
     }
 
     public function user()
