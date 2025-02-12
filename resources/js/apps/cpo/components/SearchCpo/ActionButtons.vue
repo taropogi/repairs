@@ -27,6 +27,7 @@
       </span>
     </button>
     <button
+      v-if="!(!canDownloadCpoPdf || localHeaderItem.locked || isDownloadingPdf)"
       type="button"
       class="btn tooltip-wrapper mx-1"
       :class="{
