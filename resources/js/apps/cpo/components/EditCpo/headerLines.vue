@@ -8,8 +8,8 @@
       />
     </teleport>
     <loading-overlay :text="loadingOverlayText" v-if="isGeneratingRma" />
-    <spinner-loading v-if="isGettingLines" />
-    <div v-else>
+
+    <div>
       <h5 class="bg-secondary p-2 text-white m-0" v-if="lines.length > 0">
         LINE DETAILS
       </h5>
@@ -140,7 +140,6 @@ import SelectOracleItemInput from "../Modals/SelectOracleItemInput.vue";
 import LoadingOverlay from "../UI/LoadingOverlay.vue";
 import { mapGetters } from "vuex";
 import TotalsRow from "./TotalsRow.vue";
-import SpinnerLoading from "../UI/SpinnerLoading.vue";
 
 export default {
   components: {
@@ -148,7 +147,6 @@ export default {
     SelectOracleItemInput,
     TotalsRow,
     LoadingOverlay,
-    SpinnerLoading,
   },
   // props: ["headerId", "headerIsLocked"],
 
@@ -254,6 +252,8 @@ export default {
           type: "info",
         });
         // console.log(this.lineDetails);
+
+        window.scrollTo(0, document.body.scrollHeight);
       } catch (error) {
         console.log(err);
       } finally {
