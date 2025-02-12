@@ -1,7 +1,7 @@
 <template>
   <div class="nowrap">
     <button
-    v-if="!(!canDeleteCpo || localHeaderItem.locked)"
+      v-if="!(!canDeleteCpo || localHeaderItem.locked)"
       type="button"
       class="btn tooltip-wrapper mx-1"
       :class="{
@@ -26,7 +26,7 @@
         <i class="bi bi-pencil-square me-1"></i> EDIT
       </span>
     </button>
-    <button v-if="!(!canDownloadCpoPdf || localHeaderItem.locked || isDownloadingPdf)"
+    <button
       type="button"
       class="btn tooltip-wrapper mx-1"
       :class="{
@@ -103,7 +103,7 @@ export default {
 
       setTimeout(() => {
         this.isDownloadingPdf = false;
-      }, 2000);
+      }, 1000);
 
       // console.log(this.linkGeneratePdf + "/?id=" + this.localHeaderItem.id);
     },
