@@ -16,7 +16,7 @@
         'btn-success': canEditCpo,
         'btn-secondary': !canEditCpo,
       }"
-      @click="$emit('update-header')"
+      @click="updateHeader"
       :disabled="!canEditCpo"
     >
       <span class="nowrap fw-bold">
@@ -27,7 +27,7 @@
 
     <span
       class="btn btn-warning mx-1 nowrap fw-bold"
-      @click="showStatusHistory = true"
+      @click="viewStatusHistory"
     >
       <i class="bi bi-clock-history"></i>
       VIEW STATUS HISTORY</span
@@ -63,7 +63,7 @@ import { mapGetters } from "vuex";
 import ModalStatusHistory from "./ModalStatusHistory.vue";
 
 export default {
-  inject: ["laravelData"],
+  inject: ["laravelData", "logActivity"],
   emits: ["update-header"],
   props: {
     cpoId: {
@@ -99,7 +99,26 @@ export default {
     },
   },
   methods: {
+    viewStatusHistory() {
+      this.showStatusHistory = true;
+      this.logActivity({
+        action: "View CPO Status History",
+        description: `CPO ID: ${this.cpoId}`,
+      });
+    },
+    updateHeader() {
+      // console.log("update header");
+      this.logActivity({
+        action: "Update CPO Header",
+        description: `CPO ID: ${this.cpoId}`,
+      });
+      this.$emit("update-header");
+    },
     printCPOPdf() {
+      this.logActivity({
+        action: "Download CPO PDF in Edit Page",
+        description: `CPO ID: ${this.cpoId}`,
+      });
       window.location.href = this.linkGeneratePdf + "/?id=" + this.cpoId;
     },
     gotoSearchPage() {

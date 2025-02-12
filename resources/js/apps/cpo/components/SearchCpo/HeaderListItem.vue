@@ -54,6 +54,14 @@
     <td>
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.customer_name }}
+        <div>
+          <span
+            class="badge bg-warning text-dark"
+            v-if="localHeaderItem.lines_count === 0"
+          >
+            <small>NO LINES</small>
+          </span>
+        </div>
       </label>
     </td>
     <td>

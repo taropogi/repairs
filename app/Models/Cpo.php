@@ -14,7 +14,7 @@ class Cpo extends Model
     protected $guarded = [];
     protected $with = ['status', 'status_history', 'lines'];
 
-    protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number'];
+    protected $appends = ['formatted_id', 'is_completed', 'formatted_rma_number', 'lines_count'];
 
     protected $cpoNumberPadZero;
     protected $rmaNumberPadZero;
@@ -55,6 +55,11 @@ class Cpo extends Model
     public function lines()
     {
         return $this->hasMany(CpoLine::class)->orderBy('line_number', 'ASC');
+    }
+
+    public function getLinesCountAttribute()
+    {
+        return $this->lines->count();
     }
 
     public function user()

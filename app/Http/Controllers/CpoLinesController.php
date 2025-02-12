@@ -266,9 +266,16 @@ class CpoLinesController extends Controller
      */
     public function destroy(Request $request)
     {
-        sleep(1);
+        // sleep(1);
         $cpoLine = CpoLine::where('id', $request->id)->first();
         $cpoLine->delete();
+
+        Activity::create([
+            'action' => 'Delete CPO Line',
+            'description' => 'Deleted CPO: Line ' . $cpoLine->line_number . ' in CPO #' . $cpoLine->cpo->formatted_id,
+            'user_id' => auth()->user()->id,
+        ]);
+
         return $cpoLine;
     }
 }

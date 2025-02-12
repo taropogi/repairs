@@ -51,6 +51,15 @@ export default {
           console.log(error.message);
         }
       },
+      async logActivity(activity) {
+        try {
+          await axios.post("/api/log/activity", {
+            ...activity,
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
+      },
     };
   },
   created() {

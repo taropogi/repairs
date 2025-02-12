@@ -83,6 +83,15 @@ class ActivityController extends Controller
         //
     }
 
+    public function logActivity(Request $request)
+    {
+        Activity::create([
+            'action' => $request->action,
+            'description' => $request->description,
+            'user_id' => auth()->user()->id
+        ]);
+    }
+
     public function logGotoYp(Request $request)
     {
         Activity::create([

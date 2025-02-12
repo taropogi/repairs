@@ -63,6 +63,7 @@ Route::post('cpo/generateRma', [CpoController::class, 'generateRma']);
 Route::post('/log/gotoYp', [ActivityController::class, 'logGotoYp']);
 Route::post('/log/selectItem', [ActivityController::class, 'logSelectItem']);
 Route::post('/log/page-visit', [ActivityController::class, 'logPageVisit']);
+Route::post('/log/activity', [ActivityController::class, 'logActivity']);
 
 //cpo line
 Route::post('cpoline', [CpoLinesController::class, 'store']);
