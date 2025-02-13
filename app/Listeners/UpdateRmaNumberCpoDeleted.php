@@ -30,12 +30,14 @@ class UpdateRmaNumberCpoDeleted
     {
         $cpo = $event->cpo;
         $cpo->rma_number = null;
+        $cpo->is_rma_final = false;
         $cpo->save();
 
         // also for othere delete cpo
         $deletedCpos = Cpo::onlyTrashed()->whereNotNull('rma_number')->get();
         foreach ($deletedCpos as $deletedCpo) {
             $deletedCpo->rma_number = null;
+            $deletedCpo->is_rma_final = false;
             $deletedCpo->save();
         }
 
