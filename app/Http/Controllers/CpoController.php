@@ -490,7 +490,7 @@ class CpoController extends Controller
 
 
 
-        $qry = Cpo::orderBy('created_at', 'desc')->orderBy('updated_at', 'desc');
+        $qry = Cpo::orderBy('updated_at', 'desc');
         if ($request->searchName) {
             $qry = $qry->where('customer_name', 'LIKE', '%' . $request->searchName . '%');
         }
