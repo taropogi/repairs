@@ -9,18 +9,7 @@
     "
   >
     <th>
-      <span class="nowrap"
-        >{{ localHeaderItem.formatted_id }}
-        <i
-          class="bi bi-lock-fill"
-          v-if="localHeaderItem.is_completed"
-          :class="{
-            'text-warning': localHeaderItem.is_completed,
-            'mx-2': localHeaderItem.is_completed,
-          }"
-        ></i
-      ></span>
-      <div class="form-check" v-if="false">
+      <div class="form-check">
         <input
           class="form-check-input"
           type="checkbox"
