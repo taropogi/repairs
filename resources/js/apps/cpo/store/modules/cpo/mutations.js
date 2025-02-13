@@ -58,4 +58,8 @@ export default {
         myArray.push(selectedItem);
         state.selectedPos = myArray;
     },
+
+    resetSelectedCpos(state) {
+        state.selectedPos = [];
+    },
 };

@@ -148,7 +148,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions("cpo", ["addDeletedCpos", "updateSelectedCpoDeleted"]),
+    ...mapActions("cpo", [
+      "addDeletedCpos",
+      "updateSelectedCpoDeleted",
+      "resetSelectedCpos",
+    ]),
 
     downloadPdfs() {
       console.log("pdfs");
@@ -203,6 +207,9 @@ export default {
             isStatusUpdated: true,
           });
         }
+        setTimeout(() => {
+          this.resetSelectedCpos();
+        }, 2000);
       }
       this.$emit("close-modal");
     },
@@ -223,5 +230,4 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
+ 

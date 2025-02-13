@@ -56,9 +56,9 @@
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.customer_name }}
 
-        <div class="d-inline ml-2" v-if="false">
+        <div class="d-inline ml-2">
           <span
-            class="badge bg-warning text-dark"
+            class="badge bg-warning text-dark rounded-pill"
             v-if="localHeaderItem.lines_count === 0"
           >
             <small>NO ITEMS</small>
@@ -67,9 +67,9 @@
             v-else-if="
               localHeaderItem.lines_count == localHeaderItem.invalid_lines_count
             "
-            class="badge bg-warning text-dark"
+            class="badge bg-warning text-dark rounded-pill"
           >
-            <small>NO VALID ITEMS</small>
+            <small class="fw-bold">NO VALID ITEMS</small>
           </span>
         </div>
       </label>
@@ -158,6 +158,10 @@ export default {
           this.getUpdatedHeader();
         }, 1000);
       }
+    },
+    selectedPos(value) {
+      // console.log("changed");
+      this.isCurrentlySelected();
     },
   },
   computed: {
@@ -299,12 +303,11 @@ export default {
 
     isCurrentlySelected() {
       const selectedPos = this.getSelectedPos;
-      const selectedItem = selectedPos.find(
+      this.isSelected = selectedPos.find(
         (num) => num.id === this.localHeaderItem.id
-      );
-      if (selectedItem) {
-        this.isSelected = true;
-      }
+      )
+        ? true
+        : false;
     },
   },
   mounted() {

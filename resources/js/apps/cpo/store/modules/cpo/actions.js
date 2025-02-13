@@ -22,4 +22,7 @@ export default {
     addSelectedPo(context, payload) {
         context.commit("addSelectedPo", payload);
     },
+    resetSelectedCpos(context) {
+        context.commit("resetSelectedCpos");
+    },
 };
