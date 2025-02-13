@@ -212,7 +212,11 @@
           />
         </div>
       </form>
-      <action-buttons :cpo-id="headerRow.id" @updateHeader="submitCpoForm" />
+      <action-buttons
+        :header-row="headerRow"
+        :cpo-id="headerRow.id"
+        @updateHeader="submitCpoForm"
+      />
     </div>
   </div>
 </template>

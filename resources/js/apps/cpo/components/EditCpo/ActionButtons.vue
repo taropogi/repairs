@@ -34,12 +34,12 @@
     >
 
     <a
-      v-if="canDownloadCpoPdf"
+      v-if="canDownloadCpoPdf && !noValidItems"
       href="#"
       class="btn mx-1"
       @click="printCPOPdf"
       :class="{
-        disabled: !canDownloadCpoPdf,
+        disabled: !canDownloadCpoPdf || noValidItems,
         'btn-info': canDownloadCpoPdf,
         'btn-secondary': !canDownloadCpoPdf,
       }"
@@ -49,7 +49,9 @@
         DOWNLOAD PDF
       </span>
     </a>
+
     <router-link
+      v-if="false"
       :to="{ name: searchCpoLink }"
       class="btn btn-danger mx-1 fw-bold"
     >
@@ -68,6 +70,10 @@ export default {
   props: {
     cpoId: {
       type: Number,
+      required: true,
+    },
+    headerRow: {
+      type: Object,
       required: true,
     },
   },
@@ -96,6 +102,9 @@ export default {
       return this.laravelData.route_list.find(
         (route) => route.routeName === "generate-pdf"
       ).uri;
+    },
+    noValidItems() {
+      return this.headerRow.lines_count === this.headerRow.invalid_lines_count;
     },
   },
   methods: {
