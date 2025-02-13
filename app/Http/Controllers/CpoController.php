@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CpoDeleted;
 use App\Events\CpoUpdated;
 use App\Models\Cpo;
 use App\Models\Item;
@@ -62,15 +63,15 @@ class CpoController extends Controller
 
     public function generateRma(Request $request)
     {
+
         $cpo = Cpo::find($request->cpoId);
         $rmaNumber = null;
         if (!$cpo->rma_number) {
             $rmaNumber = Cpo::max('rma_number') + 1;
         }
 
-
-
         if (!$cpo->is_rma_final) {
+
             $cpo->rma_number =  $rmaNumber;
             $cpo->update();
 
@@ -107,7 +108,6 @@ class CpoController extends Controller
         $request->validate([
             'customerName' => ['required'],
             'customerAddress' => ['required'],
-            'contactNumber' => ['required'],
             // 'rpoNumber' => ['required'],
             'preparedBy' => ['required'],
             'authorizedBy' => ['required'],
@@ -754,6 +754,8 @@ class CpoController extends Controller
         ]);
 
         $cpo->delete();
+
+        event(new CpoDeleted($cpo));
     }
 
     public function destroyMulti(Request $request)

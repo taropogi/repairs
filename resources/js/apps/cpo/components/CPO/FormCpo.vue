@@ -104,13 +104,13 @@
             </div>
             <div class="p-2">
               <label for="contact-number" class="form-label mb-0"
-                >CONTACT NUMBER</label
-              >
+                >CONTACT NUMBER
+                <span class="badge bg-info mx-2 text-dark">OPTIONAL</span>
+              </label>
               <input
                 type="text"
                 class="form-control shadow"
                 id="contact-number"
-                required
                 v-model="formData.contactNumber"
                 @input="
                   formData.contactNumber = formData.contactNumber.toUpperCase()
