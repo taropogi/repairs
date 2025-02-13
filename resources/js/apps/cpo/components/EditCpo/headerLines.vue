@@ -56,7 +56,10 @@
 
     <hr />
     <div>
-      <div v-if="!headerIsLocked && canEditCpo">
+      <div
+        v-if="!headerIsLocked && canEditCpo"
+        class="d-flex justify-content-start"
+      >
         <button
           class="btn btn-primary mx-1"
           type="button"
