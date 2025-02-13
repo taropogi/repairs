@@ -255,6 +255,7 @@ class CpoLinesController extends Controller
         usleep(500000);
 
         $response['cpoLine']    = $cpoLine;
+        $response['cpo']        = Cpo::find($cpoLine->cpo_id);
         return $response;
     }
 
@@ -276,6 +277,9 @@ class CpoLinesController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return $cpoLine;
+        $response['cpo'] = Cpo::find($cpoLine->cpo_id);
+        $response['cpoLine'] = $cpoLine;
+
+        return $response;
     }
 }

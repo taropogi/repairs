@@ -258,7 +258,7 @@ export default {
     };
   },
   inject: ["showNotification"],
-  emits: ["deleteLine", "saveLine", "select-item-for"],
+  emits: ["delete-line", "saveLine", "select-item-for"],
   computed: {
     ...mapGetters("auth", [
       "canEditCpo",
@@ -299,20 +299,20 @@ export default {
         this.isUpdated = true;
       }
 
-      setTimeout(
-        () => {
-          if (isDelete) {
-            // this.isDeleted = false;
-          } else {
-            this.isUpdated = false;
-          }
+      // setTimeout(
+      //   () => {
+      //     if (isDelete) {
+      //       // this.isDeleted = false;
+      //     } else {
+      //       this.isUpdated = false;
+      //     }
 
-          if (isDelete) {
-            this.$emit("deleteLine", this.lineDetails.id);
-          }
-        },
-        isDelete ? 500 : 2000
-      ); // 1 second
+      //     if (isDelete) {
+      //       this.$emit("delete-line", this.lineDetails.id);
+      //     }
+      //   },
+      //   isDelete ? 500 : 2000
+      // ); // 1 second
     },
     async saveLine() {
       //locally save
@@ -324,6 +324,7 @@ export default {
           message: `Line# ${this.lineDetails.line_number} has been updated`,
           type: "success",
         });
+
         // console.log(res);
       } catch (error) {
         console.log(error.message);
@@ -336,11 +337,14 @@ export default {
     async deleteLine() {
       try {
         this.isDeleting = true;
-        await axios.post("api/cpoline/destroy/", {
+        const res = await axios.post("api/cpoline/destroy/", {
           id: this.lineDetails.id,
         });
 
-        this.blinkTr(true);
+        console.log("emit delete line", res.data.cpo);
+        this.$emit("delete-line", res.data.cpo);
+
+        // this.blinkTr(true);
         this.showNotification({
           message: `Line# ${this.lineDetails.line_number} has been deleted`,
           type: "error",

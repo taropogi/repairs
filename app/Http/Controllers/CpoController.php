@@ -347,7 +347,7 @@ class CpoController extends Controller
         // usleep(500000);
         sleep(1);
         return response()->json([
-            'cpo' => $cpo
+            'cpo' => Cpo::find($request->cpoId)
         ]);
     }
 

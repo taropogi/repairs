@@ -13,6 +13,7 @@
         @updating="isUpdating = true"
         @updated="isUpdating = false"
         :generated-rma="generatedRma"
+        :no-valid-items="noValidItems"
       ></form-header>
 
       <header-lines
@@ -25,6 +26,7 @@
         @updated-lines="updatedLines"
         @updated-rma="updatedRma"
         @added-new-line="loadingText = 'Adding new line..., please wait.'"
+        @deleted-line="deletedLine"
       ></header-lines>
     </div>
   </div>
@@ -56,13 +58,26 @@ export default {
     };
   },
 
+  computed: {
+    noValidItems() {
+      return (
+        this.headerRow?.lines_count === this.headerRow?.invalid_lines_count
+      );
+    },
+  },
+
   methods: {
     ...mapActions(["setActiveNav"]),
     updatingLines() {
       this.isUpdating = true;
       this.loadingText = "Updating lines..., please wait.";
     },
+    deletedLine(headerRow) {
+      // console.log("Deleted Line: ", headerRow);
+      this.headerRow = { ...headerRow };
+    },
     updatedLines(headerRow) {
+      this.headerRow = { ...headerRow };
       if (headerRow.rma_number && !headerRow.is_rma_final) {
         // console.log("RMA Number: ", headerRow.rma_number);
         // this.formHeaderKey++;

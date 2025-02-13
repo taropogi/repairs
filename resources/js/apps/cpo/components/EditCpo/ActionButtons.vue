@@ -76,6 +76,10 @@ export default {
       type: Object,
       required: true,
     },
+    noValidItems: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     ModalStatusHistory,
@@ -102,9 +106,6 @@ export default {
       return this.laravelData.route_list.find(
         (route) => route.routeName === "generate-pdf"
       ).uri;
-    },
-    noValidItems() {
-      return this.headerRow.lines_count === this.headerRow.invalid_lines_count;
     },
   },
   methods: {

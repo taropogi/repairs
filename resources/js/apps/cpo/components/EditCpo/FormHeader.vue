@@ -216,6 +216,7 @@
         :header-row="headerRow"
         :cpo-id="headerRow.id"
         @updateHeader="submitCpoForm"
+        :no-valid-items="noValidItems"
       />
     </div>
   </div>
@@ -247,6 +248,11 @@ export default {
       type: String,
       required: false,
       default: "",
+    },
+    noValidItems: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   inject: ["laravelData", "showNotification"],

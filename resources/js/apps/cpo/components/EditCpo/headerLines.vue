@@ -45,7 +45,7 @@
             :line-details="line"
             :header-is-locked="headerIsLocked"
             :items-uom="items_uom"
-            @delete-line="getCpoLines"
+            @delete-line="deletedLine"
             @selectItemFor="selectOracleItem"
             @saveLine="saveLine"
           ></header-line>
@@ -151,7 +151,13 @@ export default {
   // props: ["headerId", "headerIsLocked"],
 
   inject: ["showNotification"],
-  emits: ["addedNewLine", "updatingLines", "updatedLines", "updatedRma"],
+  emits: [
+    "addedNewLine",
+    "updatingLines",
+    "updatedLines",
+    "updatedRma",
+    "deletedLine",
+  ],
   props: {
     headerId: {
       type: Number,
@@ -190,6 +196,10 @@ export default {
   },
 
   methods: {
+    deletedLine(headerRow) {
+      this.$emit("deletedLine", headerRow);
+      this.getCpoLines();
+    },
     selectOracleItem(forLineNumber) {
       // console.log(forLineNumber);
       this.selectItemForLineNumber = forLineNumber;
@@ -300,7 +310,8 @@ export default {
           byAddNewLine,
         });
 
-        this.$emit("updatedLines", this.headerRow);
+        // this.$emit("updatedLines", this.headerRow);
+        this.$emit("updatedLines", res.data.cpo);
 
         this.rmaIsFinal = res.data.cpo.is_rma_final;
         // console.log(this.rmaIsFinal);
