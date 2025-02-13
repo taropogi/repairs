@@ -36,7 +36,10 @@
       }"
       @click="printCPOPdf"
       :disabled="
-        !canDownloadCpoPdf || localHeaderItem.locked || isDownloadingPdf
+        !canDownloadCpoPdf ||
+        localHeaderItem.locked ||
+        isDownloadingPdf ||
+        noValidItems
       "
     >
       <span class="nowrap fw-bold">
@@ -85,6 +88,12 @@ export default {
       return this.laravelData.route_list.find(
         (route) => route.routeName === "generate-pdf"
       ).uri;
+    },
+    noValidItems() {
+      return (
+        this.localHeaderItem.lines_count ==
+        this.localHeaderItem.invalid_lines_count
+      );
     },
   },
   methods: {
