@@ -111,11 +111,17 @@ class GeneratePdfController extends Controller
 
         $cpos = Cpo::whereIn('id', $ids_arr)->get();
 
+        $validCpos = $cpos->filter(function ($cpo) {
+            return $cpo->valid_lines_count > 0;
+        });
+
+        $data['cpos'] = $validCpos;
+
 
 
         $data['title'] = 'Multi Selected CPOS';
         $data['date'] = date('m/d/Y');
-        $data['cpos'] = $cpos;
+        // $data['cpos'] = $cpos;
 
         $data['random_str'] = Str::random(10);
 
@@ -127,6 +133,12 @@ class GeneratePdfController extends Controller
 
 
         $pdf = PDF::loadView('pdf.multiCpos', $data);
+
+        Activity::create([
+            'action' => 'Downloaded PDFs',
+            'description' => 'Downloaded Multiple CPOs PDF',
+            'user_id' => auth()->user()->id
+        ]);
 
 
 

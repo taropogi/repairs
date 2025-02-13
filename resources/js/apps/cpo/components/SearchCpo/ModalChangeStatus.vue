@@ -155,7 +155,7 @@ export default {
     ]),
 
     downloadPdfs() {
-      console.log("pdfs");
+      // console.log("pdfs");
       window.location.href =
         this.linkGeneratePdfs + "/?id=" + this.selectedPosId;
     },
