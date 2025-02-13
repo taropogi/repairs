@@ -105,7 +105,7 @@
             <div class="p-2">
               <label for="contact-number" class="form-label mb-0"
                 >CONTACT NUMBER
-                <span class="badge bg-info mx-2 text-dark">OPTIONAL</span>
+                <span class="mx-2 text-primary">(OPTIONAL)</span>
               </label>
               <input
                 type="text"
