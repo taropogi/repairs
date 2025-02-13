@@ -158,6 +158,8 @@ export default {
       // console.log("pdfs");
       window.location.href =
         this.linkGeneratePdfs + "/?id=" + this.selectedPosId;
+      this.resetSelectedCpos();
+      this.closeModal();
     },
     cancelDeleteConfirm() {
       this.showConfirmDelete = false;
