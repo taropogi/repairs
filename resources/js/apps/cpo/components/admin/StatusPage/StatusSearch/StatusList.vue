@@ -57,6 +57,8 @@ export default {
         }
         return status;
       });
+
+      this.getStatuses();
     },
     async getStatuses() {
       try {

@@ -1,6 +1,22 @@
 <template>
   <tr>
-    <td>{{ status.id }}</td>
+    <td
+      :class="{
+        'bg-primary': isEditing,
+      }"
+    >
+      <div v-if="isEditing">
+        <input
+          type="text"
+          class="form-control"
+          v-model="localStatus.sequence_number"
+          ref="statusInput"
+        />
+      </div>
+      <span v-else>
+        {{ status.sequence_number }}
+      </span>
+    </td>
     <td
       style="width: 40%"
       :class="{
@@ -121,6 +137,14 @@ export default {
     isEditingId: {
       type: Number,
       required: true,
+    },
+  },
+  watch: {
+    status: {
+      handler() {
+        this.localStatus = { ...this.status };
+      },
+      immediate: true,
     },
   },
   data() {

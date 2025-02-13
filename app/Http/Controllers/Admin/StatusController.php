@@ -14,8 +14,11 @@ class StatusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
+
     {
-        $response['statuses'] = HeaderStatus::orderBy('id', 'asc')->get();
+        $qry = HeaderStatus::orderBy('sequence_number', 'asc');
+        $response['statuses'] = $qry->get();
 
         return $response;
     }
@@ -81,7 +84,20 @@ class StatusController extends Controller
         $status = HeaderStatus::find($request->id);
         $status->status = $request->status;
         $status->description = $request->description;
+        $existingStatus = HeaderStatus::where('sequence_number', $request->sequence_number)->first();
+        if ($existingStatus) {
+            $existingStatus->sequence_number =  -1;
+            $existingStatus->save();
+        }
+
+        $updatedStatusOldSequence = $status->sequence_number;
+        $status->sequence_number = $request->sequence_number;
         $status->save();
+
+        if ($existingStatus) {
+            $existingStatus->sequence_number = $updatedStatusOldSequence;
+            $existingStatus->save();
+        }
 
         return response()->json(['status' => 'success', 'message' => 'Status updated successfully!']);
     }
