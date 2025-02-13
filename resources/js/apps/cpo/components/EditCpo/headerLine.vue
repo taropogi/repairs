@@ -210,6 +210,7 @@
       <span class="badge bg-secondary" v-if="headerIsLocked">LOCKED</span>
       <div class="nowrap" v-else>
         <button
+          v-if="false"
           type="button"
           class="btn btn-primary py-1 mx-1"
           @click="saveLine"
