@@ -12,12 +12,17 @@
       class="btn btn-info"
       @click="openModalChangeStatusMulti"
     >
-      Multi-select options
+      MULTI SELECT OPTIONS
+    </button>
+
+    <button type="button" class="btn btn-secondary" @click="resetSelectedCpos">
+      DESELECT ALL
     </button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import ModalChangeStatus from "../SearchCpo/ModalChangeStatus.vue";
 
 export default {
@@ -31,6 +36,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions("cpo", ["resetSelectedCpos"]),
     openModalChangeStatusMulti() {
       this.changeStatusMulti = true;
     },
