@@ -69,7 +69,7 @@
             "
             class="badge bg-warning text-dark rounded-pill"
           >
-            <small class="fw-bold">NO VALID ITEMS</small>
+            <small>NO VALID ITEMS</small>
           </span>
         </div>
       </label>
