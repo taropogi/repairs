@@ -34,7 +34,7 @@
             <th scope="col" style="width: 50px">Repair/Parts Needed</th>
             <th scope="col" style="width: 50px">Damaged</th>
             <th scope="col">Comments</th>
-            <th scope="col" v-if="canEditCpo" style="width: 100px">Actions</th>
+            <th scope="col" v-if="canEditCpo" style="width: 0px"></th>
           </tr>
         </thead>
         <tbody>

@@ -231,8 +231,7 @@
         >
           <span v-if="!isDeleting" class="nowrap">
             <i class="bi bi-trash"></i>
-            Delete</span
-          >
+          </span>
           <span class="spinner-border spinner-border-sm" v-else></span>
         </button>
       </div>
