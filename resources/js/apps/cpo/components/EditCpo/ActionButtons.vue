@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <teleport to="body">
       <modal-status-history
         v-if="showStatusHistory"
