@@ -2,7 +2,7 @@
   <div
     class="header-container d-flex justify-content-center align-items-center flex-column p-4 mt-2"
   >
-    <h3 class="fw-bold text-primary mb-2">PULLOUT#: {{ pulloutNumber }}</h3>
+    <h1 class="fw-bold text-secondary mb-2">PULLOUT#: {{ pulloutNumber }}</h1>
     <transition name="zoom">
       <h3 class="fw-bold text-success" v-if="generatedRma">
         RMA#: {{ generatedRma }}
