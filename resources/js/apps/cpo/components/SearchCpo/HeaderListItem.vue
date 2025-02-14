@@ -35,19 +35,21 @@
     </th>
     <td>
       <label class="form-check-label" :for="id">
-        {{ localHeaderItem.formatted_rma_number }}
         <span
           title="RMA is not yet final"
-          class="badge bg-info text-dark rounded-pill"
+          class="text-danger nowrap"
           v-if="localHeaderItem.rma_number && !localHeaderItem.is_rma_final"
         >
-          <small>?</small>
+          {{ localHeaderItem.formatted_rma_number }} <small>(Draft)</small>
+        </span>
+        <span v-else>
+          {{ localHeaderItem.formatted_rma_number }}
         </span>
       </label>
     </td>
     <td>
       <label class="form-check-label" :for="id">
-        <span v-if="!isToday">
+        <span v-if="!isToday" class="nowrap">
           {{ formattedDate }}
         </span>
         <span v-else>
