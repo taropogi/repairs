@@ -87,7 +87,7 @@ export default {
 
     setInterval(() => {
       this.fetchCpos();
-    }, 5000);
+    }, 10000);
   },
 };
 </script>
