@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('log:clear')->everyMinute()->between('9:00', '17:30');
+        $schedule->command('log:clear')->everyFiveMinutes()->between('9:00', '17:30');
 
         $schedule->job(new DeleteOldActivities)->hourly()->between('9:00', '17:30');
 
