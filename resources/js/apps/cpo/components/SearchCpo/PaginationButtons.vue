@@ -1,6 +1,6 @@
 <template>
   <!-- Pagination Controls -->
-  <div class="pagination">
+  <div class="pagination flex-center">
     <button
       :disabled="currentPage === 1"
       @click="firstPage"

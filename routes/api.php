@@ -46,6 +46,7 @@ Route::post('status/create', [StatusController::class, 'store']);
 Route::post('cpo', [CpoController::class, 'create']);
 Route::post('cpo/update', [CpoController::class, 'update']);
 Route::get('cpo', [CpoController::class, 'getCpoHeaders']);
+Route::get('cpo/cpos/tally', [CpoController::class, 'getCpoTally']);
 Route::post('cpo/by/status', [CpoController::class, 'getHeadersByStatus']);
 Route::post('cpo/changed/status', [CpoController::class, 'getHeadersChangedStatus']);
 Route::post('cpo/by/modified', [CpoController::class, 'getHeadersByModified']);

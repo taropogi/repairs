@@ -63,15 +63,22 @@
           ></header-list-item>
         </transition-group>
       </table>
-      <pagination-buttons
-        v-if="showPaginationButtons"
-        :current-page="currentPage"
-        :last-page="lastPage"
-        @first-page="firstPage"
-        @next-page="nextPage"
-        @prev-page="prevPage"
-        @last-page="goToLastPage"
-      />
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <span class="total-cpos ml-auto"
+          >Total CPOS: {{ allHeadersCount }}</span
+        >
+        <div class="flex-grow-1 d-flex justify-content-center">
+          <pagination-buttons
+            v-if="showPaginationButtons"
+            :current-page="currentPage"
+            :last-page="lastPage"
+            @first-page="firstPage"
+            @next-page="nextPage"
+            @prev-page="prevPage"
+            @last-page="goToLastPage"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -266,5 +273,11 @@ export default {
   top: 0;
   z-index: 1;
   background-color: white; /* Ensure the background color matches the table */
+}
+
+.total-cpos {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #343a40; /* Darker color for elegance */
 }
 </style>

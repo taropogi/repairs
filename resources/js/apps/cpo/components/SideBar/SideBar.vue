@@ -75,57 +75,8 @@
       <random-qoute></random-qoute>
     </transition> -->
     <transition name="general-transition">
-      <div
-        v-if="isNavUpdateActive && !userIsAdmin"
-        class="alert alert-info d-flex align-items-center my-2"
-        role="alert"
-      >
-        <div>
-          <h4 class="fw-bold">
-            <i class="bi bi-info-circle me-2"></i>
-            NOTES FOR UPDATING
-          </h4>
-          <hr />
-          <strong>
-            <i class="bi bi-person-check me-2"></i>
-            CUSTOMER SELECTION</strong
-          >
-          <p class="my-2">
-            You can select oracle customer by selecting the "Choose oracle
-            customer" option. This will automatically fill the customer name and
-            address fields.
-          </p>
-          <p class="my-2">
-            If you select N/A, you can manually input the customer name and
-            address.
-          </p>
-          <strong
-            ><i class="bi bi-pencil-square me-2"></i> FOR UPDATING LINES</strong
-          >
-          <p class="my-2">
-            For updating line details, you can only access/update specific
-            fields. Fields you cannot access/update are grayed out.
-          </p>
-          <strong class="my-2"
-            ><i class="bi bi-chat-left-text me-2"></i> LINE COMMENTS</strong
-          >
-          <p class="my-2">
-            You can put your own comments for each line. Other comments by other
-            users will be visible below the input field.
-          </p>
-          <strong>
-            <i class="bi bi-box-seam me-2"></i>
-            ITEM SELECTION</strong
-          >
-          <p class="my-2">
-            You can select a specific item from the oracle item list by clicking
-            the
-            <button class="btn btn-secondary btn-sm">...</button>
-            button.
-          </p>
-          <p>You can also put the item's segment6 in th field.</p>
-          <p>This will automatically fill the description and unit fields.</p>
-        </div>
+      <div v-if="isNavSearchActive && !userIsAdmin">
+        <cpos-encoded-tally />
       </div>
     </transition>
     <transition name="note-encoding">
@@ -190,6 +141,7 @@ import AdminLinksStatus from "./AdminLinks/CpoStatus.vue";
 import AdminLinksPermissions from "./AdminLinks/Permissions.vue";
 // import RandomQoute from "./RandomQoute.vue";
 import { mapGetters, mapActions } from "vuex";
+import CposEncodedTally from "./CposEncodedTally.vue";
 export default {
   inject: ["laravelData"],
   components: {
@@ -199,6 +151,7 @@ export default {
     AdminLinksUser,
     AdminLinksStatus,
     AdminLinksPermissions,
+    CposEncodedTally,
     // RandomQoute,
   },
   data() {
