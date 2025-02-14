@@ -7,7 +7,7 @@
       <thead>
         <tr class="table-secondary">
           <th scope="col" colspan="2" class="text-center">
-            TODAY'S ENCODED CPOS
+            TODAY'S ENCODED CPOS TALLY
           </th>
         </tr>
         <tr class="table-success">
@@ -46,17 +46,24 @@ export default {
   },
 
   watch: {
-    total() {
+    total(newVal, oldVal) {
       this.animateTotal = true;
       setTimeout(() => {
         this.animateTotal = false;
       }, 500);
 
       if (!this.isInitialShow) {
-        this.showNotification({
-          message: `New CPO encoded. Total: ${this.total}`,
-          type: "success",
-        });
+        if (newVal > oldVal) {
+          this.showNotification({
+            message: `New CPO Encoded. Total Encoded Today: ${this.total}`,
+            type: "success",
+          });
+        } else {
+          this.showNotification({
+            message: `Some Cpo deleted. Total Encoded today: ${this.total}`,
+            type: "error",
+          });
+        }
       }
 
       this.isInitialShow = false;
