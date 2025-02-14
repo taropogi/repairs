@@ -36,6 +36,13 @@
     <td>
       <label class="form-check-label" :for="id">
         {{ localHeaderItem.formatted_rma_number }}
+        <span
+          title="RMA is not yet final"
+          class="badge bg-info text-dark rounded-pill"
+          v-if="localHeaderItem.rma_number && !localHeaderItem.is_rma_final"
+        >
+          <small>?</small>
+        </span>
       </label>
     </td>
     <td>
