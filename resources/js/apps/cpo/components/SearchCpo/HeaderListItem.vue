@@ -40,7 +40,7 @@
           class="text-danger nowrap"
           v-if="localHeaderItem.rma_number && !localHeaderItem.is_rma_final"
         >
-          {{ localHeaderItem.formatted_rma_number }} <small>(Draft)</small>
+          {{ localHeaderItem.formatted_rma_number }}
         </span>
         <span v-else>
           {{ localHeaderItem.formatted_rma_number }}
