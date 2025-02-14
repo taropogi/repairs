@@ -23,6 +23,8 @@ class Activity extends Model
         // });
 
         static::creating(function ($activity) {
+
+
             if (empty($activity->action_by)) {
                 $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
             }

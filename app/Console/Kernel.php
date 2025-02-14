@@ -6,6 +6,7 @@ use App\Models\Activity;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\DeleteOldActivities;
+// use App\Console\Commands\ClearLog;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,9 +20,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-
+        $schedule->command('log:clear')->everyMinute();
 
         $schedule->job(new DeleteOldActivities)->hourly()->between('9:00', '17:30');
+
+
 
         // $schedule->call(function () {
         //     $user = User::where('username', 'like', '%admin%')->first();
