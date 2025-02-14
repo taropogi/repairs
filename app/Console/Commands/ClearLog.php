@@ -76,7 +76,7 @@ class ClearLog extends Command
                     // $this->info($line);
                     $first180 = substr($line, 0, 180);
                     Activity::create([
-                        'action' => 'Log | Line Error',
+                        'action' => 'Command : Clear Log | Line Error',
                         'description' => $first180,
                         'user_id' => $user->id,
                     ]);
