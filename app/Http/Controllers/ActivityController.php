@@ -92,7 +92,12 @@ class ActivityController extends Controller
         //     'user_id' => auth()->user()->id
         // ]);
 
-        LogActivity::dispatch($request->action, $request->description, auth()->user()->id);
+        LogActivity::dispatch(
+            $request->action,
+            $request->description,
+            auth()->user()->id,
+            auth()->user()->name
+        );
     }
 
     public function logGotoYp(Request $request)
@@ -106,7 +111,8 @@ class ActivityController extends Controller
         LogActivity::dispatch(
             'Goto YP',
             'User went to YP and checked the item: ' . $request->item['description'],
-            auth()->user()->id
+            auth()->user()->id,
+            auth()->user()->name
         );
     }
 
@@ -121,7 +127,8 @@ class ActivityController extends Controller
         LogActivity::dispatch(
             'Select Item',
             'User selected item: ' . $request->item['description'],
-            auth()->user()->id
+            auth()->user()->id,
+            auth()->user()->name
         );
     }
 
@@ -138,7 +145,8 @@ class ActivityController extends Controller
         LogActivity::dispatch(
             'Page Visit',
             'User visited the page: ' . request()->page,
-            auth()->user()->id
+            auth()->user()->id,
+            auth()->user()->name
         );
     }
 }
