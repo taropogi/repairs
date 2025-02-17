@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use App\Jobs\LogActivity;
 
 class Tdw1DataController extends Controller
 {
@@ -49,11 +50,19 @@ class Tdw1DataController extends Controller
 
             // check if search is not empty
             if (!is_null(request()->search) && request()->search !== '') {
-                Activity::create([
-                    'action' => 'Searched Item / Modal',
-                    'description' => 'Searched: ' . request()->search,
-                    'user_id' => auth()->user()->id
-                ]);
+                // Activity::create([
+                //     'action' => 'Searched Item / Modal',
+                //     'description' => 'Searched: ' . request()->search,
+                //     'user_id' => auth()->user()->id
+                // ]);
+
+                LogActivity::dispatch(
+                    'Searched Item / Modal',
+                    'Searched: ' . request()->search,
+                    auth()->user()->id,
+                    auth()->user()->name,
+                    request()->ip()
+                );
             }
         }
 
