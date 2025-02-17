@@ -96,7 +96,8 @@ class ActivityController extends Controller
             $request->action,
             $request->description,
             auth()->user()->id,
-            auth()->user()->name
+            auth()->user()->name,
+            request()->ip()
         );
     }
 
@@ -112,7 +113,8 @@ class ActivityController extends Controller
             'Goto YP',
             'User went to YP and checked the item: ' . $request->item['description'],
             auth()->user()->id,
-            auth()->user()->name
+            auth()->user()->name,
+            request()->ip()
         );
     }
 
@@ -128,7 +130,8 @@ class ActivityController extends Controller
             'Select Item',
             'User selected item: ' . $request->item['description'],
             auth()->user()->id,
-            auth()->user()->name
+            auth()->user()->name,
+            request()->ip()
         );
     }
 
@@ -146,7 +149,8 @@ class ActivityController extends Controller
             'Page Visit',
             'User visited the page: ' . request()->page,
             auth()->user()->id,
-            auth()->user()->name
+            auth()->user()->name,
+            $ipAddress
         );
     }
 }

@@ -23,17 +23,20 @@ class LogActivity implements ShouldQueue
     protected $description;
     protected $user_id;
     protected $action_by;
+    protected $ip_address;
 
     public function __construct(
         $action,
         $description,
         $user_id,
-        $action_by = 'SYSTEM'
+        $action_by = 'SYSTEM',
+        $ip_address = 'SYSTEM'
     ) {
         $this->action = $action;
         $this->description = $description;
         $this->user_id = $user_id;
         $this->action_by = $action_by;
+        $this->ip_address = $ip_address;
     }
 
     /**
@@ -47,7 +50,8 @@ class LogActivity implements ShouldQueue
             'action' => 'JOB | ' .  $this->action,
             'description' => $this->description,
             'user_id' => $this->user_id,
-            'action_by' => $this->action_by
+            'action_by' => $this->action_by,
+            'ip_address' => $this->ip_address
         ]);
     }
 }
