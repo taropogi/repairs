@@ -136,7 +136,7 @@ class GeneratePdfController extends Controller
 
         Activity::create([
             'action' => 'Downloaded PDFs',
-            'description' => 'Downloaded Multiple CPOs PDF',
+            'description' => 'Downloaded Multiple CPOs PDF for valid CPOs only: ' . $data['cpos']->pluck('id')->implode(','),
             'user_id' => auth()->user()->id
         ]);
 
