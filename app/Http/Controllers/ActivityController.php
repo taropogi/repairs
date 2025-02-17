@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\LogActivity;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 
@@ -85,39 +86,59 @@ class ActivityController extends Controller
 
     public function logActivity(Request $request)
     {
-        Activity::create([
-            'action' => $request->action,
-            'description' => $request->description,
-            'user_id' => auth()->user()->id
-        ]);
+        // Activity::create([
+        //     'action' => $request->action,
+        //     'description' => $request->description,
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        LogActivity::dispatch($request->action, $request->description, auth()->user()->id);
     }
 
     public function logGotoYp(Request $request)
     {
-        Activity::create([
-            'action' => 'Goto YP',
-            'description' => 'User went to YP and checked the item: ' . $request->item['description'],
-            'user_id' => auth()->user()->id
-        ]);
+        // Activity::create([
+        //     'action' => 'Goto YP',
+        //     'description' => 'User went to YP and checked the item: ' . $request->item['description'],
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        LogActivity::dispatch(
+            'Goto YP',
+            'User went to YP and checked the item: ' . $request->item['description'],
+            auth()->user()->id
+        );
     }
 
     public function logSelectItem(Request $request)
     {
-        Activity::create([
-            'action' => 'Select Item',
-            'description' => 'User selected item: ' . $request->item['description'],
-            'user_id' => auth()->user()->id
-        ]);
+        // Activity::create([
+        //     'action' => 'Select Item',
+        //     'description' => 'User selected item: ' . $request->item['description'],
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        LogActivity::dispatch(
+            'Select Item',
+            'User selected item: ' . $request->item['description'],
+            auth()->user()->id
+        );
     }
 
     public function logPageVisit()
     {
         $ipAddress = request()->ip();
         // logger()->info('User visited the page: ' . request()->page . ' from IP: ' . $ipAddress);
-        Activity::create([
-            'action' => 'Page Visit',
-            'description' => 'User visited the page: ' . request()->page,
-            'user_id' => auth()->user()->id
-        ]);
+        // Activity::create([
+        //     'action' => 'Page Visit',
+        //     'description' => 'User visited the page: ' . request()->page,
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        LogActivity::dispatch(
+            'Page Visit',
+            'User visited the page: ' . request()->page,
+            auth()->user()->id
+        );
     }
 }
