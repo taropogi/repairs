@@ -42,6 +42,7 @@ export default {
       tally: [],
       canAccessOtherCpos: false,
       isInitialShow: true,
+      intervalId: null,
     };
   },
 
@@ -92,9 +93,13 @@ export default {
   mounted() {
     this.fetchCpos();
 
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.fetchCpos();
     }, 10000);
+  },
+  beforeUnmount() {
+    // console.log("unmounted");
+    clearInterval(this.intervalId);
   },
 };
 </script>
