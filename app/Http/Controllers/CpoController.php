@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\HeaderStatusHistory;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\LogActivity;
+
 
 class CpoController extends Controller
 {
@@ -577,11 +579,19 @@ class CpoController extends Controller
         if (
             $request->page > 1
         ) {
-            Activity::create([
-                'action' => 'Clicked Pagination Button',
-                'description' => 'Page: ' . $request->input('page'),
-                'user_id' => auth()->user()->id
-            ]);
+            // Activity::create([
+            //     'action' => 'Clicked Pagination Button',
+            //     'description' => 'Page: ' . $request->input('page'),
+            //     'user_id' => auth()->user()->id
+            // ]);
+
+            LogActivity::dispatch(
+                'Clicked Pagination Button',
+                'Page: ' . $request->input('page'),
+                auth()->user()->id,
+                auth()->user()->name,
+                request()->ip()
+            );
         }
 
         $this->checkIfSearched($request);
