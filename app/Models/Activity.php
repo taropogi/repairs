@@ -13,6 +13,8 @@ class Activity extends Model
 
     protected $guarded = [];
 
+
+
     protected static function boot()
     {
         parent::boot();
@@ -23,13 +25,14 @@ class Activity extends Model
         // });
 
         static::creating(function ($activity) {
-
-
             if (empty($activity->action_by)) {
                 $activity->action_by = Auth::check() ? Auth::user()->name : 'SYSTEM';
             }
             if (empty($activity->ip_address)) {
                 $activity->ip_address = Request::ip() ?? 'SYSTEM';
+            }
+            if (empty($activity->app_version)) {
+                $activity->app_version = 'SYSTEM';
             }
         });
     }

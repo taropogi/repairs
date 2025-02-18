@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  inject: ["showNotification"],
+  inject: ["showNotification", "appVersion"],
   data() {
     return {
       tally: [],
@@ -80,7 +80,11 @@ export default {
   methods: {
     async fetchCpos() {
       try {
-        const response = await axios.get("/api/cpo/cpos/tally");
+        const response = await axios.get("/api/cpo/cpos/tally", {
+          params: {
+            appVersion: this.appVersion,
+          },
+        });
         this.cpos = response.data;
         this.canAccessOtherCpos = response.data.canAccessOtherCpos;
         this.tally = response.data.tally;

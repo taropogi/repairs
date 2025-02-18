@@ -64,7 +64,8 @@ class CpoController extends Controller
             'Encoded count: ' . $tally->count(),
             auth()->user()->id,
             auth()->user()->name,
-            request()->ip()
+            request()->ip(),
+            request()->appVersion
         );
 
         $response['tally'] = $tally;

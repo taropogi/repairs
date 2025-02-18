@@ -20,17 +20,58 @@ import { useToast } from "vue-toastification";
 
 export default {
   data() {
-    return { laravelData: null };
+    return {
+      laravelData: null,
+      hasReloaded: false,
+      pageReloadId: null,
+      appVersion: "1.2.0",
+    };
   },
   methods: {
     ...mapActions(["setShowBackDrop", "setOracleCustomers"]),
     ...mapActions("auth", ["tryLogin"]),
+    checkReload() {
+      this.pageReloadId = setInterval(() => {
+        const now = new Date();
+        const targetHour = 12;
+        const targetMinute = 15;
+        //test
+        // const targetHour = 10;
+        // const targetMinute = 52;
+
+        console.log("Checking for reload...");
+
+        if (
+          now.getHours() === targetHour &&
+          now.getMinutes() === targetMinute &&
+          !this.hasReloaded
+        ) {
+          location.reload();
+          this.hasReloaded = true; // Set the flag to true after reloading
+        } else if (
+          now.getHours() > targetHour ||
+          (now.getHours() === targetHour && now.getMinutes() > targetMinute)
+        ) {
+          this.hasReloaded = true; // Set the flag to true if the target time has passed
+        }
+      }, 60000); // 60000 means 1 minute
+    },
   },
   computed: {
     ...mapGetters(["showBackDrop", "oracleCustomers"]),
   },
+  watch: {
+    hasReloaded(newVal) {
+      if (newVal && this.pageReloadId) {
+        clearInterval(this.pageReloadId);
+        console.log("Page reload interval cleared.");
+        this.pageReloadId = null;
+      }
+    },
+  },
   provide() {
     return {
+      appVersion: this.appVersion,
       setShowBackDrop: this.setShowBackDrop,
       laravelData: computed(() => this.laravelData),
       showNotification(toastData) {
@@ -42,19 +83,22 @@ export default {
         if (type === "warning") toast.warning(message);
         if (type === "error") toast.error(message);
       },
-      async logPageVisit(pageName) {
+      logPageVisit: async (pageName) => {
+        // console.log(this.appVersion);
         try {
           await axios.post("/api/log/page-visit", {
             page: pageName,
+            appVersion: this.appVersion,
           });
         } catch (error) {
           console.log(error.message);
         }
       },
-      async logActivity(activity) {
+      logActivity: async (activity) => {
         try {
           await axios.post("/api/log/activity", {
             ...activity,
+            appVersion: this.appVersion,
           });
         } catch (error) {
           console.log(error.message);
@@ -69,6 +113,7 @@ export default {
     this.$store.commit("setLaravelData", window.laravelData); // laravel data from layouts.app.blade.php
     this.laravelData = window.laravelData;
     this.setOracleCustomers();
+    this.checkReload();
   },
 };
 </script>
