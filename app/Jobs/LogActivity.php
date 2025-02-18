@@ -48,7 +48,7 @@ class LogActivity implements ShouldQueue
     {
         Activity::create([
             'action' => 'JOB | ' .  $this->action,
-            'description' => $this->description,
+            'description' => $this->description . ' | Activity count: ' . Activity::count(),
             'user_id' => $this->user_id,
             'action_by' => $this->action_by,
             'ip_address' => $this->ip_address
