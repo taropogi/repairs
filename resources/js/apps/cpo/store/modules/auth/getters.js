@@ -57,6 +57,14 @@ export default {
         )
             return true;
     },
+    canAccessOtherCpo(state) {
+        if (!state.user) return false;
+        if (
+            state.user.is_admin ||
+            state.user.permissions?.find((p) => p.name == "access-other-cpo")
+        )
+            return true;
+    },
     userHasPermission(state) {
         return state.user.permissions || state.user.is_admin ? true : false;
     },

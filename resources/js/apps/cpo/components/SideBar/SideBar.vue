@@ -75,7 +75,7 @@
       <random-qoute></random-qoute>
     </transition> -->
     <transition name="general-transition">
-      <div v-if="isNavSearchActive && !userIsAdmin">
+      <div v-if="isNavSearchActive && canAccessOtherCpo">
         <cpos-encoded-tally />
       </div>
     </transition>
@@ -159,7 +159,12 @@ export default {
   },
   computed: {
     ...mapGetters(["activeNav"]),
-    ...mapGetters("auth", ["isLoggedIn", "loggedUser", "canEditCpo"]),
+    ...mapGetters("auth", [
+      "isLoggedIn",
+      "loggedUser",
+      "canEditCpo",
+      "canAccessOtherCpo",
+    ]),
     ...mapGetters("cpo", ["selectedPos"]),
 
     selectedPosCount() {

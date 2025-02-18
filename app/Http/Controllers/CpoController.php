@@ -59,6 +59,14 @@ class CpoController extends Controller
 
         $tally = $query->get();
 
+        LogActivity::dispatch(
+            'Viewed CPO Tally',
+            'Encoded count: ' . $tally->count(),
+            auth()->user()->id,
+            auth()->user()->name,
+            request()->ip()
+        );
+
         $response['tally'] = $tally;
 
 
