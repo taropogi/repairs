@@ -57,9 +57,14 @@ class CpoController extends Controller
             $query = $query->where('created_by', auth()->user()->id);
         }
 
+
         $tally = $query->get();
 
-        $tally_count = $tally->count();
+        $tally_count = $tally->map(function ($item) {
+            return $item->total;
+        })->sum();
+
+        // logger()->info('CPO Tally Count: ' . $tally_count);
 
         LogActivity::dispatch(
             'Viewed CPO Tally',
