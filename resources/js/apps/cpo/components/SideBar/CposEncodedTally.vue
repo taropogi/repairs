@@ -99,7 +99,7 @@ export default {
 
     this.intervalId = setInterval(() => {
       this.fetchCpos();
-    }, 30000); // 30 seconds
+    }, 60000); // 60000 means 1 minute
   },
   beforeUnmount() {
     // console.log("unmounted");
