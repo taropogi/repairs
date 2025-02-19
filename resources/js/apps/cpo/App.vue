@@ -24,7 +24,7 @@ export default {
       laravelData: null,
       hasReloaded: false,
       pageReloadId: null,
-      appVersion: "1.2.0",
+      appVersion: "2025-02-19",
     };
   },
   methods: {

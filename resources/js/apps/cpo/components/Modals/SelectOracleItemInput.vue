@@ -90,6 +90,7 @@ import SelectOracleItemInputRow from "./SelectOracleItemInputRow.vue";
 import { mapGetters } from "vuex";
 export default {
   components: { SpinnerLoading, SelectOracleItemInputRow },
+  inject: ["appVersion"],
   data() {
     return {
       items: [],
@@ -117,6 +118,7 @@ export default {
         const res = await axios.get("api/items/all", {
           params: {
             search: this.searchOracleItemStr,
+            appVersion: this.appVersion,
           },
         });
         this.items = res.data.items;

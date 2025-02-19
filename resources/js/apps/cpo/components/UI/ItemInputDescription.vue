@@ -22,7 +22,7 @@
 <script>
 import { debounce } from "lodash";
 export default {
-  inject: ["showNotification"],
+  inject: ["showNotification", "appVersion"],
   props: {
     modelValue: {
       type: String,
@@ -56,6 +56,7 @@ export default {
         const res = await axios.get("api/items/segment6/single", {
           params: {
             search: segment6,
+            appVersion: this.appVersion,
           },
         });
         // console.log(res.data.item?.description || this.modelValue);

@@ -20,19 +20,39 @@ class Tdw1DataController extends Controller
     public function getItemBySegment6()
     {
         $response['item'] = Item::where('segment6', request()->search)->first();
+        $user = auth()->user();
         if ($response['item']) {
-            Activity::create([
-                'action' => 'Searched Item / Input',
-                'description' => 'Searched item by segment6 ' . request()->search,
-                'user_id' => auth()->user()->id
-            ]);
+
+            // Activity::create([
+            //     'action' => 'Searched Item / Input',
+            //     'description' => 'Searched item by segment6 ' . request()->search,
+            //     'user_id' => auth()->user()->id
+            // ]);
+
+            LogActivity::dispatch(
+                'Searched Item / Input',
+                'Searched item by segment6 ' . request()->search,
+                $user->id,
+                $user->name,
+                request()->ip(),
+                request()->appVersion
+            );
         } else {
             if (!is_null(request()->search) && request()->search !== '') {
-                Activity::create([
-                    'action' => 'No Item Searched / Input',
-                    'description' => 'No item found for:  ' . request()->search,
-                    'user_id' => auth()->user()->id
-                ]);
+                // Activity::create([
+                //     'action' => 'No Item Searched / Input',
+                //     'description' => 'No item found for:  ' . request()->search,
+                //     'user_id' => auth()->user()->id
+                // ]);
+
+                LogActivity::dispatch(
+                    'No Item Searched / Input',
+                    'No item found for:  ' . request()->search,
+                    $user->id,
+                    $user->name,
+                    request()->ip(),
+                    request()->appVersion
+                );
             }
         }
         return $response;
@@ -61,7 +81,8 @@ class Tdw1DataController extends Controller
                     'Searched: ' . request()->search,
                     auth()->user()->id,
                     auth()->user()->name,
-                    request()->ip()
+                    request()->ip(),
+                    request()->appVersion
                 );
             }
         }
