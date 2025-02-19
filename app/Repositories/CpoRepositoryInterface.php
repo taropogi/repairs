@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 interface CpoRepositoryInterface
 {
-    public function getCpoTally();
+
     public function store();
+    public function getCpoTally();
+    public function generateRmaNumber($cpoId);
 }

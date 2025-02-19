@@ -57,4 +57,33 @@ class CpoRepository implements CpoRepositoryInterface
 
         return $tally;
     }
+
+    public function generateRmaNumber($cpoId)
+    {
+        $cpo = Cpo::find($cpoId);
+        $rmaNumber = null;
+        if (!$cpo->rma_number) {
+            $rmaNumber = Cpo::max('rma_number') + 1;
+        }
+
+        if (!$cpo->is_rma_final) {
+
+            $cpo->rma_number =  $rmaNumber;
+            $cpo->update();
+
+            if ($rmaNumber) {
+                auth()->user()->activities()->create([
+                    'action' => 'Generate RMA',
+                    'description' => 'Generated RMA for CPO with ID:' . $cpo->id . ' and RMA Number: ' . $rmaNumber
+                ]);
+            } else {
+                auth()->user()->activities()->create([
+                    'action' => 'Removed RMA',
+                    'description' => 'Removed RMA for CPO with ID:' . $cpo->id
+                ]);
+            }
+        }
+
+        return Cpo::find($cpoId);
+    }
 }

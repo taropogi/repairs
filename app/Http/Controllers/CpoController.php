@@ -94,34 +94,10 @@ class CpoController extends Controller
 
     public function generateRma(Request $request)
     {
-
-        $cpo = Cpo::find($request->cpoId);
-        $rmaNumber = null;
-        if (!$cpo->rma_number) {
-            $rmaNumber = Cpo::max('rma_number') + 1;
-        }
-
-        if (!$cpo->is_rma_final) {
-
-            $cpo->rma_number =  $rmaNumber;
-            $cpo->update();
-
-            if ($rmaNumber) {
-                auth()->user()->activities()->create([
-                    'action' => 'Generate RMA',
-                    'description' => 'Generated RMA for CPO with ID:' . $cpo->id . ' and RMA Number: ' . $rmaNumber
-                ]);
-            } else {
-                auth()->user()->activities()->create([
-                    'action' => 'Removed RMA',
-                    'description' => 'Removed RMA for CPO with ID:' . $cpo->id
-                ]);
-            }
-        }
-
+        $updated_cpo = $this->cpoRepository->generateRmaNumber($request->cpoId);
 
         sleep(1);
-        return $cpo;
+        return $updated_cpo;
     }
     public function create(Request $request)
     {
