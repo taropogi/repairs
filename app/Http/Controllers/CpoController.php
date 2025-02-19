@@ -20,6 +20,7 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\LogActivity;
 use App\Repositories\CpoRepositoryInterface;
+use App\Repositories\CpoLineRepositoryInterface;
 
 
 
@@ -34,11 +35,13 @@ class CpoController extends Controller
      */
     private $completed_status_id = 6;
     protected $cpoRepository;
-    public function __construct(CpoRepositoryInterface $cpoRepository)
+    protected $cpoLineRepository;
+    public function __construct(CpoRepositoryInterface $cpoRepository, CpoLineRepositoryInterface $cpoLineRepository)
     {
 
         $this->middleware('auth');
         $this->cpoRepository = $cpoRepository;
+        $this->cpoLineRepository = $cpoLineRepository;
     }
 
     public function index()
@@ -128,30 +131,9 @@ class CpoController extends Controller
         // insert lines to cpo
         foreach ($request->lines as $key => $item) {
 
-            $line = new CpoLine();
-            $line->line_number = $item['lineNumber'];
-            $line->description = $item['description'] ?? null;
-
-            $line->price = isset($item['price']) && is_numeric($item['price']) ? $item['price'] : null;
-            $line->hcopy = $item['hcopy'] ?? null;
-            $line->doc_date = $item['doc_date'] ?? null;
-            $line->qty_returned = isset($item['qtyReturned']) && is_numeric($item['qtyReturned']) ? $item['qtyReturned'] : null;
-            $line->date_inspected = $item['date_inspected'] ?? null;
-            $line->unit = $item['unit'] ?? null;
-            $line->qty_inspect = isset($item['qtyInspect']) && is_numeric($item['qtyInspect']) ? $item['qtyInspect'] : null;
-            $line->date = $item['date'] ?? null;
-            $line->good_condition = isset($item['goodCondition']) && is_numeric($item['goodCondition']) ? $item['goodCondition'] : null;
-            $line->minor_repair_clean = isset($item['minorRepairClean']) && is_numeric($item['minorRepairClean']) ? $item['minorRepairClean'] : null;
-            $line->repair_parts_needed = isset($item['repairPartsNeeded']) && is_numeric($item['repairPartsNeeded']) ? $item['repairPartsNeeded'] : null;
-            $line->damaged = isset($item['damaged']) && is_numeric($item['damaged']) ? $item['damaged'] : null;
-            $line->comments = $item['comments'] ?? null;
-            $line->order_number = $item['orderNumber'] ?? null;
-            $line->cpo_id = $new_cpo->id;
-            $line->save();
-
+            $line = $this->cpoLineRepository->store($new_cpo->id, $item);
 
             // update comment
-
             if ((in_array('comments', $lineFields) || $userIsAdmin) && isset($item['comments'])) {
                 if ($item['comments'] && !empty($item['comments'])) {
                     $cpoLineComment = CpoLineComment::firstOrNew(['cpo_line_id' => $line->id, 'user_id' => auth()->user()->id]);
