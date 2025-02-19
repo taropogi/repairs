@@ -42,11 +42,13 @@
 <script>
 import ItemImage from "./ItemImage.vue";
 export default {
+  inject: ["appVersion"],
   props: {
     item: {
       type: Object,
       required: true,
     },
+
     currentlyViewingItem: {
       type: Object,
       default: null,
@@ -67,11 +69,11 @@ export default {
       window.open(url, "_blank");
     },
     async logSelectItem() {
-      // console.log(this.item);
       try {
         await axios.post("/api/log/selectItem", {
           action: "selectItem",
           item: this.item,
+          appVersion: this.appVersion,
         });
       } catch (error) {
         console.error("Error logging action:", error);
