@@ -1,6 +1,6 @@
 <tr>
     <th scope="row" rowspan="2">{{ $line->line_number }}</th>
-    <td class="text-center" style="padding: 5px;"><strong>{{ strtoupper($line->description) }}</strong></td>
+    <td class="text-center" style="padding: 2px;"><strong>{{ strtoupper($line->description) }}</strong></td>
     <td class="text-center" align="right"><small>{{ $line->qty_returned }}</small></td>
     <td class="text-center" align="right"><small>{{ $line->unit }}</small></td>
     <td class="text-center" align="right"><small>{{ $line->qty_inspect }}</small></td>
