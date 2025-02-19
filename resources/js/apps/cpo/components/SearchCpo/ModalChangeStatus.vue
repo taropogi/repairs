@@ -122,7 +122,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   emits: ["close-modal"],
-  inject: ["laravelData", "showNotification"],
+  inject: ["laravelData", "showNotification", "appVersion"],
   data() {
     return {
       selectedCpos: null,
@@ -156,8 +156,13 @@ export default {
 
     downloadPdfs() {
       // console.log("pdfs");
+      console.log(this.appVersion);
       window.location.href =
-        this.linkGeneratePdfs + "/?id=" + this.selectedPosId;
+        this.linkGeneratePdfs +
+        "/?id=" +
+        this.selectedPosId +
+        "&app_version=" +
+        this.appVersion;
       this.resetSelectedCpos();
       this.closeModal();
     },
