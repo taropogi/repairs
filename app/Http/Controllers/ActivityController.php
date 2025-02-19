@@ -112,7 +112,7 @@ class ActivityController extends Controller
 
         LogActivity::dispatch(
             'Goto YP',
-            'User went to YP and checked the item: ' . $request->item['description'],
+            'Went to YP and checked the item: ' . $request->item['description'],
             auth()->user()->id,
             auth()->user()->name,
             request()->ip(),
@@ -130,7 +130,7 @@ class ActivityController extends Controller
 
         LogActivity::dispatch(
             'Select Item',
-            'User selected item: ' . $request->item['description'],
+            'Selected item: ' . $request->item['description'],
             auth()->user()->id,
             auth()->user()->name,
             request()->ip(),
@@ -150,7 +150,7 @@ class ActivityController extends Controller
 
         LogActivity::dispatch(
             'Page Visit',
-            'User visited the page: ' . request()->page,
+            'Visited page: ' . request()->page,
             auth()->user()->id,
             auth()->user()->name,
             $ipAddress,
