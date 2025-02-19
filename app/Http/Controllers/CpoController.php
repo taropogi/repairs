@@ -19,6 +19,8 @@ use App\Models\HeaderStatusHistory;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\LogActivity;
+use App\Repositories\CpoRepositoryInterface;
+
 
 
 class CpoController extends Controller
@@ -31,10 +33,12 @@ class CpoController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $completed_status_id = 6;
-    public function __construct()
+    protected $cpoRepository;
+    public function __construct(CpoRepositoryInterface $cpoRepository)
     {
 
         $this->middleware('auth');
+        $this->cpoRepository = $cpoRepository;
     }
 
     public function index()
@@ -44,22 +48,7 @@ class CpoController extends Controller
 
     public function getCpoTally()
     {
-        $query = Cpo::select(
-            DB::raw('count(*) as total'),
-            'created_by',
-            'users.name as created_by_name'
-        )
-            ->join('users', 'cpos.created_by', '=', 'users.id')
-            ->whereDate('cpos.created_at', '=', date('Y-m-d'))
-            ->groupBy('created_by', 'users.name');
-
-        if (!auth()->user()->canAccessOtherCpos()) {
-            $query = $query->where('created_by', auth()->user()->id);
-        }
-
-
-        $tally = $query->get();
-
+        $tally = $this->cpoRepository->getCpoTally();
         $tally_count = $tally->map(function ($item) {
             return $item->total;
         })->sum();

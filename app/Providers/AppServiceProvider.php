@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\CpoRepository;
+use App\Repositories\CpoRepositoryInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Bind the CpoRepositoryInterface to the CpoRepository
+        $this->app->bind(
+            CpoRepositoryInterface::class,
+            CpoRepository::class
+        );
     }
 
     /**
