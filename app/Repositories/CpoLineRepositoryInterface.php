@@ -6,4 +6,5 @@ interface CpoLineRepositoryInterface
 {
 
     public function store($cpoId, $lineData);
+    public function update($lineId, $lineNumber, $lineData);
 }
