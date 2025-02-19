@@ -65,15 +65,9 @@ class CpoController extends Controller
         );
 
         $response['tally'] = $tally;
-
-
-
         // check permission if can access other cpos
 
         $response['canAccessOtherCpos'] = auth()->user()->canAccessOtherCpos();
-
-
-
         return $response;
     }
 
@@ -132,6 +126,14 @@ class CpoController extends Controller
     public function create(Request $request)
     {
 
+        $request->validate([
+            'customerName' => ['required'],
+            'customerAddress' => ['required'],
+            // 'rpoNumber' => ['required'],
+            'preparedBy' => ['required'],
+            'authorizedBy' => ['required'],
+        ]);
+
         $userPermissions = auth()->user()->permissions ?? [];
         $userIsAdmin = auth()->user()->is_admin;
         $lineFields = [];
@@ -142,35 +144,7 @@ class CpoController extends Controller
             }
         }
 
-        $request->validate([
-            'customerName' => ['required'],
-            'customerAddress' => ['required'],
-            // 'rpoNumber' => ['required'],
-            'preparedBy' => ['required'],
-            'authorizedBy' => ['required'],
-        ]);
-
-        $new_cpo = Cpo::create([
-            'customer_name' => $request->customerName,
-            'customer_address' => $request->customerAddress,
-            'contact_number' => $request->contactNumber,
-            // 'rpo_number' => $request->rpoNumber,
-            'prepared_by' => $request->preparedBy,
-            'authorized_by' => $request->authorizedBy,
-            'status_id' => 1,
-            'oracle_customer_id' => $request->oracleId,
-            'oracle_customer_shipto' => $request->oracleShipto,
-            'customer_reference_number' => $request->customerReferenceNumber,
-            'has_oracle_customer' => $request->has_oracle_customer ?? false
-        ]);
-
-        $new_cpo->status_history()->create([
-            'header_status_id' => 1,
-            'changed_by' => auth()->user()->id
-        ]);
-
-
-
+        $new_cpo = $this->cpoRepository->store();
         $response['cpo'] = $new_cpo;
 
         $response['lines'] = $request->lines;
@@ -301,9 +275,6 @@ class CpoController extends Controller
             ) {
                 $cpoLine->unit = $itemObj->unit;
             }
-
-
-
 
             if ((in_array('qty_inspect', $lineFields) || $userIsAdmin) && isset($itemObj->qty_inspect) && is_numeric($itemObj->qty_inspect)) {
                 $cpoLine->qty_inspect = $itemObj->qty_inspect;
@@ -784,8 +755,6 @@ class CpoController extends Controller
     public function destroy(Request $request)
     {
         $this->deleteCpo($request->cpoId);
-
-
         return $request;
     }
 
@@ -807,17 +776,10 @@ class CpoController extends Controller
     {
         $cpos_to_delete = Cpo::whereIn('id', $request->selectedCpos)->get();
 
-
-
-
         foreach ($cpos_to_delete as $cpo) {
             $this->deleteCpo($cpo->id);
         }
-
-
         $response['cpos_deleted'] = $cpos_to_delete;
-
-
         return $response;
     }
 }
