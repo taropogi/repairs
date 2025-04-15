@@ -1,78 +1,94 @@
 <template>
-  <form class="p-2 m-0 bg-white">
-    <div class="row">
-      <div class="col p-2">
-        <label>PULLOUT#</label>
+  <form class="p-3 bg-light rounded shadow-sm">
+    <div class="row g-3">
+      <div class="col-md">
+        <label for="searchRpoNumber" class="form-label">PULLOUT#</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchRpoNumber"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchRpoNumber"
+          placeholder="Enter pullout number"
         />
       </div>
-      <div class="col p-2">
-        <label>RMA#</label>
+      <div class="col-md">
+        <label for="searchRmaNumber" class="form-label">RMA#</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchRmaNumber"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchRmaNumber"
+          placeholder="Enter RMA number"
         />
       </div>
-      <div class="col p-2">
-        <label>Reference#</label>
+      <div class="col-md">
+        <label for="searchCustomerReferenceNumber" class="form-label"
+          >Reference#</label
+        >
         <input
           type="text"
-          class="form-control shadow"
+          id="searchCustomerReferenceNumber"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchCustomerReferenceNumber"
+          placeholder="Enter reference number"
         />
       </div>
-      <div class="col p-2">
-        <label>CUSTOMER NAME</label>
+      <div class="col-md">
+        <label for="searchName" class="form-label">CUSTOMER NAME</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchName"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchName"
+          placeholder="Enter customer name"
         />
       </div>
-    </div>
-    <div class="row">
-      <div class="col p-2">
-        <label>CUSTOMER ADDRESS</label>
+      <div class="col-md">
+        <label for="searchAddress" class="form-label">CUSTOMER ADDRESS</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchAddress"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchAddress"
+          placeholder="Enter customer address"
         />
       </div>
-      <div class="col p-2">
-        <label>CONTACT #</label>
+      <div class="col-md">
+        <label for="searchContactNumber" class="form-label">CONTACT #</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchContactNumber"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchContactNumber"
+          placeholder="Enter contact number"
         />
       </div>
-      <div class="col p-2">
-        <label>PREPARED BY</label>
+      <div class="col-md">
+        <label for="searchPreparedBy" class="form-label">PREPARED BY</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchPreparedBy"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchPreparedBy"
+          placeholder="Enter prepared by"
         />
       </div>
-      <div class="col p-2">
-        <label>AUTHORIZED BY</label>
+      <div class="col-md">
+        <label for="searchAuthorizedBy" class="form-label">AUTHORIZED BY</label>
         <input
           type="text"
-          class="form-control shadow"
+          id="searchAuthorizedBy"
+          class="form-control"
           @input="debouncedSearch"
           v-model="searchCriteria.searchAuthorizedBy"
+          placeholder="Enter authorized by"
         />
       </div>
     </div>

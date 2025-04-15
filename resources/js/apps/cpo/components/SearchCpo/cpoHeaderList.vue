@@ -1,10 +1,12 @@
 <template>
-  <div class="p-2">
+  <div>
     <spinner-loading v-if="isSearching && !error"> </spinner-loading>
+
+    <!-- <spinner-loading v-if="true"> </spinner-loading> -->
     <h1 v-else-if="error">
       {{ error }}
     </h1>
-    <div class="my-2" v-else>
+    <div>
       <teleport to="body">
         <modal-delete-cpo
           v-if="deleteCpo"
@@ -22,7 +24,10 @@
         ></modal-pdf-history>
       </teleport>
 
-      <table class="table table-sm table-bordered table-striped table-hover">
+      <table
+        class="table table-sm table-bordered table-striped table-hover"
+        v-if="cpoHeaderList.length > 0"
+      >
         <thead
           class="table-success"
           style="position: sticky; top: 0; z-index: 1"
@@ -63,7 +68,7 @@
           ></header-list-item>
         </transition-group>
       </table>
-      <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="d-flex justify-content-between align-items-center mt-1">
         <span class="total-cpos ml-auto"
           >Total CPOS: {{ allHeadersCount }}</span
         >
@@ -106,7 +111,7 @@ export default {
       deleteCpo: null,
       error: null,
       currentPage: 1,
-      perPage: 15,
+      perPage: 20,
       allHeadersCount: 0,
     };
   },

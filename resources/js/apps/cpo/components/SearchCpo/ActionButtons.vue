@@ -3,7 +3,7 @@
     <button
       v-if="!(!canDeleteCpo || localHeaderItem.locked)"
       type="button"
-      class="btn tooltip-wrapper mx-1"
+      class="btn btn-sm tooltip-wrapper mx-1 p-1"
       :class="{
         'btn-danger': canDeleteCpo && !localHeaderItem.locked,
         'btn-secondary': !canDeleteCpo || localHeaderItem.locked,
@@ -11,21 +11,28 @@
       @click="deleteCpo"
       :disabled="!canDeleteCpo || localHeaderItem.locked"
     >
-      <span class="nowrap fw-bold"> <i class="bi bi-trash"></i> DELETE </span>
+      <span class="nowrap fw-bold" style="font-size: 0.85rem">
+        <i class="bi bi-trash"></i> DELETE
+      </span>
     </button>
 
     <button
       type="button"
-      class="btn btn-success tooltip-wrapper mx-1"
+      class="btn btn-sm btn-success tooltip-wrapper mx-1 p-1"
       @click="editCpoHeader"
     >
-      <span v-if="!canEditCpo" class="nowrap fw-bold">
+      <span
+        v-if="!canEditCpo"
+        class="nowrap fw-bold"
+        style="font-size: 0.85rem"
+      >
         <i class="bi bi-eye me-1"></i> VIEW
       </span>
-      <span v-else class="nowrap fw-bold">
+      <span v-else class="nowrap fw-bold" style="font-size: 0.85rem">
         <i class="bi bi-pencil-square me-1"></i> EDIT
       </span>
     </button>
+
     <button
       v-if="
         !(
@@ -36,7 +43,7 @@
         )
       "
       type="button"
-      class="btn tooltip-wrapper mx-1"
+      class="btn btn-sm tooltip-wrapper mx-1 p-1"
       :class="{
         'btn-info': canDownloadCpoPdf && !localHeaderItem.locked,
         'btn-secondary': !canDownloadCpoPdf || localHeaderItem.locked,
@@ -49,7 +56,7 @@
         noValidItems
       "
     >
-      <span class="nowrap fw-bold">
+      <span class="nowrap fw-bold" style="font-size: 0.85rem">
         <i
           v-if="isDownloadingPdf"
           class="spinner-border spinner-border-sm me-1"

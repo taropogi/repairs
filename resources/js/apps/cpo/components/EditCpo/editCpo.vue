@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-100">
     <loading-overlay v-if="isUpdating" :text="loadingText" />
     <div class="sticky-top bg-white">
       <h4 class="text-center bg-success text-white p-2">UPDATE CPO</h4>

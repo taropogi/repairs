@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center p-5 m-5">
+  <div class="spinner-wrapper">
     <div class="spinner-container">
       <div class="spinner-circle"></div>
       <div class="spinner-circle"></div>
@@ -8,23 +8,36 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {};
 </script>
-  
-  <style scoped>
+
+<style scoped>
+.spinner-wrapper {
+  position: fixed; /* Fix to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Cover the entire parent */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Black background with 50% opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it appears above other elements */
+  overflow: hidden; /* Prevent scrolling */
+}
+
 .spinner-container {
   position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
+  width: 50px;
+  height: 50px;
   animation: rotate 2s linear infinite;
 }
 
 .spinner-circle {
-  width: 20px;
-  height: 20px;
+  width: 30%;
+  height: 30%;
   background-color: #3498db;
   border-radius: 50%;
   position: absolute;
