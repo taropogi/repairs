@@ -43,7 +43,6 @@
         type="button"
         class="btn btn-warning mx-1 btn-sm"
         @click="gotoYP"
-        v-if="item.inventory_item_status_code !== 'Inactive'"
         style="padding: 2px 6px; font-size: 12px"
       >
         <span class="nowrap fw-bold" style="font-size: 12px">
