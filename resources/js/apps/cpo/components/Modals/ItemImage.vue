@@ -4,7 +4,7 @@
       :src="url"
       alt="Item Image"
       class="item-image img-fluid mx-2"
-      style="max-height: 50px;"
+      style="max-height: 30px"
       @error="handleImageError"
       @click="openImage"
     />
@@ -29,15 +29,16 @@ export default {
       this.error = true;
     },
     openImage() {
-    
       const popupWidth = 600;
       const popupHeight = 400;
-      const left = (screen.width / 2) - (popupWidth / 2);
-      const top = (screen.height / 2) - (popupHeight / 2);
-      window.open(this.url, '_blank', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
-      
-    
-    }
+      const left = screen.width / 2 - popupWidth / 2;
+      const top = screen.height / 2 - popupHeight / 2;
+      window.open(
+        this.url,
+        "_blank",
+        `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`
+      );
+    },
   },
 };
 </script>

@@ -66,7 +66,7 @@ class Tdw1DataController extends Controller
             $query->where('description', 'LIKE', "%{$search}%")
                 ->orWhere('oracle_code', 'LIKE', "%{$search}%");
 
-            $query->select('inventory_item_id', 'description', 'oracle_code', 'segment6', 'list_price', 'primary_unit_of_measure', 'primary_uom_code');
+            $query->select('inventory_item_id', 'description', 'oracle_code', 'segment1', 'segment2', 'segment3', 'segment4', 'segment5', 'segment6', 'list_price', 'primary_unit_of_measure', 'primary_uom_code', 'inventory_item_status_code');
 
             // check if search is not empty
             if (!is_null(request()->search) && request()->search !== '') {
@@ -87,8 +87,16 @@ class Tdw1DataController extends Controller
             }
         }
 
-        $query->inRandomOrder();
-        $response['items'] = $query->limit(30)->get();
+        $totalItems = (clone $query)->count();
+        $response['totalItems'] = $totalItems;
+
+        if (request()->has('currentPage')) {
+            $query = $query->skip((request()->currentPage - 1) * request()->perPage);
+            $query = $query->take(request()->perPage);
+        }
+
+
+        $response['items'] = $query->get();
 
 
         $response['items'] = $response['items']->map(function ($item) {

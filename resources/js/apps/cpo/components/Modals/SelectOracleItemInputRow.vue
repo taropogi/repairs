@@ -6,15 +6,24 @@
     }"
   >
     <td>
-      <span class="fw-bold">{{ item.oracle_code }} </span>
-
       <div v-if="item?.image_urls.length > 0">
         <span v-for="(url, index) in item.image_urls" :key="index">
           <item-image :url="url" />
         </span>
       </div>
     </td>
-    <td>{{ item.description }}</td>
+    <td>
+      <span class="fw-bold">{{ oracleCode }} </span>
+    </td>
+    <td>
+      {{ item.description }}
+
+      <span
+        v-if="item.inventory_item_status_code == 'Inactive'"
+        class="badge bg-warning text-dark"
+        >{{ item.inventory_item_status_code }}</span
+      >
+    </td>
     <td>{{ item.primary_unit_of_measure }}</td>
     <td>{{ item.list_price }}</td>
 
@@ -23,16 +32,23 @@
         type="button"
         class="btn btn-info mx-1 btn-sm"
         @click="selectItem"
+        style="padding: 2px 6px; font-size: 12px"
       >
-        <span class="nowrap fw-bold">
-          <i class="bi bi-hand-index-thumb"></i>
+        <span class="nowrap fw-bold" style="font-size: 12px">
+          <i class="bi bi-hand-index-thumb" style="font-size: 10px"></i>
           SELECT
         </span>
       </button>
-      <button type="button" class="btn btn-warning mx-1 btn-sm" @click="gotoYP">
-        <span class="nowrap fw-bold">
+      <button
+        type="button"
+        class="btn btn-warning mx-1 btn-sm"
+        @click="gotoYP"
+        v-if="item.inventory_item_status_code !== 'Inactive'"
+        style="padding: 2px 6px; font-size: 12px"
+      >
+        <span class="nowrap fw-bold" style="font-size: 12px">
           VIEW IN YP
-          <i class="bi bi-arrow-right"></i>
+          <i class="bi bi-arrow-right" style="font-size: 10px"></i>
         </span>
       </button>
     </td>
@@ -55,6 +71,12 @@ export default {
     },
   },
   components: { ItemImage },
+
+  computed: {
+    oracleCode() {
+      return `${this.item.segment1}-${this.item.segment2}-${this.item.segment3}-${this.item.segment4}-${this.item.segment5}-${this.item.segment6}`;
+    },
+  },
 
   methods: {
     selectItem() {
